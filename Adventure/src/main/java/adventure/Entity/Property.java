@@ -8,6 +8,6 @@ package adventure.Entity;
  *
  * @author utente
  */
-public class Property {
+public abstract class Property {
     
 }
