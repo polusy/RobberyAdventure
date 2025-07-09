@@ -38,7 +38,7 @@ public enum PrepositionType {
     
     SAVE(new String[]{}),
     
-    SEPARATORS(new String[]{"e", "ed", "poi", "dopo"});
+    SEPARATOR(new String[]{"e", "ed", "poi", "dopo"});
 
 
     private Set<String> words;
