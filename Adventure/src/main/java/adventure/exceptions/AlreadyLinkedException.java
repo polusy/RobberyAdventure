@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class AlreadyLinkedException extends Exception {
-    private String message = "Rooms are already linked";
+    final private String message = "Rooms are already linked";
     
     public String getMessage() { return message; }
 }

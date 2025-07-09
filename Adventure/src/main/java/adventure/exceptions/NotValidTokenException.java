@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class NotValidTokenException extends Exception {
-    private String message = "Token is not valid";
+    final private String message = "Token is not valid";
     
     public String getMessage() { return message; }    
 }

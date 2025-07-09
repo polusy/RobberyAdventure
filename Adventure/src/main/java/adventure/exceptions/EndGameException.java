@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class EndGameException extends Exception {
-    private String message = "End game";
+    final private String message = "End game";
     
     public String getMessage() { return message; }    
 }

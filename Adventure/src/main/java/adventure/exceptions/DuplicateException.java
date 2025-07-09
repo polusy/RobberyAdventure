@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class DuplicateException extends Exception {
-    private String message = "Duplicate element";
+    final private String message = "Duplicate element";
     
     public String getMessage() { return message; } 
 }

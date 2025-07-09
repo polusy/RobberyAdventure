@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class NotValidSentenceException extends Exception {
-    private String message = "Sentence is not valid";
+    final private String message = "Sentence is not valid";
     
     public String getMessage() { return message; }    
 }

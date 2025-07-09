@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class IdAlreadyTakenException extends Exception {
-    private String message = "Id is already taken";
+    final private String message = "Id is already taken";
     
     public String getMessage() { return message; }    
 }

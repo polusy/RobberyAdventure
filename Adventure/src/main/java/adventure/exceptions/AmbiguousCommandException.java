@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class AmbiguousCommandException extends Exception {
-    private String message = "Command is ambiguous";
+    final private String message = "Command is ambiguous";
     
     public String getMessage() { return message; }    
 }

@@ -9,7 +9,7 @@ package adventure.exceptions;
  * @author utente
  */
 public class InconsistentInitializationException extends Exception {
-    private String message = "Inconsistent initialization attempt";
+    final private String message = "Inconsistent initialization attempt";
     
     public String getMessage() { return message; }
 }
