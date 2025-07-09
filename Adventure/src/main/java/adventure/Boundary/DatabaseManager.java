@@ -4,6 +4,9 @@
  */
 package adventure.Boundary;
 
+import java.util.Set;
+import java.lang.reflect.Type;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,10 +14,11 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.google.gson.Gson;
-import java.util.Set;
+import com.google.gson.reflect.TypeToken;
 
 import adventure.Entity.objects.AdvObject;
 import adventure.identifiers.ObjectId;
+
 
 /**
  *
@@ -61,7 +65,9 @@ public class DatabaseManager {
 	{
             name = resultSet.getString(1);
             description = resultSet.getString(2);
-            alias = gson.fromJson(resultSet.getString(3), Set.class);
+            
+            Type type = new TypeToken<Set<String>>(){}.getType();
+            alias = gson.fromJson(resultSet.getString(3), type);
 	}
 	else{
             throw new SQLException();
