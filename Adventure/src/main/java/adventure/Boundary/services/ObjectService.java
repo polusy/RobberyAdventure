@@ -28,7 +28,7 @@ public class ObjectService {
     
     static{
         try{
-            databaseManager = new DatabaseManager("jdbc:h2:file:./../database/db");
+            databaseManager = new DatabaseManager("jdbc:h2:file:./../../../../database/db");
         }catch(SQLException exception){
             throw new ExceptionInInitializerError();
         }
