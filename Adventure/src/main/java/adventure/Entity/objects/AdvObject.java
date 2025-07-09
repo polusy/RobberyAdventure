@@ -12,11 +12,11 @@ import java.util.Set;
  * @author utente
  */
 public class AdvObject {
-    final ObjectId id;
-    final String name;
-    final String description;
-    final Set<String> alias;
-    boolean visible;
+    final private ObjectId id;
+    final private String name;
+    final private String description;
+    final private Set<String> alias;
+    private boolean visible;
 
     // Constructors
     
