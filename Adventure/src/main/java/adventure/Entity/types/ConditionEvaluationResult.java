@@ -12,11 +12,11 @@ import adventure.identifiers.ObjectId;
  */
 public class ConditionEvaluationResult {
     
-    boolean conditionPassed;
-    boolean inventoryConditionPassed;
-    ObjectId missingNecessaryObject;
-    ObjectPropertyReference objectFailedConditionReference;
-    ObjectId failedVisibilityObject;
+    private boolean conditionPassed;
+    private boolean inventoryConditionPassed;
+    private ObjectId missingNecessaryObject;
+    private ObjectPropertyReference objectFailedConditionReference;
+    private ObjectId failedVisibilityObject;
 
     public ConditionEvaluationResult() {
         this.conditionPassed = true;
@@ -41,6 +41,20 @@ public class ConditionEvaluationResult {
     public boolean hasInventoryConditionPassed() {
         return inventoryConditionPassed;
     }
+
+    public ObjectId getMissingNecessaryObject() {
+        return missingNecessaryObject;
+    }
+
+    public ObjectPropertyReference getObjectFailedConditionReference() {
+        return objectFailedConditionReference;
+    }
+
+    public ObjectId getFailedVisibilityObject() {
+        return failedVisibilityObject;
+    }
+    
+    
     
     
     
