@@ -18,7 +18,6 @@ import java.io.IOException;
  * @author utente
  */
 public class ServerManager implements Runnable {
-    private String uri;
     HttpServer genericServer;
     
     public ServerManager(String stringUri, int portNumber, Class<?> service){
