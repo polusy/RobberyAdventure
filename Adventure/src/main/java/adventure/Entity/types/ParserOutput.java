@@ -64,8 +64,10 @@ public class ParserOutput {
     public void addRoom(Room room){this.doorRoom = room;}
 
     public Room getDoorRoom(){return this.doorRoom; }
-    
-    public Map<AdvObject, Preposition> getObjects() { return objects; }
+
+    public Map<AdvObject, Preposition> getObjects() {
+        return objects;
+    }
 
     public boolean hasPreposition()
     {
