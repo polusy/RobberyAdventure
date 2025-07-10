@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -165,6 +166,39 @@ public class Room {
 	return look.toString();
         
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Room other = (Room) obj;
+        return this.id == other.id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<AdvObject> getObjects() {
+        return objects;
+    }
+    
+    
+    
     
     
     
