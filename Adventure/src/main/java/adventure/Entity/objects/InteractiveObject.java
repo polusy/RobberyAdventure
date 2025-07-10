@@ -17,6 +17,7 @@ import adventure.identifiers.ObjectId;
 import adventure.exceptions.InconsistentInitializationException;
 import adventure.Entity.objects.AdvObject;
 import adventure.utilities.PropertyCommandsCorrespondence;
+import adventure.Entity.types.GameActionSpecification;
 
 /**
  *
@@ -48,6 +49,7 @@ public class InteractiveObject extends AdvObject {
 	}
 
 	this.gameActionSpecifications = gameActionSpecifications;
+        this.brokenDescription = brokenDescription;
     }
     
     // Getter methods
@@ -128,10 +130,4 @@ public class InteractiveObject extends AdvObject {
     }
 
 
-
-
-
-
-
- 
 }
