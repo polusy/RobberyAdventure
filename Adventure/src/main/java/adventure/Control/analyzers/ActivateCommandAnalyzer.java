@@ -10,6 +10,7 @@ import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PropertyType;
+import adventure.identifiers.PrepositionType;
 
 /**
  *
@@ -24,7 +25,8 @@ public class ActivateCommandAnalyzer extends CommandAnalyzer{
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
     {
-	return analyzeUnaryCommand(parserOutput, PropertyType.ACTIVATABLE, errorMessage);
+	CommandAnalysisResult commandAnalysisResult = analyzeBinaryCommand(parserOutput, PropertyType.ACTIVATABLE, PrepositionType.ACTIVATE, errorMessage);
+        return commandAnalysisResult;
     }
     
     
