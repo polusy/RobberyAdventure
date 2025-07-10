@@ -26,7 +26,8 @@ public abstract class CommandAnalyzer {
         this.errorMessage = errorMessage;
     }
     
-    public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput);
+    public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
+            throws NotValidSentenceException, AmbiguousCommandException;
     
     protected CommandAnalysisResult analyzeUnaryCommand(ParserOutput parserOutput, PropertyType propertyType, String errorMessage) throws NotValidSentenceException{
         
