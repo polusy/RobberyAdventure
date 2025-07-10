@@ -6,9 +6,11 @@ package adventure.Entity.objects;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.NoSuchElementException;
 
 import adventure.Entity.properties.Property;
 import adventure.Entity.properties.PropertyWithValue;
+import adventure.Entity.properties.Container;
 import adventure.identifiers.PropertyType;
 import adventure.identifiers.CommandType;
 import adventure.identifiers.ObjectId;
@@ -21,8 +23,8 @@ import adventure.utilities.PropertyCommandsCorrespondence;
  * @author utente
  */
 public class InteractiveObject extends AdvObject {
-    private String brokenDescription;
-    private Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications;
+    final private String brokenDescription;
+    final private Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications;
 
     // Constructor
     
@@ -56,64 +58,80 @@ public class InteractiveObject extends AdvObject {
 	return gameActionSpecifications.keySet();
     }
 
+    public Container getContainerProperty() throws NoSuchElementException {
+	if (!this.isContainer())
+            throw new NoSuchElementException();
+
+	Container containerProperty = null;
+	
+	for (Property property : this.getProperties())
+            if (property instanceof Container)
+                    containerProperty = (Container) property;
+
+	return containerProperty;
+    }    
+    
+    public PropertyWithValue getPropertyByType(PropertyType propertyType) throws NoSuchElementException{
+	if (!this.hasProperty(propertyType))
+		throw new NoSuchElementException();
+
+        PropertyWithValue propertyWithValue = null;
+        
+	for (Property property : this.getProperties()){
+            if (property instanceof PropertyWithValue){
+                if (((PropertyWithValue) property).getType() == propertyType)
+                    propertyWithValue = (PropertyWithValue) property;
+            }
+        }
+
+	return propertyWithValue;
+    }    
+
+    public GameActionSpecification getGameActionSpecification(PropertyType propertyType, CommandType commandType)
+    {
+	return gameActionSpecifications.get(this.getPropertyByType(propertyType)).get(commandType);
+    }
+    
+    // Setter method
+    
+    public void setValueToProperty(PropertyType propertyType, boolean value) throws NoSuchElementException
+    {
+	if (!this.hasProperty(propertyType))
+		throw new NoSuchElementException();
+
+	this.getPropertyByType(propertyType).setValue(value);
+    }   
+    
     public boolean hasProperty(PropertyType propertyType){ 
 	boolean foundProperty = false;
 
-	for (Property property : this.getProperties())
-            if (property. == propertyType && !foundProperty)
+	for (Property property : this.getProperties()){
+            if (property instanceof PropertyWithValue){
+                PropertyWithValue propertyWithValue = (PropertyWithValue) property;
+                
+                if (propertyWithValue.getType() == propertyType && !foundProperty)
                     foundProperty = true;
+            }
+        }
 			
 	return foundProperty;
-}
+    }
 
-+ boolean isContainer(){
+    public boolean isContainer(){
 	boolean container = false;
 	
-	for (property : this.getProperties())
-		if (property instanceof Container)
-			container = true;
-
+	for (Property property : this.getProperties())
+            if (property instanceof Container)
+                container = true;
+        
 	return container;
-}
+    }
 
-+ Container getContainerProperty() throws NoSuchElementException {
-	if (!this.isContainer())
-		throw new NoSuchElementException();
 
-	Container containerProperty;
-	
-	for (property : this.getProperties())
-		if (property instanceof Container)
-			containerProperty = (Container) property;
 
-	return containerProperty;
-}
 
-+ Property getPropertyByType(PropertyType propertyType) throws NoSuchElementException
-{
-	if (!this.hasProperty(propertyType))
-		throw new NoSucElementException();
 
-	Property property;
-	for (iteratedProperty : this.getProperties())
-		if (iteratedProperty.getType() == propertyType)
-			property = iteratedProperty;
 
-	return property;
-}
 
-+ GameActionSpecification getGameActionSpecification(PropertyType propertyType, CommandType commandType)
-{
-	return gameActionSpecifications.get(this.getPropertyByType(propertyType)).get(commandType);
-}
-
-+ void setValueToProperty(PropertyType propertyType, boolean value) throws NoSuchElementException
-{
-	if (!this.hasProperty(propertyType))
-		throw new NoSuchElementException();
-
-	PropertyWithvalue propertyWithValue = (PropertyWithValue) this.getPropertyByType(propertyType);
-	propertyWithValue.setValue(value);
-	
-}    
+ 
 }
