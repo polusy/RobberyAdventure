@@ -12,8 +12,7 @@ import adventure.identifiers.PropertyType;
 public class Fillable extends PropertyWithValue {
     
     public Fillable(boolean value){
-        super(PropertyType.FILLABLE);
-        super.setValue(value);
+        super(PropertyType.FILLABLE, value);
     }
     
 }

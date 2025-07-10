@@ -12,8 +12,7 @@ import adventure.identifiers.PropertyType;
 public class Usable extends PropertyWithValue {
     
     public Usable(boolean value){
-        super(PropertyType.USABLE);
-        super.setValue(value);
+        super(PropertyType.USABLE, value);
     }
     
 }
