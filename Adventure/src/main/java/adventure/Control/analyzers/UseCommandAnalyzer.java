@@ -6,7 +6,9 @@ package adventure.Control.analyzers;
 
 import adventure.Entity.types.CommandAnalysisResult;
 import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
+import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 import adventure.identifiers.PrepositionType;
 
@@ -17,11 +19,12 @@ import adventure.identifiers.PrepositionType;
 public class UseCommandAnalyzer extends CommandAnalyzer{
     private String errorMessage ;
     
-    public CommandAnalyzer(){
+    public UseCommandAnalyzer(){
         super(" Non vorrai mica usare questa cosa! ");
     }
     
-    CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException {
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
+            throws NotValidSentenceException, AmbiguousCommandException {
 	CommandAnalysisResult commandAnalysisResult =  analyzeBinaryCommand(parserOutput, PropertyType.USABLE, PrepositionType.USE, errorMessage);
 	
 	return commandAnalysisResult;
