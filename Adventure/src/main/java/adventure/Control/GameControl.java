@@ -7,6 +7,7 @@ package adventure.Control;
 import java.util.Map;
 import java.util.HashMap;
 
+import adventure.Control.analyzers.CommandAnalyzer;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.CommandType;
