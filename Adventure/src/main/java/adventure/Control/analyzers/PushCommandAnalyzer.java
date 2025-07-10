@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package adventure;
+package adventure.Control.analyzers;
 
 import adventure.Entity.types.CommandAnalysisResult;
 import adventure.Entity.types.GameDescription;
