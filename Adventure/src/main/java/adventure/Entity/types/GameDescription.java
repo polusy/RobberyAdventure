@@ -50,7 +50,7 @@ public abstract class GameDescription {
 	return object;
     }
 
-    public Command getCommandById(CommandType commandType) throws NoSuchElementException
+    public Command getCommandByType(CommandType commandType) throws NoSuchElementException
     {
 	for (Command command : commands)
 	{
