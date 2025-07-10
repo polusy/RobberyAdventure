@@ -21,7 +21,7 @@ public class PickUpCommandAnalyzer extends CommandAnalyzer{
     
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
-	return CommandAnalyzer.analyzeUnaryCommand(parserOutput, PropertyType.PICKUPABLE, errorMessage);
+	return analyzeUnaryCommand(parserOutput, PropertyType.PICKUPABLE, errorMessage);
     }
      
 }
