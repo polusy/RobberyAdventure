@@ -17,7 +17,7 @@ import adventure.identifiers.PropertyType;
  */
 public class LookAtCommandAnalyzer extends CommandAnalyzer {
     
-    CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	CommandAnalysisResult commandAnalysisResult = new CommandAnalysisResult(null, null, null, true, null);
 
