@@ -7,9 +7,12 @@ package adventure.Control;
 import java.util.Map;
 import java.util.HashMap;
 
+import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.CommandType;
 import adventure.identifiers.PropertyType;
 import adventure.exceptions.DuplicateException;
+import adventure.exceptions.AmbiguousCommandException;
 
 /**
  *
@@ -45,9 +48,9 @@ public class GameControl {
 }
 
 
-+ void disambiguateMove(GameDescription game, ParserOutput parserOutput) throws AmbigousCommandException
-{
-	String token = parserOutput.getCommand().getCommandToken();
+    public void disambiguateMove(GameDescription game, ParserOutput parserOutput) throws AmbiguousCommandException
+    {
+	String token = parserOutput.().getCommandToken();
 	CommandType newCommandType;
 	boolean foundPreposition= false;
 	boolean foundCandidate = false;
