@@ -13,8 +13,7 @@ import adventure.identifiers.PropertyType;
 public class Breakable extends PropertyWithValue {
     
     public Breakable(boolean value){
-        super(PropertyType.BREAKABLE);
-        super.setValue(value);
+        super(PropertyType.BREAKABLE, value);
     }
     
 }

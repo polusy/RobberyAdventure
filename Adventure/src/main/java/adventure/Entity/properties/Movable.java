@@ -13,7 +13,6 @@ import adventure.identifiers.PropertyType;
 public class Movable extends PropertyWithValue {
     
     public Movable(boolean value){
-        super(PropertyType.MOVABLE);
-        super.setValue(value);
+        super(PropertyType.MOVABLE, value);
     }
 }
