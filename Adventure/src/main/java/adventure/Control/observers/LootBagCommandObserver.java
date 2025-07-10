@@ -10,8 +10,6 @@ import adventure.Entity.types.ParserOutput;
 import adventure.Entity.types.RobberyAdventure;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.Entity.objects.ValuableObject;
-import java.util.stream.Collectors;
-import java.util.List;
 import java.io.PrintStream;
 /**
  *
