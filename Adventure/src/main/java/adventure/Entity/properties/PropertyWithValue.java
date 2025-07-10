@@ -17,8 +17,9 @@ public abstract class PropertyWithValue extends Property {
 
     // Constructors
     
-    public PropertyWithValue(PropertyType propertyType) {
+    public PropertyWithValue(PropertyType propertyType, boolean value) {
         this.propertyType = propertyType;
+        this.value = value;
     }
 
     // Getter methods

@@ -36,17 +36,11 @@ public class GameEffect {
 	if (!lootBagEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
             throw new InconsistentInitializationException();
 	
-	if (!lootBagEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
-            throw new InconsistentInitializationException();
-	
 	if (!roomEffect.getRemovingObject().equals(inventoryEffect.getAddingObject()) 
                 || !roomEffect.getRemovingObject().equals(lootBagEffect.getAddingObject()))
 	{
 		throw new InconsistentInitializationException();
 	}
-
-	if (!roomEffect.getAddingObject().equals(inventoryEffect.getRemovingObject()))
-		throw new InconsistentInitializationException();
 
 	ContainerEffect containerEffect = null;
 
@@ -54,15 +48,11 @@ public class GameEffect {
 	{
             if (objectEffects.getValue().getContainerEffect() != null)
             {
-                    containerEffect = objectEffects.getValue().getContainerEffect();
+                containerEffect = objectEffects.getValue().getContainerEffect();
+                if (!containerEffect.getRemovingObject().equals(roomEffect.getRemovingObject()))
+                    throw new InconsistentInitializationException();   
             }
-	} 
-
-	if (containerEffect != null)
-	{
-            if (!containerEffect.getRemovingObject().equals(roomEffect.getRemovingObject()))
-                throw new InconsistentInitializationException();
-	}           
+	}          
         
         this.currentPositionEffect = currentPositionEffect;
         this.inventoryEffect = inventoryEffect;

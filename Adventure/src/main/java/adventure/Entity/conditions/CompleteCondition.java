@@ -32,6 +32,16 @@ public class CompleteCondition {
 	else{
 		throw new NoSuchElementException();
 	}
-    }    
+    }   
+
+    public List<InventoryCondition> getInventoryConditionOptions() {
+        return inventoryConditionOptions;
+    }
+
+    public Map<ObjectId, ObjectCondition> getObjectsConditions() {
+        return objectsConditions;
+    }
+    
+    
     
 }

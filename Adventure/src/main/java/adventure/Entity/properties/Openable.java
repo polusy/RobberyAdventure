@@ -13,7 +13,6 @@ import adventure.identifiers.PropertyType;
 public class Openable extends PropertyWithValue {
     
     public Openable(boolean value){
-        super(PropertyType.OPENABLE);
-        super.setValue(value);
+        super(PropertyType.OPENABLE, value);
     }
 }
