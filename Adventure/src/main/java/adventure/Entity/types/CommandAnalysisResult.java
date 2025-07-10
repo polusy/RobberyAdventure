@@ -5,6 +5,7 @@
 package adventure.Entity.types;
 
 import adventure.identifiers.PropertyType;
+import adventure.Entity.objects.InteractiveObject;
 
 /**
  *
