@@ -26,6 +26,14 @@ public abstract class GameDescription {
     
     
     public abstract void init();
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
     
     
     public AdvObject getObjectById(ObjectId id) throws NoSuchElementException

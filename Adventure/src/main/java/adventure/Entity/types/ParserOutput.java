@@ -69,6 +69,16 @@ public class ParserOutput {
         return objects;
     }
 
+    public Command getCommand() {
+        return command;
+    }
+
+    public String getCommandToken() {
+        return commandToken;
+    }
+    
+    
+
     public boolean hasPreposition()
     {
             boolean foundPreposition = false;
