@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package adventure;
+package adventure.Control.analyzers;
 
 import adventure.Entity.types.CommandAnalysisResult;
+import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
+import adventure.exceptions.AmbiguousCommandException;
 import adventure.Entity.objects.AdvObject;
 import adventure.Entity.objects.InteractiveObject;
 import adventure.Entity.objects.Door;
@@ -17,18 +20,22 @@ import adventure.identifiers.PropertyType;
  */
 public class LookAtCommandAnalyzer extends CommandAnalyzer {
     
-    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
+    public LookAtCommandAnalyzer(){
+        super("");
+    }
+    
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
     {
 	CommandAnalysisResult commandAnalysisResult = new CommandAnalysisResult(null, null, null, true, null);
 
-	if (parserOutput.getRoom() == null && parserOutput.getObjects().isEmpty()){
-            commandAnalysisResult.setMesssage(gameDescription.getCurrentRoom().getLook());
+	if (parserOutput.getDoorRoom() == null && parserOutput.getObjects().isEmpty()){
+            commandAnalysisResult.setMessage(gameDescription.getCurrentRoom().getLook());
 	}
 	else if(parserOutput.getObjects().size() == 1 && !parserOutput.hasPreposition())
 	{
-            for (AdvObject object : parserOutput.getObjects.keySet())
+            for (AdvObject object : parserOutput.getObjects().keySet())
             {
-                if (parserOutput.getRoom() != null)
+                if (parserOutput.getDoorRoom() != null)
                 {
                     if (object instanceof Door)
                     {
