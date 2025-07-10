@@ -13,6 +13,9 @@ import java.util.NoSuchElementException;
 import adventure.utilities.Preposition;
 import adventure.Entity.types.Command;
 import adventure.Entity.objects.AdvObject;
+import adventure.exceptions.NotValidSentenceException;
+import adventure.exceptions.NotValidTokenException;
+import adventure.utilities.Utils;
 
 
 /**
@@ -50,12 +53,14 @@ public class Parser {
         "&&[( preposition (inventoryObject|roomObject)){2,2}]$";
     }
 
-    public List<ParserOutput> parse(String sentence, List<Command> commands, List<Room> rooms, List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) throws NotValidTokenException, NotValidSentenceException {
-  	List<String> sentences = Utils.parseString(string, stopwords, sentencesSeparators);
+    public List<ParserOutput> parse(String sentence, List<Command> commands, List<Room> rooms,
+            List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) 
+            throws NotValidTokenException, NotValidSentenceException {
+  	List<String> sentences = Utils.parseString(sentence, stopwords, sentencesSeparators);
 	List<String> tokens = new ArrayList();
 	List <ParserOutput> parserOutputs = new ArrayList();
-	List<String> allObjects;
-	List<String> names;
+	List<String> allObjects = new ArrayList();
+	List<String> names = new ArrayList();
 
 	allObjects.addAll(roomObjects);
 	allObjects.addAll(inventoryObjects);
