@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.function.BiPredicate;
 import java.util.NoSuchElementException;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.lang.StringBuilder;
 
 import adventure.utilities.Preposition;
 import adventure.Entity.types.Command;
@@ -16,6 +19,7 @@ import adventure.Entity.objects.AdvObject;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.NotValidTokenException;
 import adventure.utilities.Utils;
+import adventure.Entity.objects.Door;
 
 
 /**
@@ -53,95 +57,94 @@ public class Parser {
         "&&[( preposition (inventoryObject|roomObject)){2,2}]$";
     }
 
-    public List<ParserOutput> parse(String sentence, List<Command> commands, List<Room> rooms,
+    public List<ParserOutput> parse(String originalSentence, List<Command> commands, List<Room> rooms,
             List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) 
             throws NotValidTokenException, NotValidSentenceException {
-  	List<String> sentences = Utils.parseString(sentence, stopwords, sentencesSeparators);
+  	List<String> sentences = Utils.parseString(originalSentence, stopwords, sentencesSeparators);
 	List<String> tokens = new ArrayList();
 	List <ParserOutput> parserOutputs = new ArrayList();
-	List<String> allObjects = new ArrayList();
+	List<AdvObject> allObjects = new ArrayList();
 	List<String> names = new ArrayList();
 
 	allObjects.addAll(roomObjects);
 	allObjects.addAll(inventoryObjects);
 	names = getAllNames(allObjects);
-	names.sort(Comparator.comparingInt(s -> s.lenght));
+	names.sort(Comparator.comparingInt(s -> s.length()));
 
-	while (sentences.hasNext())
-	{
-		ParserOutput parserOutput = null;
-		Preposition preposition =  null;
-		StringBuilder mappedString = "";
+        Iterator sentencesIterator = sentences.iterator();
+	while (sentencesIterator.hasNext()){
+            ParserOutput parserOutput = null;
+            Preposition preposition =  null;
+            StringBuilder mappedString = new StringBuilder();
 
-		String sentence = sentences.next();
-		Utils.tokenize(names, 0, stopwords, wordsSeparators, tokens, sentence);
+            String sentence = (String) sentencesIterator.next();
+            Utils.tokenize(names, 0, stopwords, wordsSeparators, tokens, sentence);
 		
-		
-		while (tokens.hasNext())
-		{
-			String token = tokens.next();
-			int index = -1;
-			
-			
-			try {
-				index = getCommandIndex(token, commands);
-				parserOutput = new ParserOutput(commands.get(index), token);
-				mappedString.append("command")
-			} catch (NoSuchElementException exception);
+            Iterator tokensIterator = tokens.iterator();
+            while (tokensIterator.hasNext())
+            {
+                String token = (String) tokensIterator.next();
+                int index = -1;
 
-			try {
-				getPrepositionIndex(token, prepositions);
-				preposition = new Preposition(token);
-				mappedString.append(" preposition");
-			} catch (NoSuchElementException exception);
+                try {
+                    index = getCommandIndex(token, commands);
+                    parserOutput = new ParserOutput(commands.get(index), token);
+                    mappedString.append("command");
+                } catch (NoSuchElementException exception){};
 
-			try {
-				index = getObjectIndex(token, roomObjects);
-				parserOutput.addObject(roomObjects.get(index);
-				if (preposition != null)
-					parserOutput.addPreposition(roomObjects.get(index), preposition);
-				
-				preposition = null;
+                try {
+                    getPrepositionIndex(token, prepositions);
+                    preposition = new Preposition(token);
+                    mappedString.append(" preposition");
+                } catch (NoSuchElementException exception){};
 
-				if (roomObjects.get(index) istanceof Door)
-					mappedString.append(" door");
-				else
-					mappedString.append(" roomObject");
-			} catch (NoSuchElementException exception);
+                try {
+                    index = getObjectIndex(token, roomObjects);
+                    parserOutput.addObject(roomObjects.get(index));
+                    
+                    if (preposition != null)
+                        parserOutput.addPreposition(roomObjects.get(index), preposition);
 
-			try {
-				index = getRoomIndex(token, rooms);
-				parserOutput.addObject(rooms.get(index);
-				mappedString.append(" room");
-				parserOutput.addRoom(rooms.get(index));
-			} catch(NoSuchElementException exception);
+                    preposition = null;
 
-			try {
-				index = getObjectIndex(token, invetoryObjects);
-				parserOutput.addObject(inventoryObjects.get(index);
-				if (preposition != null)
-					parserOutput.addPreposition(inventoryObjects.get(index), new Preposition(token));
-		
-				preposition = null;
-				mappedString.append(" inventoryObject");
-			} catch (NoSuchElementException exception);
+                    if (roomObjects.get(index) instanceof Door)
+                        mappedString.append(" door");
+                    else
+                        mappedString.append(" roomObject");
+                } catch (NoSuchElementException exception){};
 
-			if (index == -1)
-				throw new NotValidTokenException();
-				
-			
-		}
+                try {
+                    index = getRoomIndex(token, rooms);
+                    parserOutput.addObject(rooms.get(index));
+                    mappedString.append(" room");
+                    parserOutput.addRoom(rooms.get(index));
+                } catch(NoSuchElementException exception){};
 
-		if (!(new String(mappedString)).matches(regex))
-		{
-			throw NotValidSentenceException();
-		}
-		else{
-			parserOutputs.add(parserOutput);
-		}
-		
-		
-}    
+                try {
+                    index = getObjectIndex(token, inventoryObjects);
+                    parserOutput.addObject(inventoryObjects.get(index));
+                    if (preposition != null)
+                            parserOutput.addPreposition(inventoryObjects.get(index), new Preposition(token));
+
+                    preposition = null;
+                    mappedString.append(" inventoryObject");
+                } catch (NoSuchElementException exception){};
+
+                if (index == -1)
+                        throw new NotValidTokenException();
+            }
+
+            if (!(new String(mappedString)).matches(regex)){
+                    throw new NotValidSentenceException();
+            }
+            else{
+                    parserOutputs.add(parserOutput);
+            }
+
+        }    
+        
+        return parserOutputs;
+    }
     
     
     private <T> int getElementIndex(String token, List<T> elements, BiPredicate<String, T> tester) throws NoSuchElementException {
