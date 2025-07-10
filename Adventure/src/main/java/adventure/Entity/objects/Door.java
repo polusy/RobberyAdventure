@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class Door extends InteractiveObject{
     
-    private final String commonDoorName = "porta";
+    public static final String commonDoorName = "porta";
     private boolean special;
     
     
@@ -30,10 +30,6 @@ public class Door extends InteractiveObject{
         super(objectId, name, description, brokenDescription, alias, visible, gameActionSpecification);
         this.special = special;
         
-    }
-
-    public String getCommonDoorName() {
-        return commonDoorName;
     }
 
     public boolean isSpecial() {
