@@ -20,6 +20,8 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.NotValidTokenException;
 import adventure.utilities.Utils;
 import adventure.Entity.objects.Door;
+import adventure.Entity.types.Room;
+import adventure.Entity.types.ParserOutput;
 
 
 /**
@@ -115,7 +117,6 @@ public class Parser {
 
                 try {
                     index = getRoomIndex(token, rooms);
-                    parserOutput.addObject(rooms.get(index));
                     mappedString.append(" room");
                     parserOutput.addRoom(rooms.get(index));
                 } catch(NoSuchElementException exception){};
