@@ -20,9 +20,14 @@ import adventure.exceptions.*;
  * @author Paolo
  */
 public abstract class CommandAnalyzer {
+    protected String errorMessage;
     
+    public CommandAnalyzer(String errorMessage){
+        this.errorMessage = errorMessage;
+    }
     
-    public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput);
+    public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
+            throws NotValidSentenceException, AmbiguousCommandException;
     
     protected CommandAnalysisResult analyzeUnaryCommand(ParserOutput parserOutput, PropertyType propertyType, String errorMessage) throws NotValidSentenceException{
         
