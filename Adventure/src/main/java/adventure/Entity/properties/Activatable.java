@@ -13,7 +13,6 @@ import adventure.identifiers.PropertyType;
 public class Activatable extends PropertyWithValue {
     
     public Activatable(boolean value){
-        super(PropertyType.ACTIVATABLE);
-        super.setValue(value);
+        super(PropertyType.ACTIVATABLE, value);
     }
 }

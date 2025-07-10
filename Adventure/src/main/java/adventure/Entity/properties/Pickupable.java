@@ -12,8 +12,7 @@ import adventure.identifiers.PropertyType;
 public class Pickupable extends PropertyWithValue {
     
     public Pickupable(boolean value){
-        super(PropertyType.PICKUPABLE);
-        super.setValue(value);
+        super(PropertyType.PICKUPABLE, value);
     }
     
 }

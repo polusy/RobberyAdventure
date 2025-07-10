@@ -13,7 +13,6 @@ import adventure.identifiers.PropertyType;
 public class Pushable extends PropertyWithValue {
     
     public Pushable(boolean value){
-        super(PropertyType.PUSHABLE);
-        super.setValue(value);
+        super(PropertyType.PUSHABLE, value);
     }
 }

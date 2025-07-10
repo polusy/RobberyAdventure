@@ -13,7 +13,6 @@ import adventure.identifiers.PropertyType;
 public class Consumable extends PropertyWithValue {
     
     public Consumable(boolean value){
-        super(PropertyType.CONSUMABLE);
-	super.setValue(value);
+        super(PropertyType.CONSUMABLE, value);
     }    
 }
