@@ -6,7 +6,9 @@ package adventure.Control;
 
 import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.function.BiPredicate;
+import java.util.NoSuchElementException;
 
 import adventure.utilities.Preposition;
 import adventure.Entity.types.Command;
@@ -48,38 +50,7 @@ public class Parser {
         "&&[( preposition (inventoryObject|roomObject)){2,2}]$";
     }
 
-+ int getElementIndex(String token, List<T> elements, BiPredicate<String, T> tester) throws NoSuchElementException
-{
-	for (int i = 0; i < elements.size(); i++) {
-		if (tester.test(token, elements(i))
-			return i;
-		}
-	}
-
-	throw new NoSuchElementException();
-}
-+ getCommandIndex(String token, List<Command> commands) throws NoSuchElementException
-{
-		return getElementIndex(token, commands, commandTester)
-{
-
-+ getPrepositionIndex(String token, List<Preposition> prepositions) throws NoSuchElementException
-{
-		return getElementIndex(token, prepositions, prepositionTester)
-{
-
-+ getObjectIndex(String token, List<AdvObject> objects) throws NoSuchElementException
-{
-		return getElementIndex(token, objects, objectTester)
-{
-
-+ getRoomIndex(String token, List<Room> rooms) throws NoSuchElementException
-{
-		return getElementIndex(token, rooms, roomTester)
-{
-
-
- + List<ParserOutput> parse(String sentence, List<Command> commands, List<Room> rooms, List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) throws NotValidTokenException, NotValidSentenceException {
+    public List<ParserOutput> parse(String sentence, List<Command> commands, List<Room> rooms, List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) throws NotValidTokenException, NotValidSentenceException {
   	List<String> sentences = Utils.parseString(string, stopwords, sentencesSeparators);
 	List<String> tokens = new ArrayList();
 	List <ParserOutput> parserOutputs = new ArrayList();
@@ -165,21 +136,48 @@ public class Parser {
 		}
 		
 		
-}
+}    
+    
+    
+    private <T> int getElementIndex(String token, List<T> elements, BiPredicate<String, T> tester) throws NoSuchElementException {
+	for (int i = 0; i < elements.size(); i++) {
+            if (tester.test(token, elements.get(i)))
+                return i;
+            }
 
-- List<String> getAllNames(List<AdvObject> objects)
+	throw new NoSuchElementException();
+    }
+    
+    private int getCommandIndex(String token, List<Command> commands) throws NoSuchElementException{
+        return getElementIndex(token, commands, commandTester);
+    }
 
-	List<String> names;
-	for (AdvObject object : objects)
-	{
-		names.add(object.getName())
-		names.addAll(object.getAlias());
-	{
+    private int getPrepositionIndex(String token, List<Preposition> prepositions) throws NoSuchElementException{
+        return getElementIndex(token, prepositions, prepositionTester);
+    }
 
-	return names;
+    private int getObjectIndex(String token, List<AdvObject> objects) throws NoSuchElementException{
+        return getElementIndex(token, objects, objectTester);
+    }
 
-		
-}
+    private int getRoomIndex(String token, List<Room> rooms) throws NoSuchElementException {
+        return getElementIndex(token, rooms, roomTester);
+    }
+
+    private List<String> getAllNames(List<AdvObject> objects){
+	List<String> names = new ArrayList();
+        
+	for (AdvObject object : objects){
+            names.add(object.getName());
+            names.addAll(object.getAlias());
+        }
+
+	return names;	
+    }
+
+
+
+
 
     
 }
