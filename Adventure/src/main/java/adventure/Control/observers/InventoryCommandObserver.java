@@ -17,23 +17,26 @@ import java.io.PrintStream;
  */
 public class InventoryCommandObserver implements GameObserver{
     
+    @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException
     {
 	if (parserOutput.getDoorRoom() != null || parserOutput.getObjects() != null)
 		throw new NotValidSentenceException();
 
 
-	StringBuilder inventoryItemsString = new StringBuilder("Il tuo inventario:%n");
+	StringBuilder inventoryItemsString = new StringBuilder("Il tuo inventario: " + System.lineSeparator());
 	
 	List<String> objectNames = gameDescription.getInventory().getObjects().stream()
 		.map(object -> object.getName())
 		.collect(Collectors.toList());
 
 	for (String objectName : objectNames){
-		out.println("- " + objectName + "%n");
+		inventoryItemsString.append("- ").append(objectName).append(System.lineSeparator());
 	}
 
-	out.println("%n");
+	inventoryItemsString.append(System.lineSeparator());
+        
+        out.println(inventoryItemsString);
 
     }
     
