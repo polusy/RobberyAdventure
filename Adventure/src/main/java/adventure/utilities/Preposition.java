@@ -12,7 +12,7 @@ public class Preposition {
     
     private String preposition;
     
-    public void Preposition(String preposition){
+    public Preposition(String preposition){
         this.preposition = preposition;
     }
 
