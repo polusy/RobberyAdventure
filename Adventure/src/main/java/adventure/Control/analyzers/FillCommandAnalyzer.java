@@ -22,6 +22,7 @@ public class FillCommandAnalyzer extends CommandAnalyzer{
         super("Cosa stai cercando di riempire? Guarda meglio...");
     }
     
+    @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException {
 	CommandAnalysisResult commandAnalysisResult =  analyzeBinaryCommand(parserOutput, PropertyType.FILLABLE, PrepositionType.FILL, errorMessage);
