@@ -20,7 +20,11 @@ import adventure.exceptions.*;
  * @author Paolo
  */
 public abstract class CommandAnalyzer {
+    protected String errorMessage;
     
+    public CommandAnalyzer(String errorMessage){
+        this.errorMessage = errorMessage;
+    }
     
     public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput);
     
