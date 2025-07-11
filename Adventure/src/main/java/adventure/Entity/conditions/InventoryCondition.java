@@ -5,6 +5,7 @@
 package adventure.Entity.conditions;
 
 import adventure.identifiers.ObjectId;
+import adventure.Entity.objects.AdvObject;
 import java.util.List;
 
 /**
@@ -20,6 +21,14 @@ public class InventoryCondition {
 
     public List<ObjectId> getNecessaryObjects() {
         return necessaryObjects;
+    }
+    
+    public boolean contains(AdvObject object){
+        if (necessaryObjects.contains(object))
+            return true;
+        else
+            return false;
+        
     }
     
     
