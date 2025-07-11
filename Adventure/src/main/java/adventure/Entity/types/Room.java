@@ -73,14 +73,14 @@ public class Room {
     }
 
     public boolean reaches(Room room)
-{
+    {
 	boolean result = false;
 	
 	if (roomLinks.values().contains(room))
 		result = true;
 	
 	return result;
-}
+    }
 
     public boolean contains(AdvObject object){
 	return objects.contains(object);
@@ -196,6 +196,16 @@ public class Room {
     public List<AdvObject> getObjects() {
         return objects;
     }
+
+    public Map<CardinalPoint, Room> getRoomLinks() {
+        return roomLinks;
+    }
+
+    public Map<CardinalPoint, Door> getDoorLinks() {
+        return doorLinks;
+    }
+    
+    
     
     
     
