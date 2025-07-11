@@ -121,6 +121,12 @@ public abstract class GameDescription {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+    
+    
     
     
 
