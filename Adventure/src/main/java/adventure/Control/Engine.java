@@ -4,9 +4,29 @@
  */
 package adventure.Control;
 
+import java.util.function.BiPredicate;
+import java.util.Map;
+import java.util.Set;
+import java.util.List;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.io.File;
+import java.io.PrintStream;
+import java.io.IOException;
+
 import adventure.Entity.types.GameDescription;
 import adventure.identifiers.CommandType;
 import adventure.Control.observers.TechnicalObserver;
+import adventure.Control.observers.GameObserver;
+import adventure.Entity.types.Command;
+import adventure.Entity.objects.AdvObject;
+import adventure.Entity.types.Room;
+import adventure.identifiers.PrepositionType;
+import adventure.identifiers.PropertyType;
+import adventure.utilities.Utils;
+import adventure.exceptions.DuplicateException;
+import adventure.Control.observers.*;
+
 
 /**
  *
@@ -16,30 +36,51 @@ public class Engine {
     private final GameDescription game; 
     private final Parser parser;
     private final GameControl gameControl;
-    private final Map<CommandType, TechincalObserver> technicalObservers;
+    private final Map<CommandType, TechnicalObserver> technicalObservers = new HashMap();
+    private final Map<CommandType, GameObserver> gameObservers = new HashMap();
+    private final PrintStream out;
 
-    public Engine(GameDescription game)
-{
-	this.game = game;
-	GameControl gameControl = new GameControl();
+    public Engine(GameDescription game){
+        Set<String> stopwords = new HashSet();
+        List<PrepositionType> prepositionTypes = Arrays.asList(PrepositionType.class.getEnumConstants());
+        String sentencesSeparatorsRegex = "e|ed|poi|dopo";
+        String wordsSeparatorsRegex = "\\s";
 
-	// da definire
-	//costruire regex per il parser
+        this.game = game;
+        GameControl gameControl = new GameControl();
+        out = System.out;
+        
+        try {
+            stopwords = Utils.loadFileListInSet(new File("./resources/stopwords"));
+        } catch (IOException exception){
+            out.println(exception.getMessage());
+        }
+       
 	BiPredicate<String, Command> commandTester = (token, command) -> command.getName().equals(token) || command.getAlias().contains(token);
 	BiPredicate<String, AdvObject> objectTester = (token, object) -> object.getName().equals(token) || object.getAlias().contains(token);
 	BiPredicate<String, Room> roomTester = (token, room) -> room.getName().equals(token);
-	BiPredicate<String, Preposition> prepositionTester = (token, preposition) -> preposition.getWords().contains(token);
+	BiPredicate<String, PrepositionType> prepositionTester = (token, preposition) -> preposition.getWords().contains(token);
 
 	try {
-		gameControl.addPropertyCommandCorrespondence(CONSUMABLE, CONSUME);
-		gameControl.addPropertyCommandCorrespondence(ACTIVATABLE, ACTIVATE);
-		gameControl.addPropertyCommandCorrespondence(PUSHABLE, PUSH);
-		gameControl.addPropertyCommandCorrespondence(OPENABLE, OPEN);
-		gameControl.addPropertyCommandCorrespondence(USABLE, USE);
-	} catch (DuplicateException exception);
+            gameControl.addPropertyCommandCorrespondence(PropertyType.CONSUMABLE, CommandType.CONSUME);
+            gameControl.addPropertyCommandCorrespondence(PropertyType.ACTIVATABLE, CommandType.ACTIVATE);
+            gameControl.addPropertyCommandCorrespondence(PropertyType.PUSHABLE, CommandType.PUSH);
+            gameControl.addPropertyCommandCorrespondence(PropertyType.OPENABLE, CommandType.OPEN);
+            gameControl.addPropertyCommandCorrespondence(PropertyType.USABLE, CommandType.USE);
+	} catch (DuplicateException exception){};
 
-	parser = new Parser(stopwords, prepositions, commandTester, objectTester, roomTester, prepositionTester, sentencesSeparators, wordsSeparators);
-	// da definire
+        
+	parser = new Parser(stopwords, prepositionTypes, commandTester, objectTester, roomTester,
+                prepositionTester, sentencesSeparatorsRegex, wordsSeparatorsRegex);
+        
+       
+        technicalObservers.put(CommandType.END, new EndCommandObserver());
+
+        gameObservers.put(CommandType.INVENTORY, new InventoryCommandObserver());
+        gameObservers.put(CommandType.LOOT_BAG, new LootBagCommandObserver());
+
+        
+    }
 }
 public void execute() {
         System.out.println("================================");
