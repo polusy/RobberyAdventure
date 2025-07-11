@@ -31,11 +31,9 @@ public class DatabaseManager {
     
     public DatabaseManager() throws SQLException{
         
-        Path projectRoot = Paths.get("").toAbsolutePath();
-        Path dbPath = projectRoot.resolve("database/db"); 
-        
-        String url = "jdbc:h2:" + dbPath.toString();
+        String url = "jdbc:h2:./database/db";
         connection = DriverManager.getConnection(url);
+        connection.setAutoCommit(true);
     }
 
     public void createObjectsTable() throws SQLException{
@@ -47,7 +45,7 @@ public class DatabaseManager {
     }
 
     public void addObject(String objectIdString, String name, String description, String jsonAlias) throws SQLException{
-	String objectInsertionQuery = "INSERT INTO Objects VALUES (? ? ? ?)" ;
+	String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?, ?, ?)" ;
 
 	PreparedStatement statement = connection.prepareStatement(objectInsertionQuery);
 	statement.setString(1, objectIdString);
