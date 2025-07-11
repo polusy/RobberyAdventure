@@ -20,7 +20,7 @@ public class CloseCommandAnalyzer extends CommandAnalyzer{
         super("Non puoi chiudere questo oggetto!");
     }
     
-    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	return analyzeUnaryCommand(parserOutput, PropertyType.OPENABLE, errorMessage);
     }
