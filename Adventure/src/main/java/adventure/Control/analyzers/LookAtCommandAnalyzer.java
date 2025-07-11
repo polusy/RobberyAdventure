@@ -4,6 +4,7 @@
  */
 package adventure.Control.analyzers;
 
+import adventure.Control.analyzers.OpenCommandAnalyzer;
 import adventure.Entity.types.CommandAnalysisResult;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
