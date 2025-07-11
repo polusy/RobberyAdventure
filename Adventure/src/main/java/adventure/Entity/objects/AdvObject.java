@@ -13,10 +13,10 @@ import java.util.Set;
  * @author utente
  */
 public class AdvObject {
-    final private ObjectId id;
-    final private String name;
-    final private String description;
-    final private Set<String> alias;
+    private ObjectId id;
+    private String name;
+    private String description;
+    private Set<String> alias;
     private boolean visible;
 
     // Constructors
@@ -60,6 +60,29 @@ public class AdvObject {
     public void setVisibility(boolean visible){
         this.visible = visible;
     }
+
+    public AdvObject() {
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAlias(Set<String> alias) {
+        this.alias = alias;
+    }
+    
+    
+    
+    
 
     @Override
     public int hashCode() {
