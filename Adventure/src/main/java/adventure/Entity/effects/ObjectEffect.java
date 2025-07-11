@@ -14,7 +14,7 @@ public class ObjectEffect {
     
     private final Set<PropertyValue> propertyWithValueResults;
     private ContainerEffect containerEffect;
-    private boolean visibility;
+    private Boolean visibility;
     
     public ObjectEffect(Set<PropertyValue> propertyWithValueResults, ContainerEffect containerEffect, boolean visibility){
         this.propertyWithValueResults = propertyWithValueResults;
@@ -39,7 +39,7 @@ public class ObjectEffect {
         return visibility;
     }
 
-    public void setVisibility(boolean visibility) {
+    public void setVisibility(Boolean visibility) {
         this.visibility = visibility;
     }
     

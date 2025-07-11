@@ -4,6 +4,10 @@
  */
 package adventure.Entity.types;
 
+import adventure.Entity.objects.AdvObject;
+import adventure.Entity.objects.ValuableObject;
+import adventure.exceptions.*;
+
 /**
  *
  * @author Paolo
@@ -14,6 +18,17 @@ public class RobberyAdventure extends GameDescription{
 
     public LootBag getLootBag() {
         return lootBag;
+    }
+    
+    public void addObjectToLootBag(AdvObject object)throws DuplicateException, IllegalArgumentException{
+        
+        if (lootBag.contains(object))
+            throw new DuplicateException();
+        
+        if (object instanceof ValuableObject)
+            lootBag.add((ValuableObject)object);
+        else 
+            throw new IllegalArgumentException();
     }
     
     

@@ -18,6 +18,10 @@ public class GameActionResult {
         this.message = message;
         this.specialAction = specialAction;
     }
+    
+    public GameActionResult(String message){
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;
