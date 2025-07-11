@@ -28,6 +28,7 @@ public class ParserOutput {
     }
     
     
+    
     public void addObject(AdvObject object){
         objects.put(object, null);
     }
