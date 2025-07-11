@@ -13,6 +13,7 @@ import adventure.Entity.objects.InteractiveObject;
 import adventure.Entity.objects.AdvObject;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
+import adventure.Entity.types.Command;
 import adventure.Entity.properties.Property;
 import adventure.Entity.properties.PropertyWithValue;
 import adventure.identifiers.CommandType;
@@ -56,8 +57,8 @@ public class GameControl {
 
 
     public void disambiguateMove(GameDescription game, ParserOutput parserOutput) 
-            throws AmbiguousCommandException, NotValidSentenceException
-    {
+            throws AmbiguousCommandException, NotValidSentenceException {
+        
 	String token = parserOutput.getCommandToken();
 	CommandType newCommandType = null;
 	boolean foundPreposition = false;
@@ -83,54 +84,48 @@ public class GameControl {
                     if (property instanceof PropertyWithValue)
                     {
                         PropertyWithValue iteratedProperty = (PropertyWithValue) property;
-                        for (String filteringWord : iteratedProperty.getType().get())
-                        {
-                                if (filteringWord.equals(token))
-                                {
-                                        if (foundPropertyType == null)
-                                                foundPropertyType = IteratedProperty.getPropertyType();
-                                        else
-                                                throw new AmbiguosCommandException();
-                                }
+                        
+                        for (String filteringWord : iteratedProperty.getType().getCommandFilteringWords()){
+                            if (filteringWord.equals(token)){
+                                if (foundPropertyType == null)
+                                    foundPropertyType = iteratedProperty.getType();
+                                else
+                                    throw new AmbiguousCommandException();
+                            }
                         }
                     }
                 }
-                }
-                else if (parserOutput.getObjects.size() >= 1 && foundPreposition == false)
-                {
+            }
+            else if (parserOutput.getObjects().size() >= 1 && foundPreposition == false){
+                for (AdvObject object: parserOutput.getObjects().keySet()) {
+                    
+                    if (object instanceof InteractiveObject) {
+                        InteractiveObject iteratedObject = (InteractiveObject) object;
 
-                        for (AdvObject object: parserOutput.getObjects().keySet())
+                        for (Property property : iteratedObject.getProperties())
                         {
-                                if (object istanceof InteractiveObject)
+                            if (property instanceof PropertyWithValue)
+                            {
+                                PropertyWithValue IteratedProperty = (PropertyWithValue) property;
+                                for (String filteringWord : IteratedProperty.getType().getCommandFilteringWords())
                                 {
-                                        InteractiveObject iteratedObject = (InteractiveObject) object;
-
-                                        for (Property property : IiteratedObject.getProperties())
-                                        {
-                                                if (property istanceof PropertyWithStatus)
-                                                {
-                                                        PropertyWithStatus IteratedProperty = (PropertyWithStatus) property;
-                                                        for (String filteringWord : IteratedProperty.getPropertyType().getCommandsFilteringWords())
-                                                        {
-                                                                if (filteringWord.equals(token) && foundCandidate == false)
-                                                                {
-                                                                        candidatePropertyType = IteratedProperty.getPropertyType();
-                                                                        foundCandidate = true;
-                                                                }
-                                                                else if (filteringWord.equals(token) && foundCandidate == true)
-                                                                {
-                                                                        throw new AmbiguousCommandException();
-                                                                }
-                                                        }
-                                                }
-                                        }
+                                    if (filteringWord.equals(token) && foundCandidate == false){
+                                        foundPropertyType = IteratedProperty.getType();
+                                        foundCandidate = true;
+                                    }
+                                    else if (filteringWord.equals(token) && foundCandidate == true){
+                                        throw new AmbiguousCommandException();
+                                    }
                                 }
+                            }
                         }
+                    }
                 }
+            }
 
-        newCommandType = propertyCommandCorrespondences.getValue(candidatePropertyType);
-        Command newCommand = game.getCommandById(newCommandType);
-        parserOutput.setCommand(newCommand):
+        newCommandType = propertyCommandCorrespondences.get(foundPropertyType);
+        Command newCommand = game.getCommandByType(newCommandType);
+        parserOutput.setCommand(newCommand);
     }
 }
 
