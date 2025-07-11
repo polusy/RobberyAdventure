@@ -20,7 +20,7 @@ public class PushCommandAnalyzer extends CommandAnalyzer{
         super("Ma ti rendi conto che stai cercando di premere questo oggetto?!");
     }
     
-    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	return analyzeUnaryCommand(parserOutput, PropertyType.PUSHABLE, errorMessage);
     }

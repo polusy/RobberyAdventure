@@ -22,7 +22,7 @@ public class ConsumeCommandAnalyzer extends CommandAnalyzer {
     
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
-            throws NotValidSentenceException, AmbiguousCommandException     {
+            throws NotValidSentenceException{
 	return analyzeUnaryCommand(parserOutput, PropertyType.CONSUMABLE, errorMessage);
     }
 }
