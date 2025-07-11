@@ -44,6 +44,12 @@ public enum PropertyType{
         this.commandFilteringWords = new HashSet<>(Arrays.asList(commandFilteringWords));
     }
 
+    public Set<String> getCommandFilteringWords() {
+        return commandFilteringWords;
+    }
+    
+    
+
 
 
 }
