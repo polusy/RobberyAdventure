@@ -8,8 +8,12 @@ import java.util.function.BiPredicate;
 import java.util.Map;
 import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Iterator;
 import java.io.File;
 import java.io.PrintStream;
 import java.io.IOException;
@@ -21,10 +25,11 @@ import adventure.Control.observers.GameObserver;
 import adventure.Entity.types.Command;
 import adventure.Entity.objects.AdvObject;
 import adventure.Entity.types.Room;
+import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.PrepositionType;
 import adventure.identifiers.PropertyType;
 import adventure.utilities.Utils;
-import adventure.exceptions.DuplicateException;
+import adventure.exceptions.*;
 import adventure.Control.observers.*;
 
 
@@ -81,33 +86,47 @@ public class Engine {
 
         
     }
-}
-public void execute() {
-        System.out.println("================================");
-        System.out.println("* Adventure v. 0.4 - 2023-2024 *");
-        System.out.println("*         developed by         *");
-        System.out.println("*       Pierpaolo Basile       *");
-        System.out.println("================================");
-        System.out.println();
-        System.out.println(game.getWelcomeMsg());
-        System.out.println();
-        System.out.println("Ti trovi qui: " + game.getCurrentRoom().getName());
-        System.out.println();
-        System.out.println(game.getCurrentRoom().getDescription());
-        System.out.println();
-        System.out.print("?> ");
+
+    public void execute() {
+        List<ParserOutput> parserOutputs = new ArrayList();
+        
+        out.println("================================");
+        out.println("* Robbery Adventure *");
+        out.println("================================");
+        out.println();
+
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-	try{
-            ParserOutput parserOutput = parser.parse(command, game.getCommands(), game.getRooms(), game.getCurrentRoom().getObjects(), game.getInventory());
-		gameControl.disambiguateMove(game, parserOutput);
-		notifyTechnicalObservers(game, parserOutput);
-		gameControl.nextMove(game, parserOutput, System.out);
-
-	}catch(AmbiguousCommandException exception){ // da definire}
-	catch(NotValidSentenceException exception) { // da definire}
-	catch(NotValidTokenException exception) { // da definire}
+            ParserOutput parserOutput = null;
+            parserOutputs.clear();
+            
+            try{
+                
+                try {
+                    parserOutputs = parser.parse(command, game.getCommands(), game.getRooms(),
+                        game.getCurrentRoom().getObjects(), game.getInventory().getObjects());
+                } catch (NotValidTokenException excception){
+                    
+                }
+            
+                
+                Iterator parserOutputsIterator = parserOutputs.iterator();
+                
+                while (parserOutputsIterator.hasNext()) {
+                    parserOutput = (ParserOutput) parserOutputsIterator.next();
+                    
+                    gameControl.disambiguateMove(game, parserOutput);
+                    notifyTechnicalObservers(game, parserOutput);
+                    notifyGameObservers(game, parserOutput, out);
+                    gameControl.nextMove(game, parserOutput, System.out);
+                }
+            }
+            catch(AmbiguousCommandException exception){
+                
+            }
+            catch(NotValidSentenceException exception) { // da definire}
+            catch(NotValidTokenException exception) { // da definire}
                 if (game.getCurrentRoom() == null) {
                     System.out.println("La tua avventura termina qui! Complimenti!");
                     System.exit(0);
@@ -117,7 +136,7 @@ public void execute() {
         }
     }
 
-+ void notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput){
+    public void notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput){
 
 	StringBuilder message = null;
 	CommandType commandType = parserOutput.getCommand().getCommandType();
