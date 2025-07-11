@@ -27,7 +27,7 @@ public class Room {
     private String description;
     Map<CardinalPoint, Room> roomLinks;
     Map<CardinalPoint, Door> doorLinks;
-    final private List<AdvObject> objects;
+    private List<AdvObject> objects;
     
 
     public Room(RoomId id, String name, String description, Map<CardinalPoint, Room> roomLinks, Map<CardinalPoint, Door> doorLinks, List<AdvObject> objects) {
@@ -38,6 +38,14 @@ public class Room {
         this.doorLinks = doorLinks;
         this.objects = objects;
     }
+
+    public Room(RoomId id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+    
+
     
     
     public void addObject(AdvObject object) throws DuplicateException{
