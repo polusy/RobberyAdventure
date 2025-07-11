@@ -52,7 +52,7 @@ public class Engine {
         String wordsSeparatorsRegex = "\\s";
 
         this.game = game;
-        GameControl gameControl = new GameControl();
+        gameControl = new GameControl();
         out = System.out;
         
         try {
@@ -101,15 +101,9 @@ public class Engine {
             ParserOutput parserOutput = null;
             parserOutputs.clear();
             
-            try{
-                
-                try {
-                    parserOutputs = parser.parse(command, game.getCommands(), game.getRooms(),
-                        game.getCurrentRoom().getObjects(), game.getInventory().getObjects());
-                } catch (NotValidTokenException excception){
-                    
-                }
-            
+            try{  
+                parserOutputs = parser.parse(command, game.getCommands(), game.getRooms(),
+                    game.getCurrentRoom().getObjects(), game.getInventory().getObjects());
                 
                 Iterator parserOutputsIterator = parserOutputs.iterator();
                 
@@ -122,32 +116,40 @@ public class Engine {
                     gameControl.nextMove(game, parserOutput, System.out);
                 }
             }
+            catch (NotValidTokenException excception){
+                out.println("Non ho capito cosa vuoi dire");
+            }
             catch(AmbiguousCommandException exception){
-                
+                out.println(exception.getMessage());
             }
-            catch(NotValidSentenceException exception) { // da definire}
-            catch(NotValidTokenException exception) { // da definire}
-                if (game.getCurrentRoom() == null) {
-                    System.out.println("La tua avventura termina qui! Complimenti!");
-                    System.exit(0);
-                }
+            catch(NotValidSentenceException exception) { 
+                out.println(exception.getMessage());
             }
+            catch (EndGameException exception){
+                out.println("Probabilmente come ladro non vali granché" + '(' + "e menomale)" +')');
+            }
+            
             System.out.print("?> ");
         }
     }
 
-    public void notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput){
+    public void notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput) 
+            throws EndGameException, NotValidSentenceException {
+        StringBuilder message = null;
+	CommandType commandType = parserOutput.getCommand().getType();
 
-	StringBuilder message = null;
-	CommandType commandType = parserOutput.getCommand().getCommandType();
+	if (technicalObservers.containsKey(commandType))
+            technicalObservers.get(commandType).update(game, parserOutput, message);
+    }
+    
+    public void notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
+            throws NotValidSentenceException {
+        
+	CommandType commandType = parserOutput.getCommand().getType();
 
-	if technicalObservers.containsKey(commandType)
-		technicalObservers.getValue(commandType).update(game, parserOutput, message);
-
-	System.out.println(message);
-
-
-}
+	if (gameObservers.containsKey(commandType))
+            gameObservers.get(commandType).update(game, parserOutput, out);
+    }
 
     
 }
