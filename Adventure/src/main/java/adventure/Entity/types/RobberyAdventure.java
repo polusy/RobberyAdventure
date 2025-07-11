@@ -4,12 +4,25 @@
  */
 package adventure.Entity.types;
 
-import adventure.Entity.objects.AdvObject;
-import adventure.Entity.objects.ValuableObject;
-import adventure.identifiers.CommandType;
+
+import java.lang.IllegalArgumentException;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
+import adventure.Entity.properties.*;
+import adventure.Entity.conditions.*;
+import adventure.Entity.effects.*;
+import adventure.Entity.objects.*;
+import adventure.identifiers.*;
+
+
 import adventure.utilities.Utils;
-import adventure.identifiers.RoomId;
 import adventure.exceptions.*;
+import adventure.Entity.types.PropertyValue;
 
 
 import java.io.File;
@@ -42,14 +55,223 @@ public class RobberyAdventure extends GameDescription{
     
     
     @Override
-    public void init(){
+    public void init() throws InconsistentInitializationException{
         
+        Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications = new HashMap();
+        GameActionSpecification gameActionSpecification = null;
+        Property property = null;
+        CommandType commandType = null;
+      
         initCommands();
         initRooms();
-    
-    
-    
+
+        
+        
+        ObjectId objectId = ObjectId.SLING;
+        
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, InteractiveObject.class, "Hai raccolto la fionda. "
+                + "Assomiglia a quella che avevi da piccolo, che il vicino ti ha sequestrato dopo che gli hai "
+                + "mandato in frantumi la finestra.", "Hai gettato la fionda");
+        
     };
+    
+    private void addStandardGameActionSpecifications (Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
+            Property property, ObjectId targetObjectId, ObjectId containerId, Class<?> targetObjectClass,
+            String positivePassingConditionMessage, String negativePassingConditionMessage)
+        throws InconsistentInitializationException {
+        
+        GameActionSpecification gameActionSpecification = null;
+        
+        if (((PropertyWithValue)property).getType() == PropertyType.PICKUPABLE){
+            CommandType commandType = CommandType.PICK_UP;
+            
+            gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
+                targetObjectId, containerId, targetObjectClass, positivePassingConditionMessage);
+        
+            gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+    
+            if (targetObjectClass != ValuableObject.class){
+                commandType = CommandType.DROP;
+        
+                gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
+                    targetObjectId, null, targetObjectClass, negativePassingConditionMessage);
+        
+                gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+            }
+        }
+    }
+    
+    private GameActionSpecification buildStandardGameActionSpecification(Property property, 
+            CommandType commandType, ObjectId targetObjectId, ObjectId containerId, Class<?> targetObjectClass,
+            String passingConditionMessage) throws IllegalArgumentException, InconsistentInitializationException{
+        
+        CompleteCondition completeCondition = null;
+        FailingConditionMessages failingConditionMessages = null;
+        PassingConditionResult passingConditionResult = null;
+        GameEffect gameEffect = null;
+        Map<ObjectId, ObjectEffect> objectsEffects = null;
+        
+        completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId);
+        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, 
+                targetObjectId , null);
+        
+        
+        objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId);
+        gameEffect = this.buildStandardGameEffect(commandType, targetObjectId, targetObjectClass, objectsEffects);
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        return (new GameActionSpecification(completeCondition, failingConditionMessages, passingConditionResult));    
+    }
+    
+    private InventoryCondition buildInventoryCondition(ObjectId[] necessaryObjects){
+        List<ObjectId> necessaryObjectsList = new ArrayList<>();
+        
+        for (int i=0; i < necessaryObjects.length ; i++)
+            necessaryObjectsList.add(necessaryObjects[i]);
+        
+        return (new InventoryCondition(necessaryObjectsList));
+    }
+    
+    private CompleteCondition buildStandardCompleteCondition(CommandType commandType, ObjectId targetObjectId)
+    throws IllegalArgumentException {
+        CompleteCondition completeCondition = null;
+        Map<ObjectId, ObjectCondition> objectsConditions = new HashMap<>();
+        List<InventoryCondition> inventoryConditionOptions = new ArrayList<>();
+        InventoryCondition inventoryCondition = null;
+        ObjectCondition objectCondition = null;
+        Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();
+        
+        if (commandType == CommandType.PICK_UP){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.PICKUPABLE, false));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+            
+            completeCondition = new CompleteCondition(null, objectsConditions);
+        }
+        else if(commandType == CommandType.DROP){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.PICKUPABLE, true));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+            
+            inventoryCondition = this.buildInventoryCondition(new ObjectId[] {targetObjectId});
+            inventoryConditionOptions.add(inventoryCondition);
+            completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+            
+        return completeCondition;
+    }
+    
+    private FailingConditionMessages buildStandardFailingConditionMessages(CommandType commandType, 
+            ObjectId targetObjectId, String errorMessage) throws IllegalArgumentException {
+        
+        FailingConditionMessages failingConditionMessages = null;
+        Map<ObjectId, String> missingNecessaryObjectsMessages = new HashMap<>();
+        Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
+        Map<ObjectId, Map<PropertyType,String>> failingObjectsConditionsMessages = new HashMap<>();
+        Map<PropertyType,String> failingPropertiesMessages = new HashMap<>();
+      
+        if (commandType == CommandType.PICK_UP){
+            failingVisibilityConditionMessages.put(targetObjectId, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+            failingPropertiesMessages.put(PropertyType.PICKUPABLE, "Hai già raccolto questo oggetto, "
+                    + "hai proprio la memoria di un pesciolino rosso!");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            failingConditionMessages = new FailingConditionMessages(null,
+                    null, failingObjectsConditionsMessages, failingVisibilityConditionMessages);
+        }
+        else if(commandType == CommandType.DROP){
+            missingNecessaryObjectsMessages.put(targetObjectId, "Non hai questo oggetto nell'inventario");
+            failingPropertiesMessages.put(PropertyType.PICKUPABLE, "Non hai questo oggetto nell'inventario");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+            null, failingObjectsConditionsMessages, null);
+        }        
+        else{
+            throw new IllegalArgumentException();
+        }
+            
+        return failingConditionMessages;
+    }
+
+    private GameEffect buildStandardGameEffect(CommandType commandType, ObjectId targetObjectId, 
+            Class<?> targetObjectClass, Map<ObjectId, ObjectEffect> objectsEffects) 
+            throws IllegalArgumentException, InconsistentInitializationException{
+    
+        GameEffect gameEffect = null;
+        CurrentPositionEffect currentPositionEffect = null;
+        InventoryEffect inventoryEffect = null;
+        LootBagEffect lootBagEffect = null;
+        RoomEffect roomEffect = null;
+ 
+        
+        if (commandType == CommandType.PICK_UP){
+            
+            if (targetObjectClass != ValuableObject.class){
+                inventoryEffect = new InventoryEffect(targetObjectId, null);
+            }
+            else if (targetObjectClass == ValuableObject.class){
+                lootBagEffect = new LootBagEffect(targetObjectId);
+            }
+            
+            roomEffect = new RoomEffect(null, targetObjectId);
+            
+            gameEffect = new GameEffect(null, inventoryEffect, 
+                    lootBagEffect, roomEffect, objectsEffects, null);
+        }
+        else if (commandType == CommandType.DROP){
+            inventoryEffect = new InventoryEffect(null, targetObjectId);
+            roomEffect = new RoomEffect(targetObjectId, null);
+            gameEffect = new GameEffect(null, inventoryEffect, 
+                    null, roomEffect, objectsEffects, null);
+        }
+        
+        else{
+            throw new IllegalArgumentException();
+        }
+        
+        return gameEffect;
+    }
+    
+    private Map<ObjectId, ObjectEffect> buildStandardObjectsEffects(CommandType commandType,
+            ObjectId targetObjectId, ObjectId containerId) throws IllegalArgumentException {
+        
+        Map<ObjectId, ObjectEffect> objectsEffects = new HashMap<>();
+        ObjectEffect objectEffect = null;
+        Set<PropertyValue> propertyWithValueResults = new HashSet<>();
+        
+        
+        if (commandType == CommandType.PICK_UP){
+            // Target object effect
+            propertyWithValueResults.add(new PropertyValue(PropertyType.PICKUPABLE, true));
+            objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+            objectsEffects.put(targetObjectId, objectEffect);
+
+            if (containerId != null){
+                ContainerEffect containerEffect = new ContainerEffect(targetObjectId);
+                objectEffect = new ObjectEffect(null, containerEffect, true);
+                objectsEffects.put(containerId, objectEffect);
+            }
+        }
+        else if (commandType == CommandType.DROP){
+            propertyWithValueResults.add(new PropertyValue(PropertyType.PICKUPABLE, false));
+            objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+            objectsEffects.put(targetObjectId, objectEffect);            
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+
+        return objectsEffects;
+    }
     
     private void initCommands(){
         
