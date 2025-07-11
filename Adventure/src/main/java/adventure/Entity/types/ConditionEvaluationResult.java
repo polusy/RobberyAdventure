@@ -34,6 +34,12 @@ public class ConditionEvaluationResult {
         this.failedVisibilityObject = failedVisibilityObject;
     }
 
+    public void setInventoryConditionPassed(boolean inventoryConditionPassed) {
+        this.inventoryConditionPassed = inventoryConditionPassed;
+    }
+    
+    
+
     public boolean hasConditionPassed() {
         return conditionPassed;
     }
