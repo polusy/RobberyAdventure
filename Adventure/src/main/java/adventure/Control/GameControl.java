@@ -6,14 +6,20 @@ package adventure.Control;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
-import adventure.Control.analyzers.CommandAnalyzer;
+import adventure.Control.analyzers.*;
+import adventure.Entity.objects.InteractiveObject;
+import adventure.Entity.objects.AdvObject;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
+import adventure.Entity.properties.Property;
+import adventure.Entity.properties.PropertyWithValue;
 import adventure.identifiers.CommandType;
 import adventure.identifiers.PropertyType;
 import adventure.exceptions.DuplicateException;
 import adventure.exceptions.AmbiguousCommandException;
+import adventure.exceptions.NotValidSentenceException;
 
 /**
  *
@@ -31,101 +37,101 @@ public class GameControl {
 	positionChangeHandler = new PositionChangeHandler();
 	
 	try{
-            this.addCommandAnalyzer(CommandType.OPEN, OpenCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.CLOSE, CloseCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.PUSH, PushCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.PICK_UP, PickUpCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.DROP, DropCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.MOVE, MoveCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.DEACTIVATE, DeactivateCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.CONSUME, ConsumeCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.LOOK_AT, LookAtCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.BREAK, BreakCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.ACTIVATE, ActivateCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.FILL, FillCommandAnalyzer());
-            this.addCommandAnalyzer(CommandType.USE, UseCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.OPEN, new OpenCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.CLOSE, new CloseCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.PUSH, new PushCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.PICK_UP, new PickUpCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.DROP, new DropCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.MOVE, new MoveCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.DEACTIVATE, new DeactivateCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.CONSUME, new ConsumeCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.LOOK_AT, new LookAtCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.BREAK, new BreakCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.ACTIVATE, new ActivateCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.FILL, new FillCommandAnalyzer());
+            this.addCommandAnalyzer(CommandType.USE, new UseCommandAnalyzer());
 
         } catch(DuplicateException exception){};
-}
+    }
 
 
-    public void disambiguateMove(GameDescription game, ParserOutput parserOutput) throws AmbiguousCommandException
+    public void disambiguateMove(GameDescription game, ParserOutput parserOutput) 
+            throws AmbiguousCommandException, NotValidSentenceException
     {
-	String token = parserOutput.().getCommandToken();
-	CommandType newCommandType;
-	boolean foundPreposition= false;
+	String token = parserOutput.getCommandToken();
+	CommandType newCommandType = null;
+	boolean foundPreposition = false;
 	boolean foundCandidate = false;
-	PropertyType foundPropertyType;
+	PropertyType foundPropertyType = null;
 
-	if (parserOutput.getCommand().getCommandType() == CommandType.USE){
-		foundPreposition = parserOutput.hasPreposition();
+	if (parserOutput.getCommand().getType() == CommandType.USE){
+            foundPreposition = parserOutput.hasPreposition();
 
-		if(parserOutput.getObjects().size() > 1 && foundPreposition == true) 
-		{
-			InteractiveObject object = null;
-			try{
-				AdvObject advObject = parserOutput.getUniqueObjectWithoutPreposition();
-				if (advObject istanceof InteractiveObject)
-					object = (InteractiveObject) advObject;
-				else
-					throw new NotValidSentenceException();
-			}catch(NoSuchElementException exception){};
-			
+            if(parserOutput.getObjects().size() > 1 && foundPreposition == true) 
+            {
+                InteractiveObject object = null;
+                
+                try {
+                    AdvObject advObject = parserOutput.getUniqueObjectWithoutPreposition();
+                    if (advObject instanceof InteractiveObject)
+                        object = (InteractiveObject) advObject;
+                    else
+                        throw new NotValidSentenceException();
+                } catch(NoSuchElementException exception){};
 
-						for (Property property : object.getProperties())
-						{
-							if (property istanceof PropertyWithStatus)
-							{
-								PropertyWithStatus IteratedProperty = (PropertyWithStatus) property;
-								for (String filteringWord : IteratedProperty.getPropertyType().getCommandsFilteringWords())
-								{
-									if (filteringWord.equals(token))
-									{
-										if (foundPropertyType == null)
-											foundPropertyType = IteratedProperty.getPropertyType();
-										else
-											throw new AmbiguosCommandException();
-									}
-								}
-							}
-						}
-			}
-			else if (parserOutput.getObjects.size() >= 1 && foundPreposition == false)
-			{
-				
-				for (AdvObject object: parserOutput.getObjects().keySet())
-				{
-					if (object istanceof InteractiveObject)
-					{
-						InteractiveObject iteratedObject = (InteractiveObject) object;
+                for (Property property : object.getProperties()){
+                    if (property instanceof PropertyWithValue)
+                    {
+                        PropertyWithValue iteratedProperty = (PropertyWithValue) property;
+                        for (String filteringWord : iteratedProperty.getType().get())
+                        {
+                                if (filteringWord.equals(token))
+                                {
+                                        if (foundPropertyType == null)
+                                                foundPropertyType = IteratedProperty.getPropertyType();
+                                        else
+                                                throw new AmbiguosCommandException();
+                                }
+                        }
+                    }
+                }
+                }
+                else if (parserOutput.getObjects.size() >= 1 && foundPreposition == false)
+                {
 
-						for (Property property : IiteratedObject.getProperties())
-						{
-							if (property istanceof PropertyWithStatus)
-							{
-								PropertyWithStatus IteratedProperty = (PropertyWithStatus) property;
-								for (String filteringWord : IteratedProperty.getPropertyType().getCommandsFilteringWords())
-								{
-									if (filteringWord.equals(token) && foundCandidate == false)
-									{
-										candidatePropertyType = IteratedProperty.getPropertyType();
-										foundCandidate = true;
-									}
-									else if (filteringWord.equals(token) && foundCandidate == true)
-									{
-										throw new AmbiguousCommandException();
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		
-		newCommandType = propertyCommandCorrespondences.getValue(candidatePropertyType);
-		Command newCommand = game.getCommandById(newCommandType);
-		parserOutput.setCommand(newCommand):
-	}
+                        for (AdvObject object: parserOutput.getObjects().keySet())
+                        {
+                                if (object istanceof InteractiveObject)
+                                {
+                                        InteractiveObject iteratedObject = (InteractiveObject) object;
+
+                                        for (Property property : IiteratedObject.getProperties())
+                                        {
+                                                if (property istanceof PropertyWithStatus)
+                                                {
+                                                        PropertyWithStatus IteratedProperty = (PropertyWithStatus) property;
+                                                        for (String filteringWord : IteratedProperty.getPropertyType().getCommandsFilteringWords())
+                                                        {
+                                                                if (filteringWord.equals(token) && foundCandidate == false)
+                                                                {
+                                                                        candidatePropertyType = IteratedProperty.getPropertyType();
+                                                                        foundCandidate = true;
+                                                                }
+                                                                else if (filteringWord.equals(token) && foundCandidate == true)
+                                                                {
+                                                                        throw new AmbiguousCommandException();
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+
+        newCommandType = propertyCommandCorrespondences.getValue(candidatePropertyType);
+        Command newCommand = game.getCommandById(newCommandType);
+        parserOutput.setCommand(newCommand):
+    }
 }
 
 
@@ -156,20 +162,20 @@ public class GameControl {
     
 
  
-+ void addCommandAnalyzer(CommandAnalyzer commandAnalyzer, CommandType commandType) throws DuplicateException 
-{
-        if (!commandAnalyzer.contains(commandType)) {
-            commandObservers.put(commandType, commandAnalyzer);
+    private void addCommandAnalyzer(CommandType commandType, CommandAnalyzer commandAnalyzer) throws DuplicateException 
+    {
+        if (!commandAnalyzers.containsKey(commandType)) {
+            commandAnalyzers.put(commandType, commandAnalyzer);
         }
 	else{
-		throw new DuplicateException();
+            throw new DuplicateException();
 	}
     }
 
 
 + void removeCommandAnalyzer(CommandAnalyzer commandAnalyzer, CommandType commandType)  throws NoSuchElementException 
 {
-        if (!commandAnalyzers.contains(commandType)) {
+        if (!commandAnalyzers.containsKey(commandType)) {
             commandAnalyzers.put(commandType, null);
         }
 	else{
