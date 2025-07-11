@@ -15,7 +15,7 @@ import java.util.List;
 public class InventoryCondition {
     final private List<ObjectId> necessaryObjects;
 
-    public InventoryCondition(List necessaryObjects) {
+    public InventoryCondition(List<ObjectId> necessaryObjects) {
         this.necessaryObjects = necessaryObjects;
     }
 
