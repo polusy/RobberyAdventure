@@ -37,6 +37,14 @@ public class ConditionEvaluationResult {
     public void setInventoryConditionPassed(boolean inventoryConditionPassed) {
         this.inventoryConditionPassed = inventoryConditionPassed;
     }
+
+    public void setConditionPassed(boolean conditionPassed) {
+        this.conditionPassed = conditionPassed;
+    }
+
+    public void setMissingNecessaryObject(ObjectId missingNecessaryObject) {
+        this.missingNecessaryObject = missingNecessaryObject;
+    }
     
     
 
