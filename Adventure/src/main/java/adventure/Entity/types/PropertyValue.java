@@ -28,7 +28,7 @@ public class PropertyValue {
         this.propertyType = propertyType;
     }
 
-    public boolean isValue() {
+    public boolean getValue() {
         return value;
     }
 
