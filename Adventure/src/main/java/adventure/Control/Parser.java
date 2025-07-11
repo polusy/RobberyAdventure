@@ -22,6 +22,7 @@ import adventure.utilities.Utils;
 import adventure.Entity.objects.Door;
 import adventure.Entity.types.Room;
 import adventure.Entity.types.ParserOutput;
+import adventure.identifiers.PrepositionType;
 
 
 /**
@@ -30,21 +31,21 @@ import adventure.Entity.types.ParserOutput;
  */
 public class Parser {
     final private Set<String> stopwords;
-    final private List<Preposition> prepositions;
+    final private List<PrepositionType> prepositionTypes;
     final private BiPredicate<String, Command> commandTester;
-    final private BiPredicate<String, Preposition>prepositionTester; 
+    final private BiPredicate<String, PrepositionType>prepositionTester; 
     final private BiPredicate<String,AdvObject> objectTester;
     final private BiPredicate<String, Room> roomTester;
     final private String sentencesSeparators;
     final private String wordsSeparators;
     final private String regex;
      
-    public Parser(Set<String> stopwords, List<Preposition> prepositions, BiPredicate<String, Command> commandTester,
+    public Parser(Set<String> stopwords, List<PrepositionType> prepositionTypes, BiPredicate<String, Command> commandTester,
     BiPredicate<String, AdvObject> objectTester, BiPredicate<String, Room> roomTester, 
-    BiPredicate<String, Preposition> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
+    BiPredicate<String, PrepositionType> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
 
         this.stopwords = stopwords; 
-        this.prepositions = prepositions;
+        this.prepositionTypes = prepositionTypes;
         this.commandTester = commandTester;
         this.prepositionTester = prepositionTester;
         this.objectTester = objectTester;
@@ -95,7 +96,7 @@ public class Parser {
                 } catch (NoSuchElementException exception){};
 
                 try {
-                    getPrepositionIndex(token, prepositions);
+                    getPrepositionIndex(token, prepositionTypes);
                     preposition = new Preposition(token);
                     mappedString.append(" preposition");
                 } catch (NoSuchElementException exception){};
@@ -161,8 +162,8 @@ public class Parser {
         return getElementIndex(token, commands, commandTester);
     }
 
-    private int getPrepositionIndex(String token, List<Preposition> prepositions) throws NoSuchElementException{
-        return getElementIndex(token, prepositions, prepositionTester);
+    private int getPrepositionIndex(String token, List<PrepositionType> prepositionTypes) throws NoSuchElementException{
+        return getElementIndex(token, prepositionTypes, prepositionTester);
     }
 
     private int getObjectIndex(String token, List<AdvObject> objects) throws NoSuchElementException{
