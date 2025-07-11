@@ -7,13 +7,12 @@ package adventure.Control;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+import java.io.PrintStream;
 
 import adventure.Control.analyzers.*;
 import adventure.Entity.objects.InteractiveObject;
 import adventure.Entity.objects.AdvObject;
-import adventure.Entity.types.GameDescription;
-import adventure.Entity.types.ParserOutput;
-import adventure.Entity.types.Command;
+import adventure.Entity.types.*;
 import adventure.Entity.properties.Property;
 import adventure.Entity.properties.PropertyWithValue;
 import adventure.identifiers.CommandType;
@@ -126,37 +125,47 @@ public class GameControl {
         newCommandType = propertyCommandCorrespondences.get(foundPropertyType);
         Command newCommand = game.getCommandByType(newCommandType);
         parserOutput.setCommand(newCommand);
+        }
     }
-}
 
 
 
-+ void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) {
-	CommandType commandType = parserOutput.getCommand().getCommandType();
-	String message;
+    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) {
+	CommandType commandType = parserOutput.getCommand().getType();
+	String message = null;
 	CommandAnalysisResult commandAnalysisResult = null;
+        GameActionResult gameActionResult = null;
 
-	if (commandType == CommandType.NORTH || commandType == CommandType.SOUTH || commandType == CommandType.EAST || commandType == CommandType.WEST)
-		message = positionChangeHandler.handle(gameDescription, parserOutput);
+	if (commandType == CommandType.NORTH || commandType == CommandType.SOUTH || 
+                commandType == CommandType.EAST || commandType == CommandType.WEST)
+            try {
+                message = positionChangeHandler.handle(game, parserOutput);
+            } catch (NotValidSentenceException exception){
+                out.println(exception.getMessage());
+            }
 	else
-       		commandAnalysisResult = this.notifyAnalyzer(game, parserOutput);
+            try {
+                commandAnalysisResult = this.notifyAnalyzer(game, parserOutput);
+            } catch (NotValidSentenceException exception){
+                out.println(exception.getMessage());
+            }
+            catch (AmbiguousCommandException exception){
+                out.println(exception.getMessage());
+            }
 
-	if (commandAnalysisResult != null && commandAnalysisResult.isAnalysisPassed())
-	{
-		GameActionResult gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
-		message = gameActionResult.getMessage();
+	if (commandAnalysisResult != null && commandAnalysisResult.isAnalysisPassed()){
+            gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
+            message = gameActionResult.getMessage();
 	}
 
          out.println(message);
 
 	if (gameActionResult.getSpecialAction() != null)
 		gameActionResult.getSpecialAction().execute();
-      
-           
-        }
+        
+    }
     
 
- 
     private void addCommandAnalyzer(CommandType commandType, CommandAnalyzer commandAnalyzer) throws DuplicateException 
     {
         if (!commandAnalyzers.containsKey(commandType)) {
@@ -168,45 +177,43 @@ public class GameControl {
     }
 
 
-+ void removeCommandAnalyzer(CommandAnalyzer commandAnalyzer, CommandType commandType)  throws NoSuchElementException 
-{
+    private void removeCommandAnalyzer(CommandAnalyzer commandAnalyzer, CommandType commandType) throws NoSuchElementException 
+    {
         if (!commandAnalyzers.containsKey(commandType)) {
             commandAnalyzers.put(commandType, null);
         }
 	else{
-		throw new NoSuchElementException();
+            throw new NoSuchElementException();
 	}
     }
 
-
-
-
-- CommandAnalysisResult notifyAnalyzer(GameDescription game, ParserOutput parserOutput) {
-	CommandAnalyzer commandAnalyzer= commandAnalyzers.getValue(parserOutput.getCommand().getCommandType());
-	return commandAnalyzer.analyze(game, parserOutput);
+    private CommandAnalysisResult notifyAnalyzer(GameDescription game, ParserOutput parserOutput) 
+            throws NotValidSentenceException, AmbiguousCommandException {
+	CommandAnalyzer commandAnalyzer= commandAnalyzers.get(parserOutput.getCommand().getType());
+        
+        return commandAnalyzer.analyze(game, parserOutput);
 }
     
 
--  GameActionResult processCommandAnalysisResult(CommandAnalysisResult commandAnalysisResult, GameDescription gameDescription, ParserOutput parserOutput)
-{
+    private GameActionResult processCommandAnalysisResult(CommandAnalysisResult commandAnalysisResult, 
+            GameDescription gameDescription, ParserOutput parserOutput){
 	GameActionSpecification gameActionSpecification = this.findGameActionSpecification(commandAnalysisResult, parserOutput);
 	GameActionResult gameActionResult = GameActionSpecificationProcesser.process(gameActionSpecification, commandAnalysisResult);
 
 	return gameActionResult;
-}
+    }
 
-- GameActionSpecification findGameActionSpecification(CommandAnalysisResult commandAnalysisResult, ParserOutput parserOutput)
-{
-	return commandAnalysisResult.getTargetObject().getGameActionSpecification(commandAnalysisResult.getPropertyType(), parserOutput.getCommandType());
-}
+    private GameActionSpecification findGameActionSpecification(CommandAnalysisResult commandAnalysisResult,
+            ParserOutput parserOutput) {
+        
+	return commandAnalysisResult.getTargetObject().getGameActionSpecification(commandAnalysisResult.getPropertyType(), parserOutput.getCommand().getType());
+    }
 
-
-
-+ void addPropertyCommandCorrespondence(PropertyType property, CommandType command) throws DuplicateException
-{
+    
+    public void addPropertyCommandCorrespondence(PropertyType property, CommandType command) throws DuplicateException {
 	if (propertyCommandCorrespondences.containsKey(property))
-		throws new DuplicateException();
+            throw new DuplicateException();
 
 	propertyCommandCorrespondences.put(property, command);
-}    
+    }    
 }
