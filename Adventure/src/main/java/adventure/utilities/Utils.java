@@ -37,6 +37,19 @@ public class Utils {
     }
     
     
+    public static String loadFileDescriptionInString(File file) throws IOException{
+        StringBuilder description = new StringBuilder("");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        
+        while (reader.ready()){
+            description.append(reader.readLine());
+        }
+        reader.close();
+        
+        return new String(description);
+    }
+    
+    
     
     public static List<String> parseString(String string, Set<String> stopwords, String separators) {
         List<String> tokens = new ArrayList<>();
