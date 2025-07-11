@@ -6,6 +6,7 @@ package adventure.Entity.types;
 
 
 import adventure.Entity.objects.ValuableObject;
+import adventure.Entity.objects.AdvObject;
 import java.util.ArrayList;
 import java.util.List;
 import adventure.exceptions.*;
@@ -40,6 +41,13 @@ public class LootBag {
             sum = sum + valuableObject.getValue();
         }
         return sum;
+    }
+    
+    public boolean contains(AdvObject object){
+        if (objects.contains(object))
+               return true;
+        else 
+            return false;
     }
     
 }
