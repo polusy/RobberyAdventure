@@ -31,7 +31,7 @@ import adventure.identifiers.PrepositionType;
  */
 public class Parser {
     final private Set<String> stopwords;
-    final private List<PrepositionType> prepositions;
+    final private List<PrepositionType> prepositionTypes;
     final private BiPredicate<String, Command> commandTester;
     final private BiPredicate<String, PrepositionType>prepositionTester; 
     final private BiPredicate<String,AdvObject> objectTester;
@@ -40,12 +40,12 @@ public class Parser {
     final private String wordsSeparators;
     final private String regex;
      
-    public Parser(Set<String> stopwords, List<PrepositionType> prepositions, BiPredicate<String, Command> commandTester,
+    public Parser(Set<String> stopwords, List<PrepositionType> prepositionTypes, BiPredicate<String, Command> commandTester,
     BiPredicate<String, AdvObject> objectTester, BiPredicate<String, Room> roomTester, 
     BiPredicate<String, PrepositionType> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
 
         this.stopwords = stopwords; 
-        this.prepositions = prepositions;
+        this.prepositionTypes = prepositionTypes;
         this.commandTester = commandTester;
         this.prepositionTester = prepositionTester;
         this.objectTester = objectTester;
@@ -96,7 +96,7 @@ public class Parser {
                 } catch (NoSuchElementException exception){};
 
                 try {
-                    getPrepositionIndex(token, prepositions);
+                    getPrepositionIndex(token, prepositionTypes);
                     preposition = new Preposition(token);
                     mappedString.append(" preposition");
                 } catch (NoSuchElementException exception){};
@@ -162,8 +162,8 @@ public class Parser {
         return getElementIndex(token, commands, commandTester);
     }
 
-    private int getPrepositionIndex(String token, List<PrepositionType> prepositions) throws NoSuchElementException{
-        return getElementIndex(token, prepositions, prepositionTester);
+    private int getPrepositionIndex(String token, List<PrepositionType> prepositionTypes) throws NoSuchElementException{
+        return getElementIndex(token, prepositionTypes, prepositionTester);
     }
 
     private int getObjectIndex(String token, List<AdvObject> objects) throws NoSuchElementException{
