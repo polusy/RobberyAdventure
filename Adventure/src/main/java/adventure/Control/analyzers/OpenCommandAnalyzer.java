@@ -38,7 +38,7 @@ public class OpenCommandAnalyzer extends CommandAnalyzer{
 	return commandAnalysisResult;
     }
     
-    public void disambiguateDoor(CommandAnalysisResult commandAnalysisResult, GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException,AmbiguousCommandException{
+    public static void disambiguateDoor(CommandAnalysisResult commandAnalysisResult, GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException,AmbiguousCommandException{
         AdvObject toBeOpenedDoor = commandAnalysisResult.getTargetObject();
 	
 	if (toBeOpenedDoor instanceof Door)
