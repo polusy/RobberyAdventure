@@ -8,6 +8,8 @@ import adventure.identifiers.CommandType;
 import java.util.Objects;
 
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
 
 /**
  *
@@ -18,10 +20,10 @@ public class Command {
     private final String name;
     private final Set<String> alias;
 
-    public Command(CommandType type, String name, Set<String> alias) {
+    public Command(CommandType type, String name, String[] alias) {
         this.type = type;
         this.name = name;
-        this.alias = alias;
+        this.alias = new HashSet<>(Arrays.asList(alias));
     }
 
     public CommandType getType() {
