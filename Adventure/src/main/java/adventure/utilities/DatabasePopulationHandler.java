@@ -9,7 +9,12 @@ import adventure.Boundary.ClientManager;
 import adventure.Boundary.DatabaseManager;
 import adventure.Boundary.ServerManager;
 import adventure.Boundary.services.ObjectService;
+import adventure.Entity.objects.AdvObject;
+import adventure.identifiers.ObjectId;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -19,7 +24,8 @@ public class DatabasePopulationHandler {
     
     public static void main(String[] args){
     
-    ServerManager serverManager = new ServerManager("http://localhost/", 4040, ObjectService.class);
+    ServerManager serverManager = new ServerManager("http://localhost/", 8080, ObjectService.class);
+    
         try{
             DatabaseManager databaseManager = new DatabaseManager();
             databaseManager.createObjectsTable();
@@ -29,9 +35,8 @@ public class DatabasePopulationHandler {
         }
         
         serverManager.run();
-        ClientManager clientManager = new ClientManager("http://localhost/4040");
+        ClientManager clientManager = new ClientManager("http://localhost:8080");
         clientManager.populate();
-        
     }
     
     
