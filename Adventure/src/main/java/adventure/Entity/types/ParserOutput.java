@@ -74,6 +74,11 @@ public class ParserOutput {
         return command;
     }
 
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+    
+
     public String getCommandToken() {
         return commandToken;
     }
