@@ -43,7 +43,7 @@ import java.util.NoSuchElementException;
  *
  * @author Paolo
  */
-public class GameActionSpecificationProcesser {
+public abstract class GameActionSpecificationProcesser {
     
     
     public static GameActionResult process(GameActionSpecification gameActionSpecification,GameDescription gameDescription, CommandAnalysisResult commandAnalysisResult) throws NotValidSentenceException,DuplicateException
