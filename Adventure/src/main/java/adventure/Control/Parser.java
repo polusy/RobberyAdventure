@@ -22,6 +22,7 @@ import adventure.utilities.Utils;
 import adventure.Entity.objects.Door;
 import adventure.Entity.types.Room;
 import adventure.Entity.types.ParserOutput;
+import adventure.identifiers.PrepositionType;
 
 
 /**
@@ -30,18 +31,18 @@ import adventure.Entity.types.ParserOutput;
  */
 public class Parser {
     final private Set<String> stopwords;
-    final private List<Preposition> prepositions;
+    final private List<PrepositionType> prepositions;
     final private BiPredicate<String, Command> commandTester;
-    final private BiPredicate<String, Preposition>prepositionTester; 
+    final private BiPredicate<String, PrepositionType>prepositionTester; 
     final private BiPredicate<String,AdvObject> objectTester;
     final private BiPredicate<String, Room> roomTester;
     final private String sentencesSeparators;
     final private String wordsSeparators;
     final private String regex;
      
-    public Parser(Set<String> stopwords, List<Preposition> prepositions, BiPredicate<String, Command> commandTester,
+    public Parser(Set<String> stopwords, List<PrepositionType> prepositions, BiPredicate<String, Command> commandTester,
     BiPredicate<String, AdvObject> objectTester, BiPredicate<String, Room> roomTester, 
-    BiPredicate<String, Preposition> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
+    BiPredicate<String, PrepositionType> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
 
         this.stopwords = stopwords; 
         this.prepositions = prepositions;
@@ -161,7 +162,7 @@ public class Parser {
         return getElementIndex(token, commands, commandTester);
     }
 
-    private int getPrepositionIndex(String token, List<Preposition> prepositions) throws NoSuchElementException{
+    private int getPrepositionIndex(String token, List<PrepositionType> prepositions) throws NoSuchElementException{
         return getElementIndex(token, prepositions, prepositionTester);
     }
 
