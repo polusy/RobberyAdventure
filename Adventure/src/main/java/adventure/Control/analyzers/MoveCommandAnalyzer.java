@@ -21,7 +21,7 @@ public class MoveCommandAnalyzer extends CommandAnalyzer{
     }
     
     @Override
-    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
+    public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	CommandAnalysisResult commandAnalysisResult = analyzeUnaryCommand(parserOutput, PropertyType.MOVABLE, errorMessage);
         
