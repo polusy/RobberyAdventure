@@ -5,6 +5,8 @@
 package adventure.Boundary;
 
 import java.util.Set;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.lang.reflect.Type;
 
 import java.sql.Connection;
@@ -27,8 +29,13 @@ import adventure.identifiers.ObjectId;
 public class DatabaseManager {
     private Connection connection;
     
-    public DatabaseManager(String connectionString) throws SQLException{
-        connection = DriverManager.getConnection(connectionString);
+    public DatabaseManager() throws SQLException{
+        
+        Path projectRoot = Paths.get("").toAbsolutePath();
+        Path dbPath = projectRoot.resolve("database/db"); 
+        
+        String url = "jdbc:h2:" + dbPath.toString();
+        connection = DriverManager.getConnection(url);
     }
 
     public void createObjectsTable() throws SQLException{
