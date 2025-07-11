@@ -154,7 +154,15 @@ public class GameControl {
             }
 
 	if (commandAnalysisResult != null && commandAnalysisResult.isAnalysisPassed()){
-            gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
+            try {
+                gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
+            } 
+            catch (NotValidSentenceException exception){
+                out.println(exception.getMessage());
+            }
+            catch (DuplicateException exception){
+                out.println(exception.getMessage());
+            }
             message = gameActionResult.getMessage();
 	}
 
@@ -196,9 +204,10 @@ public class GameControl {
     
 
     private GameActionResult processCommandAnalysisResult(CommandAnalysisResult commandAnalysisResult, 
-            GameDescription gameDescription, ParserOutput parserOutput){
+            GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, DuplicateException{
 	GameActionSpecification gameActionSpecification = this.findGameActionSpecification(commandAnalysisResult, parserOutput);
-	GameActionResult gameActionResult = GameActionSpecificationProcesser.process(gameActionSpecification, commandAnalysisResult);
+	GameActionResult gameActionResult = GameActionSpecificationProcesser.process(gameActionSpecification, 
+                gameDescription, commandAnalysisResult);
 
 	return gameActionResult;
     }
