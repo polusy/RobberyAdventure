@@ -75,6 +75,7 @@ public class RobberyAdventure extends GameDescription{
         String failingInventoryConditionMessage = null;
         Map<ObjectId, Map<PropertyType, String>> failingObjectsConditionsMessages = new HashMap<>();
         Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
+        final String failingVisibilityConditionMessage = "Qui non c'è un oggetto simile, guardati meglio intorno!" ;
         PassingConditionResult passingConditionResult = null;
         GameEffect gameEffect = null;
         CurrentPositionEffect currentPositionEffect = null;
@@ -147,7 +148,7 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.get(ObjectId.VASE).put(PropertyType.MOVABLE,
                 "Hai già spostato questo oggetto, non è questo il momento per rimetterti in forma!");
         
-        failingVisibilityConditionMessages.put(ObjectId.VASE, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.VASE, failingVisibilityConditionMessage);
         
         failingConditionMessages = new FailingConditionMessages(null,
         null, failingObjectsConditionsMessages,
@@ -200,9 +201,84 @@ public class RobberyAdventure extends GameDescription{
         
         
         // =================================================================================================
+        objectId = ObjectId.SECURITY_CAMERA;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Breakable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.BREAK;
+          
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.SLING});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.SLING, "Non sapevo che potessi sparare"
+                + " raggi laser dagli occhi, wow! Forse hai bisogno di qualcosa per romperla...");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, "Hai già rotto"
+                + " la telecamera, non penso possa riprenderti con quel buco nell'obiettivo!");
+        
+        failingVisibilityConditionMessages.put(ObjectId.SLING, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Il sasso che hai lanciato ha centrato la telecamera "
+                + " di videosorveglianza, un'ottima mira! " ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);     
+ 
+        
 
-        
-        
         
         // ========================================================================================== 
         //                              Template
@@ -215,10 +291,7 @@ public class RobberyAdventure extends GameDescription{
         
         
         commandType = CommandType.MOVE;
-        
-
-        
-        objectsEffects = new HashMap<>();        
+           
         
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
@@ -308,7 +381,7 @@ public class RobberyAdventure extends GameDescription{
             CommandType commandType = CommandType.PICK_UP;
             
             gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                targetObjectId, containerId, targetObjectClass, positivePassingConditionMessage);
+                targetObjectId, containerId, null, targetObjectClass, positivePassingConditionMessage);
         
             gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
     
@@ -316,7 +389,7 @@ public class RobberyAdventure extends GameDescription{
                 commandType = CommandType.DROP;
         
                 gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                    targetObjectId, null, targetObjectClass, negativePassingConditionMessage);
+                    targetObjectId, null, null, targetObjectClass, negativePassingConditionMessage);
         
                 gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
             }
@@ -324,8 +397,8 @@ public class RobberyAdventure extends GameDescription{
     }
     
     private GameActionSpecification buildStandardGameActionSpecification(Property property, 
-            CommandType commandType, ObjectId targetObjectId, ObjectId containerId, Class<?> targetObjectClass,
-            String passingConditionMessage) throws IllegalArgumentException, InconsistentInitializationException{
+            CommandType commandType, ObjectId targetObjectId, ObjectId containerId, ObjectId[] containedObjectsIds,
+            Class<?> targetObjectClass, String passingConditionMessage) throws IllegalArgumentException, InconsistentInitializationException{
         
         CompleteCondition completeCondition = null;
         FailingConditionMessages failingConditionMessages = null;
@@ -337,7 +410,7 @@ public class RobberyAdventure extends GameDescription{
         failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId, null, null);
         
         
-        objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId);
+        objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId, containedObjectsIds);
         gameEffect = this.buildStandardGameEffect(commandType, targetObjectId, targetObjectClass, objectsEffects);
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
@@ -368,7 +441,7 @@ public class RobberyAdventure extends GameDescription{
                 targetObjectId, necessaryObjectsIds, missingNecessaryObjectsMessages);
         
         objectsEffects = this.buildStandardObjectsEffects(CommandType.BREAK, targetObjectId, 
-               null);
+               null, null);
         gameEffect = this.buildStandardGameEffect(CommandType.BREAK, targetObjectId, 
                 InteractiveObject.class, objectsEffects);
     }
@@ -466,6 +539,13 @@ public class RobberyAdventure extends GameDescription{
             }
             completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
         }
+        else if (commandType == CommandType.CLOSE){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.OPENABLE, true));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+            
+            completeCondition = new CompleteCondition(null, objectsConditions);        
+        }
         else{
             throw new IllegalArgumentException();
         }
@@ -529,7 +609,17 @@ public class RobberyAdventure extends GameDescription{
             failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
             failingInventoryConditionMessage, failingObjectsConditionsMessages, 
                     failingVisibilityConditionMessages);
-        }        
+        }
+        else if (commandType == CommandType.CLOSE){
+            failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
+            failingPropertiesMessages.put(PropertyType.OPENABLE, "L'oggetto e' già chiuso, forse ti "
+                    + "servirebbe piu' aprirlo non pensi?");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            failingConditionMessages = new FailingConditionMessages(null,
+            null, failingObjectsConditionsMessages, 
+                    failingVisibilityConditionMessages);            
+        }
         else{
             throw new IllegalArgumentException();
         }
@@ -576,7 +666,10 @@ public class RobberyAdventure extends GameDescription{
             gameEffect = new GameEffect(null, null, null,
                 null, objectsEffects, null);
         }
-        
+        else if (commandType == CommandType.CLOSE){
+            gameEffect = new GameEffect(null, null, null,
+                null, objectsEffects, null);
+        }
         else{
             throw new IllegalArgumentException();
         }
@@ -585,7 +678,8 @@ public class RobberyAdventure extends GameDescription{
     }
     
     private Map<ObjectId, ObjectEffect> buildStandardObjectsEffects(CommandType commandType,
-            ObjectId targetObjectId, ObjectId containerId) throws IllegalArgumentException {
+            ObjectId targetObjectId, ObjectId containerId, ObjectId[] containedObjectsIds) 
+            throws IllegalArgumentException {
         
         Map<ObjectId, ObjectEffect> objectsEffects = new HashMap<>();
         ObjectEffect objectEffect = null;
@@ -613,6 +707,17 @@ public class RobberyAdventure extends GameDescription{
             propertyWithValueResults.add(new PropertyValue(PropertyType.BREAKABLE, true));
             objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
             objectsEffects.put(targetObjectId, objectEffect);               
+        }
+        else if (commandType == CommandType.CLOSE){
+            propertyWithValueResults.add(new PropertyValue(PropertyType.OPENABLE, false));
+            objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+            objectsEffects.put(targetObjectId, objectEffect); 
+            
+            for (ObjectId containedObjectId : containedObjectsIds){
+                objectEffect = new ObjectEffect(null, null, false);
+                objectsEffects.put(containedObjectId, objectEffect); 
+            }
+            
         }
         else{
             throw new IllegalArgumentException();
