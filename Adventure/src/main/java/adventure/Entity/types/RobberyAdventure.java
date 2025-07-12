@@ -580,6 +580,18 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, null);       
         
         
+         // ==================================================================================================
+        objectId = ObjectId.WELDING_MASK;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SHELF, null, InteractiveObject.class, 
+                "Hai raccolto la maschera da saldatore, chissà com'è vederci attraverso",
+                "Hai buttato la maschera da saldatore");
+        
         
         
         // ========================================================================================== 
