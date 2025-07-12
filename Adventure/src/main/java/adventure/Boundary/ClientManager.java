@@ -54,7 +54,7 @@ public class ClientManager {
         
         Gson gson = new Gson();
         DatabaseGameTable dbGameTable = new DatabaseGameTable(gameDescription, gameId);
-        String jsonGameTable = gson.toJson(dbGameTable);
+        String jsonGameTable = gson.toJson(dbGameTable, DatabaseGameTable.class);
         
         Response response = target.path("game/add").request(MediaType.APPLICATION_JSON).put(Entity.entity(jsonGameTable, MediaType.APPLICATION_JSON));
         return response.readEntity(Boolean.class);
