@@ -5,6 +5,7 @@
 package adventure.Boundary;
 
 import java.util.Set;
+import java.util.HashSet;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.lang.reflect.Type;
@@ -12,6 +13,7 @@ import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import adventure.Entity.objects.AdvObject;
+import adventure.Entity.types.RobberyAdventure;
 import adventure.identifiers.ObjectId;
 
 
@@ -43,6 +46,69 @@ public class DatabaseManager {
 	statement.executeUpdate(objectsTableCreation);
 	statement.close();
     }
+    
+    public void createGamesTable() throws SQLException{
+        String objectsTableCreation = "CREATE TABLE IF NOT EXISTS Games ( GameId VARCHAR(40) PRIMARY KEY, GameDescription TEXT)";
+	Statement statement = connection.createStatement();
+	statement.executeUpdate(objectsTableCreation);
+	statement.close();
+    }
+
+    public boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
+
+        boolean gameSavingAlreadyExist = false;
+        String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?)" ;
+
+        PreparedStatement statement = connection.prepareStatement(objectInsertionQuery);
+        statement.setString(1, gameId);
+        statement.setString(2, jsonGameDescription);
+        try{
+            statement.executeUpdate();
+        }catch(SQLIntegrityConstraintViolationException exception){
+            gameSavingAlreadyExist = true;
+        }
+        statement.close();
+
+        return gameSavingAlreadyExist;
+    }
+        
+        
+    public String getGameById(String gameId) throws SQLException{
+        
+	Gson gson  = new Gson();
+	String objectSelectionQuery = "SELECT * FROM Games WHERE GameId = ?";
+	PreparedStatement statement = connection.prepareStatement(objectSelectionQuery);
+	statement.setString(1, gameId);
+	ResultSet resultSet = statement.executeQuery();
+	String gameDescription;
+	
+	if (resultSet.next())
+	{
+            gameDescription = resultSet.getString(2);
+	}
+	else{
+            throw new SQLException();
+	}
+        
+        return gameDescription;
+    }
+    
+    public Set<String> getAllGameNames() throws SQLException{
+        
+        String objectSelectionQuery = "SELECT GameId FROM Games";
+        PreparedStatement statement = connection.prepareStatement(objectSelectionQuery);
+	ResultSet resultSet = statement.executeQuery();
+	Set<String> gameNames = new HashSet<>();
+        
+        if (resultSet.next()){
+            gameNames.add(resultSet.getString(1));
+        }
+        
+        return gameNames;
+    }
+	
+    
+    
 
     public void addObject(String objectIdString, String name, String description, String jsonAlias) throws SQLException{
 	String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?, ?, ?)" ;
