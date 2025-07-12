@@ -102,7 +102,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, null, InteractiveObject.class, "Hai raccolto la fionda. "
+                null, null, null, InteractiveObject.class, "Hai raccolto la fionda. "
                 + "Assomiglia a quella che avevi da piccolo, che il vicino ti ha sequestrato dopo che gli hai "
                 + "mandato in frantumi la finestra.", "Hai gettato la fionda");
         
@@ -196,7 +196,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, null, InteractiveObject.class, "Hai raccolto la chiave. "
+                null, null, null, InteractiveObject.class, "Hai raccolto la chiave. "
                 , "Hai lasciato la chiave");    
         
         
@@ -371,8 +371,9 @@ public class RobberyAdventure extends GameDescription{
     };
     
     private void addStandardGameActionSpecifications (Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
-            Property property, ObjectId targetObjectId, ObjectId containerId, ObjectId[] containedObjectsIds,
-            Class<?> targetObjectClass, String positivePassingConditionMessage, String negativePassingConditionMessage)
+            Property property, ObjectId targetObjectId, List<ObjectId[]> auxiliaryObjectIds,
+            ObjectId containerId, ObjectId[] containedObjectsIds, Class<?> targetObjectClass,
+            String positivePassingConditionMessage, String negativePassingConditionMessage)
         throws InconsistentInitializationException {
         
         GameActionSpecification gameActionSpecification = null;
@@ -381,7 +382,7 @@ public class RobberyAdventure extends GameDescription{
             CommandType commandType = CommandType.PICK_UP;
             
             gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                targetObjectId, containerId, null, targetObjectClass, positivePassingConditionMessage);
+                targetObjectId, auxiliaryObjectIds, containerId, containedObjectsIds, targetObjectClass, positivePassingConditionMessage);
         
             gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
     
@@ -389,7 +390,8 @@ public class RobberyAdventure extends GameDescription{
                 commandType = CommandType.DROP;
         
                 gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                    targetObjectId, null, null, targetObjectClass, negativePassingConditionMessage);
+                    targetObjectId,auxiliaryObjectIds, null, containedObjectsIds, targetObjectClass,
+                    negativePassingConditionMessage);
         
                 gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
             }
@@ -398,7 +400,7 @@ public class RobberyAdventure extends GameDescription{
             CommandType commandType = CommandType.OPEN;
             
             gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                targetObjectId, containerId, containedObjectsIds, targetObjectClass, positivePassingConditionMessage);
+                targetObjectId, auxiliaryObjectIds, containerId, containedObjectsIds, targetObjectClass, positivePassingConditionMessage);
         
             gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
     
@@ -406,7 +408,7 @@ public class RobberyAdventure extends GameDescription{
                 commandType = CommandType.CLOSE;
         
                 gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
-                    targetObjectId, null, containedObjectsIds, targetObjectClass, negativePassingConditionMessage);
+                    targetObjectId, auxiliaryObjectIds, null, containedObjectsIds, targetObjectClass, negativePassingConditionMessage);
         
                 gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
             }            
@@ -414,8 +416,10 @@ public class RobberyAdventure extends GameDescription{
     }
     
     private GameActionSpecification buildStandardGameActionSpecification(Property property, 
-            CommandType commandType, ObjectId targetObjectId, ObjectId containerId, ObjectId[] containedObjectsIds,
-            Class<?> targetObjectClass, String passingConditionMessage) throws IllegalArgumentException, InconsistentInitializationException{
+            CommandType commandType, ObjectId targetObjectId, List<ObjectId[]> auxiliaryObjectIds,
+            ObjectId containerId, ObjectId[] containedObjectsIds,
+            Class<?> targetObjectClass, String passingConditionMessage) 
+            throws IllegalArgumentException, InconsistentInitializationException{
         
         CompleteCondition completeCondition = null;
         FailingConditionMessages failingConditionMessages = null;
@@ -423,8 +427,9 @@ public class RobberyAdventure extends GameDescription{
         GameEffect gameEffect = null;
         Map<ObjectId, ObjectEffect> objectsEffects = null;
         
-        completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId, null);
-        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId, null, null);
+        completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId, auxiliaryObjectIds);
+        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId, 
+                auxiliaryObjectIds, null);
         
         
         objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId, containedObjectsIds);
