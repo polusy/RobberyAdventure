@@ -787,6 +787,14 @@ public class RobberyAdventure extends GameDescription{
                                 + "Devi aver crepato gli stipiti..."); 
         
         
+        // ==================================================================================================    
+        objectId = ObjectId.RACK;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.DUMBBELL});
+        gameActionSpecifications.put(property, null);         
+        
         
         
         
