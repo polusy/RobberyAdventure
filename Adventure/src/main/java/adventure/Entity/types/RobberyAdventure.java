@@ -495,7 +495,7 @@ public class RobberyAdventure extends GameDescription{
         objectsConditions = new HashMap<>();
         propertyWithValueConstraints = new HashSet<>();
         
-        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN});
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.POWER_UNIT, objectId, ObjectId.WELDING_MASK});
         inventoryConditionOptions.add(inventoryCondition);
         
         propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
@@ -506,12 +506,12 @@ public class RobberyAdventure extends GameDescription{
         objectsConditions.put(objectId, objectCondition);
         
 
-        propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
         propertyWithValueConstraints.add(propertyValue);
         
         objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
         
-        objectsConditions.put(ObjectId.FUEL_CAN, objectCondition);
+        objectsConditions.put(ObjectId.POWER_UNIT, objectCondition);
         
         
         completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
@@ -522,16 +522,18 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages = new HashMap<>();
         failingVisibilityConditionMessages = new HashMap<>();
                 
-        missingNecessaryObjectsMessages.put(ObjectId.FUEL_CAN, "Il generatore elettrico non 'genera' "
-                + "l'energia elettrica dal nulla. La legge di Lavoisier si fa in secondo superiore!");
+        missingNecessaryObjectsMessages.put(ObjectId.POWER_UNIT, "Mi dispiace ma la lancia termica non funziona a pile!");
+        missingNecessaryObjectsMessages.put(ObjectId.WELDING_MASK, "Hai intenzione di bruciarti tutta "
+                + "la faccia?");
+        missingNecessaryObjectsMessages.put(objectId, "Non hai questo oggetto nell'inventario");
         
         failingObjectsConditionsMessages.put(objectId, new HashMap<>());
         failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
-                "Hai già attivato il generatore! Non senti il rumore che fa?");
+                "Hai già attivato la lancia termica!");
         
-        failingObjectsConditionsMessages.put(ObjectId.FUEL_CAN, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.FUEL_CAN).put(PropertyType.FILLABLE, 
-                "Magari il generatore avrebbe bisogno di qualcosa da bruciare per funzioanre...");
+        failingObjectsConditionsMessages.put(ObjectId.POWER_UNIT, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.POWER_UNIT).put(PropertyType.ACTIVATABLE, 
+                "Forse devi fare funzionare qualcosa... oltre al cervello");
         
         failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
         
@@ -556,7 +558,7 @@ public class RobberyAdventure extends GameDescription{
         
         gameEffect = new GameEffect(null, null,
                 null, null, objectsEffects, null);
-        passingConditionMessage = "Hai attivato il generatore! Fa un baccano assordante" ;
+        passingConditionMessage = "Hai acceso la lancia termica, sta diventando incandescente..." ;
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
