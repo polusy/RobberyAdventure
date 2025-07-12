@@ -102,7 +102,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, InteractiveObject.class, "Hai raccolto la fionda. "
+                null, null, InteractiveObject.class, "Hai raccolto la fionda. "
                 + "Assomiglia a quella che avevi da piccolo, che il vicino ti ha sequestrato dopo che gli hai "
                 + "mandato in frantumi la finestra.", "Hai gettato la fionda");
         
@@ -196,7 +196,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, InteractiveObject.class, "Hai raccolto la chiave. "
+                null, null, InteractiveObject.class, "Hai raccolto la chiave. "
                 , "Hai lasciato la chiave");    
         
         
@@ -371,8 +371,8 @@ public class RobberyAdventure extends GameDescription{
     };
     
     private void addStandardGameActionSpecifications (Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
-            Property property, ObjectId targetObjectId, ObjectId containerId, Class<?> targetObjectClass,
-            String positivePassingConditionMessage, String negativePassingConditionMessage)
+            Property property, ObjectId targetObjectId, ObjectId containerId, ObjectId[] containedObjectsIds,
+            Class<?> targetObjectClass, String positivePassingConditionMessage, String negativePassingConditionMessage)
         throws InconsistentInitializationException {
         
         GameActionSpecification gameActionSpecification = null;
@@ -393,6 +393,23 @@ public class RobberyAdventure extends GameDescription{
         
                 gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
             }
+        }
+        else if (((PropertyWithValue)property).getType() == PropertyType.OPENABLE){
+            CommandType commandType = CommandType.OPEN;
+            
+            gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
+                targetObjectId, containerId, containedObjectsIds, targetObjectClass, positivePassingConditionMessage);
+        
+            gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+    
+            if (targetObjectClass != ValuableObject.class){
+                commandType = CommandType.CLOSE;
+        
+                gameActionSpecification = this.buildStandardGameActionSpecification(property, commandType,
+                    targetObjectId, null, containedObjectsIds, targetObjectClass, negativePassingConditionMessage);
+        
+                gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+            }            
         }
     }
     
@@ -539,6 +556,16 @@ public class RobberyAdventure extends GameDescription{
             }
             completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
         }
+        else if (commandType == CommandType.OPEN){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.OPENABLE, false));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+
+            inventoryCondition = this.buildInventoryCondition(auxiliaryObjectIds.get(0));
+            inventoryConditionOptions.add(inventoryCondition);
+            
+            completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);              
+        }
         else if (commandType == CommandType.CLOSE){
             propertyWithValueConstraints.add(new PropertyValue(PropertyType.OPENABLE, true));
             objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
@@ -610,6 +637,19 @@ public class RobberyAdventure extends GameDescription{
             failingInventoryConditionMessage, failingObjectsConditionsMessages, 
                     failingVisibilityConditionMessages);
         }
+        else if (commandType == CommandType.OPEN){
+            failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
+            failingPropertiesMessages.put(PropertyType.OPENABLE, "L'oggetto è già aperto!");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            for (ObjectId auxiliaryObjectId : auxiliaryObjectsId.get(0))
+                missingNecessaryObjectsMessages.put(auxiliaryObjectId, "Non puoi aprire questo oggetto, "
+                        + "forse hai bisogno di qualcosa... ");
+            
+            failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+            null, failingObjectsConditionsMessages, 
+                    failingVisibilityConditionMessages);            
+        }
         else if (commandType == CommandType.CLOSE){
             failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
             failingPropertiesMessages.put(PropertyType.OPENABLE, "L'oggetto e' già chiuso, forse ti "
@@ -666,6 +706,10 @@ public class RobberyAdventure extends GameDescription{
             gameEffect = new GameEffect(null, null, null,
                 null, objectsEffects, null);
         }
+        else if (commandType == CommandType.OPEN){
+            gameEffect = new GameEffect(null, null, null,
+                null, objectsEffects, null);
+        }
         else if (commandType == CommandType.CLOSE){
             gameEffect = new GameEffect(null, null, null,
                 null, objectsEffects, null);
@@ -708,16 +752,29 @@ public class RobberyAdventure extends GameDescription{
             objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
             objectsEffects.put(targetObjectId, objectEffect);               
         }
+        else if (commandType == CommandType.OPEN){
+            propertyWithValueResults.add(new PropertyValue(PropertyType.OPENABLE, true));
+            objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+            objectsEffects.put(targetObjectId, objectEffect); 
+            
+            if (containedObjectsIds != null){
+                for (ObjectId containedObjectId : containedObjectsIds){
+                    objectEffect = new ObjectEffect(null, null, true);
+                    objectsEffects.put(containedObjectId, objectEffect); 
+                }
+            }
+        }
         else if (commandType == CommandType.CLOSE){
             propertyWithValueResults.add(new PropertyValue(PropertyType.OPENABLE, false));
             objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
             objectsEffects.put(targetObjectId, objectEffect); 
             
-            for (ObjectId containedObjectId : containedObjectsIds){
-                objectEffect = new ObjectEffect(null, null, false);
-                objectsEffects.put(containedObjectId, objectEffect); 
+            if (containedObjectsIds != null){
+                for (ObjectId containedObjectId : containedObjectsIds){
+                    objectEffect = new ObjectEffect(null, null, false);
+                    objectsEffects.put(containedObjectId, objectEffect); 
+                }
             }
-            
         }
         else{
             throw new IllegalArgumentException();
