@@ -278,7 +278,20 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);     
  
         
-
+        // ==================================================================================================    
+        objectId = ObjectId.GARAGE_DOOR;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        List<ObjectId[]> necessaryObjectsId = new ArrayList<>();
+        necessaryObjectsId.add(new ObjectId[] {ObjectId.GARAGE_KEY});
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                necessaryObjectsId, null, null, InteractiveObject.class, 
+                "Hai aperto la serranda del garage! "
+                        + "Speriamo che il proprietario non ci tenga dentro le solite cianfrusaglie. ", 
+                "Hai chiuso la serranda del garage."); 
         
         // ========================================================================================== 
         //                              Template
