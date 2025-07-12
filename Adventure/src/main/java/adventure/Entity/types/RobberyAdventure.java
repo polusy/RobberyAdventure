@@ -119,7 +119,8 @@ public class RobberyAdventure extends GameDescription{
         
         // CompleteCondition
         objectsConditions = new HashMap<>();
-        
+        propertyWithValueConstraints = new HashSet<>();
+                
         propertyValue = new PropertyValue(PropertyType.MOVABLE, false);
         propertyWithValueConstraints.add(propertyValue);
         
@@ -214,7 +215,7 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
         objectsConditions = new HashMap<>();
-        
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.SLING});
         inventoryConditionOptions.add(inventoryCondition);
@@ -393,7 +394,106 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
         objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
         
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN, objectId});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+
+        propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.FUEL_CAN, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+        
+        missingNecessaryObjectsMessages.put(objectId, "Non hai questo oggetto nell'inventario");        
+        missingNecessaryObjectsMessages.put(ObjectId.FUEL_CAN, "Il generatore elettrico non 'genera' "
+                + "l'energia elettrica dal nulla. La legge di Lavoisier si fa in secondo superiore!");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
+                "Hai già attivato il generatore! Non senti il rumore che fa?");
+        
+        failingObjectsConditionsMessages.put(ObjectId.FUEL_CAN, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.FUEL_CAN).put(PropertyType.FILLABLE, 
+                "Magari il generatore avrebbe bisogno di qualcosa da bruciare per funzioanre...");
+        
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai attivato il generatore! Fa un baccano assordante" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);                
+        
+        
+        // ==================================================================================================
+        objectId = ObjectId.THERMAL_LANCE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto la lancia termica. Non ne avevi mai vista una da vicino, "
+                        + "e' proprio come quelle dei film", "Hai buttato la lancia termica"); 
+
+        property = new Activatable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.ACTIVATE;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN});
         inventoryConditionOptions.add(inventoryCondition);
@@ -466,7 +566,8 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecification = new GameActionSpecification(completeCondition, 
                 failingConditionMessages, passingConditionResult);
         
-        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);                
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);  
+
         
         
         
@@ -486,7 +587,7 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
         objectsConditions = new HashMap<>();
-        
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {});
         inventoryConditionOptions.add(inventoryCondition);
