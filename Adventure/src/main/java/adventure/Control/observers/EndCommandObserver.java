@@ -8,6 +8,7 @@ import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.EndGameException;
+import adventure.Boundary.GUI.EndCommandGUI;
 
 
 
@@ -21,6 +22,12 @@ public class EndCommandObserver implements TechnicalObserver {
         if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
-        throw new EndGameException();
+        EndCommandGUI endCommandGUI = new EndCommandGUI(null, true);
+        endCommandGUI.setVisible(true);
+        
+        
+       if (endCommandGUI.isGameEnded())
+           throw new EndGameException();
+        
     }   
 }
