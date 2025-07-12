@@ -593,6 +593,19 @@ public class RobberyAdventure extends GameDescription{
                 "Hai buttato la maschera da saldatore");
         
         
+        // ==================================================================================================
+        objectId = ObjectId.TUBE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SHELF, null, InteractiveObject.class, 
+                "Hai raccolto il tubo di gomma, almeno con questo non c'è il rischio di farti male",
+                "Ti sei liberato del tubo");
+        
+        
         
         // ========================================================================================== 
         //                              Template
