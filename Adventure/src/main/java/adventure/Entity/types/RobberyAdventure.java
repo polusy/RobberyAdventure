@@ -670,7 +670,13 @@ public class RobberyAdventure extends GameDescription{
                 "Ti lasciato il cucchiaio");
 
 
-
+         // ==================================================================================================    
+        objectId = ObjectId.SOFA;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.REMOTE_CONTROL});
+        gameActionSpecifications.put(property, null); 
 
         
         // ========================================================================================== 
