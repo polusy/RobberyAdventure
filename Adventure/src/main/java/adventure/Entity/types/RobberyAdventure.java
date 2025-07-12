@@ -667,7 +667,7 @@ public class RobberyAdventure extends GameDescription{
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.DISPLAY_CABINET, null, InteractiveObject.class, 
                 "Hai preso il cucchiaio. Che bello, scintilla!",
-                "Ti lasciato il cucchiaio");
+                "Hai lasciato il cucchiaio");
 
 
          // ==================================================================================================    
@@ -677,6 +677,22 @@ public class RobberyAdventure extends GameDescription{
         
         property = new Container(new ObjectId[] {ObjectId.REMOTE_CONTROL});
         gameActionSpecifications.put(property, null); 
+
+
+        // ==================================================================================================
+        objectId = ObjectId.REMOTE_CONTROL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SOFA, null, InteractiveObject.class, 
+                "Hai raccolto il telecomando dal divano.",
+                "Hai gettato il telecomando, d'altronde non è questo il momento per "
+                        + "guardare la televisione");
+
+
 
         
         // ========================================================================================== 
