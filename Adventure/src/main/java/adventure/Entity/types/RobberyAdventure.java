@@ -379,10 +379,96 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
-                "Hai raccolto la ciave inglese, probabilmente è l'unico strumento che "
-                        + "riconosceresti in una ferramenta.!",
-                "Hai buttato la chiave inglese"); 
+                "Hai raccolto il generatore elettrico ",
+                "Ti sei liberato del generatore elettrico, all'inizio non sembrava cosi'"
+                        + "pesante!"); 
 
+        property = new Activatable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.ACTIVATE;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+
+        propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.FUEL_CAN, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.FUEL_CAN, "Il generatore elettrico non 'genera' "
+                + "l'energia elettrica dal nulla. La legge di Lavoisier si fa in secondo superiore!");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
+                "Hai già attivato il generatore! Non senti il rumore che fa?");
+        
+        failingObjectsConditionsMessages.put(ObjectId.FUEL_CAN, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.FUEL_CAN).put(PropertyType.FILLABLE, 
+                "Magari il generatore avrebbe bisogno di qualcosa da bruciare per funzioanre...");
+        
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai attivato il generatore! Fa un baccano assordante" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);                
+        
+        
         
         // ========================================================================================== 
         //                              Template
