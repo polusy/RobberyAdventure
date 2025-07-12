@@ -293,6 +293,25 @@ public class RobberyAdventure extends GameDescription{
                         + "Speriamo che il proprietario non ci tenga dentro le solite cianfrusaglie. ", 
                 "Hai chiuso la serranda del garage."); 
         
+        
+        // ==================================================================================================    
+        objectId = ObjectId.FUEL_FILLER_NECK;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, null, null, InteractiveObject.class, 
+                "Hai aperto la bocchetta per il rifornimento del carburante. Non vedi l'ora di allontanarti, "
+                        + "tu odi l'odore del gasolio", 
+                "Hai chiuso la boccherra per il rifornimento, (finalmente, "
+                        + "quell'odore ti dava la nausea");         
+        
+        
+        
+        
+        
         // ========================================================================================== 
         //                              Template
         
