@@ -810,6 +810,95 @@ public class RobberyAdventure extends GameDescription{
                         + "avere fatto esercizio almeno!");
 
 
+        // ==========================================================================================         
+        objectId = ObjectId.MIRROR;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.HAND_RAIL});
+        gameActionSpecifications.put(property, null);          
+        
+        property = new Breakable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.BREAK;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.WRENCH});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.DUMBBELL});
+        inventoryConditionOptions.add(inventoryCondition);    
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.HAMMER});
+        inventoryConditionOptions.add(inventoryCondition);  
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        failingInventoryConditionMessage = "Se desideri distruggere il vetro a testate, chi sono io per fermarti..."
+                + " ma poi chi pulisce?";
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, "Stai letteralmente"
+                + " calpestando un tappeto di schegge ... una volta qui c'era uno specchio");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        failingInventoryConditionMessage, failingObjectsConditionsMessages, null);
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                  
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+                  
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.OUTER_SAFE, objectEffect);
+
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.OUTER_NUMERIC_KEYPAD, objectEffect);           
+
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai mandato in mille pezzi lo specchio. Auguri, ti sei "
+                + "appena guadagnato sette anni di disgrazie!" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+
         
         
         
