@@ -795,6 +795,21 @@ public class RobberyAdventure extends GameDescription{
         property = new Container(new ObjectId[] {ObjectId.DUMBBELL});
         gameActionSpecifications.put(property, null);         
         
+
+        // ==================================================================================================
+        objectId = ObjectId.DUMBBELL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.RACK, null, InteractiveObject.class, 
+                "Hai raccolto (con grande fatica) i manubri",
+                "Hai lasciato cadere i manubri sul pavimento, puoi dire di "
+                        + "avere fatto esercizio almeno!");
+
+
         
         
         
