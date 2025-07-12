@@ -900,6 +900,17 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
 
         
+        // ========================================================================================== 
+        objectId = ObjectId.HAND_RAIL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Usable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+
+
+
         
         
         
