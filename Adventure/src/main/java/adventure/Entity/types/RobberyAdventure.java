@@ -605,6 +605,15 @@ public class RobberyAdventure extends GameDescription{
                 "Hai raccolto il tubo di gomma, almeno con questo non c'è il rischio di farti male",
                 "Ti sei liberato del tubo");
         
+
+         // ==================================================================================================    
+        objectId = ObjectId.DOGHOUSE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.DOG_TAG});
+        gameActionSpecifications.put(property, null);    
+
         
         
         // ========================================================================================== 
