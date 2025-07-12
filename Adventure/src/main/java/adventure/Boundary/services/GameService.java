@@ -59,9 +59,9 @@ public class GameService {
         if (gameDescription instanceof RobberyAdventure)
             jsonGameDescription = gson.toJson((RobberyAdventure) gameDescription);
 
-        boolean gameAdded = databaseManager.addGame(gameId, jsonGameDescription);
+        Boolean gameAdded = databaseManager.addGame(gameId, jsonGameDescription);
 
-        return Response.ok(gson.toJson(gameAdded), MediaType.APPLICATION_JSON).build();
+        return Response.ok(gson.toJson(gameAdded, Boolean.class), MediaType.APPLICATION_JSON).build();
     }
     
     
