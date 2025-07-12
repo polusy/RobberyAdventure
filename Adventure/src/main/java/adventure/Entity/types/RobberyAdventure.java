@@ -656,6 +656,22 @@ public class RobberyAdventure extends GameDescription{
                         + "di tua madre con una pallonata", "Hai chiuso la cristalliera."
                                 + " Quanta roba raffinata li' dentro!");  
         
+
+        // ==================================================================================================
+        objectId = ObjectId.SPOON;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.DISPLAY_CABINET, null, InteractiveObject.class, 
+                "Hai preso il cucchiaio. Che bello, scintilla!",
+                "Ti lasciato il cucchiaio");
+
+
+
+
         
         // ========================================================================================== 
         //                              Template
