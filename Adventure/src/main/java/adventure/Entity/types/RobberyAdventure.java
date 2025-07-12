@@ -354,6 +354,20 @@ public class RobberyAdventure extends GameDescription{
                 "Hai preso la sega elettrica, fai attenzione a non amputarti un dito!",
                 "Hai gettato la sega elettrica");
 
+        
+        // ==================================================================================================
+        objectId = ObjectId.WRENCH;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, null, null, InteractiveObject.class, 
+                "Hai raccolto la ciave inglese, probabilmente è l'unico strumento che "
+                        + "riconosceresti in una ferramenta.!",
+                "Hai buttato la chiave inglese");        
+        
 
         
         // ========================================================================================== 
