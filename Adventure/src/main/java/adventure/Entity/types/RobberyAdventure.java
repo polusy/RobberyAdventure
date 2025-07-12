@@ -342,6 +342,19 @@ public class RobberyAdventure extends GameDescription{
                         + "portarlo con te in giro");
 
         
+        // ==================================================================================================
+        objectId = ObjectId.ELECTRIC_SAW;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, null, null, InteractiveObject.class, 
+                "Hai preso la sega elettrica, fai attenzione a non amputarti un dito!",
+                "Hai gettato la sega elettrica");
+
+
         
         // ========================================================================================== 
         //                              Template
