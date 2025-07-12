@@ -34,7 +34,7 @@ public class DatabaseManager {
     
     public DatabaseManager() throws SQLException{
         
-        String url = "jdbc:h2:./database/db";
+        String url = "jdbc:h2:./database/dbprova";
         connection = DriverManager.getConnection(url);
         connection.setAutoCommit(true);
     }
@@ -54,9 +54,9 @@ public class DatabaseManager {
 	statement.close();
     }
 
-    public boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
+    public Boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
 
-        boolean gameSavingAlreadyExist = false;
+        Boolean gameSavingAlreadyExist = false;
         String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?)" ;
 
         PreparedStatement statement = connection.prepareStatement(objectInsertionQuery);
@@ -90,6 +90,9 @@ public class DatabaseManager {
             throw new SQLException();
 	}
         
+        
+        statement.close();
+        
         return gameDescription;
     }
     
@@ -104,6 +107,7 @@ public class DatabaseManager {
             gameNames.add(resultSet.getString(1));
         }
         
+        statement.close();
         return gameNames;
     }
 	
