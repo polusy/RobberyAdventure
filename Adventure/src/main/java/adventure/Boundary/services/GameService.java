@@ -47,7 +47,7 @@ public class GameService {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addGameSavingRequest(String jsonDatabaseGameTable) throws SQLException {
+    public Response addGameSaving(String jsonDatabaseGameTable) throws SQLException {
 
         Gson gson = new Gson();
         DatabaseGameTable databaseGameTable = gson.fromJson(jsonDatabaseGameTable, DatabaseGameTable.class);
@@ -68,7 +68,7 @@ public class GameService {
     @GET
     @Path("/{gameId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGameSavingRequest(@PathParam("gameId") String gameId) throws SQLException{
+    public Response getGameSaving(@PathParam("gameId") String gameId) throws SQLException{
         
         String jsonGameDescription = databaseManager.getGameById(gameId);
         return Response.ok(jsonGameDescription, MediaType.APPLICATION_JSON).build();
@@ -79,7 +79,7 @@ public class GameService {
     @GET
     @Path("/allnames")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllGameSavingRequest() throws SQLException{
+    public Response getAllGameSaving() throws SQLException{
         
         Gson gson = new Gson();
         
