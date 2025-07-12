@@ -289,7 +289,7 @@ public class RobberyAdventure extends GameDescription{
         List<ObjectId[]> necessaryObjectsId = new ArrayList<>();
         necessaryObjectsId.add(new ObjectId[] {ObjectId.GARAGE_KEY});
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                necessaryObjectsId, null, null, InteractiveObject.class, 
+                necessaryObjectsId, null, null, Door.class, 
                 "Hai aperto la serranda del garage! "
                         + "Speriamo che il proprietario non ci tenga dentro le solite cianfrusaglie. ", 
                 "Hai chiuso la serranda del garage."); 
@@ -771,7 +771,25 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);           
         
         
-
+        // ==================================================================================================    
+        objectId = ObjectId.LIVINGROOM_WEST_DOOR;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        necessaryObjectsId = new ArrayList<>();
+        necessaryObjectsId.add(new ObjectId[] {ObjectId.SPOON});
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                necessaryObjectsId, null, null, Door.class, 
+                "Hai aperto la porta",
+                        "Hai chiuso la porta, facendo un gran baccano. "
+                                + "Devi aver crepato gli stipiti..."); 
+        
+        
+        
+        
+        
         
         // ========================================================================================== 
         //                              Template
