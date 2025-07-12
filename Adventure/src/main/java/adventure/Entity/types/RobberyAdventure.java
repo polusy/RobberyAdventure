@@ -638,7 +638,23 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, null);  
 
 
-
+        // ==================================================================================================    
+        objectId = ObjectId.DISPLAY_CABINET;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.SPOON});
+        gameActionSpecifications.put(property, null);
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, objectId, new ObjectId[] {ObjectId.SPOON}, InteractiveObject.class, 
+                "Hai spalancato le ante della cristalliera e ti stai ricordando "
+                        + "quella volta in cui da piccolo prendesti in pieno la collezione dei vetri di Murano "
+                        + "di tua madre con una pallonata", "Hai chiuso la cristalliera."
+                                + " Quanta roba raffinata li' dentro!");  
         
         
         // ========================================================================================== 
