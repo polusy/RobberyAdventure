@@ -61,14 +61,21 @@ public class RobberyAdventure extends GameDescription{
         GameActionSpecification gameActionSpecification = null;
         Property property = null;
         CommandType commandType = null;
-      
+        ObjectId objectId = null;
+        CompleteCondition completeCondition = null;
+        FailingConditionMessages failingConditionMessages = null;
+        PassingConditionResult passingConditionResult = null;
+        GameEffect gameEffect = null;
+        Map<ObjectId, ObjectEffect> objectsEffects = null;  
+        Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();        
+
         initCommands();
         initRooms();
 
         
+        objectId = ObjectId.SLING;
         
-        ObjectId objectId = ObjectId.SLING;
-        
+        gameActionSpecifications = new HashMap();
         property = new Pickupable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
@@ -76,6 +83,17 @@ public class RobberyAdventure extends GameDescription{
                 null, InteractiveObject.class, "Hai raccolto la fionda. "
                 + "Assomiglia a quella che avevi da piccolo, che il vicino ti ha sequestrato dopo che gli hai "
                 + "mandato in frantumi la finestra.", "Hai gettato la fionda");
+        
+        
+        objectId = ObjectId.VASE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Movable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecification_Movable(gameActionSpecifications, objectId,
+                ObjectId.GARAGE_KEY, "Sotto il vaso c'era una chiave, un classico.");
+        
         
     };
     
@@ -116,8 +134,7 @@ public class RobberyAdventure extends GameDescription{
         Map<ObjectId, ObjectEffect> objectsEffects = null;
         
         completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId);
-        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, 
-                targetObjectId , null);
+        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId);
         
         
         objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId);
@@ -126,6 +143,41 @@ public class RobberyAdventure extends GameDescription{
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
         return (new GameActionSpecification(completeCondition, failingConditionMessages, passingConditionResult));    
+    }
+    
+    private void addStandardGameActionSpecification_Movable(Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
+            ObjectId targetObjectId, ObjectId revealedObjectId, String passingConditionMessage)
+        throws InconsistentInitializationException{
+        
+        GameActionSpecification gameActionSpecification = null;
+        CompleteCondition completeCondition = null;
+        FailingConditionMessages failingConditionMessages = null;
+        PassingConditionResult passingConditionResult = null;
+        GameEffect gameEffect = null;
+        Map<ObjectId, ObjectEffect> objectsEffects = null;
+        Set<PropertyValue> propertyWithValueResults = new HashSet<>();
+        ObjectEffect objectEffect = null;
+        
+        completeCondition = this.buildStandardCompleteCondition(CommandType.MOVE, targetObjectId);
+        failingConditionMessages = this.buildStandardFailingConditionMessages(CommandType.MOVE,
+                targetObjectId);
+        
+        propertyWithValueResults.add(new PropertyValue(PropertyType.MOVABLE, true));
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(targetObjectId, objectEffect);
+        
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(revealedObjectId, objectEffect);
+        
+        gameEffect = new GameEffect(null, null, null,
+                null, objectsEffects, null);
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(new Movable(false)).put(CommandType.MOVE, gameActionSpecification);        
     }
     
     private InventoryCondition buildInventoryCondition(ObjectId[] necessaryObjects){
@@ -162,6 +214,13 @@ public class RobberyAdventure extends GameDescription{
             inventoryConditionOptions.add(inventoryCondition);
             completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
         }
+        else if(commandType == CommandType.MOVE){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.MOVABLE, false));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+            
+            completeCondition = new CompleteCondition(null, objectsConditions);
+        }
         else{
             throw new IllegalArgumentException();
         }
@@ -170,8 +229,9 @@ public class RobberyAdventure extends GameDescription{
     }
     
     private FailingConditionMessages buildStandardFailingConditionMessages(CommandType commandType, 
-            ObjectId targetObjectId, String errorMessage) throws IllegalArgumentException {
+            ObjectId targetObjectId) throws IllegalArgumentException {
         
+        String failingVisibilityConditionMessage = "Qui non c'è un oggetto simile, guardati meglio intorno!";
         FailingConditionMessages failingConditionMessages = null;
         Map<ObjectId, String> missingNecessaryObjectsMessages = new HashMap<>();
         Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
@@ -179,7 +239,7 @@ public class RobberyAdventure extends GameDescription{
         Map<PropertyType,String> failingPropertiesMessages = new HashMap<>();
       
         if (commandType == CommandType.PICK_UP){
-            failingVisibilityConditionMessages.put(targetObjectId, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+            failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
             failingPropertiesMessages.put(PropertyType.PICKUPABLE, "Hai già raccolto questo oggetto, "
                     + "hai proprio la memoria di un pesciolino rosso!");
             failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
@@ -194,6 +254,16 @@ public class RobberyAdventure extends GameDescription{
             
             failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
             null, failingObjectsConditionsMessages, null);
+        }
+        else if (commandType == CommandType.MOVE){
+            failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
+            failingPropertiesMessages.put(PropertyType.MOVABLE, "Hai già spostato questo oggetto, "
+                    + "non è questo il momento per rimetterti in forma!");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            failingConditionMessages = new FailingConditionMessages(null,
+            null, failingObjectsConditionsMessages, 
+                    failingVisibilityConditionMessages);
         }        
         else{
             throw new IllegalArgumentException();
