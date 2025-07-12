@@ -905,10 +905,109 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications = new HashMap();
         property = new Usable(false);
+        gameActionSpecifications.put(property, null);
+        
+        
+        
+        // ========================================================================================== 
+        objectId = ObjectId.OUTER_SAFE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.OUTER_NUMERIC_KEYPAD, ObjectId.INNER_SAFE, 
+        ObjectId.JEWELS});
+        gameActionSpecifications.put(property, null); 
+        
+        property = new Breakable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         
+        commandType = CommandType.BREAK;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.DRILL});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        objectsConditions.put(objectId, objectCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        objectsConditions.put(ObjectId.DRILL, objectCondition);        
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.DRILL, "Quella è una delle casseforti piu' "
+                + "robuste che tu possa mai aver visto, sembra a prova di bomba. Però forse c'e' qualcosa"
+                + " in casa che puo' fare al caso tuo");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, 
+                "La serratura della cassaforte e' gia' completamente distrutta, forse "
+                        + "potevi andarci meno pesante...");
+        
+        failingObjectsConditionsMessages.put(ObjectId.DRILL, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.DRILL).put(PropertyType.ACTIVATABLE, 
+                "Quel trapano sarebbe più utile se la punta girasse su se' stessa ad "
+                        + "altissima velocita', che dici?");
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages, null);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
 
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.INNER_SAFE, objectEffect);
+
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.INNER_NUMER_KEYPAD, objectEffect);  
+        
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.JEWELS, objectEffect);         
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Sei riuscito finalmente a forare la serratura della cassaforte! Avevi"
+                + " iniziato a perdere le speranza" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+        
+        
 
 
         
