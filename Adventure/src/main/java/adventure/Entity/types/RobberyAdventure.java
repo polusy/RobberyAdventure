@@ -615,6 +615,19 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, null);    
 
         
+        // ==================================================================================================
+        objectId = ObjectId.DOG_TAG;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.DOG_TAG, null, InteractiveObject.class, 
+                "Hai raccolto la medaglietta del cane del proprietario",
+                "Hai gettato la medaglietta del cane. Comunque era piu' bella del tuo portachiavi!");
+
+
         
         // ========================================================================================== 
         //                              Template
