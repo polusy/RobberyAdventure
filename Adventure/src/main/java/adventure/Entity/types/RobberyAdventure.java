@@ -571,6 +571,15 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);  
 
         
+         // ==================================================================================================    
+        objectId = ObjectId.SHELF;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.WELDING_MASK, ObjectId.TUBE});
+        gameActionSpecifications.put(property, null);       
+        
+        
         
         
         // ========================================================================================== 
