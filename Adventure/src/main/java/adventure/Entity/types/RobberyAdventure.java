@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 import adventure.Entity.properties.*;
@@ -57,22 +58,42 @@ public class RobberyAdventure extends GameDescription{
     @Override
     public void init() throws InconsistentInitializationException{
         
-        Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications = new HashMap();
-        GameActionSpecification gameActionSpecification = null;
+        ObjectId objectId = null;
         Property property = null;
         CommandType commandType = null;
-        ObjectId objectId = null;
+        Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications = new HashMap();
+        GameActionSpecification gameActionSpecification = null;
         CompleteCondition completeCondition = null;
+        List<InventoryCondition> inventoryConditionOptions = new ArrayList<>();
+        InventoryCondition inventoryCondition = null;
+        Map<ObjectId, ObjectCondition> objectsConditions = new HashMap<>();
+        ObjectCondition objectCondition = null;
+        Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();
+        PropertyValue propertyValue = null;
         FailingConditionMessages failingConditionMessages = null;
+        Map<ObjectId, String> missingNecessaryObjectsMessages = new HashMap<>();
+        String failingInventoryConditionMessage = null;
+        Map<ObjectId, Map<PropertyType, String>> failingObjectsConditionsMessages = new HashMap<>();
+        Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
         PassingConditionResult passingConditionResult = null;
         GameEffect gameEffect = null;
-        Map<ObjectId, ObjectEffect> objectsEffects = null;  
-        Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();        
+        CurrentPositionEffect currentPositionEffect = null;
+        InventoryEffect inventoryEffect = null;
+        LootBagEffect lootBagEffect = null;
+        RoomEffect roomEffect = null;
+        Map<ObjectId, ObjectEffect> objectsEffects = new HashMap<>();
+        ObjectEffect objectEffect = null;
+        Set<PropertyValue> propertyWithValueResults = new HashSet<>();
+        ContainerEffect containerEffect = null;
+        SpecialAction specialAction = null;
+        String passingConditionMessage = null;
+              
 
+        
         initCommands();
         initRooms();
 
-        
+        // ==================================================================================================
         objectId = ObjectId.SLING;
         
         gameActionSpecifications = new HashMap();
@@ -85,14 +106,193 @@ public class RobberyAdventure extends GameDescription{
                 + "mandato in frantumi la finestra.", "Hai gettato la fionda");
         
         
+        // ==================================================================================================
         objectId = ObjectId.VASE;
         
         gameActionSpecifications = new HashMap();
         property = new Movable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
-        this.addStandardGameActionSpecification_Movable(gameActionSpecifications, objectId,
-                ObjectId.GARAGE_KEY, "Sotto il vaso c'era una chiave, un classico.");
+        commandType = CommandType.MOVE;
+        
+        
+        // CompleteCondition
+        objectsConditions = new HashMap<>();
+        
+        propertyValue = new PropertyValue(PropertyType.MOVABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.VASE, objectCondition);
+        
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.SECURITY_CAMERA, objectCondition);        
+        
+        
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        
+        failingObjectsConditionsMessages.put(ObjectId.VASE, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.VASE).put(PropertyType.MOVABLE,
+                "Hai già spostato questo oggetto, non è questo il momento per rimetterti in forma!");
+        
+        failingVisibilityConditionMessages.put(ObjectId.VASE, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.MOVABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(ObjectId.VASE, objectEffect);
+        
+                
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.GARAGE_KEY, objectEffect);        
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Sotto il vaso c'era una chiave, un classico." ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);             
+
+        
+       
+        // ==================================================================================================    
+        objectId = ObjectId.GARAGE_KEY;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, InteractiveObject.class, "Hai raccolto la chiave. "
+                , "Hai lasciato la chiave");    
+        
+        
+        // =================================================================================================
+
+        
+        
+        
+        // ========================================================================================== 
+        //                              Template
+        
+        objectId = ObjectId.VASE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Movable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.MOVE;
+        
+
+        
+        objectsEffects = new HashMap<>();        
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.BANDAGES, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.BANDAGES, "");
+        failingInventoryConditionMessage = "";
+        
+        failingObjectsConditionsMessages.put(ObjectId.BANDAGES, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.BANDAGES).put(PropertyType.ACTIVATABLE, "");
+        
+        failingVisibilityConditionMessages.put(ObjectId.BANDAGES, "");
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        failingInventoryConditionMessage, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        currentPositionEffect = new CurrentPositionEffect(RoomId.ANTE_VAULT);
+        inventoryEffect = new InventoryEffect(ObjectId.BANDAGES, ObjectId.BATTERY_CHARGER);
+        lootBagEffect = new LootBagEffect(ObjectId.BANDAGES);
+        roomEffect = new RoomEffect(ObjectId.BANDAGES, ObjectId.BATTERY_CHARGER);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+        containerEffect = new ContainerEffect(ObjectId.BANDAGES);
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, containerEffect, true);
+        objectsEffects.put(ObjectId.BANDAGES, objectEffect);
+        
+        specialAction = null;
+        
+        gameEffect = new GameEffect(currentPositionEffect, inventoryEffect,
+                lootBagEffect, roomEffect, objectsEffects, specialAction);
+        passingConditionMessage = "" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+        
+        
+        
         
         
     };
@@ -133,8 +333,8 @@ public class RobberyAdventure extends GameDescription{
         GameEffect gameEffect = null;
         Map<ObjectId, ObjectEffect> objectsEffects = null;
         
-        completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId);
-        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId);
+        completeCondition = this.buildStandardCompleteCondition(commandType, targetObjectId, null);
+        failingConditionMessages = this.buildStandardFailingConditionMessages(commandType, targetObjectId, null, null);
         
         
         objectsEffects = this.buildStandardObjectsEffects(commandType, targetObjectId, containerId);
@@ -143,6 +343,34 @@ public class RobberyAdventure extends GameDescription{
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
         return (new GameActionSpecification(completeCondition, failingConditionMessages, passingConditionResult));    
+    }
+    
+    private void addStandardGameActionSpecification_Breakable(Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
+            ObjectId targetObjectId, ObjectId[] necessaryObjectsIdsArray, String missingNecessaryObjectMessage)
+        throws InconsistentInitializationException {
+        
+        CompleteCondition completeCondition = null;
+        FailingConditionMessages failingConditionMessages = null;
+        List<ObjectId[]> necessaryObjectsIds = new ArrayList<>();
+        Map<ObjectId, String> missingNecessaryObjectsMessages = new HashMap<>();
+        Map<ObjectId, ObjectEffect> objectsEffects = new HashMap<>();
+        GameEffect gameEffect = null;
+        
+        necessaryObjectsIds.add(necessaryObjectsIdsArray);
+        
+        completeCondition = this.buildStandardCompleteCondition(CommandType.BREAK,
+                targetObjectId, necessaryObjectsIds);
+        
+        if (necessaryObjectsIdsArray.length == 1)
+            missingNecessaryObjectsMessages.put(necessaryObjectsIdsArray[0], missingNecessaryObjectMessage);
+        
+        failingConditionMessages = this.buildStandardFailingConditionMessages(CommandType.BREAK,
+                targetObjectId, necessaryObjectsIds, missingNecessaryObjectsMessages);
+        
+        objectsEffects = this.buildStandardObjectsEffects(CommandType.BREAK, targetObjectId, 
+               null);
+        gameEffect = this.buildStandardGameEffect(CommandType.BREAK, targetObjectId, 
+                InteractiveObject.class, objectsEffects);
     }
     
     private void addStandardGameActionSpecification_Movable(Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications,
@@ -158,9 +386,9 @@ public class RobberyAdventure extends GameDescription{
         Set<PropertyValue> propertyWithValueResults = new HashSet<>();
         ObjectEffect objectEffect = null;
         
-        completeCondition = this.buildStandardCompleteCondition(CommandType.MOVE, targetObjectId);
+        completeCondition = this.buildStandardCompleteCondition(CommandType.MOVE, targetObjectId, null);
         failingConditionMessages = this.buildStandardFailingConditionMessages(CommandType.MOVE,
-                targetObjectId);
+                targetObjectId, null, null);
         
         propertyWithValueResults.add(new PropertyValue(PropertyType.MOVABLE, true));
         objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
@@ -169,8 +397,8 @@ public class RobberyAdventure extends GameDescription{
         objectEffect = new ObjectEffect(null, null, true);
         objectsEffects.put(revealedObjectId, objectEffect);
         
-        gameEffect = new GameEffect(null, null, null,
-                null, objectsEffects, null);
+        gameEffect = this.buildStandardGameEffect(CommandType.MOVE, targetObjectId,
+                InteractiveObject.class, objectsEffects);
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
@@ -189,8 +417,9 @@ public class RobberyAdventure extends GameDescription{
         return (new InventoryCondition(necessaryObjectsList));
     }
     
-    private CompleteCondition buildStandardCompleteCondition(CommandType commandType, ObjectId targetObjectId)
-    throws IllegalArgumentException {
+    private CompleteCondition buildStandardCompleteCondition(CommandType commandType, ObjectId targetObjectId,
+            List<ObjectId[]> auxiliaryObjectIds) throws IllegalArgumentException {
+        
         CompleteCondition completeCondition = null;
         Map<ObjectId, ObjectCondition> objectsConditions = new HashMap<>();
         List<InventoryCondition> inventoryConditionOptions = new ArrayList<>();
@@ -221,6 +450,22 @@ public class RobberyAdventure extends GameDescription{
             
             completeCondition = new CompleteCondition(null, objectsConditions);
         }
+        else if (commandType == CommandType.BREAK){
+            propertyWithValueConstraints.add(new PropertyValue(PropertyType.BREAKABLE, false));
+            objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+            objectsConditions.put(targetObjectId, objectCondition);
+             
+            objectCondition = new ObjectCondition(null, true);
+            for (ObjectId[] necessaryObjectsIds : auxiliaryObjectIds){
+                
+                for (ObjectId objectId : necessaryObjectsIds)
+                    objectsConditions.put(objectId, objectCondition);
+                
+                inventoryCondition = this.buildInventoryCondition(necessaryObjectsIds);
+                inventoryConditionOptions.add(inventoryCondition);
+            }
+            completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        }
         else{
             throw new IllegalArgumentException();
         }
@@ -229,11 +474,12 @@ public class RobberyAdventure extends GameDescription{
     }
     
     private FailingConditionMessages buildStandardFailingConditionMessages(CommandType commandType, 
-            ObjectId targetObjectId) throws IllegalArgumentException {
+            ObjectId targetObjectId, List<ObjectId[]> auxiliaryObjectsId, 
+            Map<ObjectId, String> missingNecessaryObjectsMessages) throws IllegalArgumentException {
         
         String failingVisibilityConditionMessage = "Qui non c'è un oggetto simile, guardati meglio intorno!";
+        String failingInventoryConditionMessage = null;
         FailingConditionMessages failingConditionMessages = null;
-        Map<ObjectId, String> missingNecessaryObjectsMessages = new HashMap<>();
         Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
         Map<ObjectId, Map<PropertyType,String>> failingObjectsConditionsMessages = new HashMap<>();
         Map<PropertyType,String> failingPropertiesMessages = new HashMap<>();
@@ -263,6 +509,25 @@ public class RobberyAdventure extends GameDescription{
             
             failingConditionMessages = new FailingConditionMessages(null,
             null, failingObjectsConditionsMessages, 
+                    failingVisibilityConditionMessages);
+        }
+        else if (commandType == CommandType.BREAK){
+            failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
+            
+            for (ObjectId[] necessaryObjectsIds : auxiliaryObjectsId){
+                for (ObjectId objectId : necessaryObjectsIds)
+                    failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+            } 
+            
+            failingPropertiesMessages.put(PropertyType.BREAKABLE, "Questo oggetto è già rotto");
+            failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
+            
+            if (auxiliaryObjectsId.size() > 1)
+                failingInventoryConditionMessage = "Intendi rompere questo oggetto a mani nude o preferisci"
+                        + " tornare a casa con le ossa delle mani ancora integre? ";
+            
+            failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+            failingInventoryConditionMessage, failingObjectsConditionsMessages, 
                     failingVisibilityConditionMessages);
         }        
         else{
@@ -303,6 +568,14 @@ public class RobberyAdventure extends GameDescription{
             gameEffect = new GameEffect(null, inventoryEffect, 
                     null, roomEffect, objectsEffects, null);
         }
+        else if (commandType == CommandType.MOVE){
+            gameEffect = new GameEffect(null, null, null,
+                null, objectsEffects, null);
+        }
+        else if (commandType == CommandType.BREAK){
+            gameEffect = new GameEffect(null, null, null,
+                null, objectsEffects, null);
+        }
         
         else{
             throw new IllegalArgumentException();
@@ -335,6 +608,11 @@ public class RobberyAdventure extends GameDescription{
             propertyWithValueResults.add(new PropertyValue(PropertyType.PICKUPABLE, false));
             objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
             objectsEffects.put(targetObjectId, objectEffect);            
+        }
+        else if (commandType == CommandType.BREAK){
+            propertyWithValueResults.add(new PropertyValue(PropertyType.BREAKABLE, true));
+            objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+            objectsEffects.put(targetObjectId, objectEffect);               
         }
         else{
             throw new IllegalArgumentException();
