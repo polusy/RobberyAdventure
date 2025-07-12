@@ -309,7 +309,38 @@ public class RobberyAdventure extends GameDescription{
                         + "quell'odore ti dava la nausea");         
         
         
+        // ==================================================================================================    
+        objectId = ObjectId.TOOL_CABINET;
         
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.HAMMER, ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT});
+        gameActionSpecifications.put(property, null);
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, objectId, new ObjectId[] {ObjectId.HAMMER, 
+                    ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT}, InteractiveObject.class, 
+                "Hai aperto l'armadio degli attrezzi. Sei stato avvolto da una "
+                        + "densa nuvola di polvere che ti sta facendo tossire fino ad avere le lacrime agli occhi.", 
+                "Hai chiuso l'armadio del garage. C'erano più acari lì dentro che nel "
+                        + "vecchio tappeto di tua nonna.");  
+        
+        // ==================================================================================================
+        objectId = ObjectId.HAMMER;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, null, null, InteractiveObject.class, 
+                "Hai preso il martello. Sei cosi' maldestro che ci e' mancato poco che ti cadesse su un piede",
+                "Hai buttato il martello, di' la verità che non ce la facevi piu' a "
+                        + "portarlo con te in giro");
+
         
         
         // ========================================================================================== 
