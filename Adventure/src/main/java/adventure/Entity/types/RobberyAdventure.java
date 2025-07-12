@@ -628,6 +628,18 @@ public class RobberyAdventure extends GameDescription{
                 "Hai gettato la medaglietta del cane. Comunque era piu' bella del tuo portachiavi!");
 
 
+         // ==================================================================================================    
+        objectId = ObjectId.LIVINGROOM_TABLE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.SHOPPING_LIST, ObjectId.LUGGAGE_OBJECTS_LIST,
+        ObjectId.NEWSPAPER_PAGE});
+        gameActionSpecifications.put(property, null);  
+
+
+
+        
         
         // ========================================================================================== 
         //                              Template
