@@ -314,7 +314,8 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications = new HashMap();
         
-        property = new Container(new ObjectId[] {ObjectId.HAMMER, ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT});
+        property = new Container(new ObjectId[] {ObjectId.HAMMER, ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, 
+            ObjectId.POWER_UNIT, ObjectId.THERMAL_LANCE});
         gameActionSpecifications.put(property, null);
         
         property = new Openable(false);
@@ -336,7 +337,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, null, null, InteractiveObject.class, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
                 "Hai preso il martello. Sei cosi' maldestro che ci e' mancato poco che ti cadesse su un piede",
                 "Hai buttato il martello, di' la verità che non ce la facevi piu' a "
                         + "portarlo con te in giro");
@@ -350,7 +351,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, null, null, InteractiveObject.class, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
                 "Hai preso la sega elettrica, fai attenzione a non amputarti un dito!",
                 "Hai gettato la sega elettrica");
 
@@ -363,11 +364,24 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, null, null, InteractiveObject.class, 
-                "Hai raccolto la ciave inglese, probabilmente è l'unico strumento che "
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto la chiave inglese, probabilmente è l'unico strumento che "
                         + "riconosceresti in una ferramenta.!",
                 "Hai buttato la chiave inglese");        
         
+
+        // ==================================================================================================
+        objectId = ObjectId.POWER_UNIT;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto la ciave inglese, probabilmente è l'unico strumento che "
+                        + "riconosceresti in una ferramenta.!",
+                "Hai buttato la chiave inglese"); 
 
         
         // ========================================================================================== 
