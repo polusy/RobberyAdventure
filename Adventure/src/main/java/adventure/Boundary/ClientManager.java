@@ -6,6 +6,9 @@ package adventure.Boundary;
 
 import adventure.Entity.objects.AdvObject;
 import adventure.identifiers.ObjectId;
+import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.RobberyAdventure;
+import adventure.utilities.DatabaseGameTable;
 
 import com.google.gson.Gson;
 import java.util.Arrays;
@@ -14,6 +17,7 @@ import java.util.Set;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -44,6 +48,32 @@ public class ClientManager {
     public ClientManager(String target){
         Client client = ClientBuilder.newClient();
         this.target = client.target(target);
+    }
+    
+    public boolean addGameSavingRequest(String gameId, GameDescription gameDescription){
+        
+        Gson gson = new Gson();
+        DatabaseGameTable dbGameTable = new DatabaseGameTable((RobberyAdventure)gameDescription, gameId);
+        String jsonGameTable = gson.toJson(dbGameTable, DatabaseGameTable.class);
+        
+        Response response = target.path("game/add").request(MediaType.APPLICATION_JSON).put(Entity.entity(jsonGameTable, MediaType.APPLICATION_JSON));
+        return response.readEntity(Boolean.class);
+        
+    }
+    
+    public RobberyAdventure getGameSavingRequest(String gameId){
+        
+        Response response = target.path("game/" + gameId).request(MediaType.APPLICATION_JSON).get();
+        return response.readEntity(RobberyAdventure.class);
+    }
+    
+    public Set<String> getAllGamesNamesRequest(){
+        
+        Response response = target.path("game/allnames").request(MediaType.APPLICATION_JSON).get();
+        
+        GenericType<Set<String>> genericType = new GenericType<Set<String>>(){};
+        
+        return response.readEntity(genericType);
     }
     
     public void populate(){
