@@ -57,7 +57,7 @@ public class DatabaseManager {
     public Boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
 
         Boolean gameSavingAlreadyExist = false;
-        String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?)" ;
+        String objectInsertionQuery = "INSERT INTO Games VALUES (?, ?)" ;
 
         PreparedStatement statement = connection.prepareStatement(objectInsertionQuery);
         statement.setString(1, gameId);
@@ -80,11 +80,11 @@ public class DatabaseManager {
 	PreparedStatement statement = connection.prepareStatement(objectSelectionQuery);
 	statement.setString(1, gameId);
 	ResultSet resultSet = statement.executeQuery();
-	String gameDescription;
+	String jsonGameDescription;
 	
 	if (resultSet.next())
 	{
-            gameDescription = resultSet.getString(2);
+            jsonGameDescription = resultSet.getString(2);
 	}
 	else{
             throw new SQLException();
@@ -93,7 +93,7 @@ public class DatabaseManager {
         
         statement.close();
         
-        return gameDescription;
+        return jsonGameDescription;
     }
     
     public Set<String> getAllGameNames() throws SQLException{
@@ -103,7 +103,7 @@ public class DatabaseManager {
 	ResultSet resultSet = statement.executeQuery();
 	Set<String> gameNames = new HashSet<>();
         
-        if (resultSet.next()){
+        while (resultSet.next()){
             gameNames.add(resultSet.getString(1));
         }
         
