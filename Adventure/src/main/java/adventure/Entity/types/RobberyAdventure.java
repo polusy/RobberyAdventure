@@ -102,8 +102,8 @@ public class RobberyAdventure extends GameDescription{
         
         initCommands();
         initRooms();
-        
         this.setCurrentRoom(this.getRoomById(RoomId.SIDEWALK));
+        
 
         // ==================================================================================================
         objectId = ObjectId.SLING;

@@ -56,7 +56,7 @@ public class Engine {
     public Engine(GameDescription game){
         Set<String> stopwords = new HashSet();
         List<PrepositionType> prepositionTypes = Arrays.asList(PrepositionType.class.getEnumConstants());
-        String sentencesSeparatorsRegex = "e|ed|poi|dopo";
+        String sentencesSeparatorsRegex = "\\s(e|ed|poi|dopo)\\s";
         String wordsSeparatorsRegex = "\\s";
 
         this.game = game;

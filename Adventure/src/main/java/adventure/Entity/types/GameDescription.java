@@ -21,7 +21,7 @@ public abstract class GameDescription {
     
     private final List<Command> commands = new ArrayList();
     private final List<Room> rooms = new ArrayList();
-    private Inventory inventory;
+    private Inventory inventory = new Inventory(new ArrayList<>());
     private Room currentRoom;
     
     
