@@ -25,7 +25,7 @@ import adventure.Boundary.ClientManager;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Entity.types.PropertyValue;
-import adventure.Boundary.GUI.SafeGUI;
+import adventure.Boundary.GUI.SafeDialogGUI;
 
 
 import java.io.File;
@@ -3359,12 +3359,8 @@ public class RobberyAdventure extends GameDescription{
         // PassingConditionResult
         
         specialAction = () -> {
-            SafeGUI safeGUI = new SafeGUI();
+            SafeDialogGUI safeGUI = new SafeDialogGUI(null, true);
             safeGUI.setVisible(true);
-            
-            while (safeGUI.isActive()){
-                
-            }
             
             if (safeGUI.isPasswordGuessed()){
                 throw new PasswordGuessedException();
