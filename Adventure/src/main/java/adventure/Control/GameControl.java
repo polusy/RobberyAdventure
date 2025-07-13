@@ -153,21 +153,30 @@ public class GameControl {
             }
 
 	if (commandAnalysisResult != null && commandAnalysisResult.isAnalysisPassed()){
-            try {
-                gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
-            } 
-            catch (NotValidSentenceException exception){
-                out.println(exception.getMessage());
+            
+            if (parserOutput.getCommand().getType() != CommandType.LOOK_AT)
+            {
+
+                try {
+                    gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
+                } 
+                catch (NotValidSentenceException exception){
+                    out.println(exception.getMessage());
+                }
+                catch (DuplicateException exception){
+                    out.println(exception.getMessage());
+                }
+                message = gameActionResult.getMessage();
             }
-            catch (DuplicateException exception){
-                out.println(exception.getMessage());
+            else {
+                message = commandAnalysisResult.getMessage();
             }
-            message = gameActionResult.getMessage();
 	}
 
          out.println(message);
 
-	if (gameActionResult.getSpecialAction() != null)
+	if (gameActionResult != null && gameActionResult.getSpecialAction() != null)
+        {
             try {
                 gameActionResult.getSpecialAction().execute();
             } catch (PasswordGuessedException excetion){
@@ -184,6 +193,7 @@ public class GameControl {
                 
                 throw new EndGameException();
             }
+        }
         
     }
     
@@ -220,8 +230,9 @@ public class GameControl {
     private GameActionResult processCommandAnalysisResult(CommandAnalysisResult commandAnalysisResult, 
             GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, DuplicateException{
 	GameActionSpecification gameActionSpecification = this.findGameActionSpecification(commandAnalysisResult, parserOutput);
-	GameActionResult gameActionResult = GameActionSpecificationProcesser.process(gameActionSpecification, 
-                gameDescription, commandAnalysisResult);
+       
+            GameActionResult gameActionResult = GameActionSpecificationProcesser.process(gameActionSpecification, 
+                    gameDescription, commandAnalysisResult);
 
 	return gameActionResult;
     }
