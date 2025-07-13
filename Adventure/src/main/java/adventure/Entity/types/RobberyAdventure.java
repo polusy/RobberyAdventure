@@ -1153,7 +1153,17 @@ public class RobberyAdventure extends GameDescription{
                         + " sicuro se li conservi a casa tua", null);   
 
 
-
+        // ==================================================================================================
+        objectId = ObjectId.TRAPDOOR_KEY;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.INNER_SAFE, null, InteractiveObject.class, 
+                "Hai raccolto la chiave e ti chiedi cosa potrà mai aprire di cosi' prezioso...",
+                     "Hai gettato la chiave sul pavimento");  
         
         
         
