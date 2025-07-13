@@ -17,9 +17,8 @@ import adventure.Entity.properties.Property;
 import adventure.Entity.properties.PropertyWithValue;
 import adventure.identifiers.CommandType;
 import adventure.identifiers.PropertyType;
-import adventure.exceptions.DuplicateException;
-import adventure.exceptions.AmbiguousCommandException;
-import adventure.exceptions.NotValidSentenceException;
+import adventure.identifiers.ObjectId;
+import adventure.exceptions.*;
 
 /**
  *
@@ -130,7 +129,7 @@ public class GameControl {
 
 
 
-    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) {
+    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
 	CommandType commandType = parserOutput.getCommand().getType();
 	String message = null;
 	CommandAnalysisResult commandAnalysisResult = null;
@@ -169,7 +168,22 @@ public class GameControl {
          out.println(message);
 
 	if (gameActionResult.getSpecialAction() != null)
-		gameActionResult.getSpecialAction().execute();
+            try {
+                gameActionResult.getSpecialAction().execute();
+            } catch (PasswordGuessedException excetion){
+                GameActionSpecificationProcesser.safeOpeningHandler((RobberyAdventure)game);
+            }
+            catch (EndGameException exception){
+                out.println("Stai già immaginandoti su un'amaca ai Caraibi mentre sorseggi un cocktail "
+                        + "da una noce di cocco. Hai rubato tutto quello che c'era di valore in questa casa "
+                        + "e pensi che questo furto non sarebbe potuto andare meglio... con la vendita del quadro "
+                        + "diventerai milionario!" + System.lineSeparator() + System.lineSeparator() +
+                        "Stai sognando ad occhi aperti, ma all'improvviso vieni riportato alla realtà da un "
+                                + "sinistro colpo di tosse... stai già sudando freddo, ti volti verso la porta... "
+                        + "davanti a te c'è una decina di uomini grossi come armadi che si scrocchiano le nocche delle mani.");
+                
+                throw new EndGameException();
+            }
         
     }
     

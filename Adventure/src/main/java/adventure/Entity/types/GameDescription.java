@@ -25,7 +25,8 @@ public abstract class GameDescription {
     private Room currentRoom;
     
     
-    public abstract void init() throws InconsistentInitializationException;
+    public abstract void init() throws InconsistentInitializationException, PasswordGuessedException, 
+            EndGameException;
 
     public List<Room> getRooms() {
         return rooms;

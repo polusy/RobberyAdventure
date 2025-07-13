@@ -25,6 +25,7 @@ import adventure.Boundary.ClientManager;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Entity.types.PropertyValue;
+import adventure.Boundary.GUI.SafeGUI;
 
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class RobberyAdventure extends GameDescription{
     
     
     @Override
-    public void init() throws InconsistentInitializationException{
+    public void init() throws InconsistentInitializationException, PasswordGuessedException, EndGameException{
         
         ObjectId objectId = null;
         Property property = null;
@@ -127,7 +128,8 @@ public class RobberyAdventure extends GameDescription{
         
         // CompleteCondition
         objectsConditions = new HashMap<>();
-        
+        propertyWithValueConstraints = new HashSet<>();
+                
         propertyValue = new PropertyValue(PropertyType.MOVABLE, false);
         propertyWithValueConstraints.add(propertyValue);
         
@@ -222,7 +224,7 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
         objectsConditions = new HashMap<>();
-        
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.SLING});
         inventoryConditionOptions.add(inventoryCondition);
@@ -1935,6 +1937,78 @@ public class RobberyAdventure extends GameDescription{
         containerObjects = new ObjectId[]{ObjectId.BANDAGES};
         gameActionSpecifications.put(new Container(containerObjects), null);
         
+      
+        // ==================================================================================================    
+        objectId = ObjectId.GARAGE_DOOR;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        List<ObjectId[]> necessaryObjectsId = new ArrayList<>();
+        necessaryObjectsId.add(new ObjectId[] {ObjectId.GARAGE_KEY});
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                necessaryObjectsId, null, null, Door.class, 
+                "Hai aperto la serranda del garage! "
+                        + "Speriamo che il proprietario non ci tenga dentro le solite cianfrusaglie. ", 
+                "Hai chiuso la serranda del garage."); 
+        
+        
+        // ==================================================================================================    
+        objectId = ObjectId.FUEL_FILLER_NECK;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, null, null, InteractiveObject.class, 
+                "Hai aperto la bocchetta per il rifornimento del carburante. Non vedi l'ora di allontanarti, "
+                        + "tu odi l'odore del gasolio", 
+                "Hai chiuso la boccherra per il rifornimento, (finalmente, "
+                        + "quell'odore ti dava la nausea");         
+        
+        
+        // ==================================================================================================    
+        objectId = ObjectId.TOOL_CABINET;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.HAMMER, ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, 
+            ObjectId.POWER_UNIT, ObjectId.THERMAL_LANCE});
+        gameActionSpecifications.put(property, null);
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, objectId, new ObjectId[] {ObjectId.HAMMER, 
+                    ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT}, InteractiveObject.class, 
+                "Hai aperto l'armadio degli attrezzi. Sei stato avvolto da una "
+                        + "densa nuvola di polvere che ti sta facendo tossire fino ad avere le lacrime agli occhi.", 
+                "Hai chiuso l'armadio del garage. C'erano più acari lì dentro che nel "
+                        + "vecchio tappeto di tua nonna.");  
+        
+        // ==================================================================================================
+        objectId = ObjectId.HAMMER;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai preso il martello. Sei cosi' maldestro che ci e' mancato poco che ti cadesse su un piede",
+                "Hai buttato il martello, di' la verità che non ce la facevi piu' a "
+                        + "portarlo con te in giro");
+  
+  // ========================================================================================================
+        objectId = ObjectId.DRAWER;
+        
+        gameActionSpecifications = new HashMap();
+        containerObjects = new ObjectId[]{ObjectId.BANDAGES};
+        gameActionSpecifications.put(new Container(containerObjects), null);
+  
         property = new Openable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
@@ -1954,17 +2028,42 @@ public class RobberyAdventure extends GameDescription{
             room1.addObject(interactiveObject);
         }catch(DuplicateException exception){}
         
-        
-        
-        // ==========================================================================================
-           
-        objectId = ObjectId.BANDAGES;
+
+        // ==================================================================================================
+        objectId = ObjectId.ELECTRIC_SAW;
         
         gameActionSpecifications = new HashMap();
         property = new Pickupable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
-        this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BANDAGES, null,
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai preso la sega elettrica, fai attenzione a non amputarti un dito!",
+                "Hai gettato la sega elettrica");
+
+        
+        // ==================================================================================================
+        objectId = ObjectId.WRENCH;
+
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());        
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto la chiave inglese, probabilmente è l'unico strumento che "
+                        + "riconosceresti in una ferramenta.!",
+                "Hai buttato la chiave inglese");      
+      
+      
+        // ==========================================================================================
+        objectId = ObjectId.BANDAGES;
+      
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+      
+         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BANDAGES, null,
         ObjectId.DRAWER, null, InteractiveObject.class, "Hai raccolto delle bende dal cassetto...bravoh!",
         "Hai lasciato delle bende in giro per la casa!");
         
@@ -1978,8 +2077,204 @@ public class RobberyAdventure extends GameDescription{
         room1 = this.getRoomById(RoomId.BATHROOM);
         try{
             room1.addObject(interactiveObject);
-        }catch(DuplicateException exception){}
+        }catch(DuplicateException exception){}     
         
+
+        // ==================================================================================================
+        objectId = ObjectId.POWER_UNIT;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto il generatore elettrico ",
+                "Ti sei liberato del generatore elettrico, all'inizio non sembrava cosi'"
+                        + "pesante!"); 
+
+        property = new Activatable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.ACTIVATE;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN, objectId});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+
+        propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.FUEL_CAN, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+        
+        missingNecessaryObjectsMessages.put(objectId, "Non hai questo oggetto nell'inventario");        
+        missingNecessaryObjectsMessages.put(ObjectId.FUEL_CAN, "Il generatore elettrico non 'genera' "
+                + "l'energia elettrica dal nulla. La legge di Lavoisier si fa in secondo superiore!");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
+                "Hai già attivato il generatore! Non senti il rumore che fa?");
+        
+        failingObjectsConditionsMessages.put(ObjectId.FUEL_CAN, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.FUEL_CAN).put(PropertyType.FILLABLE, 
+                "Magari il generatore avrebbe bisogno di qualcosa da bruciare per funzioanre...");
+        
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai attivato il generatore! Fa un baccano assordante" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);                
+        
+        
+        // ==================================================================================================
+        objectId = ObjectId.THERMAL_LANCE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
+                "Hai raccolto la lancia termica. Non ne avevi mai vista una da vicino, "
+                        + "e' proprio come quelle dei film", "Hai buttato la lancia termica"); 
+
+        property = new Activatable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.ACTIVATE;
+      
+      
+        // CompleteCondition
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.POWER_UNIT, objectId, ObjectId.WELDING_MASK});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.POWER_UNIT, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.POWER_UNIT, "Mi dispiace ma la lancia termica non funziona a pile!");
+        missingNecessaryObjectsMessages.put(ObjectId.WELDING_MASK, "Hai intenzione di bruciarti tutta "
+                + "la faccia?");
+        missingNecessaryObjectsMessages.put(objectId, "Non hai questo oggetto nell'inventario");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
+                "Hai già attivato la lancia termica!");
+        
+        failingObjectsConditionsMessages.put(ObjectId.POWER_UNIT, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.POWER_UNIT).put(PropertyType.ACTIVATABLE, 
+                "Forse devi fare funzionare qualcosa... oltre al cervello");
+        
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai acceso la lancia termica, sta diventando incandescente..." ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+
         
         // ==========================================================================================
         
@@ -2079,7 +2374,631 @@ public class RobberyAdventure extends GameDescription{
         inventoryConditionOptions = new ArrayList<>();
         objectsConditions = new HashMap<>();
         propertyWithValueConstraints = new HashSet<>();
+      
+      
+
         
+
+
+        
+         // ==================================================================================================    
+        objectId = ObjectId.SHELF;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.WELDING_MASK, ObjectId.TUBE});
+        gameActionSpecifications.put(property, null);       
+        
+        
+         // ==================================================================================================
+        objectId = ObjectId.WELDING_MASK;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SHELF, null, InteractiveObject.class, 
+                "Hai raccolto la maschera da saldatore, chissà com'è vederci attraverso",
+                "Hai buttato la maschera da saldatore");
+        
+        
+        // ==================================================================================================
+        objectId = ObjectId.TUBE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SHELF, null, InteractiveObject.class, 
+                "Hai raccolto il tubo di gomma, almeno con questo non c'è il rischio di farti male",
+                "Ti sei liberato del tubo");
+        
+
+         // ==================================================================================================    
+        objectId = ObjectId.DOGHOUSE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.DOG_TAG});
+        gameActionSpecifications.put(property, null);    
+
+        
+        // ==================================================================================================
+        objectId = ObjectId.DOG_TAG;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.DOG_TAG, null, InteractiveObject.class, 
+                "Hai raccolto la medaglietta del cane del proprietario",
+                "Hai gettato la medaglietta del cane. Comunque era piu' bella del tuo portachiavi!");
+
+
+         // ==================================================================================================    
+        objectId = ObjectId.LIVINGROOM_TABLE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.SHOPPING_LIST, ObjectId.LUGGAGE_OBJECTS_LIST,
+        ObjectId.NEWSPAPER_PAGE});
+        gameActionSpecifications.put(property, null);  
+
+
+        // ==================================================================================================    
+        objectId = ObjectId.DISPLAY_CABINET;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.SPOON});
+        gameActionSpecifications.put(property, null);
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, objectId, new ObjectId[] {ObjectId.SPOON}, InteractiveObject.class, 
+                "Hai spalancato le ante della cristalliera e ti stai ricordando "
+                        + "quella volta in cui da piccolo prendesti in pieno la collezione dei vetri di Murano "
+                        + "di tua madre con una pallonata", "Hai chiuso la cristalliera."
+                                + " Quanta roba raffinata li' dentro!");  
+        
+
+        // ==================================================================================================
+        objectId = ObjectId.SPOON;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.DISPLAY_CABINET, null, InteractiveObject.class, 
+                "Hai preso il cucchiaio. Che bello, scintilla!",
+                "Hai lasciato il cucchiaio");
+
+
+         // ==================================================================================================    
+        objectId = ObjectId.SOFA;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.REMOTE_CONTROL});
+        gameActionSpecifications.put(property, null); 
+
+
+        // ==================================================================================================
+        objectId = ObjectId.REMOTE_CONTROL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.SOFA, null, InteractiveObject.class, 
+                "Hai raccolto il telecomando dal divano.",
+                "Hai gettato il telecomando, d'altronde non è questo il momento per "
+                        + "guardare la televisione");
+
+
+        // ==================================================================================================
+        objectId = ObjectId.TV;
+        
+        gameActionSpecifications = new HashMap();
+
+        property = new Activatable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.ACTIVATE;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.REMOTE_CONTROL});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+        
+        missingNecessaryObjectsMessages.put(objectId, "I telecomandi li hanno inventati parecchi anni fa...");        
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.ACTIVATABLE, 
+                "La televisione e' gia' accesa!");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages,
+        null);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "La televisione si è accesa e hai una gran voglia di buttarti sul divano "
+                + "e bere una birra" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);           
+        
+        
+        // ==================================================================================================    
+        objectId = ObjectId.LIVINGROOM_WEST_DOOR;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        necessaryObjectsId = new ArrayList<>();
+        necessaryObjectsId.add(new ObjectId[] {ObjectId.SPOON});
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                necessaryObjectsId, null, null, Door.class, 
+                "Hai aperto la porta",
+                        "Hai chiuso la porta, facendo un gran baccano. "
+                                + "Devi aver crepato gli stipiti..."); 
+        
+        
+        // ==================================================================================================    
+        objectId = ObjectId.RACK;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.DUMBBELL});
+        gameActionSpecifications.put(property, null);         
+        
+
+        // ==================================================================================================
+        objectId = ObjectId.DUMBBELL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.RACK, null, InteractiveObject.class, 
+                "Hai raccolto (con grande fatica) i manubri",
+                "Hai lasciato cadere i manubri sul pavimento, puoi dire di "
+                        + "avere fatto esercizio almeno!");
+
+
+        // ==========================================================================================         
+        objectId = ObjectId.MIRROR;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.HAND_RAIL});
+        gameActionSpecifications.put(property, null);          
+        
+        property = new Breakable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.BREAK;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.WRENCH});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.DUMBBELL});
+        inventoryConditionOptions.add(inventoryCondition);    
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.HAMMER});
+        inventoryConditionOptions.add(inventoryCondition);  
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        failingInventoryConditionMessage = "Se desideri distruggere lo specchio a testate, chi sono io per fermarti..."
+                + " ma poi chi pulisce?";
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, "Stai letteralmente"
+                + " calpestando un tappeto di schegge ... una volta qui c'era uno specchio");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        failingInventoryConditionMessage, failingObjectsConditionsMessages, null);
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                  
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+                  
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.OUTER_SAFE, objectEffect);
+
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.OUTER_NUMERIC_KEYPAD, objectEffect);           
+
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Hai mandato in mille pezzi lo specchio. Auguri, ti sei "
+                + "appena guadagnato sette anni di disgrazie!" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+
+        
+        // ========================================================================================== 
+        objectId = ObjectId.HAND_RAIL;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Usable(false);
+        gameActionSpecifications.put(property, null);
+        
+        
+        
+        // ========================================================================================== 
+        objectId = ObjectId.OUTER_SAFE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.OUTER_NUMERIC_KEYPAD, ObjectId.INNER_SAFE, 
+        ObjectId.JEWELS});
+        gameActionSpecifications.put(property, null); 
+        
+        property = new Breakable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.BREAK;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.DRILL});
+        inventoryConditionOptions.add(inventoryCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        objectsConditions.put(objectId, objectCondition);
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        objectsConditions.put(ObjectId.DRILL, objectCondition);        
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = new HashMap<>();
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        missingNecessaryObjectsMessages.put(ObjectId.DRILL, "Quella è una delle casseforti piu' "
+                + "robuste che tu possa mai aver visto, sembra a prova di bomba. Però forse c'e' qualcosa"
+                + " in casa che puo' fare al caso tuo");
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, 
+                "La serratura della cassaforte e' gia' completamente distrutta, forse "
+                        + "potevi andarci meno pesante...");
+        
+        failingObjectsConditionsMessages.put(ObjectId.DRILL, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.DRILL).put(PropertyType.ACTIVATABLE, 
+                "Quel trapano sarebbe più utile se la punta girasse su se' stessa ad "
+                        + "altissima velocita', che dici?");
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        null, failingObjectsConditionsMessages, null);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.INNER_SAFE, objectEffect);
+
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.INNER_NUMER_KEYPAD, objectEffect);  
+        
+        objectEffect = new ObjectEffect(null, null, true);
+        objectsEffects.put(ObjectId.JEWELS, objectEffect);         
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, objectsEffects, null);
+        passingConditionMessage = "Sei riuscito finalmente a forare la serratura della cassaforte! Avevi"
+                + " iniziato a perdere le speranza" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);  
+        
+        
+        // ========================================================================================== 
+        objectId = ObjectId.INNER_SAFE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.INNER_NUMER_KEYPAD, ObjectId.SAFE_ROLL_OF_BILLS, 
+        ObjectId.TRAPDOOR_KEY});
+        gameActionSpecifications.put(property, null); 
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.OPEN;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+      
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+
+        // FailingConditionMessages
+
+        failingObjectsConditionsMessages = new HashMap<>();
+
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.OPENABLE, 
+                "Hai gia' aperto la cassaforte!");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        null);
+        
+        // PassingConditionResult
+        
+        passingConditionMessage = "Usa il tastierino e spera di inserire la combinazione corretta in meno di "
+                + "quattro secoli" ;
+        
+        passingConditionResult = new PassingConditionResult(null, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);               
+        
+        
+        // ========================================================================================== 
+        objectId = ObjectId.INNER_NUMER_KEYPAD;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Usable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.USE;
+           
+        
+        // CompleteCondition
+        objectsConditions = new HashMap<>();
+        
+        objectCondition = new ObjectCondition(null, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+        // FailingConditionMessages
+  
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, null,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        specialAction = () -> {
+            SafeGUI safeGUI = new SafeGUI();
+            safeGUI.setVisible(true);
+            
+            while (safeGUI.isActive()){
+                
+            }
+            
+            if (safeGUI.isPasswordGuessed()){
+                throw new PasswordGuessedException();
+            }
+        };
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, null, specialAction);
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, null);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);     
+
+
+        // ==================================================================================================
+        objectId = ObjectId.SAFE_ROLL_OF_BILLS;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.INNER_SAFE, null, ValuableObject.class, 
+                "Ti sei impossessato della mazzetta di banconote e pensi di recarti subito in banca quando uscirai "
+                        + "da qui, peché con tutti i furti che vengono fatti negli appartamenti, non ti senti"
+                        + " sicuro se li conservi in casa tua", null);   
+
+
+        // ==================================================================================================
+        objectId = ObjectId.TRAPDOOR_KEY;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.INNER_SAFE, null, InteractiveObject.class, 
+                "Hai raccolto la chiave e ti chiedi cosa potrà mai aprire di cosi' prezioso...",
+                     "Hai gettato la chiave sul pavimento");  
+        
+
+        // ==================================================================================================
+        objectId = ObjectId.JEWELS;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.OUTER_SAFE, null, ValuableObject.class, 
+                "Hai raccolto tutti i gioelli", null);  
+
+
+        
+        
+        // ========================================================================================== 
+        //                              Template
+        
+        objectId = ObjectId.VASE;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Movable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.MOVE;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.ELECTRIC_SAW});
         inventoryConditionOptions.add(inventoryCondition);

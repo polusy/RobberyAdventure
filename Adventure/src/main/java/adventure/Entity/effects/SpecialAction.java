@@ -4,12 +4,16 @@
  */
 package adventure.Entity.effects;
 
+import adventure.exceptions.PasswordGuessedException;
+import adventure.exceptions.EndGameException;
+
+
 /**
  *
  * @author Paolo
  */
 public interface SpecialAction {
     
-    public void execute();
+    public void execute() throws PasswordGuessedException, EndGameException;
     
 }
