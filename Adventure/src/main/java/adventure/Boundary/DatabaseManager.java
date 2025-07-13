@@ -34,7 +34,7 @@ public class DatabaseManager {
     
     public DatabaseManager() throws SQLException{
         
-        String url = "jdbc:h2:./database/dbprova";
+        String url = "jdbc:h2:./database/db";
         connection = DriverManager.getConnection(url);
         connection.setAutoCommit(true);
     }
