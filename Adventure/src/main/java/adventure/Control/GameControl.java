@@ -17,9 +17,8 @@ import adventure.Entity.properties.Property;
 import adventure.Entity.properties.PropertyWithValue;
 import adventure.identifiers.CommandType;
 import adventure.identifiers.PropertyType;
-import adventure.exceptions.DuplicateException;
-import adventure.exceptions.AmbiguousCommandException;
-import adventure.exceptions.NotValidSentenceException;
+import adventure.identifiers.ObjectId;
+import adventure.exceptions.*;
 
 /**
  *
@@ -130,7 +129,7 @@ public class GameControl {
 
 
 
-    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) {
+    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out){
 	CommandType commandType = parserOutput.getCommand().getType();
 	String message = null;
 	CommandAnalysisResult commandAnalysisResult = null;
@@ -169,7 +168,14 @@ public class GameControl {
          out.println(message);
 
 	if (gameActionResult.getSpecialAction() != null)
-		gameActionResult.getSpecialAction().execute();
+            try {
+                gameActionResult.getSpecialAction().execute();
+            } catch (PasswordGuessedException excetion){
+                GameActionSpecificationProcesser.safeOpeningHandler((RobberyAdventure)game);
+            }
+            catch (EndGameException exception){
+                
+            }
         
     }
     
