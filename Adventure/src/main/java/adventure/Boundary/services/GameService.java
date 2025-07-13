@@ -48,20 +48,19 @@ public class GameService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addGameSaving(String jsonDatabaseGameTable) throws SQLException {
+        
+            Gson gson = new Gson();
+            DatabaseGameTable databaseGameTable = gson.fromJson(jsonDatabaseGameTable, DatabaseGameTable.class);
+            String gameId = databaseGameTable.getId();
+            RobberyAdventure robberyAdventure = databaseGameTable.getRobberyAdventure();
 
-        Gson gson = new Gson();
-        DatabaseGameTable databaseGameTable = gson.fromJson(jsonDatabaseGameTable, DatabaseGameTable.class);
-        String gameId = databaseGameTable.getId();
-        GameDescription gameDescription = databaseGameTable.getGameDescription();
+            String jsonGameDescription = null;
 
-        String jsonGameDescription = null;
+                jsonGameDescription = gson.toJson(robberyAdventure, RobberyAdventure.class);
 
-        if (gameDescription instanceof RobberyAdventure)
-            jsonGameDescription = gson.toJson((RobberyAdventure) gameDescription);
+            Boolean gameAdded = databaseManager.addGame(gameId, jsonGameDescription);
 
-        Boolean gameAdded = databaseManager.addGame(gameId, jsonGameDescription);
-
-        return Response.ok(gson.toJson(gameAdded, Boolean.class), MediaType.APPLICATION_JSON).build();
+            return Response.ok(gson.toJson(gameAdded), MediaType.APPLICATION_JSON).build();
     }
     
     
