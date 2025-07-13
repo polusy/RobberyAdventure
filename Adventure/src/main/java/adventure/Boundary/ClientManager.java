@@ -53,7 +53,7 @@ public class ClientManager {
     public boolean addGameSavingRequest(String gameId, GameDescription gameDescription){
         
         Gson gson = new Gson();
-        DatabaseGameTable dbGameTable = new DatabaseGameTable(gameDescription, gameId);
+        DatabaseGameTable dbGameTable = new DatabaseGameTable((RobberyAdventure)gameDescription, gameId);
         String jsonGameTable = gson.toJson(dbGameTable, DatabaseGameTable.class);
         
         Response response = target.path("game/add").request(MediaType.APPLICATION_JSON).put(Entity.entity(jsonGameTable, MediaType.APPLICATION_JSON));
@@ -61,7 +61,7 @@ public class ClientManager {
         
     }
     
-    public GameDescription getGameSavingRequest(String gameId){
+    public RobberyAdventure getGameSavingRequest(String gameId){
         
         Response response = target.path("game/" + gameId).request(MediaType.APPLICATION_JSON).get();
         return response.readEntity(RobberyAdventure.class);
