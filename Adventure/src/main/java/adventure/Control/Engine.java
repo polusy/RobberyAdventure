@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.PrintStream;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import adventure.Entity.types.GameDescription;
 import adventure.identifiers.CommandType;
@@ -25,12 +26,18 @@ import adventure.Control.observers.GameObserver;
 import adventure.Entity.types.Command;
 import adventure.Entity.objects.AdvObject;
 import adventure.Entity.types.Room;
+import adventure.Entity.types.RobberyAdventure;
 import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.PrepositionType;
 import adventure.identifiers.PropertyType;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Control.observers.*;
+import adventure.Boundary.DatabaseManager;
+
+
+import adventure.Boundary.ServerManager;
+import adventure.Boundary.services.*;
 
 
 /**
@@ -38,12 +45,13 @@ import adventure.Control.observers.*;
  * @author utente
  */
 public class Engine {
-    private final GameDescription game; 
+    private GameDescription game; 
     private final Parser parser;
     private final GameControl gameControl;
     private final Map<CommandType, TechnicalObserver> technicalObservers = new HashMap();
     private final Map<CommandType, GameObserver> gameObservers = new HashMap();
     private final PrintStream out;
+    
 
     public Engine(GameDescription game){
         Set<String> stopwords = new HashSet();
@@ -80,6 +88,8 @@ public class Engine {
         
        
         technicalObservers.put(CommandType.END, new EndCommandObserver());
+        technicalObservers.put(CommandType.MENU, new MenuCommandObserver());
+        technicalObservers.put(CommandType.SAVE, new SaveCommandObserver());
 
         gameObservers.put(CommandType.INVENTORY, new InventoryCommandObserver());
         gameObservers.put(CommandType.LOOT_BAG, new LootBagCommandObserver());
@@ -87,16 +97,31 @@ public class Engine {
         
     }
 
-    public void execute() {
+    public void execute(){
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
         boolean gameOver = false;
+        ServerManager objectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
+        ServerManager gameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
+               
         
         
         out.println("================================");
         out.println("* Robbery Adventure *");
         out.println("================================");
         out.println();
+        
+       
+        //starting server 
+        objectsManager.run();
+        gameSavingsManager.run();
+        
+        
+        try{//initializing games savings tables in db
+            DatabaseManager dbmanager = new DatabaseManager(); 
+            dbmanager.createGamesTable();
+        }catch(SQLException exception){out.println(exception.getSQLState());};
+        
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine() && !exit && !gameOver) {
@@ -158,6 +183,12 @@ public class Engine {
 
 	if (gameObservers.containsKey(commandType))
             gameObservers.get(commandType).update(game, parserOutput, out);
+    }
+    
+    
+    public static void main(String[] args){
+        Engine engine = new Engine(new RobberyAdventure());
+        engine.execute();
     }
 
     
