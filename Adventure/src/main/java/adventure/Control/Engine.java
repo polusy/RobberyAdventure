@@ -25,12 +25,17 @@ import adventure.Control.observers.GameObserver;
 import adventure.Entity.types.Command;
 import adventure.Entity.objects.AdvObject;
 import adventure.Entity.types.Room;
+import adventure.Entity.types.RobberyAdventure;
 import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.PrepositionType;
 import adventure.identifiers.PropertyType;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Control.observers.*;
+
+
+import adventure.Boundary.ServerManager;
+import adventure.Boundary.services.*;
 
 
 /**
@@ -80,6 +85,8 @@ public class Engine {
         
        
         technicalObservers.put(CommandType.END, new EndCommandObserver());
+        technicalObservers.put(CommandType.MENU, new MenuCommandObserver());
+        technicalObservers.put(CommandType.SAVE, new SaveCommandObserver());
 
         gameObservers.put(CommandType.INVENTORY, new InventoryCommandObserver());
         gameObservers.put(CommandType.LOOT_BAG, new LootBagCommandObserver());
@@ -91,12 +98,19 @@ public class Engine {
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
         boolean gameOver = false;
+        ServerManager ObjectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
+        ServerManager GameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
         
         
         out.println("================================");
         out.println("* Robbery Adventure *");
         out.println("================================");
         out.println();
+        
+       
+        //starting server 
+        ObjectsManager.run();
+        GameSavingsManager.run();
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine() && !exit && !gameOver) {
@@ -158,6 +172,12 @@ public class Engine {
 
 	if (gameObservers.containsKey(commandType))
             gameObservers.get(commandType).update(game, parserOutput, out);
+    }
+    
+    
+    public static void main(String[] args){
+        Engine engine = new Engine(new RobberyAdventure());
+        engine.execute();
     }
 
     
