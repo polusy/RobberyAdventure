@@ -29,24 +29,12 @@ public class SaveCommandObserver implements TechnicalObserver{
         if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
-        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(new ClientManager("http://localhost:8081"),game, null, true);
+        
+        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(new ClientManager("http://localhost:8081"),(RobberyAdventure)game, null, true);
         saveCommandGUI.setVisible(true);
         
     }   
     
-    
-    
-    public static void main(String[] args) throws SQLException{
-        
-        ServerManager server = new ServerManager("http://localhost/", 8081, GameService.class);
-        server.run();
-        DatabaseManager dbmanager = new DatabaseManager();
-        ClientManager clientManager = new ClientManager("http://localhost:8081");
-        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(clientManager, new RobberyAdventure(), null, true);
-        saveCommandGUI.setVisible(true);
-        
-        System.out.println(clientManager.getAllGamesNamesRequest());
-    }
     
     
 }
