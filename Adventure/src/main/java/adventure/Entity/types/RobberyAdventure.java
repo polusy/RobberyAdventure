@@ -3744,7 +3744,7 @@ public class RobberyAdventure extends GameDescription{
         
         
         // ==========================================================================================                                  
-        objectId = ObjectId.DOORKNOB;
+        objectId = ObjectId.CAR;
 
         //adding object to room
 
@@ -3753,21 +3753,148 @@ public class RobberyAdventure extends GameDescription{
         advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
         advObject.getAlias(), true); 
 
-        room1 = this.getRoomById(RoomId.VAULT);
+        room1 = this.getRoomById(RoomId.GARAGE);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};  
+        
+        
+        // ==========================================================================================                                  
+        objectId = ObjectId.SHOPPING_LIST;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.LIVING_ROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};         
+        
+            
+        // ==========================================================================================                                  
+        objectId = ObjectId.LUGGAGE_OBJECTS_LIST;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.LIVING_ROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};  
+        
+        
+        // ==========================================================================================                                  
+        objectId = ObjectId.NEWSPAPER_PAGE;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.LIVING_ROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};    
+        
+        
+        // ==========================================================================================                                  
+        objectId = ObjectId.BENCH;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.GYM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};          
+       
+
+        // ==========================================================================================                                  
+        objectId = ObjectId.LAT_MACHINE;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.GYM);
         try{
             room1.addObject(advObject);
         }catch(DuplicateException exception){};            
-            
-            
-        // ==========================================================================================
-
-        
         
        
+          // ==========================================================================================                                  
+        objectId = ObjectId.SHOULDER_PRESS;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.GYM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};          
+        
+        
+        // ==========================================================================================                                  
+        objectId = ObjectId.OUTER_NUMERIC_KEYPAD;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), false); 
+
+        room1 = this.getRoomById(RoomId.GYM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};            
+        
+        
+        // ==========================================================================================                                  
+        objectId = ObjectId.GARAGE_DOOR;
+
+        //adding object to room
+
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.GARAGE);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};            
+        
+        
+        
+        
+        
+        
         // ========================================================================================== 
         //                              Template
         
-        objectId = ObjectId.VASE;
+        objectId = ObjectId.LAT_MACHINE;
         
         gameActionSpecifications = new HashMap();
         property = new Movable(false);
