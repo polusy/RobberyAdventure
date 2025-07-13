@@ -5,7 +5,7 @@
 package adventure.Boundary.GUI;
 
 import adventure.Boundary.ClientManager;
-import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.RobberyAdventure;
 import javax.swing.JOptionPane;
 /**
  *
@@ -15,16 +15,16 @@ public class SaveCommandGUI extends javax.swing.JDialog {
     
     
     private ClientManager clientManager;
-    private GameDescription gameDescription;
+    private RobberyAdventure robberyAdventure;
 
     /**
      * Creates new form SaveCommandGUI
      */
-    public SaveCommandGUI(ClientManager clientManager, GameDescription gameDescription, java.awt.Frame parent, boolean modal) {
+    public SaveCommandGUI(ClientManager clientManager,RobberyAdventure robberyAdventure, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.clientManager = clientManager;
-        this.gameDescription = gameDescription;
+        this.robberyAdventure = robberyAdventure ;
         
     }
 
@@ -93,13 +93,13 @@ public class SaveCommandGUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String newSavingName = jTextField1.getText();
-        Boolean gameAdded = clientManager.addGameSavingRequest(newSavingName, gameDescription);
+        Boolean gameAlreadyExisted = clientManager.addGameSavingRequest(newSavingName, robberyAdventure);
         
-        if (gameAdded){
-            dispose();
+        if (gameAlreadyExisted){
+            JOptionPane.showMessageDialog(rootPane,"Nome del salvataggio già esistente!");
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, JOptionPane.ERROR_MESSAGE);
+            dispose();
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
