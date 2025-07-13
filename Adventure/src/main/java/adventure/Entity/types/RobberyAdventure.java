@@ -1084,30 +1084,23 @@ public class RobberyAdventure extends GameDescription{
         
         // CompleteCondition
         objectsConditions = new HashMap<>();
-        propertyWithValueConstraints = new HashSet<>();
         
-        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
-        propertyWithValueConstraints.add(propertyValue);
+        objectCondition = new ObjectCondition(null, true);
         
-        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
-        
-        objectsConditions.put(ObjectId.INNER_SAFE, objectCondition);
+        objectsConditions.put(objectId, objectCondition);
         
         
         completeCondition = new CompleteCondition(null, objectsConditions);
         
         // FailingConditionMessages
-        failingObjectsConditionsMessages = new HashMap<>();
-        
-        failingObjectsConditionsMessages.put(ObjectId.INNER_SAFE, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.INNER_SAFE).put(PropertyType.OPENABLE, 
-                "Hai gia' aperto la cassaforte, a cosa ti serve piu' usare nuovamente il tastierino? "
-                        + "E comunque e' sempre meglio non giocarci troppo, non si sa mai con questi aggeggi...");
-        
+  
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
         
         failingConditionMessages = new FailingConditionMessages(null,
-        null, failingObjectsConditionsMessages,
-        null);
+        null, null,
+        failingVisibilityConditionMessages);
         
         
         // PassingConditionResult
