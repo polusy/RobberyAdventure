@@ -110,12 +110,8 @@ public class Engine {
         } catch (InconsistentInitializationException exception){
             out.println(exception.getMessage());
         } 
-        catch (PasswordGuessedException exception){
-            out.println(exception.getMessage());
-        }
-        catch (EndGameException exception){
-            out.println(exception.getMessage());
-        }
+        catch (PasswordGuessedException exception){ }
+        catch (EndGameException exception){ }
         
         
         out.println("================================");
