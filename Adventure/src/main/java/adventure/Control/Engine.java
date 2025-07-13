@@ -97,7 +97,7 @@ public class Engine {
         
     }
 
-    public void execute(){
+    public void execute() throws InconsistentInitializationException{
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
         boolean gameOver = false;
@@ -107,8 +107,6 @@ public class Engine {
                
         try {
             game.init();
-        } catch (InconsistentInitializationException exception){
-            out.println(exception.getMessage());
         } 
         catch (PasswordGuessedException exception){ }
         catch (EndGameException exception){ }
@@ -203,7 +201,7 @@ public class Engine {
     }
     
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws InconsistentInitializationException{
         Engine engine = new Engine(new RobberyAdventure());
         engine.execute();
     }

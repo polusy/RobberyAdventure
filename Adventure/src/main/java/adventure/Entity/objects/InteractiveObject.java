@@ -37,10 +37,10 @@ public class InteractiveObject extends AdvObject {
 
 	for (Map.Entry<Property, Map<CommandType, GameActionSpecification>> generalEntry : gameActionSpecifications.entrySet()){
             
-            if (!(generalEntry.getKey() instanceof PropertyWithValue) && !generalEntry.getValue().keySet().isEmpty())
+            if (!(generalEntry.getKey() instanceof PropertyWithValue) && (generalEntry.getValue() != null))
                 throw new InconsistentInitializationException();
             
-            if ((generalEntry.getKey() instanceof PropertyWithValue) && !generalEntry.getValue().keySet().isEmpty()){
+            if ((generalEntry.getKey() instanceof PropertyWithValue) && generalEntry.getValue() != null){
                 PropertyWithValue property = (PropertyWithValue) generalEntry.getKey();
                 
                 if (!PropertyCommandsCorrespondence.getCommands(property.getType()).containsAll(generalEntry.getValue().keySet()))
