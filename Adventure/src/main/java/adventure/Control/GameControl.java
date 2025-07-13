@@ -129,7 +129,7 @@ public class GameControl {
 
 
 
-    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out){
+    public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
 	CommandType commandType = parserOutput.getCommand().getType();
 	String message = null;
 	CommandAnalysisResult commandAnalysisResult = null;
