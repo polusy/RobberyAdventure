@@ -1138,6 +1138,22 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);     
 
+
+        // ==================================================================================================
+        objectId = ObjectId.SAFE_ROLL_OF_BILLS;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
+                null, ObjectId.INNER_SAFE, null, ValuableObject.class, 
+                "Ti sei impossessato della mazzetta di banconote e pensi di recarti subito in banca quando uscirai "
+                        + "da qui, peché con tutti i furti che vengono fatti negli appartamenti, non ti senti"
+                        + " sicuro se li conservi a casa tua", null);   
+
+
+
         
         
         
