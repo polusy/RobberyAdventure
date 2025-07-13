@@ -12,6 +12,7 @@ import adventure.exceptions.*;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,9 +26,9 @@ public class Room {
     final private RoomId id;
     private String name;
     private String description;
-    Map<CardinalPoint, Room> roomLinks;
-    Map<CardinalPoint, Door> doorLinks;
-    private List<AdvObject> objects;
+    Map<CardinalPoint, Room> roomLinks = new HashMap<>();
+    Map<CardinalPoint, Door> doorLinks = new HashMap<>();
+    private List<AdvObject> objects = new ArrayList<>();
     
 
     public Room(RoomId id, String name, String description, Map<CardinalPoint, Room> roomLinks, Map<CardinalPoint, Door> doorLinks, List<AdvObject> objects) {

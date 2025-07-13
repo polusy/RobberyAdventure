@@ -8,6 +8,12 @@ import adventure.Entity.conditions.CompleteCondition;
 import adventure.exceptions.InconsistentInitializationException;
 import java.util.NoSuchElementException;
 import adventure.Entity.conditions.InventoryCondition;
+import adventure.identifiers.ObjectId;
+import adventure.identifiers.PropertyType;
+
+
+import java.util.Map;
+
 
 /**
  *
@@ -23,65 +29,50 @@ public class GameActionSpecification {
         
         
         //controllo su condizioni dell'inventario
-        
-        if (completeCondition.getInventoryConditionOptions() != null){
-           
-            if(completeCondition.getInventoryConditionOptions().size() == 1){
-                
-                if (failingConditionMessages.getMissingNecessaryObjectsMessages() == null)
+        if (failingConditionMessages.getMissingNecessaryObjectsMessages() != null){
+
+            if (completeCondition.getInventoryConditionOptions().size() != 1)
                     throw new InconsistentInitializationException();
-                
-                if (failingConditionMessages.getFailingInventoryConditionMessage() != null)
-                    throw new InconsistentInitializationException();
-                
-                try{
-                    InventoryCondition inventoryCondition = completeCondition.getUniqueInventoryCondition();
-                    if(inventoryCondition.getNecessaryObjects().containsAll(failingConditionMessages.getMissingNecessaryObjectsMessages().keySet())){
-                        throw new InconsistentInitializationException();
-                    }
-                }catch(NoSuchElementException exception){}
-            }
             
-           
-            else if (completeCondition.getInventoryConditionOptions().size() > 1){
-                if(failingConditionMessages.getFailingInventoryConditionMessage() == null)
-                    throw new InconsistentInitializationException();
+       
+            for (Map.Entry<ObjectId, String> missingNecessaryObjectMessage : failingConditionMessages.getMissingNecessaryObjectsMessages().entrySet()){
                 
-                if (failingConditionMessages.getFailingObjectsConditionsMessages() != null){
+                if (!completeCondition.getInventoryConditionOptions().get(0).contains(missingNecessaryObjectMessage.getKey()))
                     throw new InconsistentInitializationException();
                 }
                 
             }
-        }
-        else{
-            if (failingConditionMessages.getMissingNecessaryObjectsMessages() != null)
-                throw new InconsistentInitializationException();
+        
+        if (failingConditionMessages.getFailingInventoryConditionMessage() != null){
             
-            if(failingConditionMessages.getFailingInventoryConditionMessage() != null)
+            if (completeCondition.getInventoryConditionOptions() == null)
                 throw new InconsistentInitializationException();
+                
+            if (completeCondition.getInventoryConditionOptions().size() <= 1)
+                throw new InconsistentInitializationException();
+
         }
         
+        if (failingConditionMessages.getFailingObjectsConditionsMessages() != null){
         
-        //controllo su condizioni degli oggetti
-        
-        if (completeCondition.getObjectsConditions() != null){
-            if(!completeCondition.getObjectsConditions().keySet().containsAll(failingConditionMessages.getFailingObjectsConditionsMessages().keySet())){
-                throw new InconsistentInitializationException();
-            }
-            
-            if(!completeCondition.getObjectsConditions().keySet().containsAll(failingConditionMessages.getFailingVisibilityConditionMessages().keySet())){
-                throw new InconsistentInitializationException();
-            }
-            
-            
-        }
-        else{
-            if (failingConditionMessages.getFailingObjectsConditionsMessages() != null || failingConditionMessages.getFailingVisibilityConditionMessages() != null){
-                throw new InconsistentInitializationException();
+            for(Map.Entry<ObjectId, Map<PropertyType, String>> failingConditionMessage : failingConditionMessages.getFailingObjectsConditionsMessages().entrySet()){
+
+               if (!completeCondition.getObjectsConditions().keySet().contains(failingConditionMessage.getKey()))
+                   throw new InconsistentInitializationException();
             }
         }
+
         
-        
+        if (failingConditionMessages.getFailingVisibilityConditionMessages() != null){ 
+           
+            for (Map.Entry<ObjectId, String> failingVisibilityConditionMessage : failingConditionMessages.getFailingVisibilityConditionMessages().entrySet()){
+
+                if(!completeCondition.getObjectsConditions().keySet().contains(failingVisibilityConditionMessage.getKey()))
+                    throw new InconsistentInitializationException();
+
+            }
+        }
+           
         
         this.completeCondition = completeCondition;
         this.failingConditionMessages = failingConditionMessages;

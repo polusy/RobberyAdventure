@@ -31,5 +31,14 @@ public class InventoryCondition {
         
     }
     
+    public boolean contains(ObjectId objectId){
+    if (necessaryObjects.contains(objectId))
+        return true;
+    else
+        return false;
+
+    }
+    
+    
     
 }

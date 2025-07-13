@@ -27,32 +27,44 @@ public class GameEffect {
            LootBagEffect lootBagEffect, RoomEffect roomEffect, Map<ObjectId, ObjectEffect> objectsEffects,
            SpecialAction specialAction) throws InconsistentInitializationException {
         
-    	if (!inventoryEffect.getRemovingObject().equals(roomEffect.getAddingObject()))
-            throw new InconsistentInitializationException();
-	
-	if (!inventoryEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
-            throw new InconsistentInitializationException();
-	
-	if (!lootBagEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
-            throw new InconsistentInitializationException();
-	
-	if (!roomEffect.getRemovingObject().equals(inventoryEffect.getAddingObject()) 
-                || !roomEffect.getRemovingObject().equals(lootBagEffect.getAddingObject()))
-	{
-		throw new InconsistentInitializationException();
-	}
+        
+        if (roomEffect != null && inventoryEffect != null && lootBagEffect != null)
+        {
+            
+                if (!inventoryEffect.getRemovingObject().equals(roomEffect.getAddingObject()))
+                    throw new InconsistentInitializationException();
 
-	ContainerEffect containerEffect = null;
+                if (!inventoryEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
+                    throw new InconsistentInitializationException();
+            
+                if (!lootBagEffect.getAddingObject().equals(roomEffect.getRemovingObject()))
+                    throw new InconsistentInitializationException();
+                
 
-	for (Map.Entry<ObjectId, ObjectEffect> objectEffects: objectsEffects.entrySet())
-	{
-            if (objectEffects.getValue().getContainerEffect() != null)
+                    if (!roomEffect.getRemovingObject().equals(inventoryEffect.getAddingObject()) 
+                            || !roomEffect.getRemovingObject().equals(lootBagEffect.getAddingObject()))
+                    {
+                            throw new InconsistentInitializationException();
+                    }
+                   
+            
+        }
+
+            ContainerEffect containerEffect = null;
+        
+        if (objectsEffects != null)
+        {
+
+            for (Map.Entry<ObjectId, ObjectEffect> objectEffects: objectsEffects.entrySet())
             {
-                containerEffect = objectEffects.getValue().getContainerEffect();
-                if (!containerEffect.getRemovingObject().equals(roomEffect.getRemovingObject()))
-                    throw new InconsistentInitializationException();   
+                if (objectEffects.getValue().getContainerEffect() != null)
+                {
+                    containerEffect = objectEffects.getValue().getContainerEffect();
+                    if (!containerEffect.getRemovingObject().equals(roomEffect.getRemovingObject()))
+                        throw new InconsistentInitializationException();   
+                }
             }
-	}          
+        }
         
         this.currentPositionEffect = currentPositionEffect;
         this.inventoryEffect = inventoryEffect;
