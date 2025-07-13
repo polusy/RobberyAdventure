@@ -101,6 +101,7 @@ public class Engine {
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
         boolean gameOver = false;
+        boolean isTechnicalCommand = false;
         ServerManager objectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
         ServerManager gameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
                
@@ -139,13 +140,15 @@ public class Engine {
                     parserOutput = (ParserOutput) parserOutputsIterator.next();
                     
                     gameControl.disambiguateMove(game, parserOutput);
-                    notifyTechnicalObservers(game, parserOutput);
+                    isTechnicalCommand = notifyTechnicalObservers(game, parserOutput);
                     notifyGameObservers(game, parserOutput, out);
                     
-                    try {
-                        gameControl.nextMove(game, parserOutput, System.out);
-                    } catch (EndGameException exception){
-                        gameOver = true;
+                    if (!isTechnicalCommand){
+                        try {
+                            gameControl.nextMove(game, parserOutput, System.out);
+                        } catch (EndGameException exception){
+                            gameOver = true;
+                        }
                     }
                 }
             }
@@ -167,13 +170,20 @@ public class Engine {
         }
     }
 
-    public void notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput) 
+    public boolean notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput) 
             throws EndGameException, NotValidSentenceException {
         StringBuilder message = null;
+        boolean recognizedCommand = false;
+        
 	CommandType commandType = parserOutput.getCommand().getType();
 
-	if (technicalObservers.containsKey(commandType))
+
+	if (technicalObservers.containsKey(commandType)){
+            recognizedCommand = true;
             technicalObservers.get(commandType).update(game, parserOutput, message);
+        }
+        
+        return recognizedCommand;
     }
     
     public void notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
