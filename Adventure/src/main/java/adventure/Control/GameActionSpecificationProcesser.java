@@ -291,7 +291,18 @@ public abstract class GameActionSpecificationProcesser {
 	return new GameActionResult(passingConditionMessage, specialAction);
     }
  
-
+    public static void safeOpeningHandler(RobberyAdventure game){
+        InteractiveObject innerSafe = (InteractiveObject) game.getObjectById(ObjectId.INNER_SAFE);
+        
+        if (innerSafe.getPropertyByType(PropertyType.OPENABLE).getValue() == false){
+            
+            innerSafe.getPropertyByType(PropertyType.OPENABLE).setValue(true);
+            game.getObjectById(ObjectId.SAFE_ROLL_OF_BILLS).setVisibility(true);
+            game.getObjectById(ObjectId.TRAPDOOR_KEY).setVisibility(true);
+        }
+    }
+    
+    
 }
     
     
