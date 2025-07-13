@@ -89,6 +89,9 @@ public class Engine {
 
     public void execute() {
         List<ParserOutput> parserOutputs = new ArrayList();
+        boolean exit = false;
+        boolean gameOver = false;
+        
         
         out.println("================================");
         out.println("* Robbery Adventure *");
@@ -96,7 +99,7 @@ public class Engine {
         out.println();
 
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
+        while (scanner.hasNextLine() && !exit && !gameOver) {
             String command = scanner.nextLine();
             ParserOutput parserOutput = null;
             parserOutputs.clear();
@@ -113,7 +116,12 @@ public class Engine {
                     gameControl.disambiguateMove(game, parserOutput);
                     notifyTechnicalObservers(game, parserOutput);
                     notifyGameObservers(game, parserOutput, out);
-                    gameControl.nextMove(game, parserOutput, System.out);
+                    
+                    try {
+                        gameControl.nextMove(game, parserOutput, System.out);
+                    } catch (EndGameException exception){
+                        gameOver = true;
+                    }
                 }
             }
             catch (NotValidTokenException excception){
@@ -127,6 +135,7 @@ public class Engine {
             }
             catch (EndGameException exception){
                 out.println("Probabilmente come ladro non vali granché" + '(' + "e menomale)" +')');
+                exit = true;
             }
             
             System.out.print("?> ");
