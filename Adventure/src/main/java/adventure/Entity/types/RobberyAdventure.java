@@ -57,7 +57,7 @@ public class RobberyAdventure extends GameDescription{
     
     
     @Override
-    public void init() throws InconsistentInitializationException{
+    public void init() throws InconsistentInitializationException, PasswordGuessedException, EndGameException{
         
         ObjectId objectId = null;
         Property property = null;
