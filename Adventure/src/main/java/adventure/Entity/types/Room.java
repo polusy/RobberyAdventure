@@ -141,7 +141,7 @@ public class Room {
     
     
     public String getLook(){
-        StringBuilder look = new StringBuilder("Vediamo un po', ci sono questi oggetti: %n");
+        StringBuilder look = new StringBuilder("Vediamo un po', ci sono questi oggetti: " + System.lineSeparator());
         
         List<AdvObject> visibleObjects = objects.stream()
 			.filter(object -> object.isVisible())
@@ -160,7 +160,7 @@ public class Room {
                 .filter(object -> object instanceof Door)
                 .map(object -> { 
                     Door door = (Door) object;
-                    return (door.getName() + this.getLinkedRoom(this.getCardinalPointByDoor(door)).getName());
+                    return (door.getName() + " " + this.getLinkedRoom(this.getCardinalPointByDoor(door)).getName());
                 })
                 .collect(Collectors.toList())
         );

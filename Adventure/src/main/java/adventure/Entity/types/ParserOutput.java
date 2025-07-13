@@ -7,6 +7,7 @@ package adventure.Entity.types;
 import java.util.Map;
 import java.util.Set;
 import java.util.NoSuchElementException;
+import java.util.HashMap;
 
 import adventure.Entity.objects.AdvObject;
 import adventure.utilities.Preposition;
@@ -19,7 +20,7 @@ public class ParserOutput {
     
     private Command command;
     private String commandToken;
-    private Map<AdvObject, Preposition> objects;
+    private Map<AdvObject, Preposition> objects = new HashMap<>();
     private Room doorRoom;
 
     public ParserOutput(Command command, String commandToken) {

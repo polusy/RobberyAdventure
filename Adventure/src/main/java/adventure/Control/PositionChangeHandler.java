@@ -57,7 +57,8 @@ public class PositionChangeHandler {
 			{
                             gameDescription.setCurrentRoom(linkedRoom);
                             String newRoomName = gameDescription.getCurrentRoom().getName();
-                            message = "\t" + newRoomName + "%n===========================================%n" + "\t" +
+                            message = "\t" + newRoomName + System.lineSeparator() + "===========================================" +
+                                    System.lineSeparator() +
                             gameDescription.getCurrentRoom().getDescription();
 			}
 			else if (linkedDoor != null)

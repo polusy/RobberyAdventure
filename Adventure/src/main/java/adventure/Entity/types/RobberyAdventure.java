@@ -2013,7 +2013,7 @@ public class RobberyAdventure extends GameDescription{
         door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
         null, advObject.getAlias(), true, gameActionSpecifications, true);
         
-        room2 = this.getRoomById(RoomId.EAST_GARDEN);
+        room2 = this.getRoomById(RoomId.WEST_GARDEN);
         room1 = this.getRoomById(RoomId.GARAGE);
         
         
@@ -2519,7 +2519,70 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications = new HashMap();
         property = new Openable(false);
-        gameActionSpecifications.put(property, null);
+        gameActionSpecifications.put(property, new HashMap<>());
+        
+        commandType = CommandType.OPEN;
+        
+        // CompleteCondition
+        inventoryConditionOptions = null;
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.BATHROOM_WINDOW, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        missingNecessaryObjectsMessages = null;
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+        
+        failingObjectsConditionsMessages.put(ObjectId.BATHROOM_WINDOW, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.OPENABLE, "la finestra è già aperta...che strano uomo che sei!");
+        
+        failingVisibilityConditionMessages.put(ObjectId.BATHROOM_WINDOW, "Nessun oggetto da queste parti, vediti meglio attorno!");
+        
+        failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
+        failingInventoryConditionMessage, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = null;
+        
+        currentPositionEffect = null;
+        inventoryEffect = null;
+        lootBagEffect = null;
+        roomEffect = null;
+                
+        containerEffect = null;
+        specialAction = null;
+        
+        gameEffect = new GameEffect(currentPositionEffect, inventoryEffect,
+                lootBagEffect, roomEffect, objectsEffects, specialAction);
+        passingConditionMessage = "la finestra non può essere aperta cosi' semplicemente...!" ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+        
+        
         
         property = new Breakable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
@@ -3557,7 +3620,7 @@ public class RobberyAdventure extends GameDescription{
         //adding object to room
         advObject = clientManager.getObjectRequest(objectId);
 
-        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
         advObject.getAlias(), true); 
 
         room1 = this.getRoomById(RoomId.KITCHEN);
@@ -4386,7 +4449,31 @@ public class RobberyAdventure extends GameDescription{
             addRoom(new Room(RoomId.SIDEWALK, "marciapiede", Utils.loadFileDescriptionInString(new File("./resources/descriptions/sidewalk"))));     
             addRoom(new Room(RoomId.STAIRCASE, "scalinata", Utils.loadFileDescriptionInString(new File("./resources/descriptions/staircase"))));   
             addRoom(new Room(RoomId.VAULT, "vault", Utils.loadFileDescriptionInString(new File("./resources/descriptions/vault"))));
-            addRoom(new Room(RoomId.WEST_GARDEN, "giardino ovest", Utils.loadFileDescriptionInString(new File("./resources/descriptions/west_garden"))));  
+            addRoom(new Room(RoomId.WEST_GARDEN, "giardino ovest", Utils.loadFileDescriptionInString(new File("./resources/descriptions/west_garden")))); 
+            
+            Room room = getRoomById(RoomId.SIDEWALK);
+            room.addRoomLink(CardinalPoint.NORTH, getRoomById(RoomId.MIDDLE_GARDEN));
+            
+            room = getRoomById(RoomId.MIDDLE_GARDEN);
+            room.addRoomLink(CardinalPoint.SOUTH, getRoomById(RoomId.SIDEWALK));
+            
+            room = getRoomById(RoomId.MIDDLE_GARDEN);
+            room.addRoomLink(CardinalPoint.NORTH, getRoomById(RoomId.STAIRCASE));
+            
+            room = getRoomById(RoomId.STAIRCASE);
+            room.addRoomLink(CardinalPoint.SOUTH, getRoomById(RoomId.MIDDLE_GARDEN));
+            
+            room = getRoomById(RoomId.MIDDLE_GARDEN);
+            room.addRoomLink(CardinalPoint.EAST, getRoomById(RoomId.EAST_GARDEN));
+            
+            room = getRoomById(RoomId.EAST_GARDEN);
+            room.addRoomLink(CardinalPoint.WEST, getRoomById(RoomId.MIDDLE_GARDEN));
+            
+            room = getRoomById(RoomId.MIDDLE_GARDEN);
+            room.addRoomLink(CardinalPoint.WEST, getRoomById(RoomId.WEST_GARDEN));
+            
+            room = getRoomById(RoomId.WEST_GARDEN);
+            room.addRoomLink(CardinalPoint.EAST, getRoomById(RoomId.MIDDLE_GARDEN));
             
         }catch(DuplicateException exception){}
         catch(IOException exception){};
