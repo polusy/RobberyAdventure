@@ -1078,9 +1078,52 @@ public class RobberyAdventure extends GameDescription{
         property = new Usable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
+        
+        commandType = CommandType.USE;
+           
+        
+        // CompleteCondition
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(ObjectId.INNER_SAFE, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+        // FailingConditionMessages
+        failingObjectsConditionsMessages = new HashMap<>();
+        
+        failingObjectsConditionsMessages.put(ObjectId.INNER_SAFE, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.INNER_SAFE).put(PropertyType.OPENABLE, 
+                "Hai gia' aperto la cassaforte, a cosa ti serve piu' usare nuovamente il tastierino? "
+                        + "E comunque e' sempre meglio non giocarci troppo, non si sa mai con questi aggeggi...");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        null);
+        
+        
         // PassingConditionResult
         
-        
+        specialAction = () -> {
+            SafeGUI safeGUI = new SafeGUI();
+            safeGUI.setVisible(true);
+            
+            while (safeGUI.isActive()){
+                
+            }
+            
+            if (safeGUI.isPasswordGuessed()){
+                throw new PasswordGuessedException();
+            }
+        };
         
         gameEffect = new GameEffect(null, null,
                 null, null, null, specialAction);
@@ -1090,10 +1133,10 @@ public class RobberyAdventure extends GameDescription{
         
         // GameActionSpecification
         
-        gameActionSpecification = new GameActionSpecification(null, 
-                null, passingConditionResult);
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
         
-        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);   
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);     
 
         
         
