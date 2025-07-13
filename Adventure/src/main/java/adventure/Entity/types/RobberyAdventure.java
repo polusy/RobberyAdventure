@@ -745,7 +745,7 @@ public class RobberyAdventure extends GameDescription{
         advObject = clientManager.getObjectRequest(objectId);
 
         interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        null, advObject.getAlias(), false, gameActionSpecifications);
+        null, advObject.getAlias(), true, gameActionSpecifications);
 
 
         room1 = this.getRoomById(RoomId.SECRET_ROOM);
@@ -826,7 +826,7 @@ public class RobberyAdventure extends GameDescription{
         advObject = clientManager.getObjectRequest(objectId);
 
         interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        null, advObject.getAlias(), false, gameActionSpecifications);
+        null, advObject.getAlias(), true, gameActionSpecifications);
 
 
         room1 = this.getRoomById(RoomId.ANTE_VAULT);
@@ -854,7 +854,7 @@ public class RobberyAdventure extends GameDescription{
             advObject = clientManager.getObjectRequest(objectId);
 
             valuableObject = new ValuableObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-            null, advObject.getAlias(), false, gameActionSpecifications, 1500000);
+            null, advObject.getAlias(), true, gameActionSpecifications, 1500000);
 
 
             room1 = this.getRoomById(RoomId.PAINTINGS_ROOM);
@@ -1025,7 +1025,7 @@ public class RobberyAdventure extends GameDescription{
         advObject = clientManager.getObjectRequest(objectId);
 
         interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        null, advObject.getAlias(), false, gameActionSpecifications);
+        null, advObject.getAlias(), true, gameActionSpecifications);
 
 
         room1 = this.getRoomById(RoomId.LAUNDRY);
@@ -1128,6 +1128,20 @@ public class RobberyAdventure extends GameDescription{
         
         
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), false, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
+        
+        
         // ========================================================================================== 
         //                              
         
@@ -1136,6 +1150,18 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications = new HashMap();
         containerObjects = new ObjectId[]{ObjectId.FUEL_CAN, ObjectId.BATTERIES, ObjectId.BATTERY_CHARGER};
         gameActionSpecifications.put(new Container(containerObjects), null);
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
         // ==========================================================================================   
         
@@ -1237,7 +1263,20 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecification = new GameActionSpecification(completeCondition, 
                 failingConditionMessages, passingConditionResult);
         
-        gameActionSpecifications.get(property).put(commandType, gameActionSpecification); 
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+        
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
         
           // ========================================================================================== 
@@ -1334,6 +1373,19 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
         
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
         // ==========================================================================================
         
         
@@ -1346,6 +1398,18 @@ public class RobberyAdventure extends GameDescription{
         addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BATTERY_CHARGER, null, ObjectId.RIGHT_SHELVING_UNIT, null,
         InteractiveObject.class, "Hai raccolto un caricatore...vedi se riesci a caricare delle pile...!", "Hai lasciato il caricabatterie qui nella stanza...");
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
         
         // ========================================================================================== 
         //                              
@@ -1355,6 +1419,18 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications = new HashMap();
         containerObjects = new ObjectId[]{ObjectId.DETERGENT, ObjectId.DRILL};
         gameActionSpecifications.put(new Container(containerObjects), null);
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
         // ========================================================================================== 
         
@@ -1367,6 +1443,18 @@ public class RobberyAdventure extends GameDescription{
         
         addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BATTERY_CHARGER, null, ObjectId.LEFT_SHELVING_UNIT, null,
         InteractiveObject.class, "Hai raccolto un detersivo...hai voglia di fare una bella lavatrice ?...", "Hai lasciato il detersivo da qualche parte nella stanza...");
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
 
         // ========================================================================================== 
@@ -1473,10 +1561,35 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification); 
         
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.LAUNDRY);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
         // ========================================================================================== 
         //                             
         
-        objectId = ObjectId.DOUBLE_BED;
+            objectId = ObjectId.DOUBLE_BED;
+        
+            //adding object to room
+            
+            advObject = clientManager.getObjectRequest(objectId);
+
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject.getAlias(), true); 
+
+            room1 = this.getRoomById(RoomId.BEDROOM);
+            try{
+                room1.addObject(advObject);
+            }catch(DuplicateException exception){};
         
         
         
@@ -1495,6 +1608,18 @@ public class RobberyAdventure extends GameDescription{
         null, containerObjects, InteractiveObject.class, "Hai aperto il baule e hai trovato un grazioso album fotografico del matrimonio del magnate...",
         "Hai chiuso il baule,...bravo");
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BEDROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
         
         
         // ========================================================================================== 
@@ -1512,6 +1637,19 @@ public class RobberyAdventure extends GameDescription{
         "Hai lasciato l'album qui da qualche parte nella stanza...!");
         
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), false, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BEDROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
+        
          // ========================================================================================== 
         //                              
         
@@ -1520,6 +1658,18 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications = new HashMap();
         containerObjects = new ObjectId[]{ObjectId.WEDDING_RINGS};
         gameActionSpecifications.put(new Container(containerObjects), null);
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BEDROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
         
         // ========================================================================================== 
@@ -1538,11 +1688,37 @@ public class RobberyAdventure extends GameDescription{
         null);
         
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        valuableObject = new ValuableObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications, 22103);
+
+
+        room1 = this.getRoomById(RoomId.BEDROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
+        
         
         // ========================================================================================== 
         //                              
         
         objectId = ObjectId.WARDROBE; //AdvObject
+        
+        
+            //adding object to room
+            
+            advObject = clientManager.getObjectRequest(objectId);
+
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject.getAlias(), true); 
+
+            room1 = this.getRoomById(RoomId.BEDROOM);
+            try{
+                room1.addObject(advObject);
+            }catch(DuplicateException exception){};
 
         
         
@@ -1561,6 +1737,25 @@ public class RobberyAdventure extends GameDescription{
         null, null, InteractiveObject.class, "Hai aperto la porta che collega il salone alla camera da letto...vai in giro per la casa ora!",
         "Hai chiuso la porta est del salone...complimenti!");
         
+        
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.LIVING_ROOM);
+            room2 = this.getRoomById(RoomId.BEDROOM);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.EAST, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
+        
+
+        
         // ==========================================================================================
            
         objectId = ObjectId.WC; //ContainerOnly
@@ -1568,6 +1763,19 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications = new HashMap();
         containerObjects = new ObjectId[]{ObjectId.TOILET_TANK};
         gameActionSpecifications.put(new Container(containerObjects), null);
+        
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
         
         
         // ==========================================================================================
@@ -1587,6 +1795,19 @@ public class RobberyAdventure extends GameDescription{
         "Hai chiuso la cassetta dello scarico finalmente...c'era una puzza tremenda!");
         
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
+        
         
         // ==========================================================================================
            
@@ -1600,11 +1821,35 @@ public class RobberyAdventure extends GameDescription{
         ObjectId.TOILET_TANK, null, ValuableObject.class, "Hai raccolto un braccialetto d'oro, metti in saccoccia!",
         null);
         
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        valuableObject = new ValuableObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), false, gameActionSpecifications, 1200);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
   
         
         // ==========================================================================================
            
         objectId = ObjectId.BAR_OF_SOAP;  //advObject
+        
+                
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
         
         // ==========================================================================================
         
@@ -1665,6 +1910,19 @@ public class RobberyAdventure extends GameDescription{
                 failingConditionMessages, passingConditionResult);
         
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
+        
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
                 
                 
                 
@@ -1682,7 +1940,21 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.DRAWER, null,
         null, containerObjects, InteractiveObject.class, "Hai aperto il cassetto del lavandino...trovi delle bende sfuse!",
-        "Hai chiuso il cassetto del lavandino!");      
+        "Hai chiuso il cassetto del lavandino!"); 
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
+        
         
         // ==========================================================================================
            
@@ -1696,23 +1968,68 @@ public class RobberyAdventure extends GameDescription{
         ObjectId.DRAWER, null, InteractiveObject.class, "Hai raccolto delle bende dal cassetto...bravoh!",
         "Hai lasciato delle bende in giro per la casa!");
         
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), false, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
+        
         
         // ==========================================================================================
         
        
-            objectId = ObjectId.BIDET;
+        objectId = ObjectId.BIDET;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
             
             
         // ==========================================================================================
         
        
-            objectId = ObjectId.SHOWER;
+        objectId = ObjectId.SHOWER;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
             
             
         // ==========================================================================================
         
        
-            objectId = ObjectId.TOWEL;
+        objectId = ObjectId.TOWEL;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.BATHROOM);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
         
         
         // ==========================================================================================
@@ -1726,6 +2043,23 @@ public class RobberyAdventure extends GameDescription{
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BATHROOM_DOOR, null,
         null, null, InteractiveObject.class, "Hai aperto la porta che collega il bagno alla camera da letto...e sii un po' felice!",
         "Hai chiuso la porta del bagno, bravissimo!");
+        
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.BATHROOM);
+            room2 = this.getRoomById(RoomId.BEDROOM);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
+        
         
         
         // ==========================================================================================
@@ -1819,6 +2153,23 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.get(property).put(commandType, gameActionSpecification);
         
         
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            "La finestra del bagno è rotta....sei stato grandioso!", advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.EAST_GARDEN);
+            room2 = this.getRoomById(RoomId.BATHROOM);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
+        
+        
         
         // ==========================================================================================
            
@@ -1831,40 +2182,110 @@ public class RobberyAdventure extends GameDescription{
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.RUBBER_GLOVES, null,
         ObjectId.SINK, null, InteractiveObject.class, "Hai raccolto dei guanti di gomma...!",
         "Hai lasciato dei guanti di gomma in giro...");
+        
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.KITCHEN);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
 
         // ==========================================================================================  
         
-            objectId = ObjectId.SINK;
-        
-            gameActionSpecifications = new HashMap();
-            containerObjects = new ObjectId[]{ObjectId.RUBBER_GLOVES};
-            gameActionSpecifications.put(new Container(containerObjects), null);
+        objectId = ObjectId.SINK;
+
+        gameActionSpecifications = new HashMap();
+        containerObjects = new ObjectId[]{ObjectId.RUBBER_GLOVES};
+        gameActionSpecifications.put(new Container(containerObjects), null);
+            
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+        room1 = this.getRoomById(RoomId.KITCHEN);
+        try{
+            room1.addObject(interactiveObject);
+        }catch(DuplicateException exception){}
             
         // ========================================================================================== 
             
             
-            objectId = ObjectId.FRUIT_BOWL;
+        objectId = ObjectId.FRUIT_BOWL;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.KITCHEN);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
             
             
         // ========================================================================================== 
             
             
             objectId = ObjectId.DISHES;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.KITCHEN);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
           
             
         // ========================================================================================== 
        
                     
-            objectId = ObjectId.CHAIRS;
+        objectId = ObjectId.CHAIRS;
+            
+        //adding object to room
+        advObject = clientManager.getObjectRequest(objectId);
+
+        advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+        advObject.getAlias(), true); 
+
+        room1 = this.getRoomById(RoomId.KITCHEN);
+        try{
+            room1.addObject(advObject);
+        }catch(DuplicateException exception){};
           
             
         // ========================================================================================== 
         
             objectId = ObjectId.KITCHEN_TABLE;
-        
+
             gameActionSpecifications = new HashMap();
             containerObjects = new ObjectId[]{ObjectId.FRUIT_BOWL, ObjectId.DISHES};
             gameActionSpecifications.put(new Container(containerObjects), null);
+
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications);
+
+
+            room1 = this.getRoomById(RoomId.KITCHEN);
+            try{
+                room1.addObject(interactiveObject);
+            }catch(DuplicateException exception){}
         
         
         // ==========================================================================================
@@ -1872,6 +2293,17 @@ public class RobberyAdventure extends GameDescription{
         
                    
             objectId = ObjectId.BOOKCASE;
+
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject.getAlias(), true); 
+
+            room1 = this.getRoomById(RoomId.LIBRARY);
+            try{
+                room1.addObject(advObject);
+            }catch(DuplicateException exception){};
         
         
         // ==========================================================================================
@@ -1886,13 +2318,41 @@ public class RobberyAdventure extends GameDescription{
             this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.LIBRARY_DOOR, null,
             null, null, InteractiveObject.class, "Hai aperto la porta della biblioteca!",
             "Hai chiuso la porta della biblioteca");
+            
+            
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.LIBRARY);
+            room2 = this.getRoomById(RoomId.BEDROOM);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.SOUTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
         
         
         // ==========================================================================================
         
         
                    
-                objectId = ObjectId.DANCE;
+            objectId = ObjectId.DANCE;
+
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject.getAlias(), true); 
+
+            room1 = this.getRoomById(RoomId.LIBRARY);
+            try{
+                room1.addObject(advObject);
+            }catch(DuplicateException exception){};
         
 
         
@@ -1900,7 +2360,7 @@ public class RobberyAdventure extends GameDescription{
         
         
                    
-        objectId = ObjectId.LAUNDRY_DOOR;
+            objectId = ObjectId.LAUNDRY_DOOR;
         
             gameActionSpecifications = new HashMap();
             property = new Openable(false);
@@ -1909,13 +2369,30 @@ public class RobberyAdventure extends GameDescription{
             this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.LAUNDRY_DOOR, null,
             null, null, InteractiveObject.class, "Hai aperto la porta della lavanderia!",
             "Hai chiuso la porta della lavanderia...");
+            
+            
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.GYM);
+            room2 = this.getRoomById(RoomId.LAUNDRY);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
         
                     
        // ==========================================================================================
         
         
                    
-        objectId = ObjectId.KITCHEN_DOOR;
+            objectId = ObjectId.KITCHEN_DOOR;
         
             gameActionSpecifications = new HashMap();
             property = new Openable(false);
@@ -1924,6 +2401,22 @@ public class RobberyAdventure extends GameDescription{
             this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.KITCHEN_DOOR, null,
             null, null, InteractiveObject.class, "Hai aperto la porta della cucina!",
             "Hai chiuso la porta della cucina...");
+            
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.LIVING_ROOM);
+            room2 = this.getRoomById(RoomId.KITCHEN);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
         
                 
        // ==========================================================================================
@@ -1931,6 +2424,22 @@ public class RobberyAdventure extends GameDescription{
         
                    
             objectId = ObjectId.MAIN_DOOR;
+            
+            //adding object to room
+            advObject = clientManager.getObjectRequest(objectId);
+
+            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            null, advObject.getAlias(), true, gameActionSpecifications, false);
+
+            room1 = this.getRoomById(RoomId.STAIRCASE);
+            room2 = this.getRoomById(RoomId.LIVING_ROOM);
+        
+        
+            try{
+                this.addDoor(door, room1, room2);
+                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
+            }catch(AlreadyLinkedException exception){}
+            catch(DuplicateException exception){};
         
         
         // ==========================================================================================
