@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.PrintStream;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import adventure.Entity.types.GameDescription;
 import adventure.identifiers.CommandType;
@@ -32,6 +33,7 @@ import adventure.identifiers.PropertyType;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Control.observers.*;
+import adventure.Boundary.DatabaseManager;
 
 
 import adventure.Boundary.ServerManager;
@@ -43,12 +45,13 @@ import adventure.Boundary.services.*;
  * @author utente
  */
 public class Engine {
-    private final GameDescription game; 
+    private GameDescription game; 
     private final Parser parser;
     private final GameControl gameControl;
     private final Map<CommandType, TechnicalObserver> technicalObservers = new HashMap();
     private final Map<CommandType, GameObserver> gameObservers = new HashMap();
     private final PrintStream out;
+    
 
     public Engine(GameDescription game){
         Set<String> stopwords = new HashSet();
@@ -94,12 +97,13 @@ public class Engine {
         
     }
 
-    public void execute() {
+    public void execute(){
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
         boolean gameOver = false;
-        ServerManager ObjectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
-        ServerManager GameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
+        ServerManager objectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
+        ServerManager gameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
+               
         
         
         out.println("================================");
@@ -109,8 +113,15 @@ public class Engine {
         
        
         //starting server 
-        ObjectsManager.run();
-        GameSavingsManager.run();
+        objectsManager.run();
+        gameSavingsManager.run();
+        
+        
+        try{//initializing games savings tables in db
+            DatabaseManager dbmanager = new DatabaseManager(); 
+            dbmanager.createGamesTable();
+        }catch(SQLException exception){out.println(exception.getSQLState());};
+        
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine() && !exit && !gameOver) {
