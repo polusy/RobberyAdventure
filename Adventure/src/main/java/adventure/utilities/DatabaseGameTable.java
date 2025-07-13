@@ -5,7 +5,7 @@
 package adventure.utilities;
 
 
-import adventure.Entity.types.GameDescription;
+import adventure.Entity.types.RobberyAdventure;
 
 
 /**
@@ -14,34 +14,36 @@ import adventure.Entity.types.GameDescription;
  */
 public class DatabaseGameTable {
     
-    private GameDescription gameDescription;
+    private RobberyAdventure robberyAdventure;
     private String id;
 
-    public DatabaseGameTable(GameDescription gameDescription, String id) {
-        this.gameDescription = gameDescription;
+    public DatabaseGameTable(RobberyAdventure robbery, String id) {
+        this.robberyAdventure = robbery;
         this.id = id;
     }
 
     public DatabaseGameTable() {
     }
-    
-    
 
-    public GameDescription getGameDescription() {
-        return gameDescription;
+    public RobberyAdventure getRobberyAdventure() {
+        return robberyAdventure;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setGameDescription(GameDescription gameDescription) {
-        this.gameDescription = gameDescription;
+    public void setRobberyAdventure(RobberyAdventure robberyAdventure) {
+        this.robberyAdventure = robberyAdventure;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    
+    
+
+
     
     
     
