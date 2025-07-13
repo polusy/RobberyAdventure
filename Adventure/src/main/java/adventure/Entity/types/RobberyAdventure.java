@@ -24,6 +24,7 @@ import adventure.identifiers.*;
 import adventure.utilities.Utils;
 import adventure.exceptions.*;
 import adventure.Entity.types.PropertyValue;
+import adventure.Boundary.GUI.SafeGUI;
 
 
 import java.io.File;
@@ -1005,15 +1006,94 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecification = new GameActionSpecification(completeCondition, 
                 failingConditionMessages, passingConditionResult);
         
-        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);  
         
         
         // ========================================================================================== 
-        objectId = ObjectId.OUTER_NUMERIC_KEYPAD;
+        objectId = ObjectId.INNER_SAFE;
+        
+        gameActionSpecifications = new HashMap();
+        
+        property = new Container(new ObjectId[] {ObjectId.INNER_NUMER_KEYPAD, ObjectId.SAFE_ROLL_OF_BILLS, 
+        ObjectId.TRAPDOOR_KEY});
+        gameActionSpecifications.put(property, null); 
+        
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.OPEN;
+           
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+      
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+
+        // FailingConditionMessages
+
+        failingObjectsConditionsMessages = new HashMap<>();
+
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.OPENABLE, 
+                "Hai gia' aperto la cassaforte!");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        null);
+        
+        // PassingConditionResult
+        
+        passingConditionMessage = "Usa il tastierino e spera di inserire la combinazione corretta in meno di "
+                + "quattro secoli" ;
+        
+        passingConditionResult = new PassingConditionResult(null, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);               
+        
+        
+        // ========================================================================================== 
+        objectId = ObjectId.INNER_NUMER_KEYPAD;
         
         gameActionSpecifications = new HashMap();
         property = new Usable(false);
-        gameActionSpecifications.put(property, null);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        // PassingConditionResult
+        
+        
+        
+        gameEffect = new GameEffect(null, null,
+                null, null, null, specialAction);
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, null);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(null, 
+                null, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);   
 
         
         
