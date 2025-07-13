@@ -105,6 +105,17 @@ public class Engine {
         ServerManager objectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
         ServerManager gameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
                
+        try {
+            game.init();
+        } catch (InconsistentInitializationException exception){
+            out.println(exception.getMessage());
+        } 
+        catch (PasswordGuessedException exception){
+            out.println(exception.getMessage());
+        }
+        catch (EndGameException exception){
+            out.println(exception.getMessage());
+        }
         
         
         out.println("================================");
