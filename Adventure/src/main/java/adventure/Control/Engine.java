@@ -102,6 +102,7 @@ public class Engine {
         boolean exit = false;
         boolean gameOver = false;
         boolean isTechnicalCommand = false;
+        boolean isGameObserverCommand = false;
         ServerManager objectsManager = new ServerManager("http://localhost", 8080, ObjectService.class);
         ServerManager gameSavingsManager = new ServerManager("http://localhost", 8081, GameService.class);
                
@@ -111,11 +112,11 @@ public class Engine {
         catch (PasswordGuessedException exception){ }
         catch (EndGameException exception){ }
         
-        
-        out.println("================================");
-        out.println("* Robbery Adventure *");
-        out.println("================================");
-        out.println();
+        out.println(System.lineSeparator());
+        out.println("=========================================================");
+        out.println("\t\tRobbery Adventure");
+        out.println("=========================================================");
+        out.println(System.lineSeparator());
         
        
         //starting server 
@@ -146,9 +147,9 @@ public class Engine {
                     
                     gameControl.disambiguateMove(game, parserOutput);
                     isTechnicalCommand = notifyTechnicalObservers(game, parserOutput);
-                    notifyGameObservers(game, parserOutput, out);
+                    isGameObserverCommand = notifyGameObservers(game, parserOutput, out);
                     
-                    if (!isTechnicalCommand){
+                    if (!isTechnicalCommand && !isGameObserverCommand){
                         try {
                             gameControl.nextMove(game, parserOutput, System.out);
                         } catch (EndGameException exception){
@@ -167,7 +168,7 @@ public class Engine {
                 out.println(exception.getMessage());
             }
             catch (EndGameException exception){
-                out.println("Probabilmente come ladro non vali granché" + '(' + "e menomale)" +')');
+                out.println("Probabilmente come ladro non vali granche'" + '(' + "e menomale)" +')');
                 exit = true;
             }
             
@@ -191,13 +192,18 @@ public class Engine {
         return recognizedCommand;
     }
     
-    public void notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
+    public boolean notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
             throws NotValidSentenceException {
         
 	CommandType commandType = parserOutput.getCommand().getType();
+        boolean recognizedCommand = false;
 
-	if (gameObservers.containsKey(commandType))
+	if (gameObservers.containsKey(commandType)){
+            recognizedCommand = true;
             gameObservers.get(commandType).update(game, parserOutput, out);
+        }
+        
+        return recognizedCommand;
     }
     
     

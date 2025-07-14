@@ -17,7 +17,7 @@ import adventure.identifiers.PropertyType;
  */
 public class MoveCommandAnalyzer extends CommandAnalyzer{
         public MoveCommandAnalyzer(){
-        super("Non puoi spostare questo oggetto, è inutile....");
+        super("Non puoi spostare questo oggetto, e' inutile....");
     }
     
     @Override

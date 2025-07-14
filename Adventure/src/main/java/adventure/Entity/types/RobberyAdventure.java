@@ -77,7 +77,7 @@ public class RobberyAdventure extends GameDescription{
         String failingInventoryConditionMessage = null;
         Map<ObjectId, Map<PropertyType, String>> failingObjectsConditionsMessages = new HashMap<>();
         Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
-        final String failingVisibilityConditionMessage = "Qui non c'è un oggetto simile, guardati meglio intorno!" ;
+        final String failingVisibilityConditionMessage = "Qui non c'e' un oggetto simile, guardati meglio intorno!" ;
         PassingConditionResult passingConditionResult = null;
         GameEffect gameEffect = null;
         CurrentPositionEffect currentPositionEffect = null;
@@ -171,7 +171,7 @@ public class RobberyAdventure extends GameDescription{
         
         failingObjectsConditionsMessages.put(ObjectId.VASE, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.VASE).put(PropertyType.MOVABLE,
-                "Hai già spostato questo oggetto, non è questo il momento per rimetterti in forma!");
+                "Hai già spostato questo oggetto, non e' questo il momento per rimetterti in forma!");
         
         failingObjectsConditionsMessages.put(ObjectId.SECURITY_CAMERA, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.SECURITY_CAMERA).put(PropertyType.BREAKABLE,
@@ -220,7 +220,7 @@ public class RobberyAdventure extends GameDescription{
         
         advObject = clientManager.getObjectRequest(objectId);
         interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        "La telecamera ora è decisamente innocua. Il sasso deve essersi conficcato in profondita'",
+        "La telecamera ora e' decisamente innocua. Il sasso deve essersi conficcato in profondita'",
                 advObject.getAlias(), true, gameActionSpecifications);
         
         room1 = this.getRoomById(RoomId.STAIRCASE);
@@ -402,8 +402,8 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.put(ObjectId.THERMAL_LANCE, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.THERMAL_LANCE).put(PropertyType.ACTIVATABLE, "La lancia termica deve essere attivata!");
         
-        failingVisibilityConditionMessages.put(ObjectId.THERMAL_LANCE, "Qui non c'è un oggetto simile, guardati meglio intorno!");
-        failingVisibilityConditionMessages.put(ObjectId.WELDING_MASK, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.THERMAL_LANCE, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.WELDING_MASK, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
         null, failingObjectsConditionsMessages,
@@ -455,7 +455,7 @@ public class RobberyAdventure extends GameDescription{
         advObject = clientManager.getObjectRequest(objectId);
         
         door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        "la porta del vault è rotta....chissà chi ha combinato questo casino", advObject.getAlias(), true, gameActionSpecifications, false);
+        "la porta del vault e' rotta....chissà chi ha combinato questo casino", advObject.getAlias(), true, gameActionSpecifications, false);
         
         room2 = this.getRoomById(RoomId.VAULT);
         room1 = this.getRoomById(RoomId.ANTE_VAULT);
@@ -760,10 +760,10 @@ public class RobberyAdventure extends GameDescription{
 
         
         failingObjectsConditionsMessages.put(ObjectId.SECRET_ROOM_DOOR, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.SECRET_ROOM_DOOR).put(PropertyType.OPENABLE, "Il varco è già aperto....");
+        failingObjectsConditionsMessages.get(ObjectId.SECRET_ROOM_DOOR).put(PropertyType.OPENABLE, "Il varco e' già aperto....");
         
-        failingVisibilityConditionMessages.put(ObjectId.SECRET_ROOM_DOOR, "Qui non c'è un oggetto simile, guardati meglio intorno!");
-        failingVisibilityConditionMessages.put(ObjectId.BUTTON, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.SECRET_ROOM_DOOR, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.BUTTON, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
         failingInventoryConditionMessage, failingObjectsConditionsMessages,
@@ -873,7 +873,7 @@ public class RobberyAdventure extends GameDescription{
         
         gameEffect = new GameEffect(currentPositionEffect, inventoryEffect,
                 lootBagEffect, roomEffect, objectsEffects, specialAction);
-        passingConditionMessage = "Sei giunto nella famosa stanza segreta...cosi' segreta che non c'è niente..." ;
+        passingConditionMessage = "Sei giunto nella famosa stanza segreta...cosi' segreta che non c'e' niente..." ;
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
@@ -1039,7 +1039,7 @@ public class RobberyAdventure extends GameDescription{
         missingNecessaryObjectsMessages.put(ObjectId.DETERGENT, "Vuoi usare la lavatrice senza detersivo....che matto!");
         failingInventoryConditionMessage = null;
         
-        failingVisibilityConditionMessages.put(ObjectId.DETERGENT, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.DETERGENT, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
         failingInventoryConditionMessage, failingObjectsConditionsMessages,
@@ -1288,8 +1288,8 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.put(ObjectId.FUEL_CAN, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.FUEL_CAN).put(PropertyType.FILLABLE, "Hai già riempito la tanica...");
         
-        failingVisibilityConditionMessages.put(ObjectId.FUEL_CAN, "Qui non c'è un oggetto simile, guardati meglio intorno!");
-        failingVisibilityConditionMessages.put(ObjectId.FUEL_FILLER_NECK, "Qui non c'è un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.FUEL_CAN, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.FUEL_FILLER_NECK, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
         failingInventoryConditionMessage, failingObjectsConditionsMessages,
@@ -1399,8 +1399,8 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.put(ObjectId.BATTERIES, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.BATTERIES).put(PropertyType.ACTIVATABLE, "Le pile sono state già attivate...stupidino!");
         
-        failingVisibilityConditionMessages.put(ObjectId.BATTERIES, "Qui non c'è un oggetto simile, guardati intorno!");
-        failingVisibilityConditionMessages.put(ObjectId.BATTERY_CHARGER, "Qui non c'è un oggetto simile, guardati intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.BATTERIES, "Qui non c'e' un oggetto simile, guardati intorno!");
+        failingVisibilityConditionMessages.put(ObjectId.BATTERY_CHARGER, "Qui non c'e' un oggetto simile, guardati intorno!");
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
         failingInventoryConditionMessage, failingObjectsConditionsMessages,
@@ -1582,12 +1582,12 @@ public class RobberyAdventure extends GameDescription{
         failingInventoryConditionMessage = null;
         
         failingObjectsConditionsMessages.put(ObjectId.DRILL, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.DRILL).put(PropertyType.ACTIVATABLE, "Il trapano è già attivato...che stupido!");
+        failingObjectsConditionsMessages.get(ObjectId.DRILL).put(PropertyType.ACTIVATABLE, "Il trapano e' già attivato...che stupido!");
         failingObjectsConditionsMessages.put(ObjectId.BATTERIES, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.BATTERIES).put(PropertyType.ACTIVATABLE, "Le pile nel tuo inventario sono scariche! tutto ti devo spiegare?!");
         
-        failingVisibilityConditionMessages.put(ObjectId.DRILL, "Qui non c'è un oggetto simile, guardati intorno...");
-        failingVisibilityConditionMessages.put(ObjectId.BATTERIES, "Qui non c'è un oggetto simile, guardati intorno...");
+        failingVisibilityConditionMessages.put(ObjectId.DRILL, "Qui non c'e' un oggetto simile, guardati intorno...");
+        failingVisibilityConditionMessages.put(ObjectId.BATTERIES, "Qui non c'e' un oggetto simile, guardati intorno...");
         failingInventoryConditionMessage = null;
         
         failingConditionMessages = new FailingConditionMessages(missingNecessaryObjectsMessages,
@@ -2027,6 +2027,8 @@ public class RobberyAdventure extends GameDescription{
         }catch(AlreadyLinkedException exception){}
         catch(DuplicateException exception){};        
         
+       
+        
         
         // ==================================================================================================    
         objectId = ObjectId.FUEL_FILLER_NECK;
@@ -2082,6 +2084,7 @@ public class RobberyAdventure extends GameDescription{
         null, advObject.getAlias(), true, gameActionSpecifications);
         
         room1 = this.getRoomById(RoomId.GARAGE);
+        room2 = this.getRoomById(RoomId.WEST_GARDEN);
         try{
             room1.addObject(interactiveObject);
         }catch(DuplicateException exception){};        
@@ -2108,7 +2111,9 @@ public class RobberyAdventure extends GameDescription{
         room1 = this.getRoomById(RoomId.GARAGE);
         try{
             room1.addObject(interactiveObject);
-        }catch(DuplicateException exception){};        
+        }catch(DuplicateException exception){};   
+        
+        
   
   // ========================================================================================================
         objectId = ObjectId.DRAWER;
@@ -2171,7 +2176,7 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.TOOL_CABINET, null, InteractiveObject.class, 
-                "Hai raccolto la chiave inglese, probabilmente è l'unico strumento che "
+                "Hai raccolto la chiave inglese, probabilmente e' l'unico strumento che "
                         + "riconosceresti in una ferramenta.!",
                 "Hai buttato la chiave inglese");      
       
@@ -2550,7 +2555,7 @@ public class RobberyAdventure extends GameDescription{
                 
         
         failingObjectsConditionsMessages.put(ObjectId.BATHROOM_WINDOW, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.OPENABLE, "la finestra è già aperta...che strano uomo che sei!");
+        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.OPENABLE, "la finestra e' già aperta...che strano uomo che sei!");
         
         failingVisibilityConditionMessages.put(ObjectId.BATHROOM_WINDOW, "Nessun oggetto da queste parti, vediti meglio attorno!");
         
@@ -2627,8 +2632,8 @@ public class RobberyAdventure extends GameDescription{
         failingInventoryConditionMessage = null;
         
         failingObjectsConditionsMessages.put(ObjectId.BATHROOM_WINDOW, new HashMap<>());
-        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.OPENABLE, "la finestra è già aperta...che strano uomo che sei!");
-        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.BREAKABLE, "la finestra è già rotta...scemo!");
+        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.OPENABLE, "la finestra e' già aperta...che strano uomo che sei!");
+        failingObjectsConditionsMessages.get(ObjectId.BATHROOM_WINDOW).put(PropertyType.BREAKABLE, "la finestra e' già rotta...scemo!");
         
         failingVisibilityConditionMessages.put(ObjectId.ELECTRIC_SAW, "Nessun oggetto da queste parti, vediti meglio attorno!");
         
@@ -2678,7 +2683,7 @@ public class RobberyAdventure extends GameDescription{
             advObject = clientManager.getObjectRequest(objectId);
 
             door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
-            "La finestra del bagno è rotta....sei stato grandioso!", advObject.getAlias(), true, gameActionSpecifications, true);
+            "La finestra del bagno e' rotta....sei stato grandioso!", advObject.getAlias(), true, gameActionSpecifications, true);
 
             room1 = this.getRoomById(RoomId.EAST_GARDEN);
             room2 = this.getRoomById(RoomId.BATHROOM);
@@ -2721,7 +2726,7 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.SHELF, null, InteractiveObject.class, 
-                "Hai raccolto la maschera da saldatore, chissà com'è vederci attraverso",
+                "Hai raccolto la maschera da saldatore, chissà com'e' vederci attraverso",
                 "Hai buttato la maschera da saldatore");
         
         
@@ -2747,7 +2752,7 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.SHELF, null, InteractiveObject.class, 
-                "Hai raccolto il tubo di gomma, almeno con questo non c'è il rischio di farti male",
+                "Hai raccolto il tubo di gomma, almeno con questo non c'e' il rischio di farti male",
                 "Ti sei liberato del tubo");
         
         //adding object to room
@@ -2914,7 +2919,7 @@ public class RobberyAdventure extends GameDescription{
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.SOFA, null, InteractiveObject.class, 
                 "Hai raccolto il telecomando dal divano.",
-                "Hai gettato il telecomando, d'altronde non è questo il momento per "
+                "Hai gettato il telecomando, d'altronde non e' questo il momento per "
                         + "guardare la televisione");
 
 
@@ -2994,7 +2999,7 @@ public class RobberyAdventure extends GameDescription{
         
         gameEffect = new GameEffect(null, null,
                 null, null, objectsEffects, null);
-        passingConditionMessage = "La televisione si è accesa e hai una gran voglia di buttarti sul divano "
+        passingConditionMessage = "La televisione si e' accesa e hai una gran voglia di buttarti sul divano "
                 + "e bere una birra" ;
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
@@ -3270,7 +3275,7 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages = new HashMap<>();
         failingVisibilityConditionMessages = new HashMap<>();
                 
-        missingNecessaryObjectsMessages.put(ObjectId.DRILL, "Quella è una delle casseforti piu' "
+        missingNecessaryObjectsMessages.put(ObjectId.DRILL, "Quella e' una delle casseforti piu' "
                 + "robuste che tu possa mai aver visto, sembra a prova di bomba. Però forse c'e' qualcosa"
                 + " in casa che puo' fare al caso tuo");
         
@@ -4202,7 +4207,7 @@ public class RobberyAdventure extends GameDescription{
             ObjectId targetObjectId, List<ObjectId[]> auxiliaryObjectsId, 
             Map<ObjectId, String> missingNecessaryObjectsMessages) throws IllegalArgumentException {
         
-        String failingVisibilityConditionMessage = "Qui non c'è un oggetto simile, guardati meglio intorno!";
+        String failingVisibilityConditionMessage = "Qui non c'e' un oggetto simile, guardati meglio intorno!";
         String failingInventoryConditionMessage = null;
         FailingConditionMessages failingConditionMessages = null;
         Map<ObjectId, String> failingVisibilityConditionMessages = new HashMap<>();
@@ -4232,7 +4237,7 @@ public class RobberyAdventure extends GameDescription{
         else if (commandType == CommandType.MOVE){
             failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
             failingPropertiesMessages.put(PropertyType.MOVABLE, "Hai già spostato questo oggetto, "
-                    + "non è questo il momento per rimetterti in forma!");
+                    + "non e' questo il momento per rimetterti in forma!");
             failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
             
             failingConditionMessages = new FailingConditionMessages(null,
@@ -4247,7 +4252,7 @@ public class RobberyAdventure extends GameDescription{
                     failingVisibilityConditionMessages.put(objectId, failingVisibilityConditionMessage);
             } 
             
-            failingPropertiesMessages.put(PropertyType.BREAKABLE, "Questo oggetto è già rotto");
+            failingPropertiesMessages.put(PropertyType.BREAKABLE, "Questo oggetto e' già rotto");
             failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
             
             if (auxiliaryObjectsId.size() > 1)
@@ -4260,7 +4265,7 @@ public class RobberyAdventure extends GameDescription{
         }
         else if (commandType == CommandType.OPEN){
             failingVisibilityConditionMessages.put(targetObjectId, failingVisibilityConditionMessage);
-            failingPropertiesMessages.put(PropertyType.OPENABLE, "L'oggetto è già aperto!");
+            failingPropertiesMessages.put(PropertyType.OPENABLE, "L'oggetto e' già aperto!");
             failingObjectsConditionsMessages.put(targetObjectId, failingPropertiesMessages);
             
             if (auxiliaryObjectsId != null){
