@@ -168,7 +168,7 @@ public class Engine {
                 out.println(exception.getMessage());
             }
             catch (EndGameException exception){
-                out.println("Probabilmente come ladro non vali granché" + '(' + "e menomale)" +')');
+                out.println("Probabilmente come ladro non vali granche'" + '(' + "e menomale)" +')');
                 exit = true;
             }
             

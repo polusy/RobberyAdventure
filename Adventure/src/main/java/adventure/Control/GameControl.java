@@ -195,13 +195,13 @@ public class GameControl {
                 GameActionSpecificationProcesser.safeOpeningHandler((RobberyAdventure)game);
             }
             catch (EndGameException exception){
-                out.println("Stai già immaginandoti su un'amaca ai Caraibi mentre sorseggi un cocktail "
+                out.println("Stai gia' immaginandoti su un'amaca ai Caraibi mentre sorseggi un cocktail "
                         + "da una noce di cocco. Hai rubato tutto quello che c'era di valore in questa casa "
                         + "e pensi che questo furto non sarebbe potuto andare meglio... con la vendita del quadro "
                         + "diventerai milionario!" + System.lineSeparator() + System.lineSeparator() +
                         "Stai sognando ad occhi aperti, ma all'improvviso vieni riportato alla realtà da un "
                                 + "sinistro colpo di tosse... stai già sudando freddo, ti volti verso la porta... "
-                        + "davanti a te c'è una decina di uomini grossi come armadi che si scrocchiano le nocche delle mani.");
+                        + "davanti a te c'e' una decina di uomini grossi come armadi che si scrocchiano le nocche delle mani.");
                 
                 throw new EndGameException();
             }
