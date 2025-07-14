@@ -83,6 +83,7 @@ public class Parser {
             ParserOutput parserOutput = null;
             Preposition preposition =  null;
             StringBuilder mappedString = new StringBuilder();
+            tokens = new ArrayList();
 
             String sentence = (String) sentencesIterator.next();
             Utils.tokenize(names, 0, stopwords, wordsSeparators, tokens, sentence);
