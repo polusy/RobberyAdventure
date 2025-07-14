@@ -10,6 +10,7 @@ import adventure.Entity.objects.AdvObject;
 import java.util.ArrayList;
 import java.util.List;
 import adventure.exceptions.*;
+import adventure.identifiers.ObjectId;
 
 /**
  *
@@ -49,5 +50,17 @@ public class LootBag {
         else 
             return false;
     }
+    
+    public boolean contains(ObjectId objectId){
+        boolean contained = false;
+        
+        for (AdvObject object : objects){
+            if (object.getId() == objectId)
+                contained = true;
+        }
+        
+        return contained;
+    }
+    
     
 }
