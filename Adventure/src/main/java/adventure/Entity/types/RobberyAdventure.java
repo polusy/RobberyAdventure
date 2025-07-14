@@ -403,7 +403,7 @@ public class RobberyAdventure extends GameDescription{
         
         objectsConditions.put(ObjectId.THERMAL_LANCE, objectCondition);
         
-        
+        propertyWithValueConstraints = new HashSet<>();
         
         propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
         propertyWithValueConstraints.add(propertyValue);
