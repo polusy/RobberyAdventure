@@ -112,11 +112,11 @@ public class Engine {
         catch (PasswordGuessedException exception){ }
         catch (EndGameException exception){ }
         
-        
-        out.println("================================");
-        out.println("* Robbery Adventure *");
-        out.println("================================");
-        out.println();
+        out.println(System.lineSeparator());
+        out.println("=========================================================");
+        out.println("\t\tRobbery Adventure");
+        out.println("=========================================================");
+        out.println(System.lineSeparator());
         
        
         //starting server 
