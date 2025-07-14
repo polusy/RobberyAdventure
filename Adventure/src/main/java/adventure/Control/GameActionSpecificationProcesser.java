@@ -240,6 +240,7 @@ public abstract class GameActionSpecificationProcesser {
                 if (gameDescription instanceof RobberyAdventure)
                 {
                     RobberyAdventure robberyAdventure = (RobberyAdventure) gameDescription;
+                    removedObject = gameDescription.getObjectById(gameEffect.getLootBagEffect().getAddingObject());
                     robberyAdventure.addObjectToLootBag(robberyAdventure.getObjectById(gameEffect.getLootBagEffect().getAddingObject()));
                 }
             }
@@ -251,7 +252,7 @@ public abstract class GameActionSpecificationProcesser {
                     gameDescription.addObjectToRoom(gameDescription.getCurrentRoom(), removedObject);
 
             if (gameEffect.getRoomEffect().getRemovingObject() != null)
-                    gameDescription.removeObjectFromRoom(gameDescription.getCurrentRoom(), gameDescription.getObjectById(gameEffect.getRoomEffect().getRemovingObject()));
+                    gameDescription.removeObjectFromRoom(gameDescription.getCurrentRoom(), removedObject);
 	 }
 
 

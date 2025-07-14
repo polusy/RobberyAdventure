@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import adventure.Entity.properties.*;
 import adventure.Entity.conditions.*;
@@ -43,6 +44,26 @@ public class RobberyAdventure extends GameDescription{
     public LootBag getLootBag() {
         return lootBag;
     }
+    
+    
+    public AdvObject getObjectById(ObjectId id) throws NoSuchElementException
+    {
+        try{
+            super.getObjectById(id);
+        } catch (NoSuchElementException exception){
+            
+            if (!lootBag.contains(id))
+                throw new NoSuchElementException();
+            
+            
+        }
+        
+
+   
+    
+    
+    
+    
     
     public void addObjectToLootBag(AdvObject object)throws DuplicateException, IllegalArgumentException{
         
