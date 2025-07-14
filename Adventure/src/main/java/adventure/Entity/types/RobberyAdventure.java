@@ -2017,8 +2017,8 @@ public class RobberyAdventure extends GameDescription{
         door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
         null, advObject.getAlias(), true, gameActionSpecifications, true);
         
-        room2 = this.getRoomById(RoomId.WEST_GARDEN);
-        room1 = this.getRoomById(RoomId.GARAGE);
+        room1 = this.getRoomById(RoomId.WEST_GARDEN);
+        room2 = this.getRoomById(RoomId.GARAGE);
         
         
         try{
