@@ -69,6 +69,10 @@ public class PositionChangeHandler {
                                         if (openable.getValue() == true)
                                         {
                                             gameDescription.setCurrentRoom(linkedRoom);
+                                            String newRoomName = gameDescription.getCurrentRoom().getName();
+                                            message = System.lineSeparator() + "\t" + newRoomName + System.lineSeparator() +
+                                                    "===========================================" + System.lineSeparator() +
+                                            gameDescription.getCurrentRoom().getDescription();                                            
                                         }
                                         else{
                                             message = "C'e' una porta, devi aprirla per poter andare in questa direzione.";
