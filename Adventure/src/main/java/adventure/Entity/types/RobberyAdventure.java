@@ -100,6 +100,7 @@ public class RobberyAdventure extends GameDescription{
 
         ClientManager clientManager = new ClientManager("http://localhost:8080");
         
+        this.lootBag = new LootBag();
         initCommands();
         initRooms();
         this.setCurrentRoom(this.getRoomById(RoomId.SIDEWALK));
