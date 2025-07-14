@@ -2084,7 +2084,7 @@ public class RobberyAdventure extends GameDescription{
         null, advObject.getAlias(), true, gameActionSpecifications);
         
         room1 = this.getRoomById(RoomId.GARAGE);
-        room2 = this.getRoomById(RoomId.WEST_GARDEN);
+        
         try{
             room1.addObject(interactiveObject);
         }catch(DuplicateException exception){};        
