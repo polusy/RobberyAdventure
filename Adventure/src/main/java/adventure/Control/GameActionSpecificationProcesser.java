@@ -252,7 +252,7 @@ public abstract class GameActionSpecificationProcesser {
                     gameDescription.addObjectToRoom(gameDescription.getCurrentRoom(), removedObject);
 
             if (gameEffect.getRoomEffect().getRemovingObject() != null)
-                    gameDescription.removeObjectFromRoom(gameDescription.getCurrentRoom(), removedObject);
+                    gameDescription.removeObjectFromRoom(gameDescription.getCurrentRoom(), gameDescription.getObjectById(gameEffect.getRoomEffect().getRemovingObject()));
 	 }
 
 
@@ -273,11 +273,14 @@ public abstract class GameActionSpecificationProcesser {
                                     if (container.hasObject(effect.getContainerEffect().getRemovingObject()))
                                     {
                                         container.removeObject(effect.getContainerEffect().getRemovingObject());
-                                        auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.OPEN).getPassingConditionResult();
-                                        auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                                        
+                                        if (object.hasProperty(PropertyType.OPENABLE)){
+                                            auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.OPEN).getPassingConditionResult();
+                                            auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
 
-                                        auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.CLOSE).getPassingConditionResult();
-                                        auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                                            auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.CLOSE).getPassingConditionResult();
+                                            auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                                    }
                                     }
 			}
 
