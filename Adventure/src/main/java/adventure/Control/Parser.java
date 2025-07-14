@@ -143,7 +143,7 @@ public class Parser {
                         throw new NotValidTokenException();
             }
 
-            if (!(new String(mappedString)).matches(regex) || (new String(mappedString)).matches(notValidRegex)){
+            if (!(new String(mappedString)).matches(regex) && !(new String(mappedString)).matches(notValidRegex)){
                     throw new NotValidSentenceException();
             }
             else{
