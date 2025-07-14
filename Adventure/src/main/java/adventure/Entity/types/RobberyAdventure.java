@@ -173,6 +173,10 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.get(ObjectId.VASE).put(PropertyType.MOVABLE,
                 "Hai già spostato questo oggetto, non è questo il momento per rimetterti in forma!");
         
+        failingObjectsConditionsMessages.put(ObjectId.SECURITY_CAMERA, new HashMap<>());
+        failingObjectsConditionsMessages.get(ObjectId.SECURITY_CAMERA).put(PropertyType.BREAKABLE,
+                "La telecamera ti sta guardando...rompila prima che qualcuno ti scopra..!");
+        
         failingVisibilityConditionMessages.put(ObjectId.VASE, failingVisibilityConditionMessage);
         
         failingConditionMessages = new FailingConditionMessages(null,
@@ -2674,7 +2678,7 @@ public class RobberyAdventure extends GameDescription{
             advObject = clientManager.getObjectRequest(objectId);
 
             door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
-            "La finestra del bagno è rotta....sei stato grandioso!", advObject.getAlias(), true, gameActionSpecifications, false);
+            "La finestra del bagno è rotta....sei stato grandioso!", advObject.getAlias(), true, gameActionSpecifications, true);
 
             room1 = this.getRoomById(RoomId.EAST_GARDEN);
             room2 = this.getRoomById(RoomId.BATHROOM);
@@ -3807,17 +3811,19 @@ public class RobberyAdventure extends GameDescription{
             //adding object to room
             advObject = clientManager.getObjectRequest(objectId);
 
-            door = new Door(advObject.getId(), advObject.getName(), advObject.getDescription(),
-            null, advObject.getAlias(), true, gameActionSpecifications, false);
-
+            advObject = new AdvObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
+            advObject.getAlias(), true); 
+            
+            
             room1 = this.getRoomById(RoomId.STAIRCASE);
             room2 = this.getRoomById(RoomId.LIVING_ROOM);
+            
         
         
             try{
-                this.addDoor(door, room1, room2);
-                this.addLinks(CardinalPoint.NORTH, door, room1, room2);
-            }catch(AlreadyLinkedException exception){}
+                room1.addObject(advObject);
+                room2.addObject(advObject);
+            }
             catch(DuplicateException exception){};
         
         

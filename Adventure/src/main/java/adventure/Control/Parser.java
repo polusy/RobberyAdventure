@@ -23,6 +23,7 @@ import adventure.Entity.objects.Door;
 import adventure.Entity.types.Room;
 import adventure.Entity.types.ParserOutput;
 import adventure.identifiers.PrepositionType;
+import java.util.Collections;
 
 
 /**
@@ -70,11 +71,12 @@ public class Parser {
 	List <ParserOutput> parserOutputs = new ArrayList();
 	List<AdvObject> allObjects = new ArrayList();
 	List<String> names = new ArrayList();
+        
 
 	allObjects.addAll(roomObjects);
 	allObjects.addAll(inventoryObjects);
 	names = getAllNames(allObjects);
-	names.sort(Comparator.comparingInt(s -> s.length()));
+	names.sort(Collections.reverseOrder(Comparator.comparingInt(s -> s.length())));
 
         Iterator sentencesIterator = sentences.iterator();
 	while (sentencesIterator.hasNext()){
@@ -98,7 +100,7 @@ public class Parser {
                 } catch (NoSuchElementException exception){};
 
                 try {
-                    getPrepositionIndex(token, prepositionTypes);
+                    index = getPrepositionIndex(token, prepositionTypes);
                     preposition = new Preposition(token);
                     mappedString.append(" preposition");
                 } catch (NoSuchElementException exception){};
@@ -128,7 +130,7 @@ public class Parser {
                     index = getObjectIndex(token, inventoryObjects);
                     parserOutput.addObject(inventoryObjects.get(index));
                     if (preposition != null)
-                            parserOutput.addPreposition(inventoryObjects.get(index), new Preposition(token));
+                            parserOutput.addPreposition(inventoryObjects.get(index), preposition);
 
                     preposition = null;
                     mappedString.append(" inventoryObject");

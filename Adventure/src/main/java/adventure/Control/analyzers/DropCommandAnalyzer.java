@@ -17,7 +17,7 @@ import adventure.identifiers.PropertyType;
 public class DropCommandAnalyzer extends CommandAnalyzer{
     
         public DropCommandAnalyzer(){
-        super(" Pensi veramente di riuscire a mettere questa cosa nello zaino!? ");
+        super(" Non hai questo oggetto nell'inventario...come pretendi di lasciarlo! ");
     }
     
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
