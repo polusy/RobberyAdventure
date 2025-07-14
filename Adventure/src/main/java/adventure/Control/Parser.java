@@ -192,6 +192,16 @@ public class Parser {
 	return names;	
     }
 
+    
+    private List<String> getAllRoomNames(List<Room> rooms){
+	List<String> names = new ArrayList();
+        
+	for (Room room : rooms){
+            names.add(room.getName());
+        }
+
+	return names;	
+    }
 
 
 
