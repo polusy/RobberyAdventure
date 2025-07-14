@@ -2027,6 +2027,8 @@ public class RobberyAdventure extends GameDescription{
         }catch(AlreadyLinkedException exception){}
         catch(DuplicateException exception){};        
         
+       
+        
         
         // ==================================================================================================    
         objectId = ObjectId.FUEL_FILLER_NECK;
@@ -2082,6 +2084,7 @@ public class RobberyAdventure extends GameDescription{
         null, advObject.getAlias(), true, gameActionSpecifications);
         
         room1 = this.getRoomById(RoomId.GARAGE);
+        room2 = this.getRoomById(RoomId.WEST_GARDEN);
         try{
             room1.addObject(interactiveObject);
         }catch(DuplicateException exception){};        
@@ -2108,7 +2111,9 @@ public class RobberyAdventure extends GameDescription{
         room1 = this.getRoomById(RoomId.GARAGE);
         try{
             room1.addObject(interactiveObject);
-        }catch(DuplicateException exception){};        
+        }catch(DuplicateException exception){};   
+        
+        
   
   // ========================================================================================================
         objectId = ObjectId.DRAWER;
