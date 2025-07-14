@@ -164,7 +164,8 @@ public class GameControl {
 
                 try {
                     gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
-                    message = gameActionResult.getMessage();
+                    if (gameActionResult != null)
+                        message = gameActionResult.getMessage();
                 } 
                 catch (NotValidSentenceException exception){
                     out.println(exception.getMessage());

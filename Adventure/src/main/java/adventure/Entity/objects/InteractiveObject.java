@@ -91,7 +91,10 @@ public class InteractiveObject extends AdvObject {
 
     public GameActionSpecification getGameActionSpecification(PropertyType propertyType, CommandType commandType)
     {
-	return gameActionSpecifications.get(this.getPropertyByType(propertyType)).get(commandType);
+        if (gameActionSpecifications.get(this.getPropertyByType(propertyType)) != null)
+            return gameActionSpecifications.get(this.getPropertyByType(propertyType)).get(commandType);
+        else
+            return null;
     }
     
     // Setter method

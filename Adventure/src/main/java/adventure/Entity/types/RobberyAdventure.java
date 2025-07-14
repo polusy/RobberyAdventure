@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JFrame;
 /**
  *
  * @author Paolo
@@ -927,18 +928,92 @@ public class RobberyAdventure extends GameDescription{
         // ==========================================================================================
           
           
-        // ========================================================================================== 
-                                   
-        
-             objectId = ObjectId.THE_STARRY_NIGHT;
-        
-            gameActionSpecifications = new HashMap();
-            property = new Pickupable(false);
-            gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
 
-            this.addStandardGameActionSpecifications(gameActionSpecifications, property,objectId,null, null,
-                    null, ValuableObject.class, "Hai raccolto il quadro dei tuoi sogni....", null); 
+        
+      
             
+            
+            
+            
+        // ========================================================================================== 
+        //                              Template
+        
+        objectId = ObjectId.THE_STARRY_NIGHT;
+        
+        gameActionSpecifications = new HashMap();
+        property = new Pickupable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        commandType = CommandType.PICK_UP;
+           
+        
+        // CompleteCondition
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.PICKUPABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+  
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+        // FailingConditionMessages
+        
+        failingObjectsConditionsMessages = new HashMap<>();
+        failingVisibilityConditionMessages = new HashMap<>();
+                
+
+        
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.PICKUPABLE, "Hai già raccolto il quadro!");
+        
+        failingVisibilityConditionMessages.put(objectId, "Nessun oggetto da queste parti, vediti meglio attorno!");
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        failingVisibilityConditionMessages);
+        
+        
+        // PassingConditionResult
+        
+        propertyWithValueResults = new HashSet<>();
+        objectsEffects = new HashMap<>();
+        
+        lootBagEffect = null;
+        roomEffect = null;
+        
+        propertyValue = new PropertyValue(PropertyType.PICKUPABLE, true);
+        propertyWithValueResults.add(propertyValue);
+                
+                
+        objectEffect = new ObjectEffect(propertyWithValueResults, null, true);
+        objectsEffects.put(objectId, objectEffect);
+        
+        specialAction = () -> {throw new EndGameException();};
+        
+        gameEffect = new GameEffect(null, null,
+                lootBagEffect, roomEffect, objectsEffects, specialAction);
+        passingConditionMessage = "Hai raccolto il quadro dei tuoi sogni... un'opera di inestimabile valore..." ;
+        
+        passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);            
+            
+            
+
             //adding object to room
             advObject = clientManager.getObjectRequest(objectId);
 
@@ -949,9 +1024,10 @@ public class RobberyAdventure extends GameDescription{
             room1 = this.getRoomById(RoomId.PAINTINGS_ROOM);
             try{
                 room1.addObject(valuableObject);
-            }catch(DuplicateException exception){}
+            }catch(DuplicateException exception){}        
         
         
+            
         
           // ==========================================================================================
           
@@ -1136,7 +1212,7 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications = new HashMap();
         property = new Openable(false);
-        gameActionSpecifications.put(property, null);
+        gameActionSpecifications.put(property, new HashMap<>());
 
         
         ObjectId[] auxiliaryObjects = new ObjectId[]{ObjectId.TRAPDOOR_KEY};
@@ -2526,7 +2602,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BATHROOM_DOOR, null,
-        null, null, Door.class, "Hai aperto la porta che collega il bagno alla camera da letto...e sii un po' felice!",
+        null, null,InteractiveObject.class, "Hai aperto la porta che collega il bagno alla camera da letto...e sii un po' felice!",
         "Hai chiuso la porta del bagno, bravissimo!");
         
             //adding object to room
@@ -2821,7 +2897,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
-                null, ObjectId.DOG_TAG, null, InteractiveObject.class, 
+                null, ObjectId.DOGHOUSE, null, InteractiveObject.class, 
                 "Hai raccolto la medaglietta del cane del proprietario",
                 "Hai gettato la medaglietta del cane. Comunque era piu' bella del tuo portachiavi!");
 
@@ -3475,7 +3551,15 @@ public class RobberyAdventure extends GameDescription{
         // PassingConditionResult
         
         specialAction = () -> {
-            SafeDialogGUI safeGUI = new SafeDialogGUI(null, true);
+            JFrame dummyOwner = new JFrame();
+            dummyOwner.setUndecorated(true);
+            dummyOwner.setSize(0, 0);
+            dummyOwner.setLocationRelativeTo(null);
+            dummyOwner.setVisible(true);
+            
+            SafeDialogGUI safeGUI = new SafeDialogGUI(dummyOwner, true);
+            safeGUI.pack();
+            safeGUI.setLocationRelativeTo(dummyOwner);
             safeGUI.setVisible(true);
             
             if (safeGUI.isPasswordGuessed()){
