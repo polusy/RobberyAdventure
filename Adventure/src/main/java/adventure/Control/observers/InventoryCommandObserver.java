@@ -20,7 +20,7 @@ public class InventoryCommandObserver implements GameObserver{
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException
     {
-	if (parserOutput.getDoorRoom() != null || parserOutput.getObjects() != null)
+	if (parserOutput.getDoorRoom() != null || !parserOutput.getObjects().isEmpty())
 		throw new NotValidSentenceException();
 
 

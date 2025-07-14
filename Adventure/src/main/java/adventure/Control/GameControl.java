@@ -171,7 +171,9 @@ public class GameControl {
             else {
                 message = commandAnalysisResult.getMessage();
             }
-	}
+	}else if(commandAnalysisResult != null && !commandAnalysisResult.isAnalysisPassed()){
+            message = commandAnalysisResult.getMessage();
+        }
 
          out.println(message);
 

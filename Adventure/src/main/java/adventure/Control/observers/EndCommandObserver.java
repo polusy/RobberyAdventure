@@ -19,7 +19,7 @@ import adventure.Boundary.GUI.EndCommandGUI;
 public class EndCommandObserver implements TechnicalObserver {
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {
         
-        if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
+        if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
         EndCommandGUI endCommandGUI = new EndCommandGUI(null, true);
