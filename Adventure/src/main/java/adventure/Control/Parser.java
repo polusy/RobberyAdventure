@@ -88,6 +88,8 @@ public class Parser {
             Utils.tokenize(names, 0, stopwords, wordsSeparators, tokens, sentence);
 		
             Iterator tokensIterator = tokens.iterator();
+            
+            parserOutput = new ParserOutput(null, null);
             while (tokensIterator.hasNext())
             {
                 String token = (String) tokensIterator.next();
