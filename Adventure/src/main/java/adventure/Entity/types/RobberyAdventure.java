@@ -2096,7 +2096,7 @@ public class RobberyAdventure extends GameDescription{
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, objectId, new ObjectId[] {ObjectId.HAMMER, 
-                    ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT}, InteractiveObject.class, 
+                    ObjectId.ELECTRIC_SAW, ObjectId.WRENCH, ObjectId.POWER_UNIT, ObjectId.THERMAL_LANCE}, InteractiveObject.class, 
                 "Hai aperto l'armadio degli attrezzi. Sei stato avvolto da una "
                         + "densa nuvola di polvere che ti sta facendo tossire fino ad avere le lacrime agli occhi.", 
                 "Hai chiuso l'armadio del garage. C'erano piu' acari li' dentro che nel "
@@ -2526,7 +2526,7 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, ObjectId.BATHROOM_DOOR, null,
-        null, null, InteractiveObject.class, "Hai aperto la porta che collega il bagno alla camera da letto...e sii un po' felice!",
+        null, null, Door.class, "Hai aperto la porta che collega il bagno alla camera da letto...e sii un po' felice!",
         "Hai chiuso la porta del bagno, bravissimo!");
         
             //adding object to room
