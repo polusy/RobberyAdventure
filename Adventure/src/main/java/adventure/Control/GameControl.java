@@ -183,7 +183,7 @@ public class GameControl {
         
         
         if (message != null)
-            out.println(message);
+            out.println(message + System.lineSeparator());
         
         
 
