@@ -21,7 +21,7 @@ public class ParserOutput {
     private Command command;
     private String commandToken;
     private Map<AdvObject, Preposition> objects = new HashMap<>();
-    private Room doorRoom;
+    private Room doorRoom = null;
 
     public ParserOutput(Command command, String commandToken) {
         this.command = command;
