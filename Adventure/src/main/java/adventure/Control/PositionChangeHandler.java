@@ -57,8 +57,8 @@ public class PositionChangeHandler {
 			{
                             gameDescription.setCurrentRoom(linkedRoom);
                             String newRoomName = gameDescription.getCurrentRoom().getName();
-                            message = "\t" + newRoomName + System.lineSeparator() + "===========================================" +
-                                    System.lineSeparator() +
+                            message = System.lineSeparator() + "\t" + newRoomName + System.lineSeparator() +
+                                    "===========================================" + System.lineSeparator() +
                             gameDescription.getCurrentRoom().getDescription();
 			}
 			else if (linkedDoor != null)
@@ -72,12 +72,12 @@ public class PositionChangeHandler {
                                             gameDescription.setCurrentRoom(linkedRoom);
                                         }
                                         else{
-                                            message = "C'è una porta, devi aprirla per poter andare in questa direzione.";
+                                            message = "C'e' una porta, devi aprirla per poter andare in questa direzione.";
                                         }
                                 } catch (NoSuchElementException exception){};
                             }
                             else{
-                                message = "C'è una porta, ma non si può aprire in nessun modo!" ;
+                                message = "C'e' una porta, ma non si può aprire in nessun modo!" ;
                             }
 			}
 		 }
