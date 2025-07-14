@@ -49,14 +49,17 @@ public class RobberyAdventure extends GameDescription{
     public AdvObject getObjectById(ObjectId id) throws NoSuchElementException
     {
         try{
-            super.getObjectById(id);
+            return super.getObjectById(id);
         } catch (NoSuchElementException exception){
             
             if (!lootBag.contains(id))
                 throw new NoSuchElementException();
+            else 
+                return lootBag.getObjectById(id);
             
             
         }
+    }
         
 
    
