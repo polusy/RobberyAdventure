@@ -96,7 +96,7 @@ public abstract class GameActionSpecificationProcesser {
                 if (inventoryObjectsId.containsAll(inventoryConditionOption.getNecessaryObjects()))
                 {
                     inventoryConditionOptionFound = true;
-                    if (auxiliaryObject == null || inventoryConditionOption.contains(auxiliaryObject))
+                    if (auxiliaryObject == null || inventoryConditionOption.contains(auxiliaryObject.getId()))
                     {
                         inventoryConditionPassed = true;
                     }

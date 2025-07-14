@@ -6,6 +6,7 @@ package adventure.Entity.types;
 
 import adventure.identifiers.PropertyType;
 import adventure.Entity.objects.InteractiveObject;
+import adventure.Entity.objects.AdvObject;
 
 /**
  *
@@ -13,7 +14,7 @@ import adventure.Entity.objects.InteractiveObject;
  */
 public class CommandAnalysisResult {
     private String message;
-    private InteractiveObject targetObject;
+    private AdvObject targetObject;
     private InteractiveObject auxiliaryObject;
     private boolean analysisPassed;
     private PropertyType propertyType;    
@@ -34,11 +35,11 @@ public class CommandAnalysisResult {
         this.message = message;
     }
 
-    public InteractiveObject getTargetObject() {
+    public AdvObject getTargetObject() {
         return targetObject;
     }
 
-    public void setTargetObject(InteractiveObject targetObject) {
+    public void setTargetObject(AdvObject targetObject) {
         this.targetObject = targetObject;
     }
 

@@ -55,10 +55,7 @@ public class LookAtCommandAnalyzer extends CommandAnalyzer {
                     }
                 }
                 else{
-                    if (!(object instanceof InteractiveObject))
-                        throw new NotValidSentenceException();
-                    
-                    commandAnalysisResult.setTargetObject((InteractiveObject)object);
+                    commandAnalysisResult.setTargetObject(object);
                 }
             }
             
@@ -66,10 +63,15 @@ public class LookAtCommandAnalyzer extends CommandAnalyzer {
 
             message = commandAnalysisResult.getTargetObject().getDescription();
             
-            InteractiveObject targetObject = commandAnalysisResult.getTargetObject();
-            if (targetObject.hasProperty(PropertyType.BREAKABLE)){
-                if (targetObject.getPropertyByType(PropertyType.BREAKABLE).getValue() == true)
-                    message = targetObject.getBrokenDescription();
+            if (commandAnalysisResult.getTargetObject() instanceof InteractiveObject)
+            {
+                
+                InteractiveObject targetObject = (InteractiveObject)commandAnalysisResult.getTargetObject();
+
+                if (targetObject.hasProperty(PropertyType.BREAKABLE)){
+                    if (targetObject.getPropertyByType(PropertyType.BREAKABLE).getValue() == true)
+                        message = targetObject.getBrokenDescription();
+                }
             }
             
             commandAnalysisResult.setMessage(message);

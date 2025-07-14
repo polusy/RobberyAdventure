@@ -96,7 +96,7 @@ public abstract class CommandAnalyzer {
                                 else if (parserOutput.getObjectWithPreposition() instanceof InteractiveObject)
                                 {
                                         auxiliaryObject = (InteractiveObject) parserOutput.getObjectWithPreposition();
-                                        if (!prepositionType.getWords().contains(parserOutput.getExpression(auxiliaryObject).getValue()))
+                                        if (!prepositionType.getWords().contains(parserOutput.getExpression(auxiliaryObject).getValue().getPreposition()))
                                         {
                                             throw new NotValidSentenceException();
                                         }
@@ -140,7 +140,7 @@ public abstract class CommandAnalyzer {
         }
     
     
-        return new CommandAnalysisResult(errorMessage, targetObject, auxiliaryObject, analysisPassed, propertyType);
+        return new CommandAnalysisResult(message, targetObject, auxiliaryObject, analysisPassed, propertyType);
     }
 }
 

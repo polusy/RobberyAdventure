@@ -5,6 +5,7 @@
 package adventure.Entity.conditions;
 import adventure.Entity.types.PropertyValue;
 import java.util.Set;
+import java.util.HashSet;
 import adventure.identifiers.PropertyType;
 import java.util.NoSuchElementException;
 
@@ -14,11 +15,11 @@ import java.util.NoSuchElementException;
  */
 public class ObjectCondition {
     
-    private final Set<PropertyValue> PropertyWithValueConstraints;
+    private Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();
     private final boolean visibility;
 
-    public ObjectCondition(Set<PropertyValue> PropertyWithValueConstraints, boolean visibility) {
-        this.PropertyWithValueConstraints = PropertyWithValueConstraints;
+    public ObjectCondition(Set<PropertyValue> propertyWithValueConstraints, boolean visibility) {
+        this.propertyWithValueConstraints = propertyWithValueConstraints;
         this.visibility = visibility;
     }
     
@@ -31,10 +32,13 @@ public class ObjectCondition {
     public PropertyValue getPropertyValue(PropertyType propertyType) throws NoSuchElementException {
         
         PropertyValue propertyValue = null;
-        
-        for (PropertyValue iteratedPropertyValue : this.PropertyWithValueConstraints){
-            if (iteratedPropertyValue.getPropertyType() == propertyType){
-                propertyValue = iteratedPropertyValue;
+    
+        if (this.propertyWithValueConstraints != null)
+        {
+            for (PropertyValue iteratedPropertyValue : this.propertyWithValueConstraints){
+                if (iteratedPropertyValue.getPropertyType() == propertyType){
+                    propertyValue = iteratedPropertyValue;
+                }
             }
         }
         

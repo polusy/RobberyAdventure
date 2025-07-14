@@ -93,6 +93,7 @@ public class GameControl {
                         }
                     }
                 }
+                foundPropertyType = PropertyType.USABLE;
             }
             else if (parserOutput.getObjects().size() >= 1 && foundPreposition == false){
                 for (AdvObject object: parserOutput.getObjects().keySet()) {
@@ -117,6 +118,10 @@ public class GameControl {
                                 }
                             }
                         }
+                        foundPropertyType = PropertyType.USABLE;
+                    }
+                    else{
+                        throw new NotValidSentenceException();
                     }
                 }
             }
@@ -159,6 +164,7 @@ public class GameControl {
 
                 try {
                     gameActionResult = this.processCommandAnalysisResult(commandAnalysisResult, game, parserOutput);
+                    message = gameActionResult.getMessage();
                 } 
                 catch (NotValidSentenceException exception){
                     out.println(exception.getMessage());
@@ -166,7 +172,7 @@ public class GameControl {
                 catch (DuplicateException exception){
                     out.println(exception.getMessage());
                 }
-                message = gameActionResult.getMessage();
+               
             }
             else {
                 message = commandAnalysisResult.getMessage();
@@ -174,8 +180,12 @@ public class GameControl {
 	}else if(commandAnalysisResult != null && !commandAnalysisResult.isAnalysisPassed()){
             message = commandAnalysisResult.getMessage();
         }
-
-         out.println(message);
+        
+        
+        if (message != null)
+            out.println(message);
+        
+        
 
 	if (gameActionResult != null && gameActionResult.getSpecialAction() != null)
         {
@@ -242,7 +252,12 @@ public class GameControl {
     private GameActionSpecification findGameActionSpecification(CommandAnalysisResult commandAnalysisResult,
             ParserOutput parserOutput) {
         
-	return commandAnalysisResult.getTargetObject().getGameActionSpecification(commandAnalysisResult.getPropertyType(), parserOutput.getCommand().getType());
+        if (commandAnalysisResult.getTargetObject() instanceof InteractiveObject)
+        {
+            return ((InteractiveObject)commandAnalysisResult.getTargetObject()).getGameActionSpecification(commandAnalysisResult.getPropertyType(), parserOutput.getCommand().getType());
+        }
+        else
+            return null;
     }
 
     

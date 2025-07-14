@@ -17,7 +17,6 @@ import adventure.identifiers.PrepositionType;
  * @author utente
  */
 public class UseCommandAnalyzer extends CommandAnalyzer{
-    private String errorMessage ;
     
     public UseCommandAnalyzer(){
         super(" Non vorrai mica usare questa cosa! ");
