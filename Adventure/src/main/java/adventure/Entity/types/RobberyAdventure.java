@@ -2346,6 +2346,7 @@ public class RobberyAdventure extends GameDescription{
         
         objectsConditions.put(objectId, objectCondition);
         
+        propertyWithValueConstraints = new HashSet<>();
 
         propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
         propertyWithValueConstraints.add(propertyValue);
