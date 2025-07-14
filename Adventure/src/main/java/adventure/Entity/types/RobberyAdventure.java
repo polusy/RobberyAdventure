@@ -2447,6 +2447,7 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         
         inventoryConditionOptions = new ArrayList<>();
+        propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.POWER_UNIT, objectId, ObjectId.WELDING_MASK});
         inventoryConditionOptions.add(inventoryCondition);
@@ -2458,6 +2459,7 @@ public class RobberyAdventure extends GameDescription{
         
         objectsConditions.put(objectId, objectCondition);
         
+        propertyWithValueConstraints = new HashSet<>();
 
         propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, true);
         propertyWithValueConstraints.add(propertyValue);
