@@ -929,18 +929,8 @@ public class RobberyAdventure extends GameDescription{
         }catch(DuplicateException exception){}
         
         
-        // ==========================================================================================
           
-          
-
-        
-      
-            
-            
-            
-            
         // ========================================================================================== 
-        //                              Template
         
         objectId = ObjectId.THE_STARRY_NIGHT;
         
@@ -1204,12 +1194,9 @@ public class RobberyAdventure extends GameDescription{
         }catch(DuplicateException exception){}
         
         
-        
-        
-          // ==========================================================================================
           
           
-         // ========================================================================================== 
+        // ========================================================================================== 
         //                             
         
         objectId = ObjectId.TRAPDOOR;
@@ -1368,6 +1355,7 @@ public class RobberyAdventure extends GameDescription{
         
         objectsConditions.put(ObjectId.FUEL_FILLER_NECK, objectCondition);
         
+        propertyWithValueConstraints = new HashSet<>();
         
         propertyValue = new PropertyValue(PropertyType.FILLABLE, false);
         propertyWithValueConstraints.add(propertyValue);
