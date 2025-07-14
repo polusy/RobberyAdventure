@@ -204,6 +204,7 @@ public abstract class GameActionSpecificationProcesser {
         String passingConditionMessage = passingConditionResult.getPassingConditionMessage();
 	GameEffect gameEffect = passingConditionResult.getGameEffect();
 	SpecialAction specialAction = null;
+        AdvObject removedObject = null;
        
         PassingConditionResult auxiliaryPassingConditionResult = null;
         Container container = null;
@@ -224,8 +225,11 @@ public abstract class GameActionSpecificationProcesser {
 		if (gameEffect.getInventoryEffect().getAddingObject() != null)
 			gameDescription.addObjectToinventory(gameDescription.getObjectById(gameEffect.getInventoryEffect().getAddingObject()));
 
-		if (gameEffect.getInventoryEffect().getRemovingObject() != null)
+		if (gameEffect.getInventoryEffect().getRemovingObject() != null){
+                        removedObject = gameDescription.getObjectById(gameEffect.getInventoryEffect().getRemovingObject());
 			gameDescription.removeObjectFromInventory(gameDescription.getObjectById(gameEffect.getInventoryEffect().getRemovingObject()));
+                        
+                }
         }
 
 	
@@ -244,7 +248,7 @@ public abstract class GameActionSpecificationProcesser {
 	if (gameEffect.getRoomEffect() != null)
 	{
             if (gameEffect.getRoomEffect().getAddingObject() != null)
-                            gameDescription.addObjectToRoom(gameDescription.getCurrentRoom(), gameDescription.getObjectById(gameEffect.getRoomEffect().getAddingObject()));
+                    gameDescription.addObjectToRoom(gameDescription.getCurrentRoom(), removedObject);
 
             if (gameEffect.getRoomEffect().getRemovingObject() != null)
                     gameDescription.removeObjectFromRoom(gameDescription.getCurrentRoom(), gameDescription.getObjectById(gameEffect.getRoomEffect().getRemovingObject()));

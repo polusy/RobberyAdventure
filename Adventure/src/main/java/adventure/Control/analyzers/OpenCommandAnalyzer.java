@@ -80,8 +80,5 @@ public class OpenCommandAnalyzer extends CommandAnalyzer{
                 }
 
 	}
-        else{
-                throw new NoSuchElementException();
-        }
     }
 }

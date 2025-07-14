@@ -21,6 +21,8 @@ import adventure.Entity.types.RobberyAdventure;
 import adventure.exceptions.EndGameException;
 import adventure.exceptions.NotValidSentenceException;
 import java.sql.SQLException;
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
 
 
 /**
@@ -32,10 +34,18 @@ public class MenuCommandObserver implements TechnicalObserver {
         @Override
         public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {
         
-        if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
+        if (!parserOutput.getObjects().isEmpty()|| parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
-        MenuCommandGUI menuCommandGUI = new MenuCommandGUI(new ClientManager("http://localhost:8081"), (RobberyAdventure)game, null, true);
+        JFrame dummyOwner = new JFrame();
+        dummyOwner.setUndecorated(true);  
+        dummyOwner.setSize(0, 0);          
+        dummyOwner.setLocationRelativeTo(null);
+        dummyOwner.setVisible(true);       
+
+        MenuCommandGUI menuCommandGUI = new MenuCommandGUI(new ClientManager("http://localhost:8081"), (RobberyAdventure)game, dummyOwner, true);
+        menuCommandGUI.pack();
+        menuCommandGUI.setLocationRelativeTo(dummyOwner);
         menuCommandGUI.setVisible(true);
         
         if (menuCommandGUI.isGameEnded())

@@ -4419,6 +4419,7 @@ public class RobberyAdventure extends GameDescription{
 	addCommand(CommandType.PUSH, "premi", new String[]{"premere", "spingi", "spingere", "pressare", "pressa","schiacciare", "schiaccia"});
 	addCommand(CommandType.BREAK, "rompi", new String[]{"rompere", "distruggere", "sfasciare", "disintegrare" , "rompere", 	"distruggi", "sfascia", "disintegra","disintegrare", "sfonda","sfondare", "danneggia", "danneggiare"});
 	addCommand(CommandType.PICK_UP, "raccogli", new String[]{"raccogliere", "prendere", "afferrare", "prendi", "afferra"});
+        addCommand(CommandType.DROP, "lascia", new String[]{});
         addCommand(CommandType.USE, "usa", new String[]{"utilizza", "utilizzare", "usare"});
 	addCommand(CommandType.CONSUME, "consuma", new String[]{"consumare"});
 	addCommand(CommandType.ACTIVATE, "attiva", new String[]{"accendi", "accendere", "attivare", "avvia", "avviare", "aziona"});
