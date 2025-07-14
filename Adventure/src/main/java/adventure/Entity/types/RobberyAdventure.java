@@ -4420,7 +4420,7 @@ public class RobberyAdventure extends GameDescription{
 	addCommand(CommandType.SOUTH, "sud", new String[]{"s"});
 	addCommand(CommandType.EAST, "est", new String[]{"e"});
 	addCommand(CommandType.WEST, "ovest", new String[]{"o"});
-	addCommand(CommandType.LOOT_BAG, "bottino", new String[]{"sacco, zaino, refurtiva, borsa"});
+	addCommand(CommandType.LOOT_BAG, "bottino", new String[]{"sacco", "zaino", "refurtiva", "borsa"});
 	addCommand(CommandType.INVENTORY, "inventario", new String[]{"inv"});
 	addCommand(CommandType.END, "esci", new String[]{"end", "fine","finire", "terminare", "termina", "exit", "basta"});
 	addCommand(CommandType.SAVE, "salva", new String[]{" salvataggio", "salvare"});
