@@ -179,6 +179,8 @@ public class RobberyAdventure extends GameDescription{
         objectsConditions.put(ObjectId.VASE, objectCondition);
         
         
+        propertyWithValueConstraints = new HashSet<>();
+        
         propertyValue = new PropertyValue(PropertyType.BREAKABLE, true);
         propertyWithValueConstraints.add(propertyValue);
         
@@ -1661,6 +1663,7 @@ public class RobberyAdventure extends GameDescription{
         
         objectsConditions.put(ObjectId.BATTERIES, objectCondition);
         
+        propertyWithValueConstraints = new HashSet<>();
         
         propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
         propertyWithValueConstraints.add(propertyValue);
