@@ -14,7 +14,8 @@ import java.util.NoSuchElementException;
  * @author Paolo
  * 
  * La classe rappresenta un insieme di condizioni sulle proprietà di un oggetto
- * che devono essere necessariamente rispettate (la visibilità dell'oggetto è mantenuta come proprietà speciale).
+ * che devono essere necessariamente rispettate (la visibilità dell'oggetto è mantenuta come proprietà speciale),
+ * affinché possa essere eseguita un'azione effettiva sulla sessione di gioco.
  */
 public class ObjectCondition {
     
