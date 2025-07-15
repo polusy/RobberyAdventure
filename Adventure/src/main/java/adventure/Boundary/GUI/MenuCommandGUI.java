@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Paolo
+ * 
+ * La classe swing rappresenta l'interfaccia grafica del menu del gioco.
  */
 public class MenuCommandGUI extends javax.swing.JDialog {
     
@@ -43,8 +45,8 @@ public class MenuCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form MenuCommandGUI
-     * @param clientManager
-     * @param robberyAdventure
+     * @param clientManager manager necessario per permettere di effettuare chiamate REST al server.
+     * @param robberyAdventure Descrizione di gioco di cui si vorranno (probabilmente) salvare i progressi.
      * @param parent
      * @param modal
      */
@@ -127,6 +129,13 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * Il metodo permette la visualizzazione della GUI dell'End command,
+     * quindi l'interazione per permettere all'utente l'uscita dal gioco (tramite menu).
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         EndCommandGUI endCommandGUI = new EndCommandGUI(null, true);
         endCommandGUI.setVisible(true);
@@ -138,10 +147,26 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated 
+     * Il metodo dovrebbe completare il suo corpo, inserendo la chiamata alla SaveCommandGUI
+     * per permettere il salvataggio del gioco.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated 
+     * Il metodo dovrebbe completare il suo corpo, inserendo la chiamata alla RescueProgressGUI
+     * per permettere il recupero del salvataggio di gioco specifico.
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
         
