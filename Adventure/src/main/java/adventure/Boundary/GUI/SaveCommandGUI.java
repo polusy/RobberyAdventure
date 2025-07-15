@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Paolo
+ * 
+ * La classe swing rappresenta l'interazione con l'utente per il salvataggio dei progressi di gioco.
  */
 public class SaveCommandGUI extends javax.swing.JDialog {
     
@@ -19,8 +21,8 @@ public class SaveCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form SaveCommandGUI
-     * @param clientManager
-     * @param robberyAdventure
+     * @param clientManager clientManager necessario per usufruire dei servizi REST per il salvataggio dei progressi nel db.
+     * @param robberyAdventure descrizione di gioco (progressi) da salvare nel db.
      * @param parent
      * @param modal
      */
@@ -98,9 +100,17 @@ public class SaveCommandGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated 
+     * Il metodo implementa la richiesta (al servizio REST) di salvataggio dei progressi di gioco.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String newSavingName = jTextField1.getText();
         JOptionPane.showMessageDialog(rootPane, "Funzionalità non implementata");
+        
         /*
         Boolean gameAlreadyExisted = clientManager.addGameSavingRequest(newSavingName, robberyAdventure);
         
