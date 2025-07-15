@@ -4,6 +4,7 @@
  */
 package adventure.Control.observers;
 
+import adventure.Boundary.GUI.FrameCreator;
 import adventure.Boundary.GUI.EndCommandGUI;
 import adventure.Boundary.GUI.MenuCommandGUI;
 import adventure.Boundary.ClientManager;

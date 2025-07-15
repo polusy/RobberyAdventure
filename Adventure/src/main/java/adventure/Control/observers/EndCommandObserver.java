@@ -4,6 +4,7 @@
  */
 package adventure.Control.observers;
 
+import adventure.Boundary.GUI.FrameCreator;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
