@@ -8,12 +8,20 @@ import javax.swing.JFrame;
 /**
  *
  * @author Paolo
+ * 
+ * La classe si occupa di creare un frame di base
+ * per garantire la visibilità di dialog durante 
+ * l'esecuzione del gioco.
  */
 public class FrameCreator {
     
     /**
      *
-     * @return
+     * @return il Jframe di base
+     * 
+     * 
+     * Il metodo crea un jframe di base che farà da owner
+     * delle dialog create durante il gameplay.
      */
     public static JFrame createBaseFrame(){
         JFrame dummyOwner = new JFrame();
