@@ -3315,7 +3315,29 @@ public class RobberyAdventure extends GameDescription{
         
         gameActionSpecifications = new HashMap();
         property = new Usable(false);
-        gameActionSpecifications.put(property, null);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+        
+        // CompleteCondition
+        objectsConditions = new HashMap<>();
+        
+        objectCondition = new ObjectCondition(null, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+        
+        completeCondition = new CompleteCondition(null, objectsConditions);
+        
+        // PassingConditionResult
+        
+        passingConditionResult = new PassingConditionResult(null, "Hai provato ad aprie lo "
+                + "specchio, ma è bloccato! Eppure quel corrimano sembra proprio una maniglia!");
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                null, passingConditionResult);        
         
         
         //adding object to room
