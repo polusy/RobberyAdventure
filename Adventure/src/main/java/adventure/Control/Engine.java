@@ -41,8 +41,12 @@ import adventure.Boundary.services.*;
 
 
 /**
+ * La classe costituisce l'ambiente di esecuzione astratto dell'applicazione. 
+ * Coordina gli aspetti tecnici legati al funzionamento dell'applicazione e delega la gestione della logica del gioco
+ * vero e proprio a classi specializzate.
+ * 
  *
- * @author utente
+ * @author Alessandro
  */
 public class Engine {
     private GameDescription game; 
@@ -54,7 +58,7 @@ public class Engine {
     
     /**
      *
-     * @param game
+     * @param game È la partita della quale l'Engine coordinerà il funzionamento
      */
     public Engine(GameDescription game){
         Set<String> stopwords = new HashSet();
@@ -101,7 +105,10 @@ public class Engine {
         
     }
 
-    /**
+    /** Avvia l'esecuzione della partita e si occupa del coordinamento delle attività di alto livello legate ad essa.
+     *  
+     * Avvia l'esecuzione dei thread che si occupano dell'interazione del gioco con la base di dati per il salvataggio 
+     * della partita e del caricamento di partite salvate in precedenza.
      *
      * @throws InconsistentInitializationException
      */
@@ -185,11 +192,13 @@ public class Engine {
         }
     }
 
-    /**
+    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i TechnicalObserver,
+     * che lo processano in caso esso sia di loro competenza
      *
-     * @param game
-     * @param parserOutput
-     * @return
+     * @param game Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return true se il comando estrapolato dalla stringa inserita dall'utente da parte del parser è di pertinenza di 
+     * un TechnicalObserver, false altrimenti
      * @throws EndGameException
      * @throws NotValidSentenceException
      */
@@ -209,12 +218,14 @@ public class Engine {
         return recognizedCommand;
     }
     
-    /**
+    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i GameObserver,
+     * che lo processano in caso esso sia di loro competenza
      *
-     * @param game
-     * @param parserOutput
-     * @param out
-     * @return
+     * @param game Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @param out Stream di output sul quale un gameObserver può eventualmente stampare un messaggio
+     * @return true se il comando estrapolato dalla stringa inserita dall'utente da parte del parser è di pertinenza di 
+     * un GameObserver, false altrimenti
      * @throws NotValidSentenceException
      */
     public boolean notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
@@ -231,9 +242,10 @@ public class Engine {
         return recognizedCommand;
     }
     
-    /**
+    /** Metodo main che viene eseguito con l'avvio dell'applicazione.
+     * Costruisce un nuovo oggetto Engine e ne avvia l'attività
      *
-     * @param args
+     * @param args parametri inseriti da linea di comando. Vengono ignorati
      * @throws InconsistentInitializationException
      */
     public static void main(String[] args) throws InconsistentInitializationException{
