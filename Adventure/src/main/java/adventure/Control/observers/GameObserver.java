@@ -12,6 +12,8 @@ import java.io.PrintStream;
 /**
  *
  * @author Paolo
+ * 
+ * Interfaccia rappresentante qualsiasi observer del gioco
  */
 public interface GameObserver {
     
@@ -21,6 +23,9 @@ public interface GameObserver {
      * @param parserOutput
      * @param out
      * @throws NotValidSentenceException
+     * 
+     * Il metodo esegue un update sul gioco, relativamente all'output del parser nella corrente interazione CLI,
+     * eseguendo possibilmente un print su un generico stream di output.
      */
     public abstract void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out)
             throws NotValidSentenceException;
