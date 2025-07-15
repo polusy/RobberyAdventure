@@ -22,7 +22,7 @@ public interface GameObserver {
      * @param gameDescription Descrizione corrente del gioco.
      * @param parserOutput output del parser
      * @param out
-     * @throws NotValidSentenceException
+     * @throws NotValidSentenceException Se l'utente scrive una frase non corretta contestualmente al comando inserito.
      * 
      * Il metodo esegue un update sul gioco, relativamente all'output del parser nella corrente interazione CLI,
      * eseguendo possibilmente un print su un generico stream di output, inoltre si accerta che il parserOutput
