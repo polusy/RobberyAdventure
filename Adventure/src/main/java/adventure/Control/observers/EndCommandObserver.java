@@ -17,20 +17,30 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author utente
+ * @author Paolo
+ * 
+ * La classe rappresenta il gestore del comando di fine gioco.
  */
 public class EndCommandObserver implements TechnicalObserver {
 
     /**
      *
-     * @param game
-     * @param parserOutput
+     * @param game Descrizione di gioco corrente
+     * 
+     * @param parserOutput Rappresenta l'output del parser al momento del parsing della stringa inserita nell'input stream
+     * dell'utente attraverso CLI.
+     * 
      * @param message
      * @throws NotValidSentenceException
      * @throws EndGameException
+     * 
+     * Il metodo verifica che la frase sia sintatticamente corretta, e effettua una chiamata alla classe GUI per
+     * gestire la volontà di abbandono dell'utente.
      */
+    @Override
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {
         
+        //verifico che il parserOutput non contenga altri tipi di elementi parsati (stanza, oggetti...)
         if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
@@ -39,7 +49,7 @@ public class EndCommandObserver implements TechnicalObserver {
         EndCommandGUI endCommandGUI = new EndCommandGUI(baseFrame, true);
         endCommandGUI.setVisible(true);
         
-        
+        //se l'utente vuole abbandonare
        if (endCommandGUI.isGameEnded())
            throw new EndGameException();
         
