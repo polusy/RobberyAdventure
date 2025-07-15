@@ -9,8 +9,6 @@ import adventure.identifiers.ObjectId;
 import adventure.Entity.types.GameDescription;
 import adventure.Entity.types.RobberyAdventure;
 import adventure.utilities.DatabaseGameTable;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.google.gson.Gson;
 import java.util.Arrays;
@@ -52,11 +50,11 @@ public class ClientManager {
         this.target = client.target(target);
     }
     
-    public boolean addGameSavingRequest(String gameId, GameDescription gameDescription) throws JsonProcessingException{
+    public boolean addGameSavingRequest(String gameId, GameDescription gameDescription){
         
-        ObjectMapper objectMapper = new ObjectMapper();
+        Gson gson = new Gson();
         DatabaseGameTable dbGameTable = new DatabaseGameTable((RobberyAdventure)gameDescription, gameId);
-        String jsonGameTable = objectMapper.writeValueAsString(dbGameTable);
+        String jsonGameTable = gson.toJson(dbGameTable, DatabaseGameTable.class);
         
         Response response = target.path("game/add").request(MediaType.APPLICATION_JSON).put(Entity.entity(jsonGameTable, MediaType.APPLICATION_JSON));
         return response.readEntity(Boolean.class);

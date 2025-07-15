@@ -16,20 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.UUID;
-
-
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 /**
  *
  * @author Paolo
  */
-@JsonIdentityInfo(
-    generator = ObjectIdGenerators.UUIDGenerator.class, 
-    property = "@json_id"
-)
 public class Room {
     
     final private RoomId id;
