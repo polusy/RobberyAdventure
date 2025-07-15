@@ -735,6 +735,7 @@ public class RobberyAdventure extends GameDescription{
             try{
                 room1.addDoorLink(CardinalPoint.WEST, door);
                 room1.addRoomLink(CardinalPoint.WEST, room2);
+                room1.addObject(door);
             }catch(DuplicateException exception){};
         
         
