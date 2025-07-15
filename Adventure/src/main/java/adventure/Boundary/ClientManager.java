@@ -81,7 +81,7 @@ public class ClientManager {
         String[] aliasArray = {"bendaggi"};
         Set<String> alias = new HashSet<>(Arrays.asList(aliasArray));
         AdvObject object = new AdvObject(ObjectId.BANDAGES, "bende", "Delle bende sporche, "
-        + "utilizzate chissà dove, vedi tu per cosa le puoi usare", alias);
+        + "utilizzate chissa' dove, vedi tu per cosa le puoi usare", alias);
         addObjectRequest(object);
         
         
@@ -166,12 +166,12 @@ public class ClientManager {
         
         aliasArray = new String[]{"scrigno"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.CHEST, "baule", "Un baule di legno antico, chissà che ci sarà dentro...", alias);
+        object = new AdvObject(ObjectId.CHEST, "baule", "Un baule di legno antico, chissa' che ci sara' dentro...", alias);
         addObjectRequest(object);
         
         aliasArray = new String[]{"quadro"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DANCE, "Danza di Matisse", "Lo splendido quadro di Matisse, con 5 danzatori...chissà se ha questo numero come password di qualcosa...", alias);
+        object = new AdvObject(ObjectId.DANCE, "Danza di Matisse", "Lo splendido quadro di Matisse, con 5 danzatori...chissa' se ha questo numero come password di qualcosa...", alias);
         addObjectRequest(object);
         
         
@@ -195,25 +195,25 @@ public class ClientManager {
         
         aliasArray = new String[]{"cuccia del cane"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DOGHOUSE, "cuccia","La cuccia del cane del magnate...ma il cane non si fa vedere...c'è solo una medaglietta dentro...", alias);
+        object = new AdvObject(ObjectId.DOGHOUSE, "cuccia","La cuccia del cane del magnate...ma il cane non si fa vedere...c'e' solo una medaglietta dentro...", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DOG_TAG, "medaglietta","La medaglietta del cane....guss a caratteri cubitali...forse ti può essere utile!", alias);
+        object = new AdvObject(ObjectId.DOG_TAG, "medaglietta","La medaglietta del cane....guss a caratteri cubitali...forse ti puo' essere utile!", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DOORKNOB, "pomello","Il pomello della porta della stanza dei quadri...è molto strano...prova ad aprire la porta usandolo!", alias);
+        object = new AdvObject(ObjectId.DOORKNOB, "pomello","Il pomello della porta della stanza dei quadri...e' molto strano...prova ad aprire la porta usandolo!", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{"letto"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DOUBLE_BED, "letto matrimoniale","Un letto megalodontico, chissà chi l'ha progettato....ovviamente non puoi rubarlo", alias);
+        object = new AdvObject(ObjectId.DOUBLE_BED, "letto matrimoniale","Un letto megalodontico, chissa' chi l'ha progettato....ovviamente non puoi rubarlo", alias);
         addObjectRequest(object);
         
         
@@ -232,19 +232,19 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DUMBBELL, "manubrio","Un manubrio da palestra....! chissà se lo specchio resiste al suo impatto...", alias);
+        object = new AdvObject(ObjectId.DUMBBELL, "manubrio","Un manubrio da palestra....! chissa' se lo specchio resiste al suo impatto...", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.ELECTRIC_SAW, "sega elettrica","Una sega elettrica circolare già carica....chissà per cosa la usa...ma la finestra del bagno probabilmente vuole essere aperta in questo modo...", alias);
+        object = new AdvObject(ObjectId.ELECTRIC_SAW, "sega elettrica","Una sega elettrica circolare gia' carica....chissa' per cosa la usa...ma la finestra del bagno probabilmente vuole essere aperta in questo modo...", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{"scanner"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.FINGERPRINT_SCANNER, "scanner impronta digitale","Lo scanner di impronte digitali della porta blindata del vault...sicuramente non è il modo adatto per entrare nel vault....", alias);
+        object = new AdvObject(ObjectId.FINGERPRINT_SCANNER, "scanner impronta digitale","Lo scanner di impronte digitali della porta blindata del vault...sicuramente non e' il modo adatto per entrare nel vault....", alias);
         addObjectRequest(object);
         
         
@@ -255,7 +255,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.FUEL_CAN, "tanica","Una tanica che sà di benzina....sarebbe curioso prendere in prestito la benzina dalla macchina...", alias);
+        object = new AdvObject(ObjectId.FUEL_CAN, "tanica","Una tanica che sa' di benzina....sarebbe curioso prendere in prestito la benzina dalla macchina...", alias);
         addObjectRequest(object);
         
         
@@ -304,7 +304,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.INNER_SAFE, "cassaforte interna","Un'altra cassaforte da aprire...quel tale del magnate avrà sicuramente nascosto altre chiavi qui dentro...", alias);
+        object = new AdvObject(ObjectId.INNER_SAFE, "cassaforte interna","Un'altra cassaforte da aprire...quel tale del magnate avra' sicuramente nascosto altre chiavi qui dentro...", alias);
         addObjectRequest(object);
         
         aliasArray = new String[]{};
@@ -320,7 +320,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.KITCHEN_TABLE, "tavolo","Il grande tavolo della cucina, grandioso, con intagli antichi...chissà da dove l'hanno preso", alias);
+        object = new AdvObject(ObjectId.KITCHEN_TABLE, "tavolo","Il grande tavolo della cucina, grandioso, con intagli antichi...chissa' da dove l'hanno preso", alias);
         addObjectRequest(object);
         
         
@@ -338,7 +338,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.LEFT_SHELVING_UNIT, "scaffale sinistro","Uno scaffale con un sacco di roba mai usata....c'è anche un detersivo mezzo vuoto!", alias);
+        object = new AdvObject(ObjectId.LEFT_SHELVING_UNIT, "scaffale sinistro","Uno scaffale con un sacco di roba mai usata....c'e' anche un detersivo mezzo vuoto!", alias);
         addObjectRequest(object);
         
         aliasArray = new String[]{};
@@ -361,19 +361,19 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.LIVINGROOM_WEST_DOOR, "porta","La porta della palestra....è blindata...ha una serratura che sembra molto difficile da scassinare...dovresti fare leva con qualcosa...", alias);
+        object = new AdvObject(ObjectId.LIVINGROOM_WEST_DOOR, "porta","La porta della palestra....e' blindata...ha una serratura che sembra molto difficile da scassinare...dovresti fare leva con qualcosa...", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.LOCKERS, "armadietti","Armadietti del caveau...non hanno caramelle all'interno...prenditi tutto quello che non è tuo...", alias);
+        object = new AdvObject(ObjectId.LOCKERS, "armadietti","Armadietti del caveau...non hanno caramelle all'interno...prenditi tutto quello che non e' tuo...", alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.LUGGAGE_OBJECTS_LIST, "lista oggetti valigia","La lista degli oggetti da portare in valigia! il magnate è in vacanza....quindi posso restare un altro po' a casa loro!", alias);
+        object = new AdvObject(ObjectId.LUGGAGE_OBJECTS_LIST, "lista oggetti valigia","La lista degli oggetti da portare in valigia! il magnate e' in vacanza....quindi posso restare un altro po' a casa loro!", alias);
         addObjectRequest(object);
         
         
@@ -402,7 +402,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.OUTER_SAFE, "cassaforte", "La cassaforte del magnate...un tastierino non funzionante...chissà cosa nasconderà al suo interno...",alias);
+        object = new AdvObject(ObjectId.OUTER_SAFE, "cassaforte", "La cassaforte del magnate...un tastierino non funzionante...chissa' cosa nascondera' al suo interno...",alias);
         addObjectRequest(object);
         
         
@@ -413,7 +413,7 @@ public class ClientManager {
         
         aliasArray = new String[]{"fotografie"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.PHOTO_ALBUM, "album fotografico", "Quante foto del magnate...come si è divertito! ora smettila...vai a rubare!",alias);
+        object = new AdvObject(ObjectId.PHOTO_ALBUM, "album fotografico", "Quante foto del magnate...come si e' divertito! ora smettila...vai a rubare!",alias);
         addObjectRequest(object);
         
         
@@ -436,7 +436,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.RIGHT_SHELVING_UNIT, "scaffale destro", "lo scaffale più pieno che tu abbia mai visto....qualche pila...diverse taniche...facci qualcosa!",alias);
+        object = new AdvObject(ObjectId.RIGHT_SHELVING_UNIT, "scaffale destro", "lo scaffale piu' pieno che tu abbia mai visto....qualche pila...diverse taniche...facci qualcosa!",alias);
         addObjectRequest(object);
         
         
@@ -500,7 +500,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.SPOON, "cucchiaio", "Che bel cucchiaio.... da quanto non ne vedi uno cosi', è speciale...forse ti serve per aprire qualcosa...!",alias);
+        object = new AdvObject(ObjectId.SPOON, "cucchiaio", "Che bel cucchiaio.... da quanto non ne vedi uno cosi', e' speciale...forse ti serve per aprire qualcosa...!",alias);
         addObjectRequest(object);
         
         
@@ -570,13 +570,13 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.TUBE,"tubo", "Un tubo di gomma...chissà se puoi riempire la tenica di benzina con questo....",alias);
+        object = new AdvObject(ObjectId.TUBE,"tubo", "Un tubo di gomma...chissa' se puoi riempire la tenica di benzina con questo....",alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{"tv"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.TV,"televisione", "Una televisione enorme...ma è fissata bene al muro...forse hai voglia di accenderla?",alias);
+        object = new AdvObject(ObjectId.TV,"televisione", "Una televisione enorme...ma e' fissata bene al muro...forse hai voglia di accenderla?",alias);
         addObjectRequest(object);
         
         
@@ -625,7 +625,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.WASH_BASIN,"lavandino", "Un lavandino normalissimo...inutile e stupido come te...continua a rubare che è meglio!",alias);
+        object = new AdvObject(ObjectId.WASH_BASIN,"lavandino", "Un lavandino normalissimo...inutile e stupido come te...continua a rubare che e' meglio!",alias);
         addObjectRequest(object);
         
         
@@ -637,7 +637,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.WEDDING_RINGS,"fedi", "Le fedi preziosissime del magnate e della moglie...giù nello zaino!",alias);
+        object = new AdvObject(ObjectId.WEDDING_RINGS,"fedi", "Le fedi preziosissime del magnate e della moglie...giu' nello zaino!",alias);
         addObjectRequest(object);
         
         aliasArray = new String[]{};
@@ -647,7 +647,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.WRENCH,"chiave inglese", "Una chiave inglese...può essere sempre utile...",alias);
+        object = new AdvObject(ObjectId.WRENCH,"chiave inglese", "Una chiave inglese...puo' essere sempre utile...",alias);
         addObjectRequest(object);
         
         
