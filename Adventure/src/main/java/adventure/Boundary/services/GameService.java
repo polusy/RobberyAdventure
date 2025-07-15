@@ -12,6 +12,8 @@ import adventure.Entity.types.RobberyAdventure;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.lang.reflect.Type;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -47,20 +49,20 @@ public class GameService {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addGameSaving(String jsonDatabaseGameTable) throws SQLException {
+    public Response addGameSaving(String jsonDatabaseGameTable) throws SQLException, JsonProcessingException {
         
-            Gson gson = new Gson();
-            DatabaseGameTable databaseGameTable = gson.fromJson(jsonDatabaseGameTable, DatabaseGameTable.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            DatabaseGameTable databaseGameTable = objectMapper.readValue(jsonDatabaseGameTable, DatabaseGameTable.class);
             String gameId = databaseGameTable.getId();
             RobberyAdventure robberyAdventure = databaseGameTable.getRobberyAdventure();
 
             String jsonGameDescription = null;
 
-                jsonGameDescription = gson.toJson(robberyAdventure, RobberyAdventure.class);
+            jsonGameDescription = objectMapper.writeValueAsString(robberyAdventure);
 
             Boolean gameAdded = databaseManager.addGame(gameId, jsonGameDescription);
 
-            return Response.ok(gson.toJson(gameAdded), MediaType.APPLICATION_JSON).build();
+            return Response.ok(objectMapper.writeValueAsBytes(gameAdded), MediaType.APPLICATION_JSON).build();
     }
     
     
@@ -78,15 +80,15 @@ public class GameService {
     @GET
     @Path("/allnames")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllGameSaving() throws SQLException{
+    public Response getAllGameSaving() throws SQLException, JsonProcessingException{
         
-        Gson gson = new Gson();
+        ObjectMapper objectMapper = new ObjectMapper();
         
         Set<String> gameIds = databaseManager.getAllGameNames();
         
         Type type = new TypeToken<Set<String>>(){}.getType();
         
-        String jsonAllGameNames = gson.toJson(gameIds, type);
+        String jsonAllGameNames = objectMapper.writeValueAsString(gameIds);
         return Response.ok(jsonAllGameNames, MediaType.APPLICATION_JSON).build();
         
     }
