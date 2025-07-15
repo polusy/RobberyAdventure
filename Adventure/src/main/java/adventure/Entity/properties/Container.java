@@ -41,5 +41,11 @@ public class Container extends Property{
     public boolean hasObject(ObjectId objectId){
         return objects.contains(objectId);
     }
+
+    public Set<ObjectId> getObjects() {
+        return objects;
+    }
+    
+    
     
 }
