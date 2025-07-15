@@ -3334,10 +3334,14 @@ public class RobberyAdventure extends GameDescription{
                 + "specchio, ma è bloccato! Eppure quel corrimano sembra proprio una maniglia!");
         
         
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, null, null);        
+        
+        
         // GameActionSpecification
         
         gameActionSpecification = new GameActionSpecification(completeCondition, 
-                null, passingConditionResult);        
+                failingConditionMessages, passingConditionResult);        
         
         
         //adding object to room
