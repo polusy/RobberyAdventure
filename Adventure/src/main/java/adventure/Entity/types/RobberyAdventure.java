@@ -2339,21 +2339,23 @@ public class RobberyAdventure extends GameDescription{
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.FUEL_CAN, objectId});
         inventoryConditionOptions.add(inventoryCondition);
         
-        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
-        propertyWithValueConstraints.add(propertyValue);
-        
-        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
-        
-        objectsConditions.put(objectId, objectCondition);
-        
-        propertyWithValueConstraints = new HashSet<>();
-
         propertyValue = new PropertyValue(PropertyType.FILLABLE, true);
         propertyWithValueConstraints.add(propertyValue);
         
         objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
         
         objectsConditions.put(ObjectId.FUEL_CAN, objectCondition);
+        
+
+        
+        propertyWithValueConstraints = new HashSet<>();
+        
+        propertyValue = new PropertyValue(PropertyType.ACTIVATABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
         
         
         completeCondition = new CompleteCondition(inventoryConditionOptions, objectsConditions);
