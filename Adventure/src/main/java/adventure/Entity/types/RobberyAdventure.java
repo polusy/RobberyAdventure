@@ -93,8 +93,8 @@ public class RobberyAdventure extends GameDescription{
         
         message = "Hai finalmente raggiunto il numero civico della via che ti eri appuntato sul taccuino, appena sotto la "
                 + "lista della spesa dello scorso mercoledi' " + System.lineSeparator() + "Per fortuna questa volta non si "
-                + "tratta del solito condominio di sette piani ..." + System.lineSeparator() + "ti ricordi ancora il fiatone dopo quelle otto interminabili "
-                + "rampe di scale" + System.lineSeparator() + " per poi accorgerti, una volta arrivato sopra, "
+                + "tratta del solito condominio di sette piani con l'ascensore rotto ..." + System.lineSeparator() + "ti ricordi ancora il fiatone dopo quelle otto interminabili "
+                + "rampe di scale" + System.lineSeparator() + "per poi accorgerti, una volta arrivato sopra, "
                 + "che l'appartamento si trovava in realta' due isolati affianco ... " + System.lineSeparator() + 
                  System.lineSeparator() + "Ti trovi sul marciapiede davanti alla villa e non vedi l'ora di iniziare... "
                 + System.lineSeparator() ;
