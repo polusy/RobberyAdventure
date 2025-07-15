@@ -19,8 +19,8 @@ public interface GameObserver {
     
     /**
      *
-     * @param gameDescription
-     * @param parserOutput
+     * @param gameDescription Descrizione corrente del gioco.
+     * @param parserOutput output del parser
      * @param out
      * @throws NotValidSentenceException
      * 

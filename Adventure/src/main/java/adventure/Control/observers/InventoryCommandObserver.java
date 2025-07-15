@@ -21,10 +21,11 @@ public class InventoryCommandObserver implements GameObserver{
     
     /**
      *
-     * @param gameDescription
-     * @param parserOutput
+     * @param game Descrizione di gioco corrente
+     * @param parserOutput Rappresenta l'output del parser al momento del parsing della stringa inserita nell'input stream
+     * dell'utente attraverso CLI.
      * @param out
-     * @throws NotValidSentenceException
+     * @throws NotValidSentenceException Se l'utente inserisce una frase non corretta (contestualmente al comando di visual. dell'inventario).
      * 
      * Il metodo costruisce una stringa contenente tutti i nomi degli oggetti dell'inventario.
      */
@@ -38,6 +39,7 @@ public class InventoryCommandObserver implements GameObserver{
 
 	StringBuilder inventoryItemsString = new StringBuilder("Il tuo inventario: " + System.lineSeparator());
 	
+        //pipeline per collezionare i nomi degli oggetti in una lista
 	List<String> objectNames = gameDescription.getInventory().getObjects().stream()
 		.map(object -> object.getName())
 		.collect(Collectors.toList());
