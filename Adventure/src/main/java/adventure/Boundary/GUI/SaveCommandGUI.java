@@ -7,6 +7,9 @@ package adventure.Boundary.GUI;
 import adventure.Boundary.ClientManager;
 import adventure.Entity.types.RobberyAdventure;
 import javax.swing.JOptionPane;
+
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 /**
  *
  * @author Paolo
@@ -93,7 +96,10 @@ public class SaveCommandGUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String newSavingName = jTextField1.getText();
-        Boolean gameAlreadyExisted = clientManager.addGameSavingRequest(newSavingName, robberyAdventure);
+        Boolean gameAlreadyExisted = false;
+        try{
+             gameAlreadyExisted = clientManager.addGameSavingRequest(newSavingName, robberyAdventure);
+        }catch(JsonProcessingException exception){System.out.println(exception.getMessage());};
         
         if (gameAlreadyExisted){
             JOptionPane.showMessageDialog(rootPane,"Nome del salvataggio già esistente!");

@@ -26,7 +26,7 @@ public class SaveCommandObserver implements TechnicalObserver{
     
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException {
         
-        if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
+        if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
         
