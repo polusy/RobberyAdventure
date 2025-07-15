@@ -15,14 +15,27 @@ import java.util.List;
 public class InventoryCondition {
     final private List<ObjectId> necessaryObjects;
 
+    /**
+     *
+     * @param necessaryObjects
+     */
     public InventoryCondition(List<ObjectId> necessaryObjects) {
         this.necessaryObjects = necessaryObjects;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ObjectId> getNecessaryObjects() {
         return necessaryObjects;
     }
     
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean contains(AdvObject object){
         if (necessaryObjects.contains(object))
             return true;
@@ -31,6 +44,11 @@ public class InventoryCondition {
         
     }
     
+    /**
+     *
+     * @param objectId
+     * @return
+     */
     public boolean contains(ObjectId objectId){
     if (necessaryObjects.contains(objectId))
         return true;

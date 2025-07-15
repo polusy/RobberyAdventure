@@ -15,10 +15,21 @@ import adventure.identifiers.PropertyType;
  * @author utente
  */
 public class PickUpCommandAnalyzer extends CommandAnalyzer{
+
+    /**
+     *
+     */
     public PickUpCommandAnalyzer(){
         super(" Pensi veramente di riuscire a mettere questa cosa nello zaino!? ");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	return analyzeUnaryCommand(parserOutput, PropertyType.PICKUPABLE, errorMessage);

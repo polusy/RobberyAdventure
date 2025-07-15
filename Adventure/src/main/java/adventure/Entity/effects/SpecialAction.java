@@ -14,6 +14,11 @@ import adventure.exceptions.EndGameException;
  */
 public interface SpecialAction {
     
+    /**
+     *
+     * @throws PasswordGuessedException
+     * @throws EndGameException
+     */
     public void execute() throws PasswordGuessedException, EndGameException;
     
 }

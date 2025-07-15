@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Breakable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Breakable(boolean value){
         super(PropertyType.BREAKABLE, value);
     }

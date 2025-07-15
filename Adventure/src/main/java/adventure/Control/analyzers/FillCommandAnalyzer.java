@@ -18,10 +18,21 @@ import adventure.identifiers.PropertyType;
  */
 public class FillCommandAnalyzer extends CommandAnalyzer{
     
+    /**
+     *
+     */
     public FillCommandAnalyzer(){
         super("Cosa stai cercando di riempire? Guarda meglio...");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException {

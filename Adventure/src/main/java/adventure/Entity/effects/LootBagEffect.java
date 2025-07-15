@@ -14,14 +14,26 @@ public class LootBagEffect {
 
     private ObjectId addingObject;
 
+    /**
+     *
+     * @param addingObject
+     */
     public LootBagEffect(ObjectId addingObject) {
         this.addingObject = addingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getAddingObject() {
         return addingObject;
     }
 
+    /**
+     *
+     * @param addingObject
+     */
     public void setAddingObject(ObjectId addingObject) {
         this.addingObject = addingObject;
     }

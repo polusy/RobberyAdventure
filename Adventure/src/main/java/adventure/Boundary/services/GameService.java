@@ -43,6 +43,12 @@ public class GameService {
         }
     }
     
+    /**
+     *
+     * @param jsonDatabaseGameTable
+     * @return
+     * @throws SQLException
+     */
     @PUT
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -63,7 +69,12 @@ public class GameService {
             return Response.ok(gson.toJson(gameAdded), MediaType.APPLICATION_JSON).build();
     }
     
-    
+    /**
+     *
+     * @param gameId
+     * @return
+     * @throws SQLException
+     */
     @GET
     @Path("/{gameId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +85,11 @@ public class GameService {
         
     }
     
-    
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     @GET
     @Path("/allnames")
     @Produces(MediaType.APPLICATION_JSON)

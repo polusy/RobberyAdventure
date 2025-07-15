@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class NotValidTokenException extends Exception {
     final private String message = "Token is not valid";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }    
 }

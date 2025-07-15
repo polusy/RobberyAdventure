@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class InconsistentInitializationException extends Exception {
     final private String message = "Inconsistent initialization attempt";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }
 }

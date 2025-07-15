@@ -19,6 +19,13 @@ public class FailingConditionMessages {
     Map<ObjectId, Map<PropertyType,String>> failingObjectsConditionsMessages;
     Map<ObjectId, String> failingVisibilityConditionMessages;
 
+    /**
+     *
+     * @param missingNecessaryObjectsMessages
+     * @param failingInventoryConditionMessage
+     * @param failingObjectsConditionsMessages
+     * @param failingVisibilityConditionMessages
+     */
     public FailingConditionMessages(Map<ObjectId, String> missingNecessaryObjectsMessages, String failingInventoryConditionMessage, Map<ObjectId, Map<PropertyType, String>> failingObjectsConditionsMessages, Map<ObjectId, String> failingVisibilityConditionMessages) {
         this.missingNecessaryObjectsMessages = missingNecessaryObjectsMessages;
         this.failingInventoryConditionMessage = failingInventoryConditionMessage;
@@ -26,7 +33,11 @@ public class FailingConditionMessages {
         this.failingVisibilityConditionMessages = failingVisibilityConditionMessages;
     }
     
-    
+    /**
+     *
+     * @param conditionEvaluationResult
+     * @return
+     */
     public String getMessage(ConditionEvaluationResult conditionEvaluationResult){
         String failingMessage = null;
         
@@ -49,19 +60,34 @@ public class FailingConditionMessages {
         return failingMessage;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public Map<ObjectId, String> getMissingNecessaryObjectsMessages() {
         return missingNecessaryObjectsMessages;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFailingInventoryConditionMessage() {
         return failingInventoryConditionMessage;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<ObjectId, Map<PropertyType, String>> getFailingObjectsConditionsMessages() {
         return failingObjectsConditionsMessages;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<ObjectId, String> getFailingVisibilityConditionMessages() {
         return failingVisibilityConditionMessages;
     }

@@ -34,6 +34,12 @@ public class ObjectService {
         }
     }
     
+    /**
+     *
+     * @param jsonObject
+     * @return
+     * @throws SQLException
+     */
     @PUT
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,7 +59,12 @@ public class ObjectService {
        return Response.ok().build();
     }
     
-    
+    /**
+     *
+     * @param objectIdString
+     * @return
+     * @throws SQLException
+     */
     @GET
     @Path("/{objectId}")
     @Produces(MediaType.APPLICATION_JSON)   

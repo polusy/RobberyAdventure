@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class IdAlreadyTakenException extends Exception {
     final private String message = "Id is already taken";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }    
 }

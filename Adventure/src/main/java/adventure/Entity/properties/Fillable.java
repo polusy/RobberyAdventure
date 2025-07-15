@@ -11,6 +11,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Fillable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Fillable(boolean value){
         super(PropertyType.FILLABLE, value);
     }

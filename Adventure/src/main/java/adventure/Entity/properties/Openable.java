@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Openable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Openable(boolean value){
         super(PropertyType.OPENABLE, value);
     }

@@ -18,11 +18,20 @@ public class Container extends Property{
     
    private final Set<ObjectId> objects;
    
-   public Container(ObjectId[] objects){
+    /**
+     *
+     * @param objects
+     */
+    public Container(ObjectId[] objects){
        this.objects = new HashSet<>(Arrays.asList(objects));
    }
    
-   public void addObject(ObjectId objectId)throws DuplicateException {
+    /**
+     *
+     * @param objectId
+     * @throws DuplicateException
+     */
+    public void addObject(ObjectId objectId)throws DuplicateException {
        
        if (objects.contains(objectId))
            throw new DuplicateException();
@@ -30,6 +39,11 @@ public class Container extends Property{
        objects.add(objectId);    
    }
    
+    /**
+     *
+     * @param objectId
+     * @throws NoSuchElementException
+     */
     public void removeObject(ObjectId objectId)throws NoSuchElementException {
        
        if (!objects.contains(objectId))
@@ -38,6 +52,11 @@ public class Container extends Property{
        objects.remove(objectId); 
    }
     
+    /**
+     *
+     * @param objectId
+     * @return
+     */
     public boolean hasObject(ObjectId objectId){
         return objects.contains(objectId);
     }

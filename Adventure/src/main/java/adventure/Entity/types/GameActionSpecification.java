@@ -25,6 +25,13 @@ public class GameActionSpecification {
     private final FailingConditionMessages failingConditionMessages;
     private final PassingConditionResult passingConditionResult;
 
+    /**
+     *
+     * @param completeCondition
+     * @param failingConditionMessages
+     * @param passingConditionResult
+     * @throws InconsistentInitializationException
+     */
     public GameActionSpecification(CompleteCondition completeCondition, FailingConditionMessages failingConditionMessages, PassingConditionResult passingConditionResult) throws InconsistentInitializationException{
         
         
@@ -79,26 +86,26 @@ public class GameActionSpecification {
         this.passingConditionResult = passingConditionResult;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
+    /**
+     *
+     * @return
+     */
     public CompleteCondition getCompleteCondition() {
         return completeCondition;
     }
 
+    /**
+     *
+     * @return
+     */
     public FailingConditionMessages getFailingConditionMessages() {
         return failingConditionMessages;
     }
 
+    /**
+     *
+     * @return
+     */
     public PassingConditionResult getPassingConditionResult() {
         return passingConditionResult;
     }

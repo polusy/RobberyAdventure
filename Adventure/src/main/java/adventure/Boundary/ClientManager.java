@@ -30,6 +30,10 @@ public class ClientManager {
     
     private final WebTarget target;
     
+    /**
+     *
+     * @param object
+     */
     public void addObjectRequest(AdvObject object){
         
         Gson gson = new Gson();
@@ -37,6 +41,11 @@ public class ClientManager {
         target.path("object/add").request(MediaType.APPLICATION_JSON).put(Entity.entity(jsonObject, MediaType.APPLICATION_JSON));
     }
     
+    /**
+     *
+     * @param objectId
+     * @return
+     */
     public AdvObject getObjectRequest(ObjectId objectId){
         Response response = target.path("object/" + objectId.name()).request(MediaType.APPLICATION_JSON).get();
 	AdvObject object = response.readEntity(AdvObject.class);
@@ -45,11 +54,21 @@ public class ClientManager {
 	return object;
     }
     
+    /**
+     *
+     * @param target
+     */
     public ClientManager(String target){
         Client client = ClientBuilder.newClient();
         this.target = client.target(target);
     }
     
+    /**
+     *
+     * @param gameId
+     * @param gameDescription
+     * @return
+     */
     public boolean addGameSavingRequest(String gameId, GameDescription gameDescription){
         
         Gson gson = new Gson();
@@ -61,12 +80,21 @@ public class ClientManager {
         
     }
     
+    /**
+     *
+     * @param gameId
+     * @return
+     */
     public RobberyAdventure getGameSavingRequest(String gameId){
         
         Response response = target.path("game/" + gameId).request(MediaType.APPLICATION_JSON).get();
         return response.readEntity(RobberyAdventure.class);
     }
     
+    /**
+     *
+     * @return
+     */
     public Set<String> getAllGamesNamesRequest(){
         
         Response response = target.path("game/allnames").request(MediaType.APPLICATION_JSON).get();
@@ -76,6 +104,9 @@ public class ClientManager {
         return response.readEntity(genericType);
     }
     
+    /**
+     *
+     */
     public void populate(){
         
         String[] aliasArray = {"bendaggi"};

@@ -21,10 +21,21 @@ import adventure.identifiers.PropertyType;
  */
 public class LookAtCommandAnalyzer extends CommandAnalyzer {
     
+    /**
+     *
+     */
     public LookAtCommandAnalyzer(){
         super("");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
     {
 	CommandAnalysisResult commandAnalysisResult = new CommandAnalysisResult(null, null, null, true, null);

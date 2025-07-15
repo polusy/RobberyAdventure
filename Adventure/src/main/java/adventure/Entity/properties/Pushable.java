@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Pushable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Pushable(boolean value){
         super(PropertyType.PUSHABLE, value);
     }

@@ -18,17 +18,30 @@ public class ObjectCondition {
     private Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();
     private final boolean visibility;
 
+    /**
+     *
+     * @param propertyWithValueConstraints
+     * @param visibility
+     */
     public ObjectCondition(Set<PropertyValue> propertyWithValueConstraints, boolean visibility) {
         this.propertyWithValueConstraints = propertyWithValueConstraints;
         this.visibility = visibility;
     }
     
-
-
+    /**
+     *
+     * @return
+     */
     public boolean getVisibility() {
         return visibility;
     }
     
+    /**
+     *
+     * @param propertyType
+     * @return
+     * @throws NoSuchElementException
+     */
     public PropertyValue getPropertyValue(PropertyType propertyType) throws NoSuchElementException {
         
         PropertyValue propertyValue = null;

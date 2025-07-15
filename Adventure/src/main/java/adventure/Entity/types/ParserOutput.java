@@ -23,17 +23,30 @@ public class ParserOutput {
     private Map<AdvObject, Preposition> objects = new HashMap<>();
     private Room doorRoom = null;
 
+    /**
+     *
+     * @param command
+     * @param commandToken
+     */
     public ParserOutput(Command command, String commandToken) {
         this.command = command;
         this.commandToken = commandToken;
     }
     
-    
-    
+    /**
+     *
+     * @param object
+     */
     public void addObject(AdvObject object){
         objects.put(object, null);
     }
     
+    /**
+     *
+     * @param object
+     * @param preposition
+     * @throws NoSuchElementException
+     */
     public void addPreposition(AdvObject object, Preposition preposition) throws NoSuchElementException 
     { 
 	if  (this.containsObject(object))
@@ -42,6 +55,11 @@ public class ParserOutput {
             throw new NoSuchElementException();
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     public Map.Entry<AdvObject, Preposition> getExpression(AdvObject object)
     {
 	Set<Map.Entry<AdvObject, Preposition>> entrySet = objects.entrySet();
@@ -58,34 +76,64 @@ public class ParserOutput {
 	return returnedValue;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean containsObject(AdvObject object)
     {
             return objects.containsKey(object);
     }
 
+    /**
+     *
+     * @param room
+     */
     public void addRoom(Room room){this.doorRoom = room;}
 
+    /**
+     *
+     * @return
+     */
     public Room getDoorRoom(){return this.doorRoom; }
 
+    /**
+     *
+     * @return
+     */
     public Map<AdvObject, Preposition> getObjects() {
         return objects;
     }
 
+    /**
+     *
+     * @return
+     */
     public Command getCommand() {
         return command;
     }
 
+    /**
+     *
+     * @param command
+     */
     public void setCommand(Command command) {
         this.command = command;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public String getCommandToken() {
         return commandToken;
     }
     
-    
-
+    /**
+     *
+     * @return
+     */
     public boolean hasPreposition()
     {
             boolean foundPreposition = false;
@@ -99,6 +147,11 @@ public class ParserOutput {
             return foundPreposition;
     }
 
+    /**
+     *
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObjectWithPreposition() throws NoSuchElementException
     {
             if (!this.hasPreposition())
@@ -112,6 +165,11 @@ public class ParserOutput {
             return objectWithPreposition;
     }
 
+    /**
+     *
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getUniqueObjectWithoutPreposition() throws NoSuchElementException
     {
             if (!this.hasPreposition())

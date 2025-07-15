@@ -18,10 +18,21 @@ import adventure.identifiers.PropertyType;
  */
 public class BreakCommandAnalyzer extends CommandAnalyzer{
     
-        public BreakCommandAnalyzer(){
+    /**
+     *
+     */
+    public BreakCommandAnalyzer(){
         super("Non pensi che dovresti trovare un modo migliore per sfogare le tue frustrazioni?");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException {

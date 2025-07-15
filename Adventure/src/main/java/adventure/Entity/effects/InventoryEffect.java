@@ -14,15 +14,28 @@ public class InventoryEffect {
     private ObjectId addingObject;
     private ObjectId removingObject;
 
+    /**
+     *
+     * @param addingObject
+     * @param removingObject
+     */
     public InventoryEffect(ObjectId addingObject, ObjectId removingObject) {
         this.addingObject = addingObject;
         this.removingObject = removingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getAddingObject() {
         return addingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getRemovingObject() {
         return removingObject;
     }

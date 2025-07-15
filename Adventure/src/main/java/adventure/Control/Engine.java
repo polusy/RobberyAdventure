@@ -52,7 +52,10 @@ public class Engine {
     private final Map<CommandType, GameObserver> gameObservers = new HashMap();
     private final PrintStream out;
     
-
+    /**
+     *
+     * @param game
+     */
     public Engine(GameDescription game){
         Set<String> stopwords = new HashSet();
         List<PrepositionType> prepositionTypes = Arrays.asList(PrepositionType.class.getEnumConstants());
@@ -98,6 +101,10 @@ public class Engine {
         
     }
 
+    /**
+     *
+     * @throws InconsistentInitializationException
+     */
     public void execute() throws InconsistentInitializationException{
         List<ParserOutput> parserOutputs = new ArrayList();
         boolean exit = false;
@@ -177,6 +184,14 @@ public class Engine {
         }
     }
 
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @return
+     * @throws EndGameException
+     * @throws NotValidSentenceException
+     */
     public boolean notifyTechnicalObservers(GameDescription game, ParserOutput parserOutput) 
             throws EndGameException, NotValidSentenceException {
         StringBuilder message = null;
@@ -193,6 +208,14 @@ public class Engine {
         return recognizedCommand;
     }
     
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @param out
+     * @return
+     * @throws NotValidSentenceException
+     */
     public boolean notifyGameObservers(GameDescription game, ParserOutput parserOutput, PrintStream out) 
             throws NotValidSentenceException {
         
@@ -207,7 +230,11 @@ public class Engine {
         return recognizedCommand;
     }
     
-    
+    /**
+     *
+     * @param args
+     * @throws InconsistentInitializationException
+     */
     public static void main(String[] args) throws InconsistentInitializationException{
         Engine engine = new Engine(new RobberyAdventure());
         engine.execute();

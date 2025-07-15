@@ -30,6 +30,10 @@ public class GameControl {
     final private Map<PropertyType, CommandType> propertyCommandCorrespondences = new HashMap();    
     
     // Constructor
+
+    /**
+     *
+     */
     
     public GameControl(){
 	
@@ -53,7 +57,13 @@ public class GameControl {
         } catch(DuplicateException exception){};
     }
 
-
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @throws AmbiguousCommandException
+     * @throws NotValidSentenceException
+     */
     public void disambiguateMove(GameDescription game, ParserOutput parserOutput) 
             throws AmbiguousCommandException, NotValidSentenceException {
         
@@ -132,8 +142,13 @@ public class GameControl {
         }
     }
 
-
-
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @param out
+     * @throws EndGameException
+     */
     public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
 	CommandType commandType = parserOutput.getCommand().getType();
 	String message = null;
@@ -261,7 +276,12 @@ public class GameControl {
             return null;
     }
 
-    
+    /**
+     *
+     * @param property
+     * @param command
+     * @throws DuplicateException
+     */
     public void addPropertyCommandCorrespondence(PropertyType property, CommandType command) throws DuplicateException {
 	if (propertyCommandCorrespondences.containsKey(property))
             throw new DuplicateException();

@@ -12,6 +12,10 @@ public class EndCommandGUI extends javax.swing.JDialog {
     
     private boolean gameEnded = false;
 
+    /**
+     *
+     * @return
+     */
     public boolean isGameEnded() {
         return gameEnded;
     }
@@ -20,6 +24,8 @@ public class EndCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form EndCommandGUI
+     * @param parent
+     * @param modal
      */
     public EndCommandGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

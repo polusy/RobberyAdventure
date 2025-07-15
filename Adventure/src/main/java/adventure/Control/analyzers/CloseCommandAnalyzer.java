@@ -16,10 +16,22 @@ import adventure.identifiers.PropertyType;
  * @author utente
  */
 public class CloseCommandAnalyzer extends CommandAnalyzer{
+
+    /**
+     *
+     */
     public CloseCommandAnalyzer(){
         super("Non puoi chiudere questo oggetto!");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, 
             AmbiguousCommandException
     {

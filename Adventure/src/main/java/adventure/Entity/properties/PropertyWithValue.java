@@ -16,6 +16,12 @@ public abstract class PropertyWithValue extends Property {
     final private PropertyType propertyType; 
 
     // Constructors
+
+    /**
+     *
+     * @param propertyType
+     * @param value
+     */
     
     public PropertyWithValue(PropertyType propertyType, boolean value) {
         this.propertyType = propertyType;
@@ -23,19 +29,37 @@ public abstract class PropertyWithValue extends Property {
     }
 
     // Getter methods
+
+    /**
+     *
+     * @return
+     */
     
     public boolean getValue() {
         return value;
     }
 
+    /**
+     *
+     * @return
+     */
     public PropertyType getType(){ return propertyType; }
     
     // Setter method
+
+    /**
+     *
+     * @param value
+     */
     
     public void setValue(boolean value) {
         this.value = value;
     }    
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -43,6 +67,11 @@ public abstract class PropertyWithValue extends Property {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

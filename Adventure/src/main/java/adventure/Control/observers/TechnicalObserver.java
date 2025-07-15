@@ -14,6 +14,15 @@ import adventure.Entity.types.ParserOutput;
  * @author utente
  */
 public interface TechnicalObserver {
+
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @param message
+     * @throws NotValidSentenceException
+     * @throws EndGameException
+     */
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) 
         throws NotValidSentenceException, EndGameException ;
 }

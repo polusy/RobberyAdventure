@@ -19,12 +19,21 @@ public class CompleteCondition {
     final private List<InventoryCondition> inventoryConditionOptions; 
     final private Map<ObjectId, ObjectCondition> objectsConditions;
 
+    /**
+     *
+     * @param inventoryConditionOptions
+     * @param objectsConditions
+     */
     public CompleteCondition(List<InventoryCondition> inventoryConditionOptions, Map<ObjectId, ObjectCondition> objectsConditions) {
         this.inventoryConditionOptions = inventoryConditionOptions;
         this.objectsConditions = objectsConditions;
     }
     
-    
+    /**
+     *
+     * @return
+     * @throws NoSuchElementException
+     */
     public InventoryCondition getUniqueInventoryCondition() throws NoSuchElementException{
 	if (inventoryConditionOptions != null && inventoryConditionOptions.size() == 1){
 		return inventoryConditionOptions.get(0);
@@ -34,10 +43,18 @@ public class CompleteCondition {
 	}
     }   
 
+    /**
+     *
+     * @return
+     */
     public List<InventoryCondition> getInventoryConditionOptions() {
         return inventoryConditionOptions;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<ObjectId, ObjectCondition> getObjectsConditions() {
         return objectsConditions;
     }

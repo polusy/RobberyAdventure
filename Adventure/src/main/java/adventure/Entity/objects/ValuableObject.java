@@ -20,6 +20,18 @@ public class ValuableObject extends InteractiveObject{
     
     private int value;
     
+    /**
+     *
+     * @param objectId
+     * @param name
+     * @param description
+     * @param brokenDescription
+     * @param alias
+     * @param visible
+     * @param gameActionSpecification
+     * @param value
+     * @throws InconsistentInitializationException
+     */
     public ValuableObject(ObjectId objectId, String name, String description,
             String brokenDescription, Set<String> alias, boolean visible,
             Map<Property,Map<CommandType, GameActionSpecification>> gameActionSpecification, int value)throws InconsistentInitializationException{
@@ -33,6 +45,10 @@ public class ValuableObject extends InteractiveObject{
 
     }
 
+    /**
+     *
+     * @return
+     */
     public int getValue() {
         return value;
     }

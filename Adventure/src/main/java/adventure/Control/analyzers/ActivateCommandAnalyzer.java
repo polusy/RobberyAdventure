@@ -18,10 +18,21 @@ import adventure.identifiers.PrepositionType;
  */
 public class ActivateCommandAnalyzer extends CommandAnalyzer{
     
-        public ActivateCommandAnalyzer(){
+    /**
+     *
+     */
+    public ActivateCommandAnalyzer(){
         super("Mi sembra impossibile attivare questo oggetto!");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, AmbiguousCommandException
     {

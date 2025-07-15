@@ -20,12 +20,21 @@ import java.io.IOException;
 public class ServerManager implements Runnable {
     private HttpServer genericServer;
     
+    /**
+     *
+     * @param stringUri
+     * @param portNumber
+     * @param service
+     */
     public ServerManager(String stringUri, int portNumber, Class<?> service){
         URI uri = UriBuilder.fromUri(stringUri).port(portNumber).build();
         ResourceConfig config = new ResourceConfig(service);
         genericServer = GrizzlyHttpServerFactory.createHttpServer(uri, config);
     }
 
+    /**
+     *
+     */
     @Override
     public void run()
     {
@@ -34,6 +43,10 @@ public class ServerManager implements Runnable {
         } catch (IOException exception){};
     }
 
+    /**
+     *
+     * @return
+     */
     public HttpServer getServer()
     {
         return genericServer;

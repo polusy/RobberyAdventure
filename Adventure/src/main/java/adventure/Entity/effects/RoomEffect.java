@@ -14,15 +14,28 @@ public class RoomEffect {
     final private ObjectId addingObject;
     final private ObjectId removingObject;
 
+    /**
+     *
+     * @param addingObject
+     * @param removingObject
+     */
     public RoomEffect(ObjectId addingObject, ObjectId removingObject) {
         this.addingObject = addingObject;
         this.removingObject = removingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getAddingObject() {
         return addingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getRemovingObject() {
         return removingObject;
     }

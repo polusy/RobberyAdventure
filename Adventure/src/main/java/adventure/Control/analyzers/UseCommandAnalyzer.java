@@ -18,10 +18,21 @@ import adventure.identifiers.PrepositionType;
  */
 public class UseCommandAnalyzer extends CommandAnalyzer{
     
+    /**
+     *
+     */
     public UseCommandAnalyzer(){
         super(" Non vorrai mica usare questa cosa! ");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException {
 	CommandAnalysisResult commandAnalysisResult =  analyzeBinaryCommand(parserOutput, PropertyType.USABLE, PrepositionType.USE, errorMessage);

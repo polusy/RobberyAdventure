@@ -16,10 +16,20 @@ import adventure.identifiers.PropertyType;
  */
 public class DropCommandAnalyzer extends CommandAnalyzer{
     
-        public DropCommandAnalyzer(){
+    /**
+     *
+     */
+    public DropCommandAnalyzer(){
         super(" Non hai questo oggetto nell'inventario...come pretendi di lasciarlo! ");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	CommandAnalysisResult commandAnalysisResult = analyzeUnaryCommand(parserOutput, PropertyType.PICKUPABLE, errorMessage);

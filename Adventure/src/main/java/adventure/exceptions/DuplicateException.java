@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class DuplicateException extends Exception {
     final private String message = "Duplicate element";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; } 
 }

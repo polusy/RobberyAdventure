@@ -16,10 +16,21 @@ import adventure.identifiers.PropertyType;
  * @author Paolo
  */
 public class MoveCommandAnalyzer extends CommandAnalyzer{
-        public MoveCommandAnalyzer(){
+
+    /**
+     *
+     */
+    public MoveCommandAnalyzer(){
         super("Non puoi spostare questo oggetto, e' inutile....");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {

@@ -25,6 +25,13 @@ import javax.swing.JFrame;
  */
 public class SaveCommandObserver implements TechnicalObserver{
     
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @param message
+     * @throws NotValidSentenceException
+     */
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException {
         
         if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)

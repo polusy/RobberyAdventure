@@ -20,6 +20,14 @@ public class AdvObject {
     private boolean visible;
 
     // Constructors
+
+    /**
+     *
+     * @param id
+     * @param name
+     * @param description
+     * @param alias
+     */
     
     public AdvObject(ObjectId id, String name, String description, Set<String> alias) {
         this.id = id;
@@ -28,6 +36,14 @@ public class AdvObject {
         this.alias = alias;
     }
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param description
+     * @param alias
+     * @param visible
+     */
     public AdvObject(ObjectId id, String name, String description, Set<String> alias, boolean visible) {
         this.id = id;
         this.name = name;
@@ -37,53 +53,98 @@ public class AdvObject {
     }
 
     // Getter methods
+
+    /**
+     *
+     * @return
+     */
     
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<String> getAlias() {
         return alias;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isVisible() { return visible; }
     
     // Setter method
+
+    /**
+     *
+     * @param visible
+     */
     public void setVisibility(boolean visible){
         this.visible = visible;
     }
 
+    /**
+     *
+     */
     public AdvObject() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @param alias
+     */
     public void setAlias(Set<String> alias) {
         this.alias = alias;
     }
     
-    
-    
-    
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -91,6 +152,11 @@ public class AdvObject {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

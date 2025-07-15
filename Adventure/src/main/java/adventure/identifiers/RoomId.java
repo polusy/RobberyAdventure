@@ -11,21 +11,88 @@ package adventure.identifiers;
 
 public enum RoomId {
     
-	SIDEWALK,
-	MIDDLE_GARDEN,
-	EAST_GARDEN,
-	WEST_GARDEN,
-	STAIRCASE,
-	GARAGE,
-	BATHROOM,
-	LIVING_ROOM,
-	GYM,
-	LAUNDRY,
-	KITCHEN,
-	BEDROOM,
-	LIBRARY,
-	SECRET_ROOM,
-	ANTE_VAULT,
-	VAULT,
-	PAINTINGS_ROOM;
+    /**
+     *
+     */
+    SIDEWALK,
+
+    /**
+     *
+     */
+    MIDDLE_GARDEN,
+
+    /**
+     *
+     */
+    EAST_GARDEN,
+
+    /**
+     *
+     */
+    WEST_GARDEN,
+
+    /**
+     *
+     */
+    STAIRCASE,
+
+    /**
+     *
+     */
+    GARAGE,
+
+    /**
+     *
+     */
+    BATHROOM,
+
+    /**
+     *
+     */
+    LIVING_ROOM,
+
+    /**
+     *
+     */
+    GYM,
+
+    /**
+     *
+     */
+    LAUNDRY,
+
+    /**
+     *
+     */
+    KITCHEN,
+
+    /**
+     *
+     */
+    BEDROOM,
+
+    /**
+     *
+     */
+    LIBRARY,
+
+    /**
+     *
+     */
+    SECRET_ROOM,
+
+    /**
+     *
+     */
+    ANTE_VAULT,
+
+    /**
+     *
+     */
+    VAULT,
+
+    /**
+     *
+     */
+    PAINTINGS_ROOM;
 }

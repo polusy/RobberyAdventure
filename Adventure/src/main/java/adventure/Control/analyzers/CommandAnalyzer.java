@@ -20,15 +20,39 @@ import adventure.exceptions.*;
  * @author Paolo
  */
 public abstract class CommandAnalyzer {
+
+    /**
+     *
+     */
     protected String errorMessage;
     
+    /**
+     *
+     * @param errorMessage
+     */
     public CommandAnalyzer(String errorMessage){
         this.errorMessage = errorMessage;
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException;
     
+    /**
+     *
+     * @param parserOutput
+     * @param propertyType
+     * @param errorMessage
+     * @return
+     * @throws NotValidSentenceException
+     */
     protected CommandAnalysisResult analyzeUnaryCommand(ParserOutput parserOutput, PropertyType propertyType, String errorMessage) throws NotValidSentenceException{
         
         InteractiveObject analyzedObject = null;
@@ -68,6 +92,16 @@ public abstract class CommandAnalyzer {
         return new CommandAnalysisResult(message, analyzedObject, null, analysisPassed, propertyType);
     }
     
+    /**
+     *
+     * @param parserOutput
+     * @param propertyType
+     * @param prepositionType
+     * @param errorMessage
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     protected CommandAnalysisResult analyzeBinaryCommand(ParserOutput parserOutput, PropertyType propertyType, PrepositionType prepositionType, String errorMessage) throws NotValidSentenceException, AmbiguousCommandException{
         String message = null;
 	InteractiveObject targetObject = null;

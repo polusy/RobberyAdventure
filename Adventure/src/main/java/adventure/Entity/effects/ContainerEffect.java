@@ -13,14 +13,26 @@ public class ContainerEffect {
     
     private ObjectId removingObject;
 
+    /**
+     *
+     * @param removingObject
+     */
     public ContainerEffect(ObjectId removingObject) {
         this.removingObject = removingObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getRemovingObject() {
         return removingObject;
     }
 
+    /**
+     *
+     * @param removingObject
+     */
     public void setRemovingObject(ObjectId removingObject) {
         this.removingObject = removingObject;
     }

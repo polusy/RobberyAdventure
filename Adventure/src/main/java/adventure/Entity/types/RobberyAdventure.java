@@ -42,11 +42,20 @@ public class RobberyAdventure extends GameDescription{
     
     private LootBag lootBag;
 
+    /**
+     *
+     * @return
+     */
     public LootBag getLootBag() {
         return lootBag;
     }
     
-    
+    /**
+     *
+     * @param id
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObjectById(ObjectId id) throws NoSuchElementException
     {
         try{
@@ -62,13 +71,12 @@ public class RobberyAdventure extends GameDescription{
         }
     }
         
-
-   
-    
-    
-    
-    
-    
+    /**
+     *
+     * @param object
+     * @throws DuplicateException
+     * @throws IllegalArgumentException
+     */
     public void addObjectToLootBag(AdvObject object)throws DuplicateException, IllegalArgumentException{
         
         if (lootBag.contains(object))
@@ -80,8 +88,12 @@ public class RobberyAdventure extends GameDescription{
             throw new IllegalArgumentException();
     }
     
-    
-    
+    /**
+     *
+     * @throws InconsistentInitializationException
+     * @throws PasswordGuessedException
+     * @throws EndGameException
+     */
     @Override
     public void init() throws InconsistentInitializationException, PasswordGuessedException, EndGameException{
         

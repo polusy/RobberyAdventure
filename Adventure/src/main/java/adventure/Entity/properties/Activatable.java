@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Activatable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Activatable(boolean value){
         super(PropertyType.ACTIVATABLE, value);
     }

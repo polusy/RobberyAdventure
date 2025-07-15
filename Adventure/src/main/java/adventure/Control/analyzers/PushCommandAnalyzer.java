@@ -16,10 +16,21 @@ import adventure.identifiers.PropertyType;
  * @author utente
  */
 public class PushCommandAnalyzer extends CommandAnalyzer{
+
+    /**
+     *
+     */
     public PushCommandAnalyzer(){
         super("Ma ti rendi conto che stai cercando di premere questo oggetto?!");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	return analyzeUnaryCommand(parserOutput, PropertyType.PUSHABLE, errorMessage);

@@ -17,6 +17,13 @@ import java.io.PrintStream;
  */
 public class LootBagCommandObserver implements GameObserver{
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @param out
+     * @throws NotValidSentenceException
+     */
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException{
         StringBuilder message = new StringBuilder("La tua refurtiva si compone di: ").append(System.lineSeparator());

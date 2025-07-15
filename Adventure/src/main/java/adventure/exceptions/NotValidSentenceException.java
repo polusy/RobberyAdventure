@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class NotValidSentenceException extends Exception {
     final private String message = "Comando non valido! Non puoi fare questa cosa";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }    
 }
