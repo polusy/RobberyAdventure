@@ -70,7 +70,8 @@ public class Engine {
         }
        
 	BiPredicate<String, Command> commandTester = (token, command) -> command.getName().equals(token) || command.getAlias().contains(token);
-	BiPredicate<String, AdvObject> objectTester = (token, object) -> object.getName().equals(token) || object.getAlias().contains(token);
+	BiPredicate<String, AdvObject> objectTester = (token, object) -> object.getName().toLowerCase().equals(token) || 
+                Utils.toLowerCaseStringList(new ArrayList(object.getAlias())).contains(token);
 	BiPredicate<String, Room> roomTester = (token, room) -> room.getName().equals(token);
 	BiPredicate<String, PrepositionType> prepositionTester = (token, preposition) -> preposition.getWords().contains(token);
 
