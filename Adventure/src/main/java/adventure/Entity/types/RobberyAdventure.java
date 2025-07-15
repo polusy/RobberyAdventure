@@ -3601,7 +3601,7 @@ public class RobberyAdventure extends GameDescription{
         this.addStandardGameActionSpecifications(gameActionSpecifications, property, objectId, 
                 null, ObjectId.INNER_SAFE, null, ValuableObject.class, 
                 "Ti sei impossessato della mazzetta di banconote e pensi di recarti subito in banca quando uscirai "
-                        + "da qui, peché con tutti i furti che vengono fatti negli appartamenti, non ti senti"
+                        + "da qui, perche' con tutti i furti che vengono fatti negli appartamenti, non ti senti"
                         + " sicuro se li conservi in casa tua", null);   
 
         
