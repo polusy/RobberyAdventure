@@ -25,7 +25,8 @@ public interface GameObserver {
      * @throws NotValidSentenceException
      * 
      * Il metodo esegue un update sul gioco, relativamente all'output del parser nella corrente interazione CLI,
-     * eseguendo possibilmente un print su un generico stream di output.
+     * eseguendo possibilmente un print su un generico stream di output, inoltre si accerta che il parserOutput
+     * sia corretto contestualmente al comando di gioco inserito.
      */
     public abstract void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out)
             throws NotValidSentenceException;
