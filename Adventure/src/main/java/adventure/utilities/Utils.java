@@ -111,7 +111,7 @@ public class Utils {
                 .map(s -> s.toLowerCase())
                 .collect(Collectors.toList());
         
-        return words;
+        return lowerCaseStringList;
     }
 
     
