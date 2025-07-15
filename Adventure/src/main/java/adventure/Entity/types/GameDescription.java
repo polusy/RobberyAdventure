@@ -49,6 +49,13 @@ public abstract class GameDescription {
         return inventory;
     }
     
+    
+    /**
+     *
+     * @return
+     */ 
+    public abstract String getWelcomeMessage();
+    
     /**
      *
      * @param id
