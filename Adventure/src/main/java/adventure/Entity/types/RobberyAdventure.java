@@ -378,14 +378,19 @@ public class RobberyAdventure extends GameDescription{
         // =================================================================================================
         
 
-            objectId = ObjectId.VAULT_DOOR;
-            
-            
-            gameActionSpecifications = new HashMap();
-            property = new Breakable(false);
-            gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
-            
-            commandType = CommandType.BREAK;        
+        objectId = ObjectId.VAULT_DOOR;
+
+
+        gameActionSpecifications = new HashMap();
+
+        property = new Openable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+        
+
+        property = new Breakable(false);
+        gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
+
+        commandType = CommandType.BREAK;        
         
         // CompleteCondition
         inventoryConditionOptions = new ArrayList<>();
@@ -405,7 +410,7 @@ public class RobberyAdventure extends GameDescription{
         
         propertyWithValueConstraints = new HashSet<>();
         
-        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyValue = new PropertyValue(PropertyType.BREAKABLE, false);
         propertyWithValueConstraints.add(propertyValue);
         
         objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
@@ -431,7 +436,7 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.get(ObjectId.THERMAL_LANCE).put(PropertyType.ACTIVATABLE, "La lancia termica deve essere attivata!");
         
         failingObjectsConditionsMessages.put(objectId, new HashMap<>());
-        failingObjectsConditionsMessages.get(objectId).put(PropertyType.OPENABLE, "La porta e' stata gia' distrutta");
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.BREAKABLE, "La porta e' stata gia' distrutta");
         
         failingVisibilityConditionMessages.put(ObjectId.THERMAL_LANCE, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         failingVisibilityConditionMessages.put(ObjectId.WELDING_MASK, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
@@ -481,8 +486,8 @@ public class RobberyAdventure extends GameDescription{
         gameActionSpecifications.put(new Container(containerObjects), null);
         
         
-        gameActionSpecifications.put(new Openable(false), new HashMap<CommandType, GameActionSpecification>());
         
+        property = new Openable(false);
         commandType = CommandType.OPEN;
         
         
@@ -520,6 +525,11 @@ public class RobberyAdventure extends GameDescription{
         // PassingConditionResult
         
         passingConditionMessage = "Purtroppo non hai la stessa impronta digitale del magnate..." ;
+        
+        
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, true);
+        propertyWithValueResults.add(propertyValue);
         
         passingConditionResult = new PassingConditionResult(null, passingConditionMessage); 
         
