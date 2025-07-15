@@ -1215,7 +1215,7 @@ public class RobberyAdventure extends GameDescription{
         null, null, InteractiveObject.class, "Sei riuscito ad aprire la botola, grandioso....", "Hai chiuso la botola" );
         
         
-        gameActionSpecifications = new HashMap();
+        
         property = new Usable(false);
         gameActionSpecifications.put(property, new HashMap<CommandType, GameActionSpecification>());
         
