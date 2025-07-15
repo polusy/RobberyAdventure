@@ -171,7 +171,7 @@ public class ClientManager {
         
         aliasArray = new String[]{"quadro"};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.DANCE, "la danza di Matisse", "Lo splendido quadro di Matisse, con 5 danzatori...chissà se ha questo numero come password di qualcosa...", alias);
+        object = new AdvObject(ObjectId.DANCE, "Danza di Matisse", "Lo splendido quadro di Matisse, con 5 danzatori...chissà se ha questo numero come password di qualcosa...", alias);
         addObjectRequest(object);
         
         
@@ -530,19 +530,19 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.THE_KISS,"Il bacio", "Il bacio di Hayez..quadro grandioso...",alias);
+        object = new AdvObject(ObjectId.THE_KISS,"Bacio", "Il bacio di Hayez..quadro grandioso...",alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.THE_SCREAM,"L'urlo", "L'urlo di Munch..quadro grandioso...",alias);
+        object = new AdvObject(ObjectId.THE_SCREAM,"Urlo", "L'urlo di Munch..quadro grandioso...",alias);
         addObjectRequest(object);
         
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.THE_STARRY_NIGHT,"La notte stellata", "La notte stellata di Van Gogh...questo quadro vale troppo per essere lasciato al magnate...",alias);
+        object = new AdvObject(ObjectId.THE_STARRY_NIGHT,"Notte stellata", "La notte stellata di Van Gogh...questo quadro vale troppo per essere lasciato al magnate...",alias);
         addObjectRequest(object);
         
         
@@ -607,7 +607,7 @@ public class ClientManager {
         
         aliasArray = new String[]{};
         alias = new HashSet<>(Arrays.asList(aliasArray));
-        object = new AdvObject(ObjectId.VOCAZIONE_SAN_MATTEO,"La vocazione di San Matteo", "La vocazione di San Matteo del Caravaggio....quadro a dir poco stupendo!",alias);
+        object = new AdvObject(ObjectId.VOCAZIONE_SAN_MATTEO,"Vocazione di San Matteo", "La vocazione di San Matteo del Caravaggio....quadro a dir poco stupendo!",alias);
         addObjectRequest(object);
         
         
