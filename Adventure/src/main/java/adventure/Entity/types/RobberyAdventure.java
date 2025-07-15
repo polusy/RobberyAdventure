@@ -652,7 +652,7 @@ public class RobberyAdventure extends GameDescription{
             gameActionSpecifications.put(new Container(containerObjects), null);
             
             property = new Openable(false);
-            gameActionSpecifications.put(property, null);
+            gameActionSpecifications.put(property, new HashMap<>());
             
             List<ObjectId[]> newAuxiliaryObjectsList = new ArrayList<>();
             newAuxiliaryObjectsList.add(new ObjectId[]{ObjectId.RUBBER_GLOVES});
