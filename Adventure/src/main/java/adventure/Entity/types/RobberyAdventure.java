@@ -3415,7 +3415,7 @@ public class RobberyAdventure extends GameDescription{
         gameEffect = new GameEffect(null, null,
                 null, null, objectsEffects, null);
         passingConditionMessage = "Sei riuscito finalmente a forare la serratura della cassaforte! Avevi"
-                + " iniziato a perdere le speranza" ;
+                + " iniziato a perdere le speranze" ;
         
         passingConditionResult = new PassingConditionResult(gameEffect, passingConditionMessage);
         
