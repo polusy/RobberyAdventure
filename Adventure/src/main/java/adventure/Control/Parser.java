@@ -77,6 +77,7 @@ public class Parser {
 	allObjects.addAll(inventoryObjects);
 	names = getAllNames(allObjects);
         names.addAll(getAllRoomNames(rooms));
+        names = Utils.toLowerCaseStringList(names);
 	names.sort(Collections.reverseOrder(Comparator.comparingInt(s -> s.length())));
 
         Iterator sentencesIterator = sentences.iterator();
