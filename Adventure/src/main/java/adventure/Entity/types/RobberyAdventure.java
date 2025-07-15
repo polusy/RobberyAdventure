@@ -430,6 +430,9 @@ public class RobberyAdventure extends GameDescription{
         failingObjectsConditionsMessages.put(ObjectId.THERMAL_LANCE, new HashMap<>());
         failingObjectsConditionsMessages.get(ObjectId.THERMAL_LANCE).put(PropertyType.ACTIVATABLE, "La lancia termica deve essere attivata!");
         
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.OPENABLE, "La porta e' stata gia' distrutta");
+        
         failingVisibilityConditionMessages.put(ObjectId.THERMAL_LANCE, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         failingVisibilityConditionMessages.put(ObjectId.WELDING_MASK, "Qui non c'e' un oggetto simile, guardati meglio intorno!");
         
@@ -476,7 +479,58 @@ public class RobberyAdventure extends GameDescription{
         ObjectId[] containerObjects = new ObjectId[]{ObjectId.FINGERPRINT_SCANNER};
         
         gameActionSpecifications.put(new Container(containerObjects), null);
-        gameActionSpecifications.put(new Openable(false), null);
+        
+        
+        gameActionSpecifications.put(new Openable(false), new HashMap<CommandType, GameActionSpecification>());
+        
+        commandType = CommandType.OPEN;
+        
+        
+        // CompleteCondition
+        inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
+        propertyWithValueConstraints = new HashSet<>();
+        
+        
+        propertyValue = new PropertyValue(PropertyType.OPENABLE, false);
+        propertyWithValueConstraints.add(propertyValue);
+        
+        objectCondition = new ObjectCondition(propertyWithValueConstraints, true);
+        
+        objectsConditions.put(objectId, objectCondition);
+        
+      
+        completeCondition = new CompleteCondition(null, objectsConditions);
+
+
+        // FailingConditionMessages
+
+        failingObjectsConditionsMessages = new HashMap<>();
+
+        failingObjectsConditionsMessages.put(objectId, new HashMap<>());
+        failingObjectsConditionsMessages.get(objectId).put(PropertyType.OPENABLE, 
+                "La pora del vault adesso è rotonda dai bordi incandescenti ...");
+        
+        
+        failingConditionMessages = new FailingConditionMessages(null,
+        null, failingObjectsConditionsMessages,
+        null);        
+    
+        
+        // PassingConditionResult
+        
+        passingConditionMessage = "Purtroppo non hai la stessa impronta digitale del magnate..." ;
+        
+        passingConditionResult = new PassingConditionResult(null, passingConditionMessage); 
+        
+        
+        // GameActionSpecification
+        
+        gameActionSpecification = new GameActionSpecification(completeCondition, 
+                failingConditionMessages, passingConditionResult);
+        
+        gameActionSpecifications.get(property).put(commandType, gameActionSpecification);           
+        
         
         //adding object to room
         
