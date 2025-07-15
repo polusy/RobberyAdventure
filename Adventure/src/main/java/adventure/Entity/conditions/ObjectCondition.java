@@ -12,6 +12,9 @@ import java.util.NoSuchElementException;
 /**
  *
  * @author Paolo
+ * 
+ * La classe rappresenta un insieme di condizioni sulle proprietà di un oggetto
+ * che devono essere necessariamente rispettate (la visibilità dell'oggetto è mantenuta come proprietà speciale).
  */
 public class ObjectCondition {
     
@@ -38,9 +41,9 @@ public class ObjectCondition {
     
     /**
      *
-     * @param propertyType
-     * @return
-     * @throws NoSuchElementException
+     * @param propertyType tipo di proprietà di cui si vuole conoscere il valore associato nell'insieme di vincoli.
+     * @return La proprietà (he conserva il vincolo valoriale) che corrisponde al propertyType inserito come parametro.
+     * @throws NoSuchElementException Se viene inserito un tipo di proprietà non presente nella lista di condizioni sull'oggetto.
      */
     public PropertyValue getPropertyValue(PropertyType propertyType) throws NoSuchElementException {
         

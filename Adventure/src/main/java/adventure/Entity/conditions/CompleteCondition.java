@@ -15,9 +15,12 @@ import adventure.identifiers.ObjectId;
  *
  * @author utente
  * 
- * La classe rappresenta la condizione di soddisfacimento completa (relativa ad ogni proprietà di oggetto) necessaria per  eseguire effetti
+ * La classe rappresenta la condizione di soddisfacimento completa (relativa all'oggetto) necessaria per  eseguire effetti
  * sulla sessione di gioco (Modifica di proprietà di altri oggetti, etc...) ed individuare il messaggio relativo
  * al superamento delle condizioni necessarie.
+ * 
+ * La prima condizione è una lista di possibili condizioni sull'inventario.
+ * La seconda condizione è una mappa che associa ad un id di oggetto del gioco il vincolo che deve rispettare.
  */
 public class CompleteCondition {
     final private List<InventoryCondition> inventoryConditionOptions; 
@@ -52,7 +55,7 @@ public class CompleteCondition {
 
     /**
      *
-     * @return
+     * @return Una lista di condizioni sull'inventario (di cui almeno una deve essere soddisfatta).
      */
     public List<InventoryCondition> getInventoryConditionOptions() {
         return inventoryConditionOptions;
@@ -60,7 +63,7 @@ public class CompleteCondition {
 
     /**
      *
-     * @return
+     * @return Una mappa di vincoli (condizioni) associate ad oggetti dell'avventura.
      */
     public Map<ObjectId, ObjectCondition> getObjectsConditions() {
         return objectsConditions;
