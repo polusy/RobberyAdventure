@@ -75,7 +75,6 @@ public class DatabaseManager {
         
     public String getGameById(String gameId) throws SQLException{
         
-	Gson gson  = new Gson();
 	String objectSelectionQuery = "SELECT * FROM Games WHERE GameId = ?";
 	PreparedStatement statement = connection.prepareStatement(objectSelectionQuery);
 	statement.setString(1, gameId);
