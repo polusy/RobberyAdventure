@@ -2514,6 +2514,7 @@ public class RobberyAdventure extends GameDescription{
         // CompleteCondition
         
         inventoryConditionOptions = new ArrayList<>();
+        objectsConditions = new HashMap<>();
         propertyWithValueConstraints = new HashSet<>();
         
         inventoryCondition = this.buildInventoryCondition(new ObjectId[] {ObjectId.POWER_UNIT, objectId, ObjectId.WELDING_MASK});
