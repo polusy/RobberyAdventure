@@ -121,11 +121,12 @@ public class Engine {
         catch (EndGameException exception){ }
         
         out.println(System.lineSeparator());
-        out.println("=========================================================");
-        out.println("\t\tRobbery Adventure");
-        out.println("=========================================================");
+        out.println("==================================================================================================================");
+        out.println("\t\t\t\t\tRobbery Adventure");
+        out.println("==================================================================================================================");
         out.println(System.lineSeparator());
         
+        out.println(game.getWelcomeMessage());
        
         //starting server 
         objectsManager.run();
