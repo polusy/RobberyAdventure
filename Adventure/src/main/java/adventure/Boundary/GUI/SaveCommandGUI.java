@@ -93,6 +93,8 @@ public class SaveCommandGUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String newSavingName = jTextField1.getText();
+        JOptionPane.showMessageDialog(rootPane, "Funzionalità non implementata");
+        /*
         Boolean gameAlreadyExisted = clientManager.addGameSavingRequest(newSavingName, robberyAdventure);
         
         if (gameAlreadyExisted){
@@ -101,6 +103,7 @@ public class SaveCommandGUI extends javax.swing.JDialog {
         else{
             dispose();
         }
+        */
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

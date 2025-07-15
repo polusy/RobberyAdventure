@@ -124,19 +124,19 @@ public class MenuCommandGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(clientManager, toBeSavedRobberyAdventure, null, true);
-        saveCommandGUI.setVisible(true);
+        JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RescueProgressGUI rescueProgressGUI = new RescueProgressGUI(clientManager, null, true);
-        rescueProgressGUI.setVisible(true);
+        JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
         
+        /*
         if (rescueProgressGUI.getRobberyAdventure() != null){
             rescuedRobberyAdventure = rescueProgressGUI.getRobberyAdventure();
             JOptionPane.showMessageDialog(rootPane, "Caricamento del salvataggio effettuato...prego!");
             dispose();
         }
+        */
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

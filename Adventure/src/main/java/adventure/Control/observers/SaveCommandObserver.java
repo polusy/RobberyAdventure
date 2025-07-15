@@ -17,6 +17,7 @@ import adventure.exceptions.NotValidSentenceException;
 
 
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -26,11 +27,13 @@ public class SaveCommandObserver implements TechnicalObserver{
     
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException {
         
-        if (parserOutput.getObjects() != null || parserOutput.getDoorRoom() != null)
+        if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
         
-        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(new ClientManager("http://localhost:8081"),(RobberyAdventure)game, null, true);
+        JFrame baseFrame = FrameCreator.createBaseFrame();
+        
+        SaveCommandGUI saveCommandGUI = new SaveCommandGUI(new ClientManager("http://localhost:8081"),(RobberyAdventure)game, baseFrame, true);
         saveCommandGUI.setVisible(true);
         
     }   
