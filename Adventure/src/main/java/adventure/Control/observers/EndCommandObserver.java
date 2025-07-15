@@ -31,11 +31,13 @@ public class EndCommandObserver implements TechnicalObserver {
      * dell'utente attraverso CLI.
      * 
      * @param message
-     * @throws NotValidSentenceException
-     * @throws EndGameException
+     * @throws NotValidSentenceException Se l'utente inserisce una frase non sintatticamente corretta (per far finire il gioco).
+     * @throws EndGameException Se l'utente inserisce un corretto comando di fine gioco e conferma la volontà di uscire dal gioco.
      * 
      * Il metodo verifica che la frase sia sintatticamente corretta, e effettua una chiamata alla classe GUI per
      * gestire la volontà di abbandono dell'utente.
+     * 
+     * Se l'utente conferma l'abbandono viene lanciata un'eccezione di fine gioco, altrimenti nulla.
      */
     @Override
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {
