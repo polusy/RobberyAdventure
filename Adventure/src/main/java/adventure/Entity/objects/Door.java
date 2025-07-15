@@ -19,10 +19,24 @@ import java.util.Map;
  */
 public class Door extends InteractiveObject{
     
+    /**
+     *
+     */
     public static final String commonDoorName = "porta";
     private boolean special;
     
-    
+    /**
+     *
+     * @param objectId
+     * @param name
+     * @param description
+     * @param brokenDescription
+     * @param alias
+     * @param visible
+     * @param gameActionSpecification
+     * @param special
+     * @throws InconsistentInitializationException
+     */
     public Door(ObjectId objectId, String name, String description,
             String brokenDescription, Set<String> alias, boolean visible,
             Map<Property,Map<CommandType, GameActionSpecification>> gameActionSpecification, boolean special)throws InconsistentInitializationException{
@@ -32,6 +46,10 @@ public class Door extends InteractiveObject{
         
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSpecial() {
         return special;
     }

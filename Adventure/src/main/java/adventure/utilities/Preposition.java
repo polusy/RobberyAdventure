@@ -12,14 +12,26 @@ public class Preposition {
     
     private String preposition;
     
+    /**
+     *
+     * @param preposition
+     */
     public Preposition(String preposition){
         this.preposition = preposition;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPreposition() {
         return preposition;
     }
 
+    /**
+     *
+     * @param preposition
+     */
     public void setPreposition(String preposition) {
         this.preposition = preposition;
     }

@@ -22,6 +22,10 @@ import java.util.Set;
  */
 public class DatabasePopulationHandler {
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
     
     ServerManager serverManager = new ServerManager("http://localhost/", 8080, ObjectService.class);

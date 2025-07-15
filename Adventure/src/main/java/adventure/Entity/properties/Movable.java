@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Movable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Movable(boolean value){
         super(PropertyType.MOVABLE, value);
     }

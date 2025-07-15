@@ -37,7 +37,12 @@ public class Utils {
         return set;
     }
     
-    
+    /**
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static String loadFileDescriptionInString(File file) throws IOException{
         StringBuilder description = new StringBuilder("");
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -50,8 +55,13 @@ public class Utils {
         return new String(description);
     }
     
-    
-    
+    /**
+     *
+     * @param string
+     * @param stopwords
+     * @param separators
+     * @return
+     */
     public static List<String> parseString(String string, Set<String> stopwords, String separators) {
         List<String> tokens = new ArrayList<>();
         String[] split = string.toLowerCase().split(separators);
@@ -63,8 +73,13 @@ public class Utils {
         return tokens;
     }
     
-    
-    
+    /**
+     *
+     * @param <T>
+     * @param collection1
+     * @param collection2
+     * @return
+     */
     public static <T> Set<T> union(Collection<T> collection1, Collection<T> collection2) {
 	Set<T> set = new HashSet<>();
 	set.addAll(collection1);
@@ -72,6 +87,15 @@ public class Utils {
 	return set;
     }
     
+    /**
+     *
+     * @param words
+     * @param wordsIndex
+     * @param stopwords
+     * @param wordsSeparators
+     * @param tokens
+     * @param sentence
+     */
     public static void tokenize(List<String> words, int wordsIndex, Set<String> stopwords, String wordsSeparators, List<String> tokens, String sentence)
     {
 
@@ -105,6 +129,11 @@ public class Utils {
 
     }
     
+    /**
+     *
+     * @param words
+     * @return
+     */
     public static List<String> toLowerCaseStringList (List<String> words){
         List<String> lowerCaseStringList = words
                 .stream()

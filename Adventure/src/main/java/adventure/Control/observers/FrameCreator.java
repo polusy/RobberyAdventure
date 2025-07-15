@@ -11,6 +11,10 @@ import javax.swing.JFrame;
  */
 public class FrameCreator {
     
+    /**
+     *
+     * @return
+     */
     public static JFrame createBaseFrame(){
         JFrame dummyOwner = new JFrame();
         dummyOwner.setUndecorated(true);  

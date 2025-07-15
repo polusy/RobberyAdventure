@@ -30,7 +30,15 @@ public class Room {
     private Map<CardinalPoint, Door> doorLinks = new HashMap<>();
     private List<AdvObject> objects = new ArrayList<>();
     
-
+    /**
+     *
+     * @param id
+     * @param name
+     * @param description
+     * @param roomLinks
+     * @param doorLinks
+     * @param objects
+     */
     public Room(RoomId id, String name, String description, Map<CardinalPoint, Room> roomLinks, Map<CardinalPoint, Door> doorLinks, List<AdvObject> objects) {
         this.id = id;
         this.name = name;
@@ -40,15 +48,23 @@ public class Room {
         this.objects = objects;
     }
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param description
+     */
     public Room(RoomId id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
     
-
-    
-    
+    /**
+     *
+     * @param object
+     * @throws DuplicateException
+     */
     public void addObject(AdvObject object) throws DuplicateException{
         if(objects.contains(object))
             throw new DuplicateException();
@@ -56,6 +72,11 @@ public class Room {
         objects.add(object);
     }
     
+    /**
+     *
+     * @param object
+     * @throws NoSuchElementException
+     */
     public void removeObject(AdvObject object) throws NoSuchElementException{
         
         if(!objects.contains(object))
@@ -64,7 +85,12 @@ public class Room {
         objects.remove(object);
     }
     
-    
+    /**
+     *
+     * @param cardinalPoint
+     * @param room
+     * @throws DuplicateException
+     */
     public void addRoomLink(CardinalPoint cardinalPoint, Room room) throws DuplicateException {
 
 	if (roomLinks.containsKey(cardinalPoint))
@@ -73,6 +99,12 @@ public class Room {
 		roomLinks.put(cardinalPoint, room);
 }
 
+    /**
+     *
+     * @param cardinalPoint
+     * @param door
+     * @throws DuplicateException
+     */
     public void addDoorLink(CardinalPoint cardinalPoint, Door door) throws DuplicateException {
 
 	if (doorLinks.containsKey(cardinalPoint))
@@ -81,6 +113,11 @@ public class Room {
 		doorLinks.put(cardinalPoint, door);
     }
 
+    /**
+     *
+     * @param room
+     * @return
+     */
     public boolean reaches(Room room)
     {
 	boolean result = false;
@@ -91,9 +128,21 @@ public class Room {
 	return result;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean contains(AdvObject object){
 	return objects.contains(object);
 }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObject(ObjectId id) throws NoSuchElementException {
         for (AdvObject object : objects) {
             if (object.getId() == id) {
@@ -104,6 +153,12 @@ public class Room {
         throw new NoSuchElementException();
     }
 
+    /**
+     *
+     * @param cardinalPoint
+     * @return
+     * @throws NoSuchElementException
+     */
     public Room getLinkedRoom(CardinalPoint cardinalPoint) throws NoSuchElementException
     {
 	if (roomLinks.containsKey(cardinalPoint))
@@ -112,6 +167,12 @@ public class Room {
 	throw new NoSuchElementException();
     } 
 
+    /**
+     *
+     * @param cardinalPoint
+     * @return
+     * @throws NoSuchElementException
+     */
     public Door getLinkedDoor(CardinalPoint cardinalPoint) throws NoSuchElementException
     {
 	if (doorLinks.containsKey(cardinalPoint))
@@ -120,6 +181,11 @@ public class Room {
 	throw new NoSuchElementException();
     }
 
+    /**
+     *
+     * @param door
+     * @return
+     */
     public CardinalPoint getCardinalPointByDoor(Door door){
 	CardinalPoint cardinalPoint = null;
 
@@ -130,16 +196,26 @@ public class Room {
 	return cardinalPoint;
     }
 
+    /**
+     *
+     * @return
+     */
     public RoomId getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
     
-    
-    
+    /**
+     *
+     * @return
+     */
     public String getLook(){
         StringBuilder look = new StringBuilder("Vediamo un po', ci sono questi oggetti: " + System.lineSeparator());
         
@@ -176,6 +252,10 @@ public class Room {
         
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -183,6 +263,11 @@ public class Room {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -198,18 +283,34 @@ public class Room {
         return this.id == other.id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<AdvObject> getObjects() {
         return objects;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<CardinalPoint, Room> getRoomLinks() {
         return roomLinks;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<CardinalPoint, Door> getDoorLinks() {
         return doorLinks;
     }

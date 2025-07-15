@@ -9,9 +9,25 @@ package adventure.Entity.types;
  * @author utente
  */
 public enum CardinalPoint {
+
+    /**
+     *
+     */
     NORTH,
+
+    /**
+     *
+     */
     SOUTH,
+
+    /**
+     *
+     */
     EAST,
+
+    /**
+     *
+     */
     WEST;
 
     CardinalPoint getOpposite()

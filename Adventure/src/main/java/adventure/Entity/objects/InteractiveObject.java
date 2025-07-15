@@ -28,6 +28,18 @@ public class InteractiveObject extends AdvObject {
     final private Map<Property, Map<CommandType, GameActionSpecification>> gameActionSpecifications;
 
     // Constructor
+
+    /**
+     *
+     * @param id
+     * @param name
+     * @param description
+     * @param brokenDescription
+     * @param alias
+     * @param visible
+     * @param gameActionSpecifications
+     * @throws InconsistentInitializationException
+     */
     
     public InteractiveObject(ObjectId id, String name, String description, String brokenDescription, 
             Set<String> alias, boolean visible, 
@@ -53,13 +65,27 @@ public class InteractiveObject extends AdvObject {
     }
     
     // Getter methods
+
+    /**
+     *
+     * @return
+     */
     
     public String getBrokenDescription() { return brokenDescription; }
     
+    /**
+     *
+     * @return
+     */
     public Set<Property> getProperties(){
 	return gameActionSpecifications.keySet();
     }
 
+    /**
+     *
+     * @return
+     * @throws NoSuchElementException
+     */
     public Container getContainerProperty() throws NoSuchElementException {
 	if (!this.isContainer())
             throw new NoSuchElementException();
@@ -73,6 +99,12 @@ public class InteractiveObject extends AdvObject {
 	return containerProperty;
     }    
     
+    /**
+     *
+     * @param propertyType
+     * @return
+     * @throws NoSuchElementException
+     */
     public PropertyWithValue getPropertyByType(PropertyType propertyType) throws NoSuchElementException{
 	if (!this.hasProperty(propertyType))
 		throw new NoSuchElementException();
@@ -89,6 +121,12 @@ public class InteractiveObject extends AdvObject {
 	return propertyWithValue;
     }    
 
+    /**
+     *
+     * @param propertyType
+     * @param commandType
+     * @return
+     */
     public GameActionSpecification getGameActionSpecification(PropertyType propertyType, CommandType commandType)
     {
         if (gameActionSpecifications.get(this.getPropertyByType(propertyType)) != null)
@@ -98,6 +136,13 @@ public class InteractiveObject extends AdvObject {
     }
     
     // Setter method
+
+    /**
+     *
+     * @param propertyType
+     * @param value
+     * @throws NoSuchElementException
+     */
     
     public void setValueToProperty(PropertyType propertyType, boolean value) throws NoSuchElementException
     {
@@ -107,6 +152,11 @@ public class InteractiveObject extends AdvObject {
 	this.getPropertyByType(propertyType).setValue(value);
     }   
     
+    /**
+     *
+     * @param propertyType
+     * @return
+     */
     public boolean hasProperty(PropertyType propertyType){ 
 	boolean foundProperty = false;
 
@@ -122,6 +172,10 @@ public class InteractiveObject extends AdvObject {
 	return foundProperty;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isContainer(){
 	boolean container = false;
 	

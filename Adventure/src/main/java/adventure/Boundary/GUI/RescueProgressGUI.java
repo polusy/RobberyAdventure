@@ -26,6 +26,10 @@ public class RescueProgressGUI extends javax.swing.JDialog {
     private RobberyAdventure robberyAdventure = null;
     String rescuedGameName = null;
 
+    /**
+     *
+     * @return
+     */
     public RobberyAdventure getRobberyAdventure() {
         return robberyAdventure;
     }
@@ -36,6 +40,9 @@ public class RescueProgressGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form RescueProgressGUI
+     * @param clientManager
+     * @param parent
+     * @param modal
      */
     public RescueProgressGUI(ClientManager clientManager,java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,7 +51,10 @@ public class RescueProgressGUI extends javax.swing.JDialog {
         initProperties();
     }
     
-   public void initProperties(){
+    /**
+     *
+     */
+    public void initProperties(){
         Set<String> allNames = clientManager.getAllGamesNamesRequest();
         String[] allNamesArray = allNames.toArray(new String[0]);
         jList1.setListData(allNamesArray);
@@ -55,7 +65,9 @@ public class RescueProgressGUI extends javax.swing.JDialog {
         });
    }
 
-    
+    /**
+     *
+     */
     public RescueProgressGUI(){};
     /**
      * This method is called from within the constructor to initialize the form.

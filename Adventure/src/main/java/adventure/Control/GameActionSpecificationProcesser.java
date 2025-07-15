@@ -45,7 +45,15 @@ import java.util.NoSuchElementException;
  */
 public abstract class GameActionSpecificationProcesser {
     
-    
+    /**
+     *
+     * @param gameActionSpecification
+     * @param gameDescription
+     * @param commandAnalysisResult
+     * @return
+     * @throws NotValidSentenceException
+     * @throws DuplicateException
+     */
     public static GameActionResult process(GameActionSpecification gameActionSpecification,GameDescription gameDescription, CommandAnalysisResult commandAnalysisResult) throws NotValidSentenceException,DuplicateException
     {
         if (gameActionSpecification != null){
@@ -312,6 +320,10 @@ public abstract class GameActionSpecificationProcesser {
 	return new GameActionResult(passingConditionMessage, specialAction);
     }
  
+    /**
+     *
+     * @param game
+     */
     public static void safeOpeningHandler(RobberyAdventure game){
         InteractiveObject innerSafe = (InteractiveObject) game.getObjectById(ObjectId.INNER_SAFE);
         

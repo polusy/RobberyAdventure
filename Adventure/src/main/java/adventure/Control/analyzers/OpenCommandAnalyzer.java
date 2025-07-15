@@ -26,10 +26,21 @@ import java.util.Map;
  */
 public class OpenCommandAnalyzer extends CommandAnalyzer{
     
-        public OpenCommandAnalyzer(){
+    /**
+     *
+     */
+    public OpenCommandAnalyzer(){
         super(" Ma come pretendi di aprire quest ooggetto! ");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException {
@@ -40,6 +51,14 @@ public class OpenCommandAnalyzer extends CommandAnalyzer{
 	return commandAnalysisResult;
     }
     
+    /**
+     *
+     * @param commandAnalysisResult
+     * @param gameDescription
+     * @param parserOutput
+     * @throws NotValidSentenceException
+     * @throws AmbiguousCommandException
+     */
     public static void disambiguateDoor(CommandAnalysisResult commandAnalysisResult, GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException,AmbiguousCommandException{
         AdvObject toBeOpenedDoor = commandAnalysisResult.getTargetObject();
 	

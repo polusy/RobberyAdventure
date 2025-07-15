@@ -19,6 +19,10 @@ public class SaveCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form SaveCommandGUI
+     * @param clientManager
+     * @param robberyAdventure
+     * @param parent
+     * @param modal
      */
     public SaveCommandGUI(ClientManager clientManager,RobberyAdventure robberyAdventure, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,6 +32,9 @@ public class SaveCommandGUI extends javax.swing.JDialog {
         
     }
 
+    /**
+     *
+     */
     public SaveCommandGUI(){};
 
     /**

@@ -31,7 +31,15 @@ import javax.swing.JFrame;
  */
 public class MenuCommandObserver implements TechnicalObserver {
     
-        @Override
+    /**
+     *
+     * @param game
+     * @param parserOutput
+     * @param message
+     * @throws NotValidSentenceException
+     * @throws EndGameException
+     */
+    @Override
         public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {
         
         if (!parserOutput.getObjects().isEmpty()|| parserOutput.getDoorRoom() != null)

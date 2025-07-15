@@ -19,15 +19,27 @@ public class Inventory {
     
     private List<AdvObject> objects = new ArrayList<>();
     
-    
+    /**
+     *
+     * @param objects
+     */
     public Inventory(List<AdvObject> objects){
         this.objects = objects;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<AdvObject> getObjects() {
         return objects;
     }
     
+    /**
+     *
+     * @param object
+     * @throws NoSuchElementException
+     */
     public void remove(AdvObject object) throws NoSuchElementException{
         if (!objects.contains(object))
             throw new NoSuchElementException();
@@ -35,7 +47,11 @@ public class Inventory {
         objects.remove(object);
     }
     
-    
+    /**
+     *
+     * @param object
+     * @throws DuplicateException
+     */
     public void add(AdvObject object) throws DuplicateException{
         if (objects.contains(object))
             throw new DuplicateException();
@@ -44,6 +60,12 @@ public class Inventory {
         
     }
     
+    /**
+     *
+     * @param Id
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObjectById(ObjectId Id) throws NoSuchElementException{
         
         for (AdvObject object : objects){
@@ -55,7 +77,11 @@ public class Inventory {
         throw new NoSuchElementException();
     }
     
-    
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean contains(AdvObject object){
         if (objects.contains(object))
             return true;

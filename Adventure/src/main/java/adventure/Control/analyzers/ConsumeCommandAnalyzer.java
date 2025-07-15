@@ -16,10 +16,21 @@ import adventure.identifiers.PropertyType;
  * @author utente
  */
 public class ConsumeCommandAnalyzer extends CommandAnalyzer {
+
+    /**
+     *
+     */
     public ConsumeCommandAnalyzer(){
         super(" Non puoi in nessun modo utilizzare questa cosa! ");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     @Override
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException{

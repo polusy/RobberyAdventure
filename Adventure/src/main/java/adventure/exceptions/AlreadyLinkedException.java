@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class AlreadyLinkedException extends Exception {
     final private String message = "Rooms are already linked";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }
 }

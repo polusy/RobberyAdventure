@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class AmbiguousCommandException extends Exception {
     final private String message = "Non ho capito cosa vuoi dire, il comando è ambiguo";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }    
 }

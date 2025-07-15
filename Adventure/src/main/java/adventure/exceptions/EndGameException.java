@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class EndGameException extends Exception {
     final private String message = "End game";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }    
 }

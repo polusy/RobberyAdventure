@@ -12,6 +12,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Consumable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Consumable(boolean value){
         super(PropertyType.CONSUMABLE, value);
     }    

@@ -15,23 +15,44 @@ public class PropertyValue {
     private PropertyType propertyType;
     private boolean value;
 
+    /**
+     *
+     * @param propertyType
+     * @param value
+     */
     public PropertyValue(PropertyType propertyType, boolean value) {
         this.propertyType = propertyType;
         this.value = value;
     }
 
+    /**
+     *
+     * @return
+     */
     public PropertyType getPropertyType() {
         return propertyType;
     }
 
+    /**
+     *
+     * @param propertyType
+     */
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getValue() {
         return value;
     }
 
+    /**
+     *
+     * @param value
+     */
     public void setValue(boolean value) {
         this.value = value;
     }

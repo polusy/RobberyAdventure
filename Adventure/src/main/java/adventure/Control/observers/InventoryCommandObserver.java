@@ -17,6 +17,13 @@ import java.io.PrintStream;
  */
 public class InventoryCommandObserver implements GameObserver{
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @param out
+     * @throws NotValidSentenceException
+     */
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException
     {

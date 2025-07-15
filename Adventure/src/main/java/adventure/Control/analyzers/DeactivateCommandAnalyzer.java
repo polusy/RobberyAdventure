@@ -15,10 +15,21 @@ import adventure.identifiers.PropertyType;
  * @author Paolo
  */
 public class DeactivateCommandAnalyzer extends CommandAnalyzer{
-        public DeactivateCommandAnalyzer(){
+
+    /**
+     *
+     */
+    public DeactivateCommandAnalyzer(){
         super(" Non puoi disattivare un oggetto del genere...");
     }
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
     {
 	return analyzeUnaryCommand(parserOutput, PropertyType.ACTIVATABLE, errorMessage);

@@ -42,6 +42,17 @@ public class Parser {
     final private String regex;
     final private String notValidRegex;
      
+    /**
+     *
+     * @param stopwords
+     * @param prepositionTypes
+     * @param commandTester
+     * @param objectTester
+     * @param roomTester
+     * @param prepositionTester
+     * @param sentencesSeparators
+     * @param wordsSeparators
+     */
     public Parser(Set<String> stopwords, List<PrepositionType> prepositionTypes, BiPredicate<String, Command> commandTester,
     BiPredicate<String, AdvObject> objectTester, BiPredicate<String, Room> roomTester, 
     BiPredicate<String, PrepositionType> prepositionTester, String sentencesSeparators, String wordsSeparators) { 
@@ -63,6 +74,17 @@ public class Parser {
         notValidRegex = "^( preposition (inventoryObject|roomObject)){2,2}$";
     }
 
+    /**
+     *
+     * @param originalSentence
+     * @param commands
+     * @param rooms
+     * @param roomObjects
+     * @param inventoryObjects
+     * @return
+     * @throws NotValidTokenException
+     * @throws NotValidSentenceException
+     */
     public List<ParserOutput> parse(String originalSentence, List<Command> commands, List<Room> rooms,
             List<AdvObject> roomObjects, List<AdvObject> inventoryObjects) 
             throws NotValidTokenException, NotValidSentenceException {

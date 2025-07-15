@@ -21,14 +21,26 @@ public class LootBag {
     
     private final List<ValuableObject> objects;
     
+    /**
+     *
+     */
     public LootBag(){
         objects = new ArrayList();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ValuableObject> getObjects() {
         return objects;
     }
     
+    /**
+     *
+     * @param object
+     * @throws DuplicateException
+     */
     public void add(ValuableObject object) throws DuplicateException{
         
         if (objects.contains(object))
@@ -37,6 +49,10 @@ public class LootBag {
         objects.add(object);
     }
     
+    /**
+     *
+     * @return
+     */
     public int getTotalStolenAmount(){
         int sum = 0;
         for (ValuableObject valuableObject : objects){
@@ -45,6 +61,11 @@ public class LootBag {
         return sum;
     }
     
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean contains(AdvObject object){
         if (objects.contains(object))
                return true;
@@ -52,6 +73,11 @@ public class LootBag {
             return false;
     }
     
+    /**
+     *
+     * @param objectId
+     * @return
+     */
     public boolean contains(ObjectId objectId){
         boolean contained = false;
         
@@ -63,7 +89,12 @@ public class LootBag {
         return contained;
     }
     
-    
+    /**
+     *
+     * @param Id
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObjectById(ObjectId Id) throws NoSuchElementException{
         
         for (AdvObject object : objects){

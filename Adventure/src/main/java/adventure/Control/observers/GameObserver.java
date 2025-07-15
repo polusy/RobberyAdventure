@@ -15,6 +15,13 @@ import java.io.PrintStream;
  */
 public interface GameObserver {
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @param out
+     * @throws NotValidSentenceException
+     */
     public abstract void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out)
             throws NotValidSentenceException;
     

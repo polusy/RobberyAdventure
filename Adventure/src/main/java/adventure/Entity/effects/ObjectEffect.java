@@ -16,29 +16,54 @@ public class ObjectEffect {
     private ContainerEffect containerEffect;
     private Boolean visibility;
     
+    /**
+     *
+     * @param propertyWithValueResults
+     * @param containerEffect
+     * @param visibility
+     */
     public ObjectEffect(Set<PropertyValue> propertyWithValueResults, ContainerEffect containerEffect, boolean visibility){
         this.propertyWithValueResults = propertyWithValueResults;
         this.containerEffect = containerEffect;
         this.visibility = visibility;
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<PropertyValue> getPropertyWithValueResults() {
         return propertyWithValueResults;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public ContainerEffect getContainerEffect() {
         return containerEffect;
     }
 
+    /**
+     *
+     * @param containerEffect
+     */
     public void setContainerEffect(ContainerEffect containerEffect) {
         this.containerEffect = containerEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getVisibility() {
         return visibility;
     }
 
+    /**
+     *
+     * @param visibility
+     */
     public void setVisibility(Boolean visibility) {
         this.visibility = visibility;
     }

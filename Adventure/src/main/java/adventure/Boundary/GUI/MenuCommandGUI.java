@@ -21,10 +21,18 @@ public class MenuCommandGUI extends javax.swing.JDialog {
     
     private boolean gameEnded = false;
 
+    /**
+     *
+     * @return
+     */
     public RobberyAdventure getRescuedRobberyAdventure() {
         return rescuedRobberyAdventure;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isGameEnded() {
         return gameEnded;
     }
@@ -35,6 +43,10 @@ public class MenuCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form MenuCommandGUI
+     * @param clientManager
+     * @param robberyAdventure
+     * @param parent
+     * @param modal
      */
     public MenuCommandGUI(ClientManager clientManager,RobberyAdventure robberyAdventure, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -43,6 +55,9 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         this.toBeSavedRobberyAdventure = robberyAdventure;
     }
     
+    /**
+     *
+     */
     public MenuCommandGUI(){};
 
     /**

@@ -11,6 +11,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Usable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Usable(boolean value){
         super(PropertyType.USABLE, value);
     }

@@ -11,5 +11,9 @@ package adventure.exceptions;
 public class PasswordGuessedException extends Exception {
     final private String message = "Password guessed";
     
+    /**
+     *
+     * @return
+     */
     public String getMessage() { return message; }       
 }

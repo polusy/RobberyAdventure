@@ -15,15 +15,28 @@ public class PassingConditionResult {
     private GameEffect gameEffect;
     private String passingConditionMessage;
 
+    /**
+     *
+     * @param gameEffect
+     * @param passingConditionMessage
+     */
     public PassingConditionResult(GameEffect gameEffect, String passingConditionMessage) {
         this.gameEffect = gameEffect;
         this.passingConditionMessage = passingConditionMessage;
     }
 
+    /**
+     *
+     * @return
+     */
     public GameEffect getGameEffect() {
         return gameEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassingConditionMessage() {
         return passingConditionMessage;
     }

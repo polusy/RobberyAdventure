@@ -32,6 +32,10 @@ import adventure.identifiers.ObjectId;
 public class DatabaseManager {
     private Connection connection;
     
+    /**
+     *
+     * @throws SQLException
+     */
     public DatabaseManager() throws SQLException{
         
         String url = "jdbc:h2:./database/db";
@@ -39,6 +43,10 @@ public class DatabaseManager {
         connection.setAutoCommit(true);
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void createObjectsTable() throws SQLException{
 
 	String objectsTableCreation = "CREATE TABLE IF NOT EXISTS Objects ( ObjectId VARCHAR(40) PRIMARY KEY, Name VARCHAR(50), Description TEXT,  Alias TEXT)";
@@ -47,6 +55,10 @@ public class DatabaseManager {
 	statement.close();
     }
     
+    /**
+     *
+     * @throws SQLException
+     */
     public void createGamesTable() throws SQLException{
         String objectsTableCreation = "CREATE TABLE IF NOT EXISTS Games ( GameId VARCHAR(40) PRIMARY KEY, GameDescription TEXT)";
 	Statement statement = connection.createStatement();
@@ -54,6 +66,13 @@ public class DatabaseManager {
 	statement.close();
     }
 
+    /**
+     *
+     * @param gameId
+     * @param jsonGameDescription
+     * @return
+     * @throws SQLException
+     */
     public Boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
 
         Boolean gameSavingAlreadyExist = false;
@@ -72,7 +91,12 @@ public class DatabaseManager {
         return gameSavingAlreadyExist;
     }
         
-        
+    /**
+     *
+     * @param gameId
+     * @return
+     * @throws SQLException
+     */
     public String getGameById(String gameId) throws SQLException{
         
 	Gson gson  = new Gson();
@@ -96,6 +120,11 @@ public class DatabaseManager {
         return jsonGameDescription;
     }
     
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public Set<String> getAllGameNames() throws SQLException{
         
         String objectSelectionQuery = "SELECT GameId FROM Games";
@@ -111,9 +140,14 @@ public class DatabaseManager {
         return gameNames;
     }
 	
-    
-    
-
+    /**
+     *
+     * @param objectIdString
+     * @param name
+     * @param description
+     * @param jsonAlias
+     * @throws SQLException
+     */
     public void addObject(String objectIdString, String name, String description, String jsonAlias) throws SQLException{
 	String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?, ?, ?)" ;
 
@@ -126,6 +160,12 @@ public class DatabaseManager {
 	statement.close();
     }
 
+    /**
+     *
+     * @param objectIdString
+     * @return
+     * @throws SQLException
+     */
     public String getObjectById(String objectIdString) throws SQLException{
 	Gson gson  = new Gson();
 	String objectSelectionQuery = "SELECT Name, Description, Alias FROM Objects WHERE ObjectId = ?";

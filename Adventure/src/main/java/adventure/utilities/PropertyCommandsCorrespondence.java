@@ -66,6 +66,12 @@ public abstract class PropertyCommandsCorrespondence {
         propertyCommandsCorrespondences.put(propertyType, commandsSet); 
     }
     
+    /**
+     *
+     * @param propertyType
+     * @return
+     * @throws NoSuchElementException
+     */
     public static Set<CommandType> getCommands(PropertyType propertyType) throws NoSuchElementException
     {
 	if (!propertyCommandsCorrespondences.containsKey(propertyType))

@@ -11,6 +11,10 @@ import adventure.identifiers.PropertyType;
  */
 public class Pickupable extends PropertyWithValue {
     
+    /**
+     *
+     * @param value
+     */
     public Pickupable(boolean value){
         super(PropertyType.PICKUPABLE, value);
     }

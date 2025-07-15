@@ -24,19 +24,37 @@ public abstract class GameDescription {
     private Inventory inventory = new Inventory(new ArrayList<>());
     private Room currentRoom;
     
-    
+    /**
+     *
+     * @throws InconsistentInitializationException
+     * @throws PasswordGuessedException
+     * @throws EndGameException
+     */
     public abstract void init() throws InconsistentInitializationException, PasswordGuessedException, 
             EndGameException;
 
+    /**
+     *
+     * @return
+     */
     public List<Room> getRooms() {
         return rooms;
     }
 
+    /**
+     *
+     * @return
+     */
     public Inventory getInventory() {
         return inventory;
     }
     
-    
+    /**
+     *
+     * @param id
+     * @return
+     * @throws NoSuchElementException
+     */
     public AdvObject getObjectById(ObjectId id) throws NoSuchElementException
     {
 	AdvObject object = null;
@@ -59,6 +77,12 @@ public abstract class GameDescription {
 	return object;
     }
 
+    /**
+     *
+     * @param commandType
+     * @return
+     * @throws NoSuchElementException
+     */
     public Command getCommandByType(CommandType commandType) throws NoSuchElementException
     {
 	for (Command command : commands)
@@ -70,8 +94,12 @@ public abstract class GameDescription {
 	throw new NoSuchElementException();
     }
 
-
-
+    /**
+     *
+     * @param roomId
+     * @return
+     * @throws NoSuchElementException
+     */
     public Room getRoomById(RoomId roomId) throws NoSuchElementException
     {
 	for (Room room : rooms)
@@ -83,6 +111,11 @@ public abstract class GameDescription {
 	throw new NoSuchElementException();
     }
 
+    /**
+     *
+     * @param object
+     * @throws DuplicateException
+     */
     public void addObjectToinventory(AdvObject object) throws DuplicateException
     {
 	if (!inventory.contains(object))
@@ -91,6 +124,11 @@ public abstract class GameDescription {
             throw new DuplicateException();
     }
 
+    /**
+     *
+     * @param object
+     * @throws NoSuchElementException
+     */
     public void removeObjectFromInventory(AdvObject object) throws NoSuchElementException
     {
 	if (inventory.contains(object))
@@ -99,6 +137,12 @@ public abstract class GameDescription {
 		throw new NoSuchElementException();
     }
 
+    /**
+     *
+     * @param room
+     * @param object
+     * @throws DuplicateException
+     */
     public void addObjectToRoom(Room room, AdvObject object) throws DuplicateException
     {
         if (room.contains(object))
@@ -107,6 +151,12 @@ public abstract class GameDescription {
             room.addObject(object);
     }
 
+    /**
+     *
+     * @param room
+     * @param object
+     * @throws NoSuchElementException
+     */
     public void removeObjectFromRoom(Room room, AdvObject object) throws NoSuchElementException
     {
         if (!room.contains(object))
@@ -115,14 +165,26 @@ public abstract class GameDescription {
             room.removeObject(object);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Command> getCommands() {
         return commands;
     }
 
+    /**
+     *
+     * @return
+     */
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    /**
+     *
+     * @param currentRoom
+     */
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }

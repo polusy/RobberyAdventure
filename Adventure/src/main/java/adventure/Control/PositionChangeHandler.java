@@ -22,6 +22,14 @@ import java.util.NoSuchElementException;
  */
 public class PositionChangeHandler {
     
+    /**
+     *
+     * @param gameDescription
+     * @param parserOutput
+     * @return
+     * @throws NotValidSentenceException
+     * @throws NoSuchElementException
+     */
     public String handle(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, NoSuchElementException{
         String message = null;
 	CommandType commandType = parserOutput.getCommand().getType();

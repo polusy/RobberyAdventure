@@ -23,6 +23,16 @@ public class GameEffect {
     private Map<ObjectId, ObjectEffect> objectsEffects;
     private SpecialAction specialAction;    
 
+    /**
+     *
+     * @param currentPositionEffect
+     * @param inventoryEffect
+     * @param lootBagEffect
+     * @param roomEffect
+     * @param objectsEffects
+     * @param specialAction
+     * @throws InconsistentInitializationException
+     */
     public GameEffect(CurrentPositionEffect currentPositionEffect, InventoryEffect inventoryEffect,
            LootBagEffect lootBagEffect, RoomEffect roomEffect, Map<ObjectId, ObjectEffect> objectsEffects,
            SpecialAction specialAction) throws InconsistentInitializationException {
@@ -74,26 +84,50 @@ public class GameEffect {
         this.specialAction = specialAction;
     }
 
+    /**
+     *
+     * @return
+     */
     public CurrentPositionEffect getCurrentPositionEffect() {
         return currentPositionEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public InventoryEffect getInventoryEffect() {
         return inventoryEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public LootBagEffect getLootBagEffect() {
         return lootBagEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public RoomEffect getRoomEffect() {
         return roomEffect;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<ObjectId, ObjectEffect> getObjectsEffects() {
         return objectsEffects;
     }
 
+    /**
+     *
+     * @return
+     */
     public SpecialAction getSpecialAction() {
         return specialAction;
     }

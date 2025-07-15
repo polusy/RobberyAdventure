@@ -19,6 +19,14 @@ public class CommandAnalysisResult {
     private boolean analysisPassed;
     private PropertyType propertyType;    
 
+    /**
+     *
+     * @param message
+     * @param targetObject
+     * @param auxiliaryObject
+     * @param analysisPassed
+     * @param propertyType
+     */
     public CommandAnalysisResult(String message, InteractiveObject targetObject, InteractiveObject auxiliaryObject, boolean analysisPassed, PropertyType propertyType) {
         this.message = message;
         this.targetObject = targetObject;
@@ -27,42 +35,82 @@ public class CommandAnalysisResult {
         this.propertyType = propertyType;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     *
+     * @return
+     */
     public AdvObject getTargetObject() {
         return targetObject;
     }
 
+    /**
+     *
+     * @param targetObject
+     */
     public void setTargetObject(AdvObject targetObject) {
         this.targetObject = targetObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public InteractiveObject getAuxiliaryObject() {
         return auxiliaryObject;
     }
 
+    /**
+     *
+     * @param auxiliaryObject
+     */
     public void setAuxiliaryObject(InteractiveObject auxiliaryObject) {
         this.auxiliaryObject = auxiliaryObject;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAnalysisPassed() {
         return analysisPassed;
     }
 
+    /**
+     *
+     * @param analysisPassed
+     */
     public void setAnalysisPassed(boolean analysisPassed) {
         this.analysisPassed = analysisPassed;
     }
 
+    /**
+     *
+     * @return
+     */
     public PropertyType getPropertyType() {
         return propertyType;
     }
 
+    /**
+     *
+     * @param propertyType
+     */
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
     }

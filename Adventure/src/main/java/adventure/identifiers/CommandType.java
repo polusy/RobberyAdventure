@@ -10,26 +10,113 @@ package adventure.identifiers;
  */
 public enum CommandType {
     
-        END,
-        SAVE,
-        MENU,
-        INVENTORY,
-        LOOT_BAG,
-        NORTH,
-        SOUTH,
-        EAST,
-        WEST,
-        OPEN,
-        CLOSE,
-        PUSH,
-        BREAK,
-        PICK_UP,
-        DROP,
-        USE,
-        LOOK_AT,
-        CONSUME,
-        ACTIVATE,
-        DEACTIVATE,
-        MOVE,
-        FILL
+    /**
+     *
+     */
+    END,
+
+    /**
+     *
+     */
+    SAVE,
+
+    /**
+     *
+     */
+    MENU,
+
+    /**
+     *
+     */
+    INVENTORY,
+
+    /**
+     *
+     */
+    LOOT_BAG,
+
+    /**
+     *
+     */
+    NORTH,
+
+    /**
+     *
+     */
+    SOUTH,
+
+    /**
+     *
+     */
+    EAST,
+
+    /**
+     *
+     */
+    WEST,
+
+    /**
+     *
+     */
+    OPEN,
+
+    /**
+     *
+     */
+    CLOSE,
+
+    /**
+     *
+     */
+    PUSH,
+
+    /**
+     *
+     */
+    BREAK,
+
+    /**
+     *
+     */
+    PICK_UP,
+
+    /**
+     *
+     */
+    DROP,
+
+    /**
+     *
+     */
+    USE,
+
+    /**
+     *
+     */
+    LOOK_AT,
+
+    /**
+     *
+     */
+    CONSUME,
+
+    /**
+     *
+     */
+    ACTIVATE,
+
+    /**
+     *
+     */
+    DEACTIVATE,
+
+    /**
+     *
+     */
+    MOVE,
+
+    /**
+     *
+     */
+    FILL
 }

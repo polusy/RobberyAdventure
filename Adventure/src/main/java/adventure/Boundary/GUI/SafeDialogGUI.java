@@ -14,6 +14,10 @@ public class SafeDialogGUI extends javax.swing.JDialog {
     
     private boolean passwordGuessed = false;
 
+    /**
+     *
+     * @return
+     */
     public boolean isPasswordGuessed() {
         return passwordGuessed;
     }
@@ -22,6 +26,8 @@ public class SafeDialogGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form SafeDialogGUI
+     * @param parent
+     * @param modal
      */
     public SafeDialogGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
