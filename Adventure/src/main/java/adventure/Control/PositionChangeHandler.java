@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 public class PositionChangeHandler {
     
     public String handle(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException, NoSuchElementException{
-        String message;
+        String message = null;
 	CommandType commandType = parserOutput.getCommand().getType();
 	Door linkedDoor = null;
 	Room linkedRoom = null;
@@ -42,8 +42,7 @@ public class PositionChangeHandler {
 	{
 		try {
 			linkedRoom = gameDescription.getCurrentRoom().getLinkedRoom(cardinalPoint);
-		} catch (NoSuchElementException exception){};
-		{
+		} catch (NoSuchElementException exception) {
                     message = "Non puoi andare in questa direzione";
 		}
 
@@ -70,6 +69,10 @@ public class PositionChangeHandler {
                                         if (openable.getValue() == true)
                                         {
                                             gameDescription.setCurrentRoom(linkedRoom);
+                                            String newRoomName = gameDescription.getCurrentRoom().getName();
+                                            message = System.lineSeparator() + "\t" + newRoomName + System.lineSeparator() +
+                                                    "===========================================" + System.lineSeparator() +
+                                            gameDescription.getCurrentRoom().getDescription();                                            
                                         }
                                         else{
                                             message = "C'e' una porta, devi aprirla per poter andare in questa direzione.";

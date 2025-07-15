@@ -76,6 +76,8 @@ public class Parser {
 	allObjects.addAll(roomObjects);
 	allObjects.addAll(inventoryObjects);
 	names = getAllNames(allObjects);
+        names.addAll(getAllRoomNames(rooms));
+        names = Utils.toLowerCaseStringList(names);
 	names.sort(Collections.reverseOrder(Comparator.comparingInt(s -> s.length())));
 
         Iterator sentencesIterator = sentences.iterator();
@@ -83,6 +85,7 @@ public class Parser {
             ParserOutput parserOutput = null;
             Preposition preposition =  null;
             StringBuilder mappedString = new StringBuilder();
+            tokens = new ArrayList();
 
             String sentence = (String) sentencesIterator.next();
             Utils.tokenize(names, 0, stopwords, wordsSeparators, tokens, sentence);
@@ -142,7 +145,7 @@ public class Parser {
                         throw new NotValidTokenException();
             }
 
-            if (!(new String(mappedString)).matches(regex) || (new String(mappedString)).matches(notValidRegex)){
+            if (!(new String(mappedString)).matches(regex) && !(new String(mappedString)).matches(notValidRegex)){
                     throw new NotValidSentenceException();
             }
             else{
@@ -191,6 +194,16 @@ public class Parser {
 	return names;	
     }
 
+    
+    private List<String> getAllRoomNames(List<Room> rooms){
+	List<String> names = new ArrayList();
+        
+	for (Room room : rooms){
+            names.add(room.getName());
+        }
+
+	return names;	
+    }
 
 
 

@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -102,6 +103,15 @@ public class Utils {
 
             }
 
+    }
+    
+    public static List<String> toLowerCaseStringList (List<String> words){
+        List<String> lowerCaseStringList = words
+                .stream()
+                .map(s -> s.toLowerCase())
+                .collect(Collectors.toList());
+        
+        return lowerCaseStringList;
     }
 
     

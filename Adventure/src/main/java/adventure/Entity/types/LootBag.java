@@ -4,12 +4,14 @@
  */
 package adventure.Entity.types;
 
+import java.util.NoSuchElementException;
 
 import adventure.Entity.objects.ValuableObject;
 import adventure.Entity.objects.AdvObject;
 import java.util.ArrayList;
 import java.util.List;
 import adventure.exceptions.*;
+import adventure.identifiers.ObjectId;
 
 /**
  *
@@ -49,5 +51,29 @@ public class LootBag {
         else 
             return false;
     }
+    
+    public boolean contains(ObjectId objectId){
+        boolean contained = false;
+        
+        for (AdvObject object : objects){
+            if (object.getId() == objectId)
+                contained = true;
+        }    
+        
+        return contained;
+    }
+    
+    
+    public AdvObject getObjectById(ObjectId Id) throws NoSuchElementException{
+        
+        for (AdvObject object : objects){
+            if (object.getId() == Id){
+                return object;
+            }
+        }
+        
+        throw new NoSuchElementException();
+    }    
+    
     
 }

@@ -35,6 +35,8 @@ public class OpenCommandAnalyzer extends CommandAnalyzer{
             throws NotValidSentenceException, AmbiguousCommandException {
 	CommandAnalysisResult commandAnalysisResult =  analyzeBinaryCommand(parserOutput, PropertyType.OPENABLE, PrepositionType.OPEN, errorMessage);
 	
+        OpenCommandAnalyzer.disambiguateDoor(commandAnalysisResult, gameDescription, parserOutput);
+        
 	return commandAnalysisResult;
     }
     

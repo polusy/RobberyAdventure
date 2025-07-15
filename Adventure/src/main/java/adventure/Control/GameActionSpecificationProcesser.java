@@ -48,16 +48,19 @@ public abstract class GameActionSpecificationProcesser {
     
     public static GameActionResult process(GameActionSpecification gameActionSpecification,GameDescription gameDescription, CommandAnalysisResult commandAnalysisResult) throws NotValidSentenceException,DuplicateException
     {
-	ConditionEvaluationResult conditionEvaluationResult = processCompleteCondition(gameActionSpecification.getCompleteCondition(), gameDescription, commandAnalysisResult);
+        if (gameActionSpecification != null){
+            ConditionEvaluationResult conditionEvaluationResult = processCompleteCondition(gameActionSpecification.getCompleteCondition(), gameDescription, commandAnalysisResult);
 
-	if (conditionEvaluationResult.hasConditionPassed()){
-            GameActionResult gameActionResult = processConditionPassingResult(gameActionSpecification.getPassingConditionResult(), gameDescription);
-            return gameActionResult;
-	}
-	else{
-            String failingMessage = gameActionSpecification.getFailingConditionMessages().getMessage(conditionEvaluationResult);
-            return (new GameActionResult(failingMessage));
-	}
+            if (conditionEvaluationResult.hasConditionPassed()){
+                GameActionResult gameActionResult = processConditionPassingResult(gameActionSpecification.getPassingConditionResult(), gameDescription);
+                return gameActionResult;
+            }
+            else{
+                String failingMessage = gameActionSpecification.getFailingConditionMessages().getMessage(conditionEvaluationResult);
+                return (new GameActionResult(failingMessage));
+            }
+        }
+        return null;
     }
     
     private static ConditionEvaluationResult processCompleteCondition(CompleteCondition completeCondition ,GameDescription gameDescription, CommandAnalysisResult commandAnalysisResult) throws NotValidSentenceException
@@ -212,7 +215,7 @@ public abstract class GameActionSpecificationProcesser {
 	if (gameEffect != null)
 	{
             specialAction = gameEffect.getSpecialAction();
-        }   
+          
 
 
 	if (gameEffect.getCurrentPositionEffect() != null)
@@ -240,6 +243,7 @@ public abstract class GameActionSpecificationProcesser {
                 if (gameDescription instanceof RobberyAdventure)
                 {
                     RobberyAdventure robberyAdventure = (RobberyAdventure) gameDescription;
+                    removedObject = gameDescription.getObjectById(gameEffect.getLootBagEffect().getAddingObject());
                     robberyAdventure.addObjectToLootBag(robberyAdventure.getObjectById(gameEffect.getLootBagEffect().getAddingObject()));
                 }
             }
@@ -259,26 +263,38 @@ public abstract class GameActionSpecificationProcesser {
 	{
 		for (Map.Entry<ObjectId, ObjectEffect> objectEffects : gameEffect.getObjectsEffects().entrySet())
 		{
-			InteractiveObject object = (InteractiveObject) gameDescription.getObjectById(objectEffects.getKey());
+                        InteractiveObject object = null;
+                        AdvObject advObject = gameDescription.getObjectById(objectEffects.getKey());
+                        
+                        if (advObject instanceof InteractiveObject)
+                            object = (InteractiveObject) gameDescription.getObjectById(objectEffects.getKey());
+                   
+                            
 			ObjectEffect effect = objectEffects.getValue();
 
 			if (((Boolean)effect.getVisibility()) != null)
-				object.setVisibility(effect.getVisibility());
+				advObject.setVisibility(effect.getVisibility());
 
 			if (effect.getContainerEffect() != null)
 			{
-                            if (object.isContainer())
-                                    container = object.getContainerProperty();
-                                    if (container.hasObject(effect.getContainerEffect().getRemovingObject()))
-                                    {
-                                        container.removeObject(effect.getContainerEffect().getRemovingObject());
-                                        auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.OPEN).getPassingConditionResult();
-                                        auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                            if (object!= null && object.isContainer()){
+                                container = object.getContainerProperty();
+                                if (container.hasObject(effect.getContainerEffect().getRemovingObject()))
+                                {
+                                    container.removeObject(effect.getContainerEffect().getRemovingObject());
 
-                                        auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.CLOSE).getPassingConditionResult();
-                                        auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                                    if (object.hasProperty(PropertyType.OPENABLE)){
+                                        auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.OPEN).getPassingConditionResult();
+                                        if (auxiliaryPassingConditionResult.getGameEffect() != null){
+                                            auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+
+                                            auxiliaryPassingConditionResult = object.getGameActionSpecification(PropertyType.OPENABLE, CommandType.CLOSE).getPassingConditionResult();
+                                            auxiliaryPassingConditionResult.getGameEffect().getObjectsEffects().remove(effect.getContainerEffect().getRemovingObject());
+                                        }
                                     }
-			}
+                                }
+                            }
+                        }
 
 			if (effect.getPropertyWithValueResults() != null)
 			{
@@ -291,6 +307,7 @@ public abstract class GameActionSpecificationProcesser {
 			}
 		}
 	}
+}
 
 	return new GameActionResult(passingConditionMessage, specialAction);
     }

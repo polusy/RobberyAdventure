@@ -26,7 +26,7 @@ public enum PropertyType{
     MOVABLE(new String[] {"muovi", "spingi", "sposta", "solleva", "abbassa", "tira", "trascina", "muovere", "spingere",
     "spostare", "sollevare", "abbassare", "tirare", "trascinare"}),
 
-    OPENABLE(new String[] {"usa", "apri", "spalanca", "chiudi", "usare", "aprire", "spalancare", "chiudere"}),
+    OPENABLE(new String[] { "apri", "spalanca", "chiudi", "aprire", "spalancare", "chiudere"}),
 
     PICKUPABLE(new String[] {"raccogli", "prendi", "afferra", "lascia", "butta", "getta", "raccogliere", "prendere",
     "afferrare", "lasciare", "buttare", "gettare"}),
