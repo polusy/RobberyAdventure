@@ -10,6 +10,8 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.EndGameException;
 import adventure.Boundary.GUI.EndCommandGUI;
 
+import javax.swing.JFrame;
+
 
 
 /**
@@ -22,7 +24,9 @@ public class EndCommandObserver implements TechnicalObserver {
         if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)
             throw new NotValidSentenceException();
         
-        EndCommandGUI endCommandGUI = new EndCommandGUI(null, true);
+        JFrame baseFrame = FrameCreator.createBaseFrame();
+        
+        EndCommandGUI endCommandGUI = new EndCommandGUI(baseFrame, true);
         endCommandGUI.setVisible(true);
         
         

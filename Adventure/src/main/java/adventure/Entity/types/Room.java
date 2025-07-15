@@ -26,8 +26,8 @@ public class Room {
     final private RoomId id;
     private String name;
     private String description;
-    Map<CardinalPoint, Room> roomLinks = new HashMap<>();
-    Map<CardinalPoint, Door> doorLinks = new HashMap<>();
+    private Map<CardinalPoint, Room> roomLinks = new HashMap<>();
+    private Map<CardinalPoint, Door> doorLinks = new HashMap<>();
     private List<AdvObject> objects = new ArrayList<>();
     
 
