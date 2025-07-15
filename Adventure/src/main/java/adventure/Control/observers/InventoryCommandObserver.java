@@ -14,6 +14,8 @@ import java.io.PrintStream;
 /**
  *
  * @author Paolo
+ * 
+ * La classe si occupa di gestire la richiesta dell'utente di visualizzazione dell'inventario.
  */
 public class InventoryCommandObserver implements GameObserver{
     
@@ -23,10 +25,13 @@ public class InventoryCommandObserver implements GameObserver{
      * @param parserOutput
      * @param out
      * @throws NotValidSentenceException
+     * 
+     * Il metodo costruisce una stringa contenente tutti i nomi degli oggetti dell'inventario.
      */
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException
     {
+        //verifico validità dell'output del parser (nessun oggetto o stanza nel p. output).
 	if (parserOutput.getDoorRoom() != null || !parserOutput.getObjects().isEmpty())
 		throw new NotValidSentenceException();
 
