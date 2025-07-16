@@ -8,10 +8,22 @@ import adventure.Entity.effects.SpecialAction;
 
 /**
  *
- * @author utente
+ * 
+ * 
+ * La classe incapsula il risultato di un'azione sul gioco (messaggio da mostrare all'utente e azione speciale da eseguire).
+ * 
+ * @author Paolo
  */
 public class GameActionResult {
+    /**
+     * messaggio da mostrare all'utente dopo aver valutato le specifiche condizioni di applicabilità
+     * del comando.
+     */
     private String message;
+    
+    /**
+     * l'azione speciale da eseguire, successivamente alla valutazione della condizione di applicabilità.
+     */
     private SpecialAction specialAction;    
 
     /**

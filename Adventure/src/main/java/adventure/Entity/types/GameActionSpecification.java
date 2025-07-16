@@ -17,20 +17,40 @@ import java.util.Map;
 
 /**
  *
+ * 
+ * 
+ * La classe Rappresenta la specifica di un azione sul gioco, quindi ne conserva le condizioni di applicabilità,
+ * i risultati associati al superamento delle condizioni e i messaggi da mostrare in caso di fallimento.
+ * 
  * @author Paolo
  */
 public class GameActionSpecification {
-    
+    /**
+     * Rappresenta l'insieme delle condizioni sull'inventario e sulle proprietà degli oggetti che devono
+     * essere soddisfatte affinché possano essere eseguiti i contenuti della {@link PassingConditionResult}.
+     */
     private final CompleteCondition completeCondition;
+    
+    /**
+     * Messaggi per il fallimento di ognuna delle condizioni non soddisfatte all'interno di completeCondition.
+     */
     private final FailingConditionMessages failingConditionMessages;
+    
+    /**
+     * Effetti e azioni speciali da applicare in caso di superamento delle condizioni di applicabilità del comando.
+     */
     private final PassingConditionResult passingConditionResult;
 
     /**
      *
+     * Il costruttore si assicura che l'inizializzazione della {@link CompleteCondition} 
+     * sia coerente con l'inizializzazione dei messaggi di fallimento sulle stesse.
+     * 
      * @param completeCondition
      * @param failingConditionMessages
      * @param passingConditionResult
      * @throws InconsistentInitializationException
+     * 
      */
     public GameActionSpecification(CompleteCondition completeCondition, FailingConditionMessages failingConditionMessages, PassingConditionResult passingConditionResult) throws InconsistentInitializationException{
         

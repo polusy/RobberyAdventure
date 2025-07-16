@@ -18,6 +18,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
+ * 
+ * 
+ * La classe swing gestisce la GUI per permettere all'utente il salvataggio
+ * dei progressi di gioco.
+ * 
  * @author Paolo
  */
 public class RescueProgressGUI extends javax.swing.JDialog {
@@ -52,7 +57,11 @@ public class RescueProgressGUI extends javax.swing.JDialog {
     }
     
     /**
-     *
+     * Il metodo inizializza le properties dei componenti della dialog, quindi aggiunge i nomi recuperati
+     * dalla chiamata al server REST e li inserisce nella jlist.
+     * 
+     * Il metodo, inoltre, aggiunge un list selection listener per la selezione dello specifico elemento (nome di salvataggio)
+     * dalla lista dei nomi mostrata.
      */
     public void initProperties(){
         Set<String> allNames = clientManager.getAllGamesNamesRequest();
@@ -120,6 +129,14 @@ public class RescueProgressGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated
+     * Il metodo dovrebbe permettere il caricamento del salvataggio dei progressi di gioco
+     * associati al nome selezionato dalla jList.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (rescuedGameName != null)
         {

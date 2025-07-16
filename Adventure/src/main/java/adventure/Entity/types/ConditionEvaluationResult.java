@@ -8,14 +8,40 @@ import adventure.identifiers.ObjectId;
 
 /**
  *
+ * 
+ * 
+ * La classe rappresenta il risultato di valutazione delle condizioni presenti in una delle GameActionSpecification dell'oggetto target.
+ * 
  * @author Paolo
+ * 
+ * 
  */
 public class ConditionEvaluationResult {
     
+    /**
+     * {@code conditionPassed} per indicare il superamento generale di tutte le condizioni (su inventario e su proprietà degli oggetti)
+     */
     private boolean conditionPassed;
+    
+    /**
+     *{@code inventoryConditionPassed} per indicare il superamento della condizione sull'inventario.
+     */
     private boolean inventoryConditionPassed;
+    
+    /**
+     * {@code missingNecessaryObject} per indicare un {@link ObjectId} dell'oggetto necessario mancante nell'inventario.
+     */
     private ObjectId missingNecessaryObject;
+    
+    /**
+     * {@code objectFailedConditionReference} rappresenta un riferimento all'oggetto di cui è fallita la valutazione della condizione, e di cui
+     * viene conservato il tipo di proprietà specifico il cui valore ha portato al fallimento della condizione.
+     */
     private ObjectPropertyReference objectFailedConditionReference;
+    /**
+     * {@code failedVisibilityObject} rappresenta l'oggetto su cui è fallito il controllo di visibilità. (e.g. l'oggetto doveva essere visibile,
+     * ma invece il suo attributo visible è impostato a {@code false}).
+     */
     private ObjectId failedVisibilityObject;
 
     /**

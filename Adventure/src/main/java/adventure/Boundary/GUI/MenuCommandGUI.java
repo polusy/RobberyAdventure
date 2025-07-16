@@ -10,13 +10,28 @@ import javax.swing.JOptionPane;
 
 /**
  *
+ * 
+ * 
+ * La classe swing rappresenta l'interfaccia grafica del menu del gioco.
+ * 
  * @author Paolo
  */
 public class MenuCommandGUI extends javax.swing.JDialog {
     
-    
+    /**
+     * manager necessario per permettere di effettuare chiamate REST al server.
+     */
     private ClientManager clientManager;
+    
+    /**
+     * Descrizione di gioco di cui si vorranno (probabilmente) salvare i progressi.
+     */
     private RobberyAdventure toBeSavedRobberyAdventure;
+    
+    /**
+     * salvataggio dei progressi recuperato attraverso il metodo REST.
+     * 
+     */
     private RobberyAdventure rescuedRobberyAdventure = null;
     
     private boolean gameEnded = false;
@@ -43,8 +58,8 @@ public class MenuCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form MenuCommandGUI
-     * @param clientManager
-     * @param robberyAdventure
+     * @param clientManager 
+     * @param robberyAdventure 
      * @param parent
      * @param modal
      */
@@ -100,17 +115,13 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,6 +138,13 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * Il metodo permette la visualizzazione della GUI dell'End command,
+     * quindi l'interazione per permettere all'utente l'uscita dal gioco (tramite menu).
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         EndCommandGUI endCommandGUI = new EndCommandGUI(null, true);
         endCommandGUI.setVisible(true);
@@ -138,10 +156,26 @@ public class MenuCommandGUI extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated 
+     * Il metodo dovrebbe completare il suo corpo, inserendo la chiamata alla SaveCommandGUI
+     * per permettere il salvataggio del gioco.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     * 
+     * @deprecated 
+     * Il metodo dovrebbe completare il suo corpo, inserendo la chiamata alla RescueProgressGUI
+     * per permettere il recupero del salvataggio di gioco specifico.
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showMessageDialog(rootPane,"Funzionalità non implementata");
         

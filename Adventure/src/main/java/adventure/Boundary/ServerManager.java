@@ -15,16 +15,29 @@ import java.io.IOException;
 
 /**
  *
- * @author utente
+ * 
+ * 
+ * La classe si occupa di gestire un qualsiasi server (http) e di permetterne l'avvio.
+ * 
+ * @author Paolo
  */
 public class ServerManager implements Runnable {
+    /**
+     * Server http gestito dal {@link ServerManager}.
+     */
     private HttpServer genericServer;
     
     /**
      *
-     * @param stringUri
-     * @param portNumber
-     * @param service
+     * Il metodo costruisce un server Http, attraverso l'URI, il numero di porta e il service specifico.
+     * 
+     * @param stringUri Stringa rappresentante l'URI del server da inizializzare.
+     * 
+     * @param portNumber Numero specifico di porta associato al servizio.
+     * 
+     * @param service Letterale di classe rappresentante la classe di servizio
+     * per la configurazione del Server REST.
+     * 
      */
     public ServerManager(String stringUri, int portNumber, Class<?> service){
         URI uri = UriBuilder.fromUri(stringUri).port(portNumber).build();
@@ -33,7 +46,8 @@ public class ServerManager implements Runnable {
     }
 
     /**
-     *
+     * Il metodo implementa il metodo {@code run()} dell'interfaccia {@link Runnable}
+     * per permettere l'avvio del server in parallelo all'esecuzione del resto del gioco.
      */
     @Override
     public void run()
@@ -45,7 +59,8 @@ public class ServerManager implements Runnable {
 
     /**
      *
-     * @return
+     * @return Specifico httpServer salvato come attributo d'istanza
+     * al momento dell'init. del ServerManager.
      */
     public HttpServer getServer()
     {

@@ -9,9 +9,18 @@ import adventure.identifiers.ObjectId;
 /**
  *
  * @author Paolo
+ * 
+ * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
+ * sulla situazione corrente nella lootBag della sessione.
+ * 
+ * L'effetto viene conservato come composizione di un possibile oggetto {@link ObjectId} da aggiungere alla lootBag
+ *
+ * 
  */
 public class LootBagEffect {
-
+    /**
+     * {@code addingObject} sarà usato per ricercare l'oggetto nella stanza e inserirlo nella lootBag.
+     */
     private ObjectId addingObject;
 
     /**

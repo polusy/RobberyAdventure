@@ -28,17 +28,25 @@ import javax.swing.JFrame;
 
 /**
  *
+ * 
+ * La classe implementa l'interfaccia dei gestori tecnici di gioco. 
+ * Gestisce il comando del gioco che permette di visualizzare il menu di gioco.
+ * 
  * @author Paolo
  */
 public class MenuCommandObserver implements TechnicalObserver {
     
     /**
      *
-     * @param game
-     * @param parserOutput
-     * @param message
-     * @throws NotValidSentenceException
-     * @throws EndGameException
+     * @param game Descrizione di gioco corrente
+     * 
+     * @param parserOutput Rappresenta l'output del parser al momento del parsing della stringa inserita nell'input stream
+     * dell'utente attraverso CLI.
+     * 
+     * @param message Messaggio da avvalorare possibilmente nel corpo di update.
+     * 
+     * @throws NotValidSentenceException Se l'utente inserisce attraverso CLI un frase integralmente non coerente con il primo comando di Menu inserito.
+     * @throws EndGameException Se l'utente, tramite menu di gioco, decide di interrompere la corrente sessione di gioco.
      */
     @Override
         public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException, EndGameException {

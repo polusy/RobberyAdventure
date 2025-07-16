@@ -22,17 +22,28 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Paolo
+ *
+ * 
+ * La classe implementa l'interfaccia dei gestori tecnici di gioco. 
+ * Gestisce il comando del gioco che permette di salvare i progressi di gioco.
+ * 
+ *  @author Paolo
  */
 public class SaveCommandObserver implements TechnicalObserver{
     
     /**
      *
-     * @param game
-     * @param parserOutput
-     * @param message
-     * @throws NotValidSentenceException
+     * Il metodo controlla che il parserOutput contenga solo il comando di tipo Save e che non abbia parsato oggetti
+     * o stanze, inoltre invoca la GUI per il salvataggio dei progressi.
+     * 
+     * @param game Descrizione corrente del gioco.
+     * @param parserOutput output del parser da analizzare per eseguire l'update.
+     * @param message Messaggio possibilmente da avvalorare nel metodo di update.
+     * @throws NotValidSentenceException Se l'utente scrive una frase non corretta contestualmente al comando inserito.
+     * 
+     * 
      */
+    @Override
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) throws NotValidSentenceException {
         
         if (!parserOutput.getObjects().isEmpty() || parserOutput.getDoorRoom() != null)

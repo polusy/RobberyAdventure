@@ -6,6 +6,10 @@ package adventure.Entity.properties;
 
 /**
  *
+ * 
+ * 
+ * La classe rappresenta una qualsiasi proprietà di un oggetto dell'avventura.
+ * 
  * @author utente
  */
 public abstract class Property {

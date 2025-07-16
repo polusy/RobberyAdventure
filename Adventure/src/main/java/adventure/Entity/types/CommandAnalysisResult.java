@@ -10,13 +10,42 @@ import adventure.Entity.objects.AdvObject;
 
 /**
  *
- * @author utente
+ * 
+ * 
+ * La classe rappresenta il risultato del metodo analyze degli analyzers del gioco.
+ * 
+ * @author Paolo
  */
 public class CommandAnalysisResult {
+    
+    /**
+     * Il {@code message} individuato da mostrare all'utente.
+     */
     private String message;
+    
+    /**Il {@code targetObject} individuato dall'analyzer, attraverso l'analisi del parserOutput, rappresenta
+     * l'oggetto target su cui si vuole eseguire l'azione, e che quindi sarà necessario per valutare condizioni di applicabilità
+     * e esecuzione degli effetti.
+     */ 
     private AdvObject targetObject;
+    
+    /**
+     * Il {@code auxiliaryObject} rappresenta l'oggetto ausiliario nella stringa inserita dall'utente, rappresentante un
+     * oggetto necessario per eseguire un'azione specifica sul {@code targetObject}.
+     */
     private InteractiveObject auxiliaryObject;
+    
+    /**
+     * - Il boolean {@code analysisPassed} rappresenta il risultato dell'analisi degli analyzers:
+     *  se la stringa integrale è semanticamente valida rispetto all'azione che si vuole eseguire sul {@code targetObject}, per mezzo del {@code auxiliaryObject}
+     *  allora è impostato a {@code true}.
+     */
     private boolean analysisPassed;
+    
+    /**
+     * - la {@code propertyType} inserita rappresenta il tipo di proprietà che lo specifico Analyzer ha assicurato
+     * fosse presente nell'insieme di proprietà dell'oggetto.
+     */
     private PropertyType propertyType;    
 
     /**

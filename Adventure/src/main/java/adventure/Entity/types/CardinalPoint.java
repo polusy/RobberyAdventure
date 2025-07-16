@@ -6,7 +6,11 @@ package adventure.Entity.types;
 
 /**
  *
- * @author utente
+ * 
+ * 
+ * Enumerativo che conserva gli identificativi dei quattro punti cardinali.
+ * 
+ * @author Paolo
  */
 public enum CardinalPoint {
 
@@ -29,6 +33,14 @@ public enum CardinalPoint {
      *
      */
     WEST;
+    
+    /**
+     * 
+     * Il metodo restituisce il cardinal Point opposto relativamente a quello su cui viene invocato {@code getOpposite()}
+     * 
+     * @return {@link CardinalPoint} opposto rispetto a quello su cui si sta invocando {@code getOpposite()}.
+     * 
+     */
 
     CardinalPoint getOpposite()
     {

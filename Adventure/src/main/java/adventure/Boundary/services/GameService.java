@@ -27,6 +27,11 @@ import java.util.Set;
 
 /**
  *
+ * 
+ * 
+ * La classe rappresenta la configurazione REST del server per permettere richieste http
+ * per quanto riguarda i servizi di salvataggio di progressi di gioco e recuperi di questi ultimi.
+ * 
  * @author Paolo
  */
 
@@ -34,7 +39,10 @@ import java.util.Set;
 public class GameService {
     
     private final static DatabaseManager databaseManager;
-    
+    /**
+     * il blocco statico permette di istanziare il db,
+     * senza istanziare concretamente la classe GameService nel gioco.
+     */
     static{
         try{
             databaseManager = new DatabaseManager();
@@ -45,9 +53,13 @@ public class GameService {
     
     /**
      *
-     * @param jsonDatabaseGameTable
-     * @return
+     * Il metodo si occupa di convertire la tupla serializzata (json) in un oggetto di classe opportuna,
+     * di recuperarne i valori effettivi e di effetuare una richiesta al dbManager per salvare i progressi di gioco raggiunti.
+     *
+     * @param jsonDatabaseGameTable rappresentazione json della tupla (id, gameDescription).
+     * @return Restituisce il risultato dell'operazione eseguita.
      * @throws SQLException
+     * 
      */
     @PUT
     @Path("/add")
@@ -71,9 +83,13 @@ public class GameService {
     
     /**
      *
-     * @param gameId
-     * @return
+     * Il metodo restituisce, effettuando una chiamata al db, il salvataggio di gioco associato
+     * all'id passato nel path della richiesta http al server. 
+     * 
+     * @param gameId Id del gioco di cui si vuole recuperare il salvataggio.
+     * @return Response con il salvataggio specifico richiesto (serializzato in json).
      * @throws SQLException
+     * 
      */
     @GET
     @Path("/{gameId}")
@@ -87,8 +103,15 @@ public class GameService {
     
     /**
      *
-     * @return
+     * Il metodo restituisce, attraverso una query del dbManager,
+     * tutti i nomi dei salvataggi di gioco presenti nel db.
+     * 
+     * @return Response rappresentante la serializzazione del Set di nomi
+     * dei salvataggi del gioco (in formato Json).
+     * 
      * @throws SQLException
+     * 
+     * 
      */
     @GET
     @Path("/allnames")

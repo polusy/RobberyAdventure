@@ -8,10 +8,18 @@ import javax.swing.JOptionPane;
 
 /**
  *
+ * 
+ * 
+ * La classe swing rappresenta la GUI per permettere all'utente
+ * di interagire con il tastierino della cassaforte dell'Adventure.
+ * 
  * @author Paolo
  */
 public class SafeDialogGUI extends javax.swing.JDialog {
     
+    /**
+     * Attributo che conserva il risultato del tentativo di inserimento password sul tastierino della cassaforte
+     */
     private boolean passwordGuessed = false;
 
     /**
@@ -110,6 +118,17 @@ public class SafeDialogGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * 
+     * Il metodo recupera la password inserita nel JPassword field ed effettua un controllo
+     * sulla validità della stringa, restituendo il messaggio oppurtuno da mostrare all'utente
+     * (per mezzo del JOptionPane).
+     * 
+     * 
+     * @param evt 
+     * 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String password = new String(jPasswordField1.getPassword());

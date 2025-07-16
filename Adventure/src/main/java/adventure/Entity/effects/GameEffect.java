@@ -13,25 +13,69 @@ import adventure.exceptions.InconsistentInitializationException;
 
 /**
  *
+ * 
+ * 
+ * La classe rappresenta l'insieme di tutti i possibili effetti che potrebbero essere eseguiti
+ * sulla situazione corrente della sessione di gioco.
+ * 
+ * L'effetto viene conservato come composizione di effetti.
+ * - su posizione corrente del giocatore nella mappa del gioco {@link CurrentPositionEffect}.
+ * - sull'inventario del gioco (rimozione o inserimento di oggetti) {@link InventoryEffect}.
+ * - sulla stanza corrente del gioco (riomozione o inserimento di oggetti){@link LootBagEffect}.
+ * - sulla lootBag del gioco (inserimento di oggetti){@link RoomEffect}.
+ * - sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità){@link objectsEffects}.
+ * - azione speciale generica sulla sessione di gioco{@link specialAction}.
+ * 
  * @author utente
+ *
  */
 public class GameEffect {
+    /**
+     * Nuova Posizione corrente del giocatore nella mappa del gioco.
+     */
     private CurrentPositionEffect currentPositionEffect;
+    
+    /**
+     * Effetto sull'inventario del gioco (rimozione o inserimento di oggetti).
+     */
     private InventoryEffect inventoryEffect;
+    
+    /**
+     * Effetto sulla lootBag del gioco (inserimento di oggetti).
+     */
     private LootBagEffect lootBagEffect;
+    
+    /**
+     * Effetto sulla stanza del gioco (rimozione o inserimento di oggetti).
+     */
     private RoomEffect roomEffect;
+    
+    /**
+     * Effetto sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
+     */
     private Map<ObjectId, ObjectEffect> objectsEffects;
+    
+    /**
+     * Azione speciale generica sulla sessione di gioco.
+     */
     private SpecialAction specialAction;    
 
     /**
      *
-     * @param currentPositionEffect
-     * @param inventoryEffect
-     * @param lootBagEffect
-     * @param roomEffect
-     * @param objectsEffects
-     * @param specialAction
-     * @throws InconsistentInitializationException
+     * Il metodo è un banale costruttore, tuttavia si accerta che non ci siano assegnamenti inconsistenti tra gli effetti
+     * da eseguire sul gioco.
+     * e.g. rimozione di oggetto dalla stanza e rimozione dello stesso oggetto dall'inventario, etc...
+     * 
+     * @param currentPositionEffect Nuova Posizione corrente del giocatore nella mappa del gioco.
+     * @param inventoryEffect Effetto sull'inventario del gioco (rimozione o inserimento di oggetti).
+     * @param lootBagEffect Effetto sulla lootBag del gioco (inserimento di oggetti).
+     * @param roomEffect Effetto sulla stanza del gioco (rimozione o inserimento di oggetti).
+     * @param objectsEffects Effetto sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
+     * @param specialAction Azione speciale generica sulla sessione di gioco.
+     * 
+     * @throws InconsistentInitializationException Se si cerca di inizializzare gli effetti portandoli in uno 
+     * stato inconsistente.
+     * 
      */
     public GameEffect(CurrentPositionEffect currentPositionEffect, InventoryEffect inventoryEffect,
            LootBagEffect lootBagEffect, RoomEffect roomEffect, Map<ObjectId, ObjectEffect> objectsEffects,
