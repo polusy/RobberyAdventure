@@ -11,24 +11,24 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando CONSUME
  *
- * @author utente
+ * @author Alessandro
  */
 public class ConsumeCommandAnalyzer extends CommandAnalyzer {
 
-    /**
+    /** Costruisce l'oggetto ConsumeCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public ConsumeCommandAnalyzer(){
         super(" Non puoi in nessun modo utilizzare questa cosa! ");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando CONSUME
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      */
     @Override
