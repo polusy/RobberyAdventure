@@ -421,7 +421,7 @@ public class RobberyAdventure extends GameDescription{
         
         advObject = clientManager.getObjectRequest(objectId);
         interactiveObject = new InteractiveObject(advObject.getId(), advObject.getName(), advObject.getDescription(),
-        null, advObject.getAlias(), true, gameActionSpecifications);
+        "La telecamera e' rotta ... e' andata in frantumi!", advObject.getAlias(), true, gameActionSpecifications);
         
         room1 = this.getRoomById(RoomId.STAIRCASE);
         try{
