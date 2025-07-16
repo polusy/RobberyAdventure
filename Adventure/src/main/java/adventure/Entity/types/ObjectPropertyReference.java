@@ -7,9 +7,9 @@ package adventure.Entity.types;
 import adventure.identifiers.ObjectId;
 import adventure.identifiers.PropertyType;
 
-/**
+/** Riferimento ad una specifica proprietà di uno specifico oggetto
  *
- * @author utente
+ * @author Alessandro
  */
 public class ObjectPropertyReference {
     private ObjectId objectId;
@@ -17,8 +17,8 @@ public class ObjectPropertyReference {
 
     /**
      *
-     * @param objectId
-     * @param propertyType
+     * @param objectId Identificativo dell'oggetto proprietario della proprietà
+     * @param propertyType Identificativo della proprietà associata all'oggetto
      */
     public ObjectPropertyReference(ObjectId objectId, PropertyType propertyType) {
         this.objectId = objectId;
@@ -27,7 +27,7 @@ public class ObjectPropertyReference {
 
     /**
      *
-     * @return
+     * @return 
      */
     public ObjectId getObjectId() {
         return objectId;
@@ -43,7 +43,7 @@ public class ObjectPropertyReference {
 
     /**
      *
-     * @param objectId
+     * @param objectId Nuovo valore per l'identificativo dell'oggetto a cui è associata la proprietà
      */
     public void setObjectId(ObjectId objectId) {
         this.objectId = objectId;
@@ -51,7 +51,7 @@ public class ObjectPropertyReference {
 
     /**
      *
-     * @param propertyType
+     * @param propertyType Nuovo valore per l'identificativo della proprità associata all'oggetto
      */
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
