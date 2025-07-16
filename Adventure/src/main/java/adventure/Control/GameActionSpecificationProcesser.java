@@ -39,18 +39,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/**
+/** La classe è specializzata nell'elaborazione di un oggetto GameActionSpecification, di cui conosce la struttura
+ * 
+ * Possiede dei metodi specializzati nell'elaborazione di una GameActionSpecification a diversi livelli di granularità, 
+ * ognuno detentore di tale logica di elaborazione 
  *
  * @author Paolo
  */
 public abstract class GameActionSpecificationProcesser {
     
-    /**
+    /** Il metodo è specializzato nell'elaborazione di una GameActionSpecification al più generale livello di granularità.
+     * 
+     * Esso valuta la CompleteCondition sulla partita rappresentata dal parametro gameDescription e costruisce un risultato
+     * coerente sia nel caso in cui la condizione è soddisfatta, che nel caso contrario
      *
-     * @param gameActionSpecification
-     * @param gameDescription
-     * @param commandAnalysisResult
-     * @return
+     * @param gameActionSpecification Specifica completa delle azioni da eseguiri sulla partita
+     * @param gameDescription Partita in esecuzione
+     * @param commandAnalysisResult Risultato dell'analisi della semantica del comando inserito dall'utente da parte del CommandAnalyzer di competenza
+     * @return Risultato dell'elaborazione del parametro GameActionSpecification rispetto alla partita rappresentata dal parametro gameDescription
      * @throws NotValidSentenceException
      * @throws DuplicateException
      */
@@ -320,9 +326,9 @@ public abstract class GameActionSpecificationProcesser {
 	return new GameActionResult(passingConditionMessage, specialAction);
     }
  
-    /**
+    /** Il metodo è specializzato nella gestione delle attività conseguenti all'apertura dell'oggetto INNER_SAFE
      *
-     * @param game
+     * @param game Partita in esecuzione
      */
     public static void safeOpeningHandler(RobberyAdventure game){
         InteractiveObject innerSafe = (InteractiveObject) game.getObjectById(ObjectId.INNER_SAFE);
