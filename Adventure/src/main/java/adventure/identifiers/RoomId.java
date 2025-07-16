@@ -4,7 +4,8 @@
  */
 package adventure.identifiers;
 
-/**
+/** Questo identificativo contiene gli identificativi di tutte le stanze che compongono la mappa in cui il giocatore può
+ * spostarsi nel gioco
  *
  * @author Paolo
  */

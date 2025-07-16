@@ -6,7 +6,8 @@ package adventure.Entity.types;
 
 import adventure.identifiers.PropertyType;
 
-/**
+/** Associazione di un valore dicotomico ad una specifica tipologia di proprietà, rappresentanta dal suo identificativo
+ * {@link PropertyType}
  *
  * @author Paolo
  */
@@ -17,8 +18,8 @@ public class PropertyValue {
 
     /**
      *
-     * @param propertyType
-     * @param value
+     * @param propertyType Identificativo della proprietà
+     * @param value Valore dicotomico da associare alla proprietà
      */
     public PropertyValue(PropertyType propertyType, boolean value) {
         this.propertyType = propertyType;

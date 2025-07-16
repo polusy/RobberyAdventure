@@ -15,24 +15,26 @@ import adventure.Entity.objects.InteractiveObject;
 import adventure.Entity.objects.Door;
 import adventure.identifiers.PropertyType;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code LOOK_AT}
  *
- * @author utente
+ * @author Alessandro
  */
 public class LookAtCommandAnalyzer extends CommandAnalyzer {
     
-    /**
+    /** Costruisce l'oggetto LookAtCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public LookAtCommandAnalyzer(){
         super("");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code LOOK_AT}
+     * 
+     * Nel caso in cui il comando sia riferito ad un oggetto rotto, il metodo seleziona la relativa descrizione
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */

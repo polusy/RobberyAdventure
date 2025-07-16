@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando il gioco deve terminare, sia per la terminazione ordinaria dell'applicazione,
+ * che per casi speciali legati alla partita, come la fine dell'avventura
  *
- * @author utente
+ * @author Alessandro
  */
 public class EndGameException extends Exception {
     final private String message = "End game";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }    
 }

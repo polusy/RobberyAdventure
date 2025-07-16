@@ -20,24 +20,24 @@ import java.util.NoSuchElementException;
 
 import java.util.Map;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code OPEN}
  *
  * @author Paolo
  */
 public class OpenCommandAnalyzer extends CommandAnalyzer{
     
-    /**
+    /** Costruisce l'oggetto OpenCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public OpenCommandAnalyzer(){
         super(" Ma come pretendi di aprire quest ooggetto! ");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code OPEN}
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */
@@ -51,11 +51,11 @@ public class OpenCommandAnalyzer extends CommandAnalyzer{
 	return commandAnalysisResult;
     }
     
-    /**
+    /** Il metodo disambigua la porta della stanza indicata nell'oggetto parserOutput passato per parametro
      *
-     * @param commandAnalysisResult
-     * @param gameDescription
-     * @param parserOutput
+     * @param commandAnalysisResult Risultato dell'analisi semantica dell'oggetto parserOutput
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */

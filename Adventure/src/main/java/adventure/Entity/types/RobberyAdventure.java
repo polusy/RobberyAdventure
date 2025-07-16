@@ -34,7 +34,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.JFrame;
-/**
+
+/** Descrizione completa di tutte le informazioni statiche e dinamiche relative ad una sessione di gioco.
+ * 
+ * La classe conserva tutte le stanza che compongono la mappa nella quale il giocatore può muoversi nella sessione di gioco. 
+ * La classe conserva tutti i comandi supportati dal gioco, che il {@link Parser} è in grado di estrapolare a partire 
+ * dalla stringa di input inserita dall'utente.
+ * La classe conserva tutti gli oggetti presenti nel gioco, interattivi e non interattivi.
+ * 
+ * La classe inizializza ognuna di queste tipologie di elementi con dei metodi specializzati.
  *
  * @author Paolo
  */
@@ -44,16 +52,17 @@ public class RobberyAdventure extends GameDescription{
 
     /**
      *
-     * @return
+     * @return Zaino della refurtiva della sessione di gioco, contenente tutti gli oggetti rubati
      */
     public LootBag getLootBag() {
         return lootBag;
     }
     
-    /**
+    /** Il metodo restitisce l'oggetto del gioco avente identificativo uguale al parametro {@code id}, cercando tra 
+     * tutti gli oggetti presenti nel gioco
      *
-     * @param id
-     * @return
+     * @param id Identificativo dell'oggetto del gioco che si desidera recuperare
+     * @return Oggetto del gioco avente identificativo uguale al parametro {@code id}
      * @throws NoSuchElementException
      */
     public AdvObject getObjectById(ObjectId id) throws NoSuchElementException
@@ -71,11 +80,13 @@ public class RobberyAdventure extends GameDescription{
         }
     }
         
-    /**
+    /** Il metodo inserisce l'oggetto {@code object} nello zaino della refurtiva se non è già presente, altrimenti
+     * lancia un'eccezione {@link DuplicateException}
      *
-     * @param object
-     * @throws DuplicateException
-     * @throws IllegalArgumentException
+     * @param object Oggetto da aggiungere allo zaino della refurtiva
+     * @throws DuplicateException 
+     * @throws IllegalArgumentException Viene lanciata dal metodo se l'oggetto che si sta tentando di inserire nello
+     * zaino della refurtiva non è di classe {@link ValuableObject }
      */
     public void addObjectToLootBag(AdvObject object)throws DuplicateException, IllegalArgumentException{
         
@@ -88,11 +99,42 @@ public class RobberyAdventure extends GameDescription{
             throw new IllegalArgumentException();
     }
     
-    /**
+    @Override
+    public String getWelcomeMessage(){
+        String message ;
+        
+        message = "Hai finalmente raggiunto il numero civico della via che ti eri appuntato sul taccuino, appena sotto la "
+                + "lista della spesa dello scorso mercoledi' " + System.lineSeparator() + "Per fortuna questa volta non si "
+                + "tratta del solito condominio di sette piani con l'ascensore rotto ..." + System.lineSeparator() + "ti ricordi ancora il fiatone dopo quelle otto interminabili "
+                + "rampe di scale" + System.lineSeparator() + "per poi accorgerti, una volta arrivato sopra, "
+                + "che l'appartamento si trovava in realta' due isolati affianco ... " + System.lineSeparator() + 
+                 System.lineSeparator() + "Ti trovi sul marciapiede davanti alla villa e non vedi l'ora di iniziare... "
+                + System.lineSeparator() ;
+        
+        return message;
+    }
+    
+    /** Il metodo inizializza tutti gli oggetti presenti nel gioco, delegando quando possibile l'inizializzazione
+     * in casi in cui essa è standard, cioé rispetta il modello supportato da tali metodi specializzati.
+     * 
+     * Il metodo delega inoltre ad altri propri metodi specializzati l'inizializzazione dei comandi supportati dal gioco
+     * e delle stanza che compongono la mappa dell'avventura.
      *
-     * @throws InconsistentInitializationException
-     * @throws PasswordGuessedException
-     * @throws EndGameException
+     * @throws InconsistentInitializationException Il metodo lancia quest'eccezione nel caso in cui si prova ad inizializzare
+     * un oggetto del gioco portandolo in uno stato inconsistente rispetto alla semantica delle proprie caratteristiche interne,
+     * cioé le sue proprietà e le relative specifiche delle azioni sul gioco, rappresentate da oggetti {@link GameActionSpecification}
+     * 
+     * @throws PasswordGuessedException Il metodo non lancia mai questa eccezione in realtà, ma il compilatore obbligava a inserirne
+     * l'indicazione perché l'espressione lambda che fornisce l'implementazione per l'interfaccia funzionale {@link SpecialAction}
+     * inserita nell'inizializzazione di un oggetto lancia questa eccezione. L'implementazione
+     * delle interfacce {@link SpecialAction} non viene eseguita dalla classe {@link RobberyAdventure} stessa, ma dalla classe Control
+     * specializzata {@link GameControl}.
+     * 
+     * @throws EndGameException Il metodo non lancia mai questa eccezione in realtà, ma il compilatore obbligava a inserirne
+     * l'indicazione perché l'espressione lambda che fornisce l'implementazione per l'interfaccia funzionale {@link SpecialAction}
+     * inserita nell'inizializzazione di un oggetto lancia questa eccezione. L'implementazione
+     * delle interfacce {@link SpecialAction} non viene eseguita dalla classe {@link RobberyAdventure} stessa, ma dalla classe Control
+     * specializzata {@link GameControl}.
      */
     @Override
     public void init() throws InconsistentInitializationException, PasswordGuessedException, EndGameException{

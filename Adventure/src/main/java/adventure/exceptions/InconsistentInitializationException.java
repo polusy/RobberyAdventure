@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando si tenta di costruire un oggetto portandolo in uno stato inconsistente rispetto
+ * alla semantica della classe
  *
- * @author utente
+ * @author Alessandro
  */
 public class InconsistentInitializationException extends Exception {
     final private String message = "Inconsistent initialization attempt";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }
 }

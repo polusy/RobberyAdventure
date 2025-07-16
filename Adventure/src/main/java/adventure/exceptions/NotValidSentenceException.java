@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando la stringa inserita dall'utente non risulta corretta sul piano lessicale o 
+ * sul piano sintattico o sul piano semantico di una specifica tipologia di comando
  *
- * @author utente
+ * @author Alessandro
  */
 public class NotValidSentenceException extends Exception {
     final private String message = "Comando non valido! Non puoi fare questa cosa";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }    
 }

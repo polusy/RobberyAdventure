@@ -20,9 +20,12 @@ import adventure.identifiers.PropertyType;
 import adventure.identifiers.ObjectId;
 import adventure.exceptions.*;
 
-/**
+/** La classe è specializzata nel funzionamento di alto livello della partita
+ * 
+ * La classe si occupa del coordinamento generale delle attività inerenti al funzionamento della partita, delegando l'analisi
+ * della semantica dei comandi inseriti dall'utente e l'esecuzione delle operazioni sulla partita a classi specializzate
  *
- * @author utente
+ * @author Alessandro
  */
 public class GameControl {
     final private PositionChangeHandler positionChangeHandler;
@@ -32,7 +35,7 @@ public class GameControl {
     // Constructor
 
     /**
-     *
+     * Il metodo inizializza i {@link CommandAnalyzer} e il {@link PositionChangeHandler}
      */
     
     public GameControl(){
@@ -57,10 +60,11 @@ public class GameControl {
         } catch(DuplicateException exception){};
     }
 
-    /**
+    /** Il metodo si occupa della disambiguazione della tipologia di comando estrapolato dalla stringa inserita dall'utente
+     * da parte del {@link Parser}.
      *
-     * @param game
-     * @param parserOutput
+     * @param game Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
      * @throws AmbiguousCommandException
      * @throws NotValidSentenceException
      */
@@ -142,11 +146,13 @@ public class GameControl {
         }
     }
 
-    /**
+    /** Il metodo si occupa dell'elaborazione di alto livello della stringa inserita dall'utente.
+     * 
+     * Il metodo sottopone l'oggetto {@link ParserOutput} all'analizzatore semantico di pertinenza
      *
-     * @param game
-     * @param parserOutput
-     * @param out
+     * @param game Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @param out Stream di output sul quale il metodo può stampare un messaggio
      * @throws EndGameException
      */
     public void nextMove(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
@@ -276,10 +282,11 @@ public class GameControl {
             return null;
     }
 
-    /**
+    /** Inserisce, se non già presente, una corrispodenza tra il parametro property e il parametro command in un proprio 
+     * attributo dedicato
      *
-     * @param property
-     * @param command
+     * @param property Identificativo della proprietà 
+     * @param command Identificativo del comando che deve essere fatto corrispondere al parametro property
      * @throws DuplicateException
      */
     public void addPropertyCommandCorrespondence(PropertyType property, CommandType command) throws DuplicateException {

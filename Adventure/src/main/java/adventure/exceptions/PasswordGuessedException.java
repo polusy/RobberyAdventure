@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando il giocatore inserisce la password corretta per la cassaforte interna
+ * ({@code ObjectId} : {@code INNER_SAFE})
  *
- * @author utente
+ * @author Alessandro
  */
 public class PasswordGuessedException extends Exception {
     final private String message = "Password guessed";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }       
 }

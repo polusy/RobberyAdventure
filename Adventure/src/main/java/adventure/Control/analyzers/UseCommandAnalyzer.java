@@ -12,24 +12,24 @@ import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 import adventure.identifiers.PrepositionType;
 
-/**
- *
- * @author utente
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code USE}
+ * 
+ * @author Alessandro
  */
 public class UseCommandAnalyzer extends CommandAnalyzer{
     
-    /**
+    /** Costruisce l'oggetto UseCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public UseCommandAnalyzer(){
         super(" Non vorrai mica usare questa cosa! ");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code USE}
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */

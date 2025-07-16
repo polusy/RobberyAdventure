@@ -8,9 +8,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Arrays;
 
-/**
+/** Questo enumerativo contiene gli identificativi delle tipologie di proprietà aventi un valore dicotomico, conferibili
+ * agli oggetti presenti nel gioco
+ * 
+ * Ogni costante possiede un insieme di parole che rappresentano i comandi inseribili all'utente che fanno riferimento alla
+ * specifica tipologia di proprietà. 
+ * Ogni identificativo in questo modo rende un oggetto dotato della proprietà avente tale identificativo, bersaglio
+ * della relativa specifica tipologia di comando
  *
- * @author utente
+ * @author Alessandro
  */
 public enum PropertyType{
     
@@ -73,7 +79,8 @@ public enum PropertyType{
 
     /**
      *
-     * @return
+     * @return Insieme di parole che fanno riferimento alla specifica tipologia di comando corrispondente alla tipologia di
+     * proprietà rappresentata dalla costante sulla quale il metodo viene chiamato
      */
     public Set<String> getCommandFilteringWords() {
         return commandFilteringWords;

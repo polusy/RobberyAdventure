@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando si tenta di assegnare ad un oggetto un identificativo già assegnato ad un altro
+ * oggetto
  *
- * @author utente
+ * @author Alessandro
  */
 public class IdAlreadyTakenException extends Exception {
     final private String message = "Id is already taken";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }    
 }

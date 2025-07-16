@@ -14,17 +14,18 @@ import java.util.Set;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-/**
+/** Contenitore di servizi generici di varia natur: operazioni su file, metodi per la gestione di stringhe e 
+ * {@link Collection} generice
  *
  * @author Paolo
  */
 public class Utils {
     
     
-       /**
+     /** Il metodo preleva delle stringhe dal file {@code file} passato per parametro e le restituisce
      *
-     * @param file
-     * @return
+     * @param file File da cui prelevare le stringhe
+     * @return Insieme di stringhe prelevate dal file
      * @throws IOException
      */
     public static Set<String> loadFileListInSet(File file) throws IOException {
@@ -37,10 +38,10 @@ public class Utils {
         return set;
     }
     
-    /**
+    /** Il metodo preleva delle stringhe dal file {@code file} passato per parametro e le restituisce come un'unica stringa
      *
-     * @param file
-     * @return
+     * @param file File da cui prelevare le stringhe
+     * @return Stringa risultato della concatenazione delle stringhe prelevate dal file passato per parametro
      * @throws IOException
      */
     public static String loadFileDescriptionInString(File file) throws IOException{
@@ -55,12 +56,15 @@ public class Utils {
         return new String(description);
     }
     
-    /**
+    /**  Il metodo divide la stringa {@code string} passata per parametro in token, individuandoli secondo l'espressione
+     * regolare {@code separators} e li restituisce, scartando quelli contenuti nell'insieme {@code stopwords} passato
+     * per parametro
      *
-     * @param string
-     * @param stopwords
-     * @param separators
-     * @return
+     * @param string Stringa da suddividere in token
+     * @param stopwords Insieme di parole da ignorare nella costruzione del risultato
+     * @param separators Espressione regolare che corrisponde ai separatori dei diversi token di cui si compone la stringa
+     * {@code string} passata per parametro
+     * @return Insieme dei token individuati dal metodo
      */
     public static List<String> parseString(String string, Set<String> stopwords, String separators) {
         List<String> tokens = new ArrayList<>();
@@ -73,12 +77,12 @@ public class Utils {
         return tokens;
     }
     
-    /**
+    /** Il metodo restituisce l'insieme unione a partire dalle due collection generiche passate per parametro
      *
      * @param <T>
      * @param collection1
      * @param collection2
-     * @return
+     * @return Insieme unione i cui elementi provengono dalla {@code collection1} e dalla {@code collection2}
      */
     public static <T> Set<T> union(Collection<T> collection1, Collection<T> collection2) {
 	Set<T> set = new HashSet<>();
@@ -87,14 +91,23 @@ public class Utils {
 	return set;
     }
     
-    /**
+    /** Il metodo inserisce nel parametro {@code tokens} i token estrapolati dalla stringa {@code sentence}
+     * utilizzando l'espressione regolare {@code wordsSeparators} per individuare i token e scartando i token contenuti
+     * nella lista {@code stopwords}. 
+     * I token inseriti nel parametro {@code tokens} sono ricercati nella lista {@code words}
+     * passata per parametro, dove ognuna di tali stringhe può contenere uno dei caratteri separatori specificati
+     * nell'espressione regolare {@code wordsSeparators}
      *
-     * @param words
-     * @param wordsIndex
-     * @param stopwords
-     * @param wordsSeparators
-     * @param tokens
-     * @param sentence
+     * @param words Parole tra cui riconosce i token da inserire nel parametro {@code tokens}
+     * @param wordsIndex Indice della stringa {@code sentence} a partire dal quale iniziare il riconoscimento dei token
+     * @param stopwords Insieme di parole da ignorare in caso di corrispondenza con un token, per il suo inserimento 
+     * nel parametro {@code tokens}
+     * @param wordsSeparators Espressione regolare secondo la quale individuare i token a partire dalla stringa 
+     * {@code sentence}
+     * @param tokens Lista di token che al termine dell'esecuzione del metodo conterrà tutti i token di interesse 
+     * (scartando cioé quelli contenuti nelle {@code stopwords} ) estrapolati
+     * dalla stringa {@code sentence}, nell'ordine in cui comparivano in essa
+     * @param sentence Stringa da cui estrapolare i token da inserire nel parametr {@code tokens}
      */
     public static void tokenize(List<String> words, int wordsIndex, Set<String> stopwords, String wordsSeparators, List<String> tokens, String sentence)
     {
@@ -129,10 +142,12 @@ public class Utils {
 
     }
     
-    /**
+    /** Il metodo restituisce una lista di stringhe corrispondente alla lista {@code words} passata per parametro, dove
+     * ogni stringa ha caratteri minuscoli
      *
-     * @param words
-     * @return
+     * @param words Lista di parole da trasformare in parole con caratteri tutti minuscoli
+     * @return Lista di stringhe corrispondente alla lista {@code words} passata per parametro, dove ogni stringa
+     * ha caratteri esclusivamente minuscoli
      */
     public static List<String> toLowerCaseStringList (List<String> words){
         List<String> lowerCaseStringList = words

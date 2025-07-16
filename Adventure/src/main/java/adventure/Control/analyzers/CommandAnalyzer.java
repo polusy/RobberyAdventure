@@ -15,18 +15,18 @@ import adventure.Entity.objects.AdvObject;
 import adventure.exceptions.*;
 import adventure.exceptions.*;
 
-/**
+/** La classe è specializzata nell'analisi della semantica di generiche tipologie di comandi unari e binari
  *
  * @author Paolo
  */
 public abstract class CommandAnalyzer {
 
-    /**
+    /** Messaggio di errore da stampare in caso di fallimento dell'analisi semantica del comando rappresentato dall'oggetto {@link ParserOutput}
      *
      */
     protected String errorMessage;
     
-    /**
+    /** Costruisce il generico CommandAnalyzer inizializzando il messaggio di errore con il parametro
      *
      * @param errorMessage
      */
@@ -34,23 +34,24 @@ public abstract class CommandAnalyzer {
         this.errorMessage = errorMessage;
     }
     
-    /**
+    /** Il metodo è specializzato nell'analisi semantica di comandi arità generica, di tipologia generica 
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */
     public abstract CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput)
             throws NotValidSentenceException, AmbiguousCommandException;
     
-    /**
+    /** Il metodo è specializzato nell'analisi semantica di comandi unari di tipologia generica
      *
-     * @param parserOutput
-     * @param propertyType
-     * @param errorMessage
-     * @return
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @param propertyType Identificativo della proprietà di riferimento dello specifico comando
+     * @param errorMessage Messaggio di errore che eventualmente può venire modificato in seguito all'analisi semantica 
+     * parserOutput
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      */
     protected CommandAnalysisResult analyzeUnaryCommand(ParserOutput parserOutput, PropertyType propertyType, String errorMessage) throws NotValidSentenceException{
@@ -92,13 +93,14 @@ public abstract class CommandAnalyzer {
         return new CommandAnalysisResult(message, analyzedObject, null, analysisPassed, propertyType);
     }
     
-    /**
+    /** Il metodo è specializzato nell'analisi semantica di comandi binari di tipologia generica
      *
-     * @param parserOutput
-     * @param propertyType
-     * @param prepositionType
-     * @param errorMessage
-     * @return
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @param propertyType Identificativo della proprietà di riferimento dello specifico comando
+     * @param prepositionType Identificaivo della proprietà di riferimento dello specifico comando 
+     * @param errorMessage Messaggio di errore che eventualmente può venire modificato in seguito all'analisi semantica 
+     * parserOutput
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */

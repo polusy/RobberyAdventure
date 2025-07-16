@@ -11,24 +11,24 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code PUSH}
  *
- * @author utente
+ * @author Alessandro
  */
 public class PushCommandAnalyzer extends CommandAnalyzer{
 
-    /**
+    /** Costruisce l'oggetto PushCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public PushCommandAnalyzer(){
         super("Ma ti rendi conto che stai cercando di premere questo oggetto?!");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code PUSH}
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
