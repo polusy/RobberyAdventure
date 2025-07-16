@@ -15,6 +15,12 @@ import java.util.Map;
 /**
  *
  * @author Paolo
+ * 
+ * La classe rappresenta un qualsiasi oggetto di valore dell'avventura.
+ * Poiché questi oggetti sono sempre raccoglibili e necessari per il proseguimento dell'avventura 
+ * sono stati progettati come ereditanti la classe InteractiveObject (poiché, appunto, necessariamente interattivi).
+ * 
+ * Conserva in più un attributo d'istanza intero, che rappresenta il valore dell'oggetto raccolto o da raccogliere.
  */
 public class ValuableObject extends InteractiveObject{
     
@@ -22,15 +28,24 @@ public class ValuableObject extends InteractiveObject{
     
     /**
      *
-     * @param objectId
-     * @param name
-     * @param description
-     * @param brokenDescription
-     * @param alias
-     * @param visible
-     * @param gameActionSpecification
-     * @param value
-     * @throws InconsistentInitializationException
+     * @param objectId Identificativo dell'oggetto.
+     * 
+     * @param name Nome originale dell'oggetto.
+     * 
+     * @param description Descrizione dell'oggetto (restituita con observe dell'ogetto).
+     * 
+     * @param brokenDescription Descrizione dell'oggetto rotto (se l'oggetto ha la proprietàBreakable).
+     * 
+     * @param alias Alias del nome originale dell'oggetto
+     * 
+     * @param visible Rappresenta la visiiblità dell'oggetto.
+     * 
+     * @param gameActionSpecification Rappresenta l'insieme delle condizioni, effetti, e messaggi di passaggio e failing sulle condizioni
+     * associate ad una specifica proprietà di un oggetto e ad uno specifico comando.
+     * 
+     * @param value Rappresenta il valore dell'oggetto.
+     * 
+     * @throws InconsistentInitializationException Se l'oggetto viene inizializzato in modo inconsistente.
      */
     public ValuableObject(ObjectId objectId, String name, String description,
             String brokenDescription, Set<String> alias, boolean visible,

@@ -22,6 +22,13 @@ import adventure.Entity.types.GameActionSpecification;
 /**
  *
  * @author utente
+ * 
+ * La classe rappresenta un qualsiasi oggetto interattivo dell'avventura. Estende la classe AdvObject,
+ * infatti conserva tutti gli attributi di un normale oggetto e in più conserva una Map contenente:
+ * - Per ogni property, una Map con un comando, a cui viene associata una specifica dell'azione di gioco.
+ * 
+ * La gameActionSpecification rappresenta l'insieme delle condizioni necessarie e degli effetti da applicare alla sessione di gioco
+ * al momento del superamento di tutte i vincoli specificati nella specifica dell'azione di gioco.
  */
 public class InteractiveObject extends AdvObject {
     final private String brokenDescription;
@@ -31,14 +38,34 @@ public class InteractiveObject extends AdvObject {
 
     /**
      *
-     * @param id
-     * @param name
-     * @param description
-     * @param brokenDescription
-     * @param alias
-     * @param visible
-     * @param gameActionSpecifications
-     * @throws InconsistentInitializationException
+     * @param id Identificativo dell'oggetto.
+     * 
+     * @param name Nome originale dell'oggetto.
+     * 
+     * @param description Descrizione dell'oggetto (restituita con observe dell'ogetto).
+     * 
+     * @param brokenDescription Descrizione dell'oggetto rotto (se l'oggetto ha la proprietàBreakable).
+     * 
+     * @param alias Alias del nome originale dell'oggetto
+     * 
+     * @param visible Rappresenta la visiiblità dell'oggetto.
+     * 
+     * @param gameActionSpecifications Rappresenta l'insieme delle condizioni, effetti, e messaggi di passaggio e failing sulle condizioni
+     * associate ad una specifica proprietà di un oggetto e ad uno specifico comando.
+     * 
+     * @throws InconsistentInitializationException Se l'oggetto viene inizializzato in modo inconsistente.
+     * 
+     * Il metodo costruttore si assicura che se la proprietà inserita non è una proprietà con valore booleano (Container), allora ad essa
+     * non deve avere associata alcuna mappa con CommandType e GameActionSpecification (in quanto a questa proprietà non deve essere mai
+     * associata ad alcuna specifica di azione di gioco).
+     * 
+     * Si assicura inoltre che se la proprietà è una proprietà con valore booleano, allora necessariamente
+     * deve avere una specifica di un'azione di gioco.
+     * 
+     * Il metodo si assicura inoltre che la proprietà inserita sia corente con il tipo di comando inserito nella Map più interna:
+     * 
+     * e.g. Openable -> (Open, Close)
+     *      Pickupable -> (Pickup, Drop)
      */
     
     public InteractiveObject(ObjectId id, String name, String description, String brokenDescription, 

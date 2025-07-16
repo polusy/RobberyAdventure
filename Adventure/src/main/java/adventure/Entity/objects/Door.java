@@ -6,7 +6,6 @@ package adventure.Entity.objects;
 
 import adventure.identifiers.ObjectId;
 import adventure.identifiers.CommandType;
-import adventure.identifiers.PropertyType;
 import adventure.Entity.types.GameActionSpecification;
 import adventure.Entity.properties.Property;
 import adventure.exceptions.InconsistentInitializationException;
@@ -16,6 +15,13 @@ import java.util.Map;
 /**
  *
  * @author Paolo
+ * 
+ * la classe rappresenta un oggetto di tipo Door (porta), estende la classe InteractiveObject, in quanto
+ * oggetto interattivo e conserva in più un stringa statica rappresentante le porte con un nome comune ("porta").
+ * 
+ * La classe conserva inoltre un attributo boolean "special":
+ * - True, se il nome della porta è diverso da "porta"
+ * - False, se il nome della porta è uguale a "porta" (è quindi una porta comune).
  */
 public class Door extends InteractiveObject{
     
@@ -27,15 +33,24 @@ public class Door extends InteractiveObject{
     
     /**
      *
-     * @param objectId
-     * @param name
-     * @param description
-     * @param brokenDescription
-     * @param alias
-     * @param visible
-     * @param gameActionSpecification
-     * @param special
-     * @throws InconsistentInitializationException
+     * @param objectId Identificativo dell'oggetto.
+     * 
+     * @param name Nome originale dell'oggetto.
+     * 
+     * @param description Descrizione dell'oggetto (restituita con observe dell'ogetto).
+     * 
+     * @param brokenDescription Descrizione dell'oggetto rotto (se l'oggetto ha la proprietàBreakable).
+     * 
+     * @param alias Alias del nome originale dell'oggetto
+     * 
+     * @param visible Rappresenta la visiiblità dell'oggetto.
+     * 
+     * @param gameActionSpecification Rappresenta l'insieme delle condizioni, effetti, e messaggi di passaggio e failing sulle condizioni
+     * associate ad una specifica proprietà di un oggetto e ad uno specifico comando.
+     * 
+     * @param special True, Se la porta ha nome diverso da "porta".
+     * 
+     * @throws InconsistentInitializationException Se l'oggetto viene inizializzato in modo inconsistente.
      */
     public Door(ObjectId objectId, String name, String description,
             String brokenDescription, Set<String> alias, boolean visible,
