@@ -35,7 +35,7 @@ public class GameControl {
     // Constructor
 
     /**
-     * Il metodo inizializza i CommandAnalyzer e il PositionChangeHandler
+     * Il metodo inizializza i {@link CommandAnalyzer} e il {@link PositionChangeHandler}
      */
     
     public GameControl(){
@@ -61,7 +61,7 @@ public class GameControl {
     }
 
     /** Il metodo si occupa della disambiguazione della tipologia di comando estrapolato dalla stringa inserita dall'utente
-     * da parte del Parser.
+     * da parte del {@link Parser}.
      *
      * @param game Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
@@ -148,9 +148,9 @@ public class GameControl {
 
     /** Il metodo si occupa dell'elaborazione di alto livello della stringa inserita dall'utente.
      * 
-     * Il metodo sottopone l'oggetto ParserOutput all'analizzatore semantico di pertinenza
+     * Il metodo sottopone l'oggetto {@link ParserOutput} all'analizzatore semantico di pertinenza
      *
-     * @param game Partita in esecuzionePartita in esecuzione
+     * @param game Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
      * @param out Stream di output sul quale il metodo può stampare un messaggio
      * @throws EndGameException

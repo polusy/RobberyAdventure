@@ -83,14 +83,14 @@ public class Parser {
      * Il metodo divide eventualmente la stringa intera originale in sotto-frasi, sulla base dei sentencesSeparators.
      * Successivamente divide eventualmente ognuna delle sotto-frasi ottenute in token e tenta di riconoscerli.
      * Confronta poi la struttura sintattica della sotto-frase con la propria grammatica di riferimento e in caso positivo
-     * costruisce un oggetto ParserOutput a partire da essa.
+     * costruisce un oggetto {@link ParserOutput} a partire da essa.
      *
      * @param originalSentence Stringa intera da analizzare sintatticamente
      * @param commands Comandi tra cui un token può essere riconosciuto
      * @param rooms Stanze tra cui un token può essere riconosciuto
      * @param roomObjects Oggetti della stanza corrente tra cui un token può essere riconosciuto
      * @param inventoryObjects Oggetti correntemente presenti nell'inventario tra cui un token può essere riconosciuto
-     * @return Lista di oggetti ParserOutput, dove ognuno corrisponde al risultato dell'analisi sintattica della corrispondente
+     * @return Lista di oggetti {@link ParserOutput}, dove ognuno corrisponde al risultato dell'analisi sintattica della corrispondente
      * sottofrase derivante dalla stringa originale
      * @throws NotValidTokenException
      * @throws NotValidSentenceException

@@ -39,24 +39,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/** La classe è specializzata nell'elaborazione di un oggetto GameActionSpecification, di cui conosce la struttura
+/** La classe è specializzata nell'elaborazione di un oggetto {@link GameActionSpecification}, di cui conosce la struttura
  * 
- * Possiede dei metodi specializzati nell'elaborazione di una GameActionSpecification a diversi livelli di granularità, 
+ * Possiede dei metodi specializzati nell'elaborazione di una {@link GameActionSpecification} a diversi livelli di granularità, 
  * ognuno detentore di tale logica di elaborazione 
  *
  * @author Paolo
  */
 public abstract class GameActionSpecificationProcesser {
     
-    /** Il metodo è specializzato nell'elaborazione di una GameActionSpecification al più generale livello di granularità.
+    /** Il metodo è specializzato nell'elaborazione di una {@link GameActionSpecification} al più generale livello di granularità.
      * 
-     * Esso valuta la CompleteCondition sulla partita rappresentata dal parametro gameDescription e costruisce un risultato
+     * Esso valuta la {@link CompleteCondition} sulla partita rappresentata dal parametro gameDescription e costruisce un risultato
      * coerente sia nel caso in cui la condizione è soddisfatta, che nel caso contrario
      *
      * @param gameActionSpecification Specifica completa delle azioni da eseguiri sulla partita
      * @param gameDescription Partita in esecuzione
-     * @param commandAnalysisResult Risultato dell'analisi della semantica del comando inserito dall'utente da parte del CommandAnalyzer di competenza
-     * @return Risultato dell'elaborazione del parametro GameActionSpecification rispetto alla partita rappresentata dal parametro gameDescription
+     * @param commandAnalysisResult Risultato dell'analisi della semantica del comando inserito dall'utente da parte del {@link CommandAnalyzer} di competenza
+     * @return Risultato dell'elaborazione del parametro {@link GameActionSpecification} rispetto alla partita rappresentata dal parametro gameDescription
      * @throws NotValidSentenceException
      * @throws DuplicateException
      */
@@ -326,7 +326,7 @@ public abstract class GameActionSpecificationProcesser {
 	return new GameActionResult(passingConditionMessage, specialAction);
     }
  
-    /** Il metodo è specializzato nella gestione delle attività conseguenti all'apertura dell'oggetto INNER_SAFE
+    /** Il metodo è specializzato nella gestione delle attività conseguenti all'apertura dell'oggetto {@code INNER_SAFE}
      *
      * @param game Partita in esecuzione
      */

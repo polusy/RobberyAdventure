@@ -17,7 +17,7 @@ import adventure.identifiers.PropertyType;
 import java.util.NoSuchElementException;
 
 /** La classe è specializzata nell'analisi semantica del risultato dell'elaborazione della stringa inserita dall'utente
- * da parte del Parser rispetto a un comando di movimento tra le stanze del gioco, e nella modifica coerente della poszione
+ * da parte del {@link Parser} rispetto a un comando di movimento tra le stanze del gioco, e nella modifica coerente della poszione
  * del giocatore nella mappa del gioco
  *
  * @author Paolo

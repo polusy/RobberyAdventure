@@ -192,13 +192,13 @@ public class Engine {
         }
     }
 
-    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i TechnicalObserver,
+    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i {@link TechnicalObserver},
      * che lo processano in caso esso sia di loro competenza
      *
      * @param game Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
      * @return true se il comando estrapolato dalla stringa inserita dall'utente da parte del parser è di pertinenza di 
-     * un TechnicalObserver, false altrimenti
+     * un {@link TechnicalObserver}, false altrimenti
      * @throws EndGameException
      * @throws NotValidSentenceException
      */
@@ -218,7 +218,7 @@ public class Engine {
         return recognizedCommand;
     }
     
-    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i GameObserver,
+    /** Notifica il risultato dell'elaborazione del parser della stringa inserita dall'utente a tutti i {@link GameObserver},
      * che lo processano in caso esso sia di loro competenza
      *
      * @param game Partita in esecuzione
@@ -243,7 +243,7 @@ public class Engine {
     }
     
     /** Metodo main che viene eseguito con l'avvio dell'applicazione.
-     * Costruisce un nuovo oggetto Engine e ne avvia l'attività
+     * Costruisce un nuovo oggetto {@link Engine} e ne avvia l'attività
      *
      * @param args parametri inseriti da linea di comando. Vengono ignorati
      * @throws InconsistentInitializationException
