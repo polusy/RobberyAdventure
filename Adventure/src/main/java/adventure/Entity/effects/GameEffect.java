@@ -14,6 +14,18 @@ import adventure.exceptions.InconsistentInitializationException;
 /**
  *
  * @author utente
+ * 
+ * La classe rappresenta l'insieme di tutti i possibili effetti che potrebbero essere eseguiti
+ * sulla situazione corrente della sessione di gioco.
+ * 
+ * L'effetto viene conservato come composizione di effetti:
+ * - su posizione corrente del giocatore nella mappa del gioco.
+ * - sull'inventario del gioco (rimozione o inserimento di oggetti).
+ * - sulla stanza corrente del gioco (riomozione o inserimento di oggetti).
+ * - sulla lootBag del gioco (rimozione o inserimento di oggetti).
+ * - sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
+ * - azione speciale generica sulla sessione di gioco.
+ *
  */
 public class GameEffect {
     private CurrentPositionEffect currentPositionEffect;
@@ -31,7 +43,12 @@ public class GameEffect {
      * @param roomEffect
      * @param objectsEffects
      * @param specialAction
-     * @throws InconsistentInitializationException
+     * @throws InconsistentInitializationException Se si cerca di inizializzare gli effetti portandoli in uno 
+     * stato inconsistente.
+     * 
+     * Il metodo è un banale costruttore, tuttavia si accerta che non ci siano assegnamenti inconsistenti tra gli effetti
+     * da eseguire sul gioco.
+     * e.g. rimozione di oggetto dalla stanza e rimozione dello stesso oggetto dall'inventario, etc...
      */
     public GameEffect(CurrentPositionEffect currentPositionEffect, InventoryEffect inventoryEffect,
            LootBagEffect lootBagEffect, RoomEffect roomEffect, Map<ObjectId, ObjectEffect> objectsEffects,
