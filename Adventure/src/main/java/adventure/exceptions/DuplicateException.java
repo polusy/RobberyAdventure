@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando si tenta di aggiungere un elemento già presente in una collezione
+ * o in una sequenza di elementi
  *
- * @author utente
+ * @author Alessandro
  */
 public class DuplicateException extends Exception {
     final private String message = "Duplicate element";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; } 
 }

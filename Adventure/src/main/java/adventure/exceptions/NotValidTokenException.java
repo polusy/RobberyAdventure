@@ -4,16 +4,17 @@
  */
 package adventure.exceptions;
 
-/**
+/** Questa eccezione viene lanciata quando un token proveniente da una stringa di input
+ * non rientra nel lessico supportato dal gioco
  *
- * @author utente
+ * @author Alessandro
  */
 public class NotValidTokenException extends Exception {
     final private String message = "Token is not valid";
     
-    /**
+    /** Restituisce il messaggio di errore legato all'eccezione
      *
-     * @return
+     * @return Messaggio di errore
      */
     public String getMessage() { return message; }    
 }
