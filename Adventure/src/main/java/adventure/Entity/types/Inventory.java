@@ -11,7 +11,11 @@ import adventure.exceptions.*;
 import java.util.NoSuchElementException;
 
 
-/**
+/** Inventario del giocatore in una sessione di gioco
+ * 
+ * Nell'inventario vengono inseriti gli oggetti non di valore, cioé che non sono di classe {@link ValueableObject}, 
+ * che vengono raccolti dal giocatore durante la partita. È possible inoltre rimuovere oggetti dall'inventario
+ * 
  *
  * @author Paolo
  */
@@ -19,9 +23,9 @@ public class Inventory {
     
     private List<AdvObject> objects = new ArrayList<>();
     
-    /**
+    /** Costruisce un oggetto Inventory inserendo al suo interno la lista di {@link AdvObject} passata per parametro
      *
-     * @param objects
+     * @param objects oggetti da inserire nell'inventario
      */
     public Inventory(List<AdvObject> objects){
         this.objects = objects;
@@ -29,15 +33,16 @@ public class Inventory {
 
     /**
      *
-     * @return
+     * @return Oggetti contenuti nell'inventario
      */
     public List<AdvObject> getObjects() {
         return objects;
     }
     
-    /**
+    /** Il metodo rimuove l'oggetto rappresentato dal parametro object dall'inventario, se presente; altrimenti
+     * lancia un'eccezione {@link NoSuchElementException}
      *
-     * @param object
+     * @param object Oggetto da rimuovere dall'inventario
      * @throws NoSuchElementException
      */
     public void remove(AdvObject object) throws NoSuchElementException{
@@ -47,9 +52,10 @@ public class Inventory {
         objects.remove(object);
     }
     
-    /**
+    /** Il metodo inserisce l'oggetto rappresentato dal parametro object nell'inventario, se non già presente; 
+     * altrimenti lancia un'eccezione {@link DuplicateException}
      *
-     * @param object
+     * @param object Oggetto da inserire nell'inventario
      * @throws DuplicateException
      */
     public void add(AdvObject object) throws DuplicateException{
@@ -60,10 +66,12 @@ public class Inventory {
         
     }
     
-    /**
+    /** Il metodo restituisce l'oggetto dell'inventario avente identificativo uguale al parametro Id se presente, 
+     * altrimenti lancia l'eccezione {@link NoSuchElementException}
      *
-     * @param Id
-     * @return
+     * @param Id Identificativo dell'oggetto che il metodo deve restituire, se presente
+     * @return Oggetto avente identificativo uguale al parametro Id, se presente nell'oggetto {@link Inventory} sul quale il
+     * metodo è invocato
      * @throws NoSuchElementException
      */
     public AdvObject getObjectById(ObjectId Id) throws NoSuchElementException{
@@ -77,10 +85,11 @@ public class Inventory {
         throw new NoSuchElementException();
     }
     
-    /**
+    /** Il metodo restituisce {@code true} se l'oggetto rappresentato dal parametro object è presente nell'oggetto {@link Inventory}
+     * sul quale il metodo viene invocato, {@code false} altrimenti
      *
-     * @param object
-     * @return
+     * @param object Oggetto di cui verificare l'appartenenza all'inventario
+     * @return {@code true} se l'oggetto è contenuto nell'inventario, {@code false} altrimenti
      */
     public boolean contains(AdvObject object){
         if (objects.contains(object))
