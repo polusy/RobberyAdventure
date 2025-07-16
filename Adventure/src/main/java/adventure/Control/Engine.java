@@ -164,6 +164,8 @@ public class Engine {
                     gameControl.disambiguateMove(game, parserOutput);
                     isTechnicalCommand = notifyTechnicalObservers(game, parserOutput);
                     isGameObserverCommand = notifyGameObservers(game, parserOutput, out);
+                    gameControl.policeArrivalHandler(game, parserOutput, out);
+                    
                     
                     if (!isTechnicalCommand && !isGameObserverCommand){
                         try {
@@ -184,6 +186,12 @@ public class Engine {
                 out.println(exception.getMessage());
             }
             catch (EndGameException exception){
+                if (gameControl.getSecurityCameraThread().isAlreadyActivated()){
+                    out.println(System.lineSeparator() + "Troppo tardi! La telecamera ha allertato la polizia"
+                            + " e nsei stato arrestato!"+ System.lineSeparator());
+                    exit = true;
+                }
+                
                 out.println("Probabilmente come ladro non vali granche'" + '(' + "e menomale)" +')');
                 exit = true;
             }
