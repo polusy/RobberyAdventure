@@ -8,14 +8,14 @@ import adventure.identifiers.PropertyType;
 
 /**
  * 
- * La classe estende la classe PropertyWithValue (poiché una proprietà con un valore booleano associato).
+ * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  *
  * La classe rappresenta la proprietà di consumabilità di un oggetto, può avere due valori rappresentanti il suo stato di consumazione:
  * 
- * value è True -> consumato.
- * value è False -> non consumato.
+ * {@link value} è True -> consumato.
+ * {@link value} è False -> non consumato.
  * 
- * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa. 
+ * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#CONSUMABLE}. 
  */
 public class Consumable extends PropertyWithValue {
     

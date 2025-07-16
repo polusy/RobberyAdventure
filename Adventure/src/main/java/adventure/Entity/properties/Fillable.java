@@ -9,14 +9,14 @@ import adventure.identifiers.PropertyType;
  *
  * @author Paolo
  * 
- * La classe estende la classe PropertyWithValue (poiché una proprietà con un valore booleano associato).
+ * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  * 
  * La classe rappresenta la proprietà di riempibilità di un oggetto, può avere due valori rappresentanti il valore della suo stato di riempimento:
  * 
- * value è True -> riempito.
- * value è False -> non riempito.
+ * {@link value} è True -> riempito.
+ * {@link value} è False -> non riempito.
  * 
- * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa.
+ * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#FILLABLE}.
  */
 public class Fillable extends PropertyWithValue {
     

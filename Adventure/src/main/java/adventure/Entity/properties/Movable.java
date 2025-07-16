@@ -10,14 +10,14 @@ import adventure.identifiers.PropertyType;
  *
  * @author utente
  * 
- * La classe estende la classe PropertyWithValue (poiché una proprietà con un valore booleano associato).
+ * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  * 
  * La classe rappresenta la proprietà di mobilità di un oggetto, può avere due valori rappresentanti il suo stato di spostamento:
  * 
- * value è True -> spostato.
- * value è False -> non spostato.
+ * {@link value} è True -> spostato.
+ * {@link value} è False -> non spostato.
  * 
- * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa.
+ * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#MOVABLE}.
  */
 public class Movable extends PropertyWithValue {
     

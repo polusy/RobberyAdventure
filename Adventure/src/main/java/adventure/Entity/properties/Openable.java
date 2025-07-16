@@ -10,14 +10,14 @@ import adventure.identifiers.PropertyType;
  *
  * @author utente
  * 
- * La classe estende la classe PropertyWithValue (poiché una proprietà con un valore booleano associato).
+ * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  * 
  * La classe rappresenta la proprietà di apribilità di un oggetto, può avere due valori rappresentanti il suo stato di apertura:
  * 
- * value è True -> aperto.
- * value è False -> chiuso.
+ * {@link value} è True -> aperto.
+ * {@link value} è False -> chiuso.
  * 
- * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa.
+ * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#OPENABLE}.
  */
 public class Openable extends PropertyWithValue {
     

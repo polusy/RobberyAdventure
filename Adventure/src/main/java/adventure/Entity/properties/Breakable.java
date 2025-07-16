@@ -8,14 +8,14 @@ import adventure.identifiers.PropertyType;
 
 /**
  *
- * La classe estende la classe PropertyWithValue (poiché una proprietà con un valore booleano associato).
+ * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  * 
  * La classe rappresenta la proprietà di rompibilità di un oggetto, può avere due valori rappresentanti il suo stato di rottura:
  * 
- * value è True -> rotto
- * value è False -> integro.
+ * {@link value} è True -> rotto
+ * {@link value} è False -> integro.
  * 
- * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa. 
+ * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#BREAKABLE}. 
  */
 public class Breakable extends PropertyWithValue {
     

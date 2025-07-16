@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  *
  * @author Paolo
  * 
- * la classe eredita da Property e si differenzia da una propertyWithValue, in quanto conserva solo una lista di oggetti
+ * la classe estende {@link Property} e si differenzia da {@link propertyWithValue}, in quanto conserva solo una lista di oggetti
  * che l'oggetto Container ha al suo interno.
  */
 public class Container extends Property{
