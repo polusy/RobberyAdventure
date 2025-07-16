@@ -16,17 +16,23 @@ import adventure.Entity.objects.Door;
 import adventure.identifiers.PropertyType;
 import java.util.NoSuchElementException;
 
-/**
+/** La classe è specializzata nell'analisi semantica del risultato dell'elaborazione della stringa inserita dall'utente
+ * da parte del Parser rispetto a un comando di movimento tra le stanze del gioco, e nella modifica coerente della poszione
+ * del giocatore nella mappa del gioco
  *
  * @author Paolo
  */
 public class PositionChangeHandler {
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del risultato dell'elaborazione della stringa inserita dall'utente
+ * da parte del Parser, rappresentato dal parametro parserOutput, rispetto a un comando di movimento tra le stanze del gioco.
+ * 
+ * Se la mossa specificata dal parserOutput è legale, il metodo provvede alla modifica della posizione corrente del giocatore
+ * nella mappa del gioco
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription a un comando di movimento tra le stanze del gioco
+     * @param parserOutput a un comando di movimento tra le stanze del gioco
+     * @return Messaggio risultato dell'analisi del parserOutput
      * @throws NotValidSentenceException
      * @throws NoSuchElementException
      */
