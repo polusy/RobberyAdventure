@@ -8,7 +8,11 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
 
-/**
+/** Questo enumerativo contiene gli identificativi di tutte le preposizione supportate dal gioco che l'utente può utilizzare
+ * nella scrittura dei comandi
+ * 
+ * Ad ogni identificativo è associato un insieme di parole che rappresentano le preposizioni per quella tipologia,
+ * in relazione alle tipologie di comando
  *
  * @author Paolo
  */
@@ -86,9 +90,10 @@ public enum PrepositionType {
         this.words = new HashSet<>(Arrays.asList(words));
     }
     
-    /**
+    /** 
      *
-     * @return
+     * @return Insieme di preposizioni associate alla specifica tipologia rappresentata dalla costante su cui il metodo
+     * viene chiamato
      */
     public Set<String> getWords(){
         return words;

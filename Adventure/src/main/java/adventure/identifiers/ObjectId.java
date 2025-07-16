@@ -4,9 +4,9 @@
  */
 package adventure.identifiers;
 
-/**
+/** Questo enumerativo contiene gli identificativi di tutti gli oggetti presenti nel gioco, interattivi e non interattivi
  *
- * @author utente
+ * @author Alessandro
  */
 public enum ObjectId {
 
