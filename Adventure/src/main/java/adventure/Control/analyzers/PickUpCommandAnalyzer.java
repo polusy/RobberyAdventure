@@ -10,24 +10,24 @@ import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PropertyType;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando PICKUP
  *
- * @author utente
+ * @author Alessandro
  */
 public class PickUpCommandAnalyzer extends CommandAnalyzer{
 
-    /**
+    /** Costruisce l'oggetto PickUpCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public PickUpCommandAnalyzer(){
         super(" Pensi veramente di riuscire a mettere questa cosa nello zaino!? ");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando PICKUP
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      */
     public CommandAnalysisResult analyze(GameDescription gameDescription, ParserOutput parserOutput) throws NotValidSentenceException
