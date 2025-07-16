@@ -20,6 +20,9 @@ import adventure.identifiers.PropertyType;
 import adventure.identifiers.ObjectId;
 import adventure.exceptions.*;
 
+import adventure.utilities.SecurityCameraThread;
+import java.util.concurrent.locks.Lock;
+
 /** La classe è specializzata nel funzionamento di alto livello della partita
  * 
  * La classe si occupa del coordinamento generale delle attività inerenti al funzionamento della partita, delegando l'analisi
@@ -30,7 +33,8 @@ import adventure.exceptions.*;
 public class GameControl {
     final private PositionChangeHandler positionChangeHandler;
     final private Map<CommandType, CommandAnalyzer> commandAnalyzers = new HashMap(); 
-    final private Map<PropertyType, CommandType> propertyCommandCorrespondences = new HashMap();    
+    final private Map<PropertyType, CommandType> propertyCommandCorrespondences = new HashMap();
+    private SecurityCameraThread securityCameraThread;
     
     // Constructor
 
@@ -58,6 +62,10 @@ public class GameControl {
             this.addCommandAnalyzer(CommandType.USE, new UseCommandAnalyzer());
 
         } catch(DuplicateException exception){};
+        
+        this.securityCameraThread = new SecurityCameraThread();
+        
+        SecurityCameraThread.policeArrivalLock.lock();
     }
 
     /** Il metodo si occupa della disambiguazione della tipologia di comando estrapolato dalla stringa inserita dall'utente
@@ -294,5 +302,48 @@ public class GameControl {
             throw new DuplicateException();
 
 	propertyCommandCorrespondences.put(property, command);
-    }    
+    }
+
+
+    public Lock getSecurityCameraLock(){
+        return SecurityCameraThread.policeArrivalLock ;
+    }
+    
+    public void policeArrivalHandler(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
+        if (!securityCameraThread.isAlreadyActivated() && parserOutput.getCommand().getType() == CommandType.NORTH){
+            if (!securityCameraThread.isAlive()){
+                out.println("Sull'ingresso della villa è installata una telecamera che ti sta inquadrando tutto bene ..."
+                        + " se non fosse che hai il passamontagna e sei l'archetipo del ladro dei film ...");
+
+                securityCameraThread.start();
+            }
+        }
+              
+        if (securityCameraThread.isAlreadyActivated() && securityCameraThread.isAlive()){
+            if (((InteractiveObject)game.getObjectById(
+                    ObjectId.SECURITY_CAMERA)).getPropertyByType(
+                            PropertyType.BREAKABLE).getValue() == true){
+            
+                securityCameraThread.interrupt();
+            }
+            else{
+                out.println(System.lineSeparator() + "Il tempo scorre..." + System.lineSeparator());
+            }
+        }
+
+        else if (securityCameraThread.isAlreadyActivated() && !securityCameraThread.isAlive() &&
+                ((InteractiveObject)game.getObjectById(ObjectId.SECURITY_CAMERA)).getPropertyByType(
+                            PropertyType.BREAKABLE).getValue() == false){
+            throw new EndGameException();
+        }
+
+            
+        
+    }
+
+    public SecurityCameraThread getSecurityCameraThread() {
+        return securityCameraThread;
+    }
+    
+    
 }
