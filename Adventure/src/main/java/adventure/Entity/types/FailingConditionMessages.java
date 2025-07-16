@@ -10,11 +10,11 @@ import adventure.identifiers.PropertyType;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe conserva i messaggi di fallimento per un qualsiasi possibile fallimento della valutazione della completeCondition.
  * 
- * 
+ * @author Paolo
  * 
  */
 public class FailingConditionMessages {

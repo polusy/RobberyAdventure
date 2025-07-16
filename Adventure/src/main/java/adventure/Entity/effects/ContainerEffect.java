@@ -7,15 +7,19 @@ import adventure.identifiers.ObjectId;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
  * su un qualsiasi container del gioco.
  * 
- * L'effetto consiste nel rimuovere il {@link ObjectId} dell'oggetto dalla lista degli oggetti contenuti nel container.
+ * 
+ * @author Paolo
  */
 public class ContainerEffect {
     
+    /**
+     * L'effetto consiste nel rimuovere il {@link ObjectId} dell'oggetto dalla lista degli oggetti contenuti nel container.
+     */
     private ObjectId removingObject;
 
     /**

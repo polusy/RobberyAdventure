@@ -10,11 +10,11 @@ import adventure.Entity.objects.AdvObject;
 
 /**
  *
- * @author utente
+ * 
  * 
  * La classe rappresenta il risultato del metodo analyze degli analyzers del gioco.
  * 
- * 
+ * @author Paolo
  */
 public class CommandAnalysisResult {
     

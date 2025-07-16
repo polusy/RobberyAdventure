@@ -11,13 +11,18 @@ import adventure.Entity.types.ParserOutput;
 
 /**
  *
- * @author utente
+ * 
  * 
  * Interfaccia utilizzata per i gestori dei comandi tecnici di gioco.
+ * 
+ * @author Paolo
  */
 public interface TechnicalObserver {
 
     /**
+     * 
+     * Il metodo rappresenta l'update eseguito da un comando tecnico di gioco sulla sessione di gioco.
+     * 
      * @param game Descrizione corrente del gioco.
      * @param parserOutput output del parser da analizzare per eseguire l'update.
      * 
@@ -27,7 +32,6 @@ public interface TechnicalObserver {
      * 
      * @throws EndGameException Se il gioco termina in seguito a una successiva conferma dell'utente.
      * 
-     * Il metodo rappresenta l'update eseguito da un comando tecnico di gioco sulla sessione di gioco.
      */
     public void update (GameDescription game, ParserOutput parserOutput, StringBuilder message) 
         throws NotValidSentenceException, EndGameException ;

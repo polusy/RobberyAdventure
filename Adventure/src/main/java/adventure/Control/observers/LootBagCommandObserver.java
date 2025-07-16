@@ -13,14 +13,19 @@ import adventure.Entity.objects.ValuableObject;
 import java.io.PrintStream;
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe gestisce la richiesta dell'utente di visualizzazione della refurtiva (lootBag nel gergo inglese).
+ * 
+ * @author Paolo
  */
 public class LootBagCommandObserver implements GameObserver{
     
     /**
      *
+     * Il metodo stampa su un printStream generico i nomi degli oggetti contenuti nella refurtiva, assieme al loro valore,
+     * ed infine stampa il totale rubato (presente nella lootbag).
+     * 
      * @param game Descrizione di gioco corrente
      * @param parserOutput Rappresenta l'output del parser al momento del parsing della stringa inserita nell'input stream
      * dell'utente attraverso CLI.
@@ -28,8 +33,7 @@ public class LootBagCommandObserver implements GameObserver{
      * 
      * @throws NotValidSentenceException Se l'utente inserisce una frase non corretta (Contestualmente al comando di visualizzazione della lootBag).
      * 
-     * Il metodo stampa su un printStream generico i nomi degli oggetti contenuti nella refurtiva, assieme al loro valore,
-     * ed infine stampa il totale rubato (presente nella lootbag).
+
      */
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException{

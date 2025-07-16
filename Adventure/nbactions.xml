@@ -52,4 +52,13 @@
                 <exec.appArgs></exec.appArgs>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-Generate Javadoc</actionName>
+            <displayName>Generate Javadoc</displayName>
+            <goals>
+                <goal>javadoc</goal>
+                <goal>:</goal>
+                <goal>javadoc</goal>
+            </goals>
+        </action>
     </actions>

@@ -14,21 +14,25 @@ import java.util.Map;
 
 /**
  *
+ * 
+ * 
+ * la classe rappresenta un oggetto di tipo Porta, estende {@link InteractiveObject}, in quanto
+ * oggetto interattivo.
+ * 
+ * 
  * @author Paolo
- * 
- * la classe rappresenta un oggetto di tipo Door (porta), estende {@link InteractiveObject}, in quanto
- * oggetto interattivo e conserva in più un {@code commonDoorName} rappresentante le porte con un nome comune ("porta").
- * 
- * La classe conserva inoltre un attributo boolean {@code special}:
- * - {@code true}, se il nome della porta è diverso da "porta".
- * - {@code false}, se il nome della porta è uguale a "porta" (è quindi una porta comune).
  */
 public class Door extends InteractiveObject{
     
     /**
-     *
+     * L'attributo rappresenta il nome comune ("porta").
      */
     public static final String commonDoorName = "porta";
+    
+    /**
+     * {@code special = true}, se il nome della porta è diverso da "porta".
+     * {@code special = false}, se il nome della porta è uguale a "porta" (è quindi una porta comune).
+     */
     private boolean special;
     
     /**

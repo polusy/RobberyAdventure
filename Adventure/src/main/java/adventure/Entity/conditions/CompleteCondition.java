@@ -13,17 +13,24 @@ import adventure.identifiers.ObjectId;
 
 /**
  *
- * @author utente
+ * 
  * 
  * La classe rappresenta la condizione di soddisfacimento completa (relativa all'oggetto) necessaria per  eseguire effetti
  * sulla sessione di gioco (Modifica di proprietà di altri oggetti, etc...) ed individuare il messaggio relativo
  * al superamento delle condizioni necessarie.
  * 
- * La prima condizione è una lista di possibili condizioni sull'inventario.
- * La seconda condizione è una mappa che associa ad un {@link ObjectId} di oggetto del gioco il vincolo che deve rispettare.
+ * @author Paolo
+ * 
  */
 public class CompleteCondition {
-    final private List<InventoryCondition> inventoryConditionOptions; 
+    /**
+     * una lista di possibili condizioni sull'inventario.
+     */
+    final private List<InventoryCondition> inventoryConditionOptions;
+    
+    /**
+     * una mappa che associa ad un {@link ObjectId} di oggetto del gioco il vincolo che deve rispettare.
+     */
     final private Map<ObjectId, ObjectCondition> objectsConditions;
 
     /**
@@ -37,12 +44,12 @@ public class CompleteCondition {
     }
     
     /**
-     *
+     * Il metodo restituisce l'unica condizione di inventario ({@link InventoryCondition}) (lista di oggetti che necessariamente devono essere presenti
+     * nell'inventario per modificare quella proprietà dell'oggetto), presente nella lista delle possibili condizioni dell'inventario.
+     * 
      * @return L'unica condizione di inventario, se singola.
      * @throws NoSuchElementException Se non viene trovata alcuna condizione di inventario.NoSuchElementException
      * 
-     * Il metodo restituisce l'unica condizione di inventario {@link InventoryCondition} (lista di oggetti che necessariamente devono essere presenti
-     * nell'inventario per modificare quella proprietà dell'oggetto), presente nella lista delle possibili condizioni dell'inventario.
      */
     public InventoryCondition getUniqueInventoryCondition() throws NoSuchElementException{
 	if (inventoryConditionOptions != null && inventoryConditionOptions.size() == 1){

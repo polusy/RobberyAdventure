@@ -8,9 +8,11 @@ import adventure.Entity.effects.SpecialAction;
 
 /**
  *
- * @author utente
+ * 
  * 
  * La classe incapsula il risultato di un'azione sul gioco (messaggio da mostrare all'utente e azione speciale da eseguire).
+ * 
+ * @author Paolo
  */
 public class GameActionResult {
     /**

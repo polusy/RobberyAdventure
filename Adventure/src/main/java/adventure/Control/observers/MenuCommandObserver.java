@@ -28,9 +28,11 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Paolo
+ * 
  * La classe implementa l'interfaccia dei gestori tecnici di gioco. 
  * Gestisce il comando del gioco che permette di visualizzare il menu di gioco.
+ * 
+ * @author Paolo
  */
 public class MenuCommandObserver implements TechnicalObserver {
     

@@ -13,12 +13,9 @@ import java.util.Arrays;
 
 /**
  *
- * @author utente
+ * La classe modella un qualsiasi comando valido dell'avventura.
  * 
- * La classe rappresenta un qualsiasi comando valido del gioco, conserva:
- * 
- * 
- * 
+ * @author Paolo
  */
 public class Command {
     
@@ -33,7 +30,7 @@ public class Command {
     private final String name;
     
     /**
-     * - gli alias del nome originale {@code alias}.
+     *gli alias del nome originale {@code alias}.
      */
     private final Set<String> alias;
 

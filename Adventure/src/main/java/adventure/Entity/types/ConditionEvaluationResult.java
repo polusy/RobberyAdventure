@@ -8,9 +8,12 @@ import adventure.identifiers.ObjectId;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe rappresenta il risultato di valutazione delle condizioni presenti in una delle GameActionSpecification dell'oggetto target.
+ * 
+ * @author Paolo
+ * 
  * 
  */
 public class ConditionEvaluationResult {

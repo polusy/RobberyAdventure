@@ -11,15 +11,26 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author Paolo
  * 
- * La classe rappresenta un insieme di condizioni sulle proprietà di un oggetto
- * che devono essere necessariamente rispettate (la visibilità dell'oggetto è mantenuta come proprietà speciale),
+ * 
+ * La classe rappresenta la condizione completa su di un oggetto che deve essere necessariamente rispettata,
  * affinché possa essere eseguita un'azione effettiva sulla sessione di gioco.
+ * 
+ * @author Paolo
  */
 public class ObjectCondition {
     
+    /**
+     * insieme di condizioni sulle proprietà di un oggetto
+     * che devono essere necessariamente rispettate,
+     * affinché possa essere eseguita un'azione effettiva sulla sessione di gioco.
+     */
     private Set<PropertyValue> propertyWithValueConstraints = new HashSet<>();
+    
+    /**
+     * visibilità di oggetto che deve essere necessariamente rispettata
+     * affinché possa essere eseguita un'azione effettiva sulla sessione di gioco.
+     */
     private final boolean visibility;
 
     /**
@@ -41,9 +52,12 @@ public class ObjectCondition {
     }
     
     /**
+     * 
+     * Il metodo restituisce una proprietà che conserva il vincolo valoriale
+     * che corrisponde al {@link PropertyType} inserito come parametro.
      *
      * @param propertyType tipo di proprietà di cui si vuole conoscere il valore associato nell'insieme di vincoli.
-     * @return La proprietà (he conserva il vincolo valoriale) che corrisponde al propertyType inserito come parametro.
+     * @return La proprietà (he conserva il vincolo valoriale) che corrisponde al {@link PropertyType} inserito come parametro.
      * @throws NoSuchElementException Se viene inserito un tipo di proprietà non presente nella lista di condizioni sull'oggetto.
      */
     public PropertyValue getPropertyValue(PropertyType propertyType) throws NoSuchElementException {

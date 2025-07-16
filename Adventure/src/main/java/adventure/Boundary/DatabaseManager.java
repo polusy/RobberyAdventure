@@ -27,10 +27,12 @@ import adventure.identifiers.ObjectId;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe si occupa di gestire il database, di conservarne la connessione, di effettuare creazioni di tabelle,
  * inserimento di dati di oggetti e progressi di gioco, e infine di eseguire queries su di esso.
+ * 
+ * @author Paolo
  */
 public class DatabaseManager {
     /**
@@ -40,9 +42,10 @@ public class DatabaseManager {
     
     /**
      *
+     * Il metodo costruisce la connessione al db specifico, conservato nella cartella database.
+     * 
      * @throws SQLException
      * 
-     * Il metodo costruisce la connessione al db specifico, conservato nella cartella database.
      */
     public DatabaseManager() throws SQLException{
         
@@ -53,9 +56,10 @@ public class DatabaseManager {
 
     /**
      *
+     * Il metodo si occupa di creare la tabella che conterrà le tuple rappresentanti gli oggetti dell'adventure.
+     * 
      * @throws SQLException
      * 
-     * Il metodo si occupa di creare la tabella che conterrà le tuple rappresentanti gli oggetti dell'adventure.
      */
     public void createObjectsTable() throws SQLException{
 
@@ -67,9 +71,10 @@ public class DatabaseManager {
     
     /**
      *
+     * Il metodo si occupa di creare la tabella che conterrà le tuple rappresentanti il salvataggio specifico dei progressi di gioco.
+     * 
      * @throws SQLException
      * 
-     * Il metodo si occupa di creare la tabella che conterrà le tuple rappresentanti il salvataggio specifico dei progressi di gioco.
      */
     public void createGamesTable() throws SQLException{
         String objectsTableCreation = "CREATE TABLE IF NOT EXISTS Games ( GameId VARCHAR(40) PRIMARY KEY, GameDescription TEXT)";
@@ -80,6 +85,9 @@ public class DatabaseManager {
 
     /**
      *
+     * Il metodo di occupa di aggiungere nella tabella Games del db la tupla con l'identificativo del salvataggio
+     * e il valore ad esso associato.
+     * 
      * @param gameId Id dei progressi di gioco da salvare
      * @param jsonGameDescription descrizione json dei progressi di gioco da salvare.
      * 
@@ -89,8 +97,6 @@ public class DatabaseManager {
      * @throws SQLException
      * 
      * 
-     * Il metodo di occupa di aggiungere nella tabella Games del db la tupla con l'identificativo del salvataggio
-     * e il valore ad esso associato.
      */
     public Boolean addGame(String gameId, String jsonGameDescription) throws SQLException{
 
@@ -112,13 +118,14 @@ public class DatabaseManager {
         
     /**
      *
+     * Il metodo si occupa di eseguire una query sul db per ottenere la gameDescription
+     * associata all'id passato come param. al metodo.
+     * 
      * @param gameId Id del salvataggio da recuperare
      * @return String Json rappresentante salvataggio recuperato
      * @throws SQLException
      * 
      * 
-     * Il metodo si occupa di eseguire una query sul db per ottenere la gameDescription
-     * associata all'id passato come param. al metodo.
      */
     public String getGameById(String gameId) throws SQLException{
         
@@ -144,14 +151,15 @@ public class DatabaseManager {
     }
     
     /**
+     * 
+     * Il metodo si occupa di recuperare dal db, attraverso una query, tutti i nomi dei salvataggi
+     * di gioco effettuati.
      *
      * @return Set di stringhe rappresentante l'insieme di tutti i nomi di salvataggi di gioco
      * all'interno del db.
      * 
      * @throws SQLException
      * 
-     * Il metodo si occupa di recuperare dal db, attraverso una query, tutti i nomi dei salvataggi
-     * di gioco effettuati.
      */
     public Set<String> getAllGameNames() throws SQLException{
         
@@ -170,13 +178,14 @@ public class DatabaseManager {
 	
     /**
      *
+     * Il metodo si occupa di aggiungere l'oggetto AdvObject (descritto dai parametri) al db.
+     * 
      * @param objectIdString Id dell'oggetto (AdvObject) da aggiungere al db.
      * @param name Nome dell'oggetto (AdvObject) da aggiungere al db.
      * @param description Descrizione dell'oggetto (AdvObject) da aggiungere al db.
      * @param jsonAlias Set serializzato in Json, rappresentante gli alias dell'oggetto (AdvObject) da aggiungere al db.
      * @throws SQLException
      * 
-     * Il metodo si occupa di aggiungere l'oggetto AdvObject (descritto dai parametri) al db.
      */
     public void addObject(String objectIdString, String name, String description, String jsonAlias) throws SQLException{
 	String objectInsertionQuery = "INSERT INTO Objects VALUES (?, ?, ?, ?)" ;
@@ -192,12 +201,13 @@ public class DatabaseManager {
 
     /**
      *
+     * Il metodo si occupa di recuperare un oggetto (AdvObject) dal db, per mezzo del suo id
+     * e di convertirlo in una stringa json attraverso serializzazione. 
+     * 
      * @param objectIdString Id dell'oggetto (AdvObject) che si vuole recuperare dal db.
      * @return JsonString rappresentante serializzazione dell'oggetto recuperato dal db.
      * @throws SQLException
      * 
-     * Il metodo si occupa di recuperare un oggetto (AdvObject) dal db, per mezzo del suo id
-     * e di convertirlo in una stringa json attraverso serializzazione.
      */
     public String getObjectById(String objectIdString) throws SQLException{
 	Gson gson  = new Gson();

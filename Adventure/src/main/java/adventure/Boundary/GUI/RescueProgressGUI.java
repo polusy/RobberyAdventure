@@ -18,10 +18,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe swing gestisce la GUI per permettere all'utente il salvataggio
  * dei progressi di gioco.
+ * 
+ * @author Paolo
  */
 public class RescueProgressGUI extends javax.swing.JDialog {
     

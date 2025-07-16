@@ -8,20 +8,30 @@ import java.util.Set;
 
 /**
  *
- * @author Paolo
- * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
- * sulle proprietà din un altro oggetto del gioco.
  * 
- * L'effetto sull'oggetto specifico viene conservato come composizione di:
- * - effetto sui valori delle proprietà dell'oggetto (nello specifico i valori associati ad ogni proprietà).
- * - effetto su container (se l'oggetto è container).
- * - visibilità dell'oggetto.
+ * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
+ * sulle proprietà di un altro oggetto del gioco.
+ * 
+ * L'effetto sull'oggetto specifico viene conservato come composizione di differenti effetti.
+ * 
+ * @author Paolo
  * 
  */
 public class ObjectEffect {
-    
+    /**
+    * Effetto sui valori delle proprietà dell'oggetto (nello specifico i valori associati ad ogni proprietà).
+    *
+    */
     private final Set<PropertyValue> propertyWithValueResults;
+    
+    /**
+     * Effetto su container (se l'oggetto è container).
+     */
     private ContainerEffect containerEffect;
+    
+    /**
+     * Effetto su visibilità dell'oggetto
+     */
     private Boolean visibility;
     
     /**

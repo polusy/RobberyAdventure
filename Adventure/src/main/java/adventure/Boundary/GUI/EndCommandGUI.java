@@ -6,10 +6,12 @@ package adventure.Boundary.GUI;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe swing rappresenta la GUI per interagire con il sistema
  * per l'abbandono del gioco (uscita dal gioco).
+ * 
+ * @author Paolo
  */
 public class EndCommandGUI extends javax.swing.JDialog {
     
@@ -98,11 +100,12 @@ public class EndCommandGUI extends javax.swing.JDialog {
 
     /**
      * 
-     * @param evt 
-     * 
      * Il metodo rappresenta l'action performed del button "conferma", avvalora
      * il  boolean rappresentante la fine del gioco a true 
      * e chiude la dialog corrente.
+     * 
+     * @param evt 
+     * 
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gameEnded = true;

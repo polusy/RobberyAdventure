@@ -9,20 +9,27 @@ import java.util.Objects;
 
 /**
  *
- * @author utente
+ *
  * 
  * La classe estende {@link Property}, in quanto proprietà di oggetto.
+ * La classe modella, in più, una proprietà con un valore di stato associato.
  * 
- * La classe rappresenta, in più, una proprietà con un {@link value} booleano associato ad esso,
- * Conservandone inoltre il {@link PropertyType} associato (identificativo).
- * 
- * Il boolean rappresenta il valore caratteristico della proprietà dell'oggetto in uno specifico momento della sessione di gioco.
  * 
  * e.g. (Breakable ha {@link value} a True se l'oggetto è rotto, False altrimenti).
  * 
+ *  @author utente
+ * 
  */
 public abstract class PropertyWithValue extends Property {
+    
+    /**
+     *  Rappresenta il valore caratteristico della proprietà dell'oggetto in uno specifico momento della sessione di gioco.
+     */
     private boolean value;
+    
+    /**
+     * Identificativo associato alla proprietà con valore di stato associato.
+     */
     final private PropertyType propertyType; 
 
     // Constructors

@@ -10,16 +10,38 @@ import java.util.Set;
 
 /**
  *
- * @author utente
+ *
  * 
- * La classe rappresenta l'oggetto comune dell'avventura, conserva un id, un nome, una descrizione, gli alias
- * del nome originale (se necessario) e la visibilità di questo all'interno del gioco.
+ * La classe rappresenta l'oggetto comune dell'avventura, conserva le caratteristiche di un oggetto di
+ * base di una qualsiasi avventura testuale.
+ * 
+ *  @author Paolo
  */
 public class AdvObject {
+    
+    /**
+     * Id dell'oggetto.
+     */
     private ObjectId id;
+    
+    /**
+     * Nome dell'oggetto.
+     */
     private String name;
+    
+    /**
+     * Descrizione dell'oggetto.
+     */
     private String description;
+    
+    /**
+     * Alias dell'oggetto.
+     */
     private Set<String> alias;
+    
+    /**
+     * Attributo rappresentante la visibilità dell'oggetto nella stanza corrente.
+     */
     private boolean visible;
 
     // Constructors
@@ -145,11 +167,10 @@ public class AdvObject {
     }
     
     /**
-     *
-     * @return HashCode definito sull'Id dell'oggetto.
-     * 
      * Questo garantisce che oggetti considerati uguali secondo il metodo equals
      * abbiano lo stesso codice hash.
+     * 
+     * @return HashCode definito sull'Id dell'oggetto.
      *
      */
     @Override
@@ -160,12 +181,12 @@ public class AdvObject {
     }
 
     /**
-     *
+     * Il metodo ridefinisce l'equals, garantendo che due oggetti sono uguali se e solo se
+     * il loro id è lo stesso.
+     * 
      * @param obj
      * @return True se gli id dell'oggetto obj è uguale all'id dell'oggetto su cui viene invocato l'equals, False altrimenti.
      * 
-     * Il metodo ridefinisce l'equals, garantendo che due oggetti sono uguali se e solo se
-     * il loro id è lo stesso.
      */
     @Override
     public boolean equals(Object obj) {

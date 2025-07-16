@@ -19,7 +19,11 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 /**
  *
+ * La classe rappresenta la configurazione REST del server per permettere richieste http
+ * per quanto riguarda i servizi di inserimento degli oggetti in uno storage e recupero degli stessi dallo storage.
+ * 
  * @author Paolo
+ *
  */
 @Path("object")
 public class ObjectService {
@@ -39,13 +43,14 @@ public class ObjectService {
     
     /**
      *
+     * Il metodo REST si occupa di convertire il jsonObject in AdvObject
+     * e di chiamare il metodo di inserimento (del dbManager) di un oggetto 
+     * all'interno del db.
+     * 
      * @param jsonObject Rappresenta la serializzazione json di un AdvObject.
      * @return Response -> risultato di inserimento dell'oggetto (AdvObject) nel db.
      * @throws SQLException
      * 
-     * Il metodo REST si occupa di convertire il jsonObject in AdvObject
-     * e di chiamare il metodo di inserimento (del dbManager) di un oggetto 
-     * all'interno del db.
      */
     @PUT
     @Path("/add")
@@ -68,12 +73,13 @@ public class ObjectService {
     
     /**
      *
+     * Il metodo REST permette, attraverso l'inserimento dell'id dell'oggetto nel path della richiesta http,
+     * di restituire l'oggetto associato all'id sopracitato.
+     * 
      * @param objectIdString Id dell'oggetto di cui si vogliono recuperare i dati.
      * @return Response contenitore dell'oggetto (in formato Json) recuperato dal db.
      * @throws SQLException
      * 
-     * Il metodo REST permette, attraverso l'inserimento dell'id dell'oggetto nel path della richiesta http,
-     * di restituire l'oggetto associato all'id sopracitato.
      * 
      */
     @GET

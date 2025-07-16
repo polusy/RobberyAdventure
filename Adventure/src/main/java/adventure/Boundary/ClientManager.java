@@ -24,21 +24,26 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe si occupa di gestire le richieste al server REST, per quanto riguarda il servizio
  * di aggiunta e richiesta di oggetti e di salvataggio e recupero di progressi di gioco.
+ * 
+ * @author Paolo
  */
 public class ClientManager {
-    
+    /**
+     * target specifico per connettersi al server REST.
+     */
     private final WebTarget target;
     
     /**
      *
-     * @param object Oggetto che si vuole aggiungere alla base di dati
-     * 
      * Il metodo si occupa di richiedere al server REST, tramite richiesta http
      * l'aggiunta dell'oggetto (parametro) in uno storage.
+     * 
+     * @param object Oggetto che si vuole aggiungere alla base di dati
+     * 
      */
     public void addObjectRequest(AdvObject object){
         
@@ -49,11 +54,12 @@ public class ClientManager {
     
     /**
      *
+     * Il metodo si occupa di richiedere al server REST, tramite richiesta http
+     * l'oggetto contenuto nello storage che abbia l'id passato come parametro. 
+     * 
      * @param objectId Id dell'oggetto che si vuole recuperare dallo storage.
      * @return oggetto recuperato dallo storage.
      * 
-     * Il metodo si occupa di richiedere al server REST, tramite richiesta http
-     * l'oggetto contenuto nello storage che abbia l'id passato come parametro.
      */
     public AdvObject getObjectRequest(ObjectId objectId){
         Response response = target.path("object/" + objectId.name()).request(MediaType.APPLICATION_JSON).get();
@@ -65,10 +71,11 @@ public class ClientManager {
     
     /**
      *
+     * Il metodo costruisce un nuovo client,
+     * assegna il target specifico alla sua variabile di istanza. 
+     * 
      * @param target URI del server a cui il client deve connettersi.
      * 
-     * Il metodo costruisce un nuovo client,
-     * assegna il target specifico alla sua variabile di istanza.
      */
     public ClientManager(String target){
         Client client = ClientBuilder.newClient();
@@ -76,6 +83,9 @@ public class ClientManager {
     }
     
     /**
+     * 
+     * Il metodo si occupa di aggiungere il salvataggio dei progressi di gioco (gameDescription)
+     * in uno storage, per mezzo di una richiesta http ad un server REST.
      *
      * @param gameId Id del salvataggio dei progressi di gioco correnti.
      * @param gameDescription Oggetto contenitore dei progressi di gioco correnti.
@@ -84,8 +94,6 @@ public class ClientManager {
      * di gioco.
      * 
      * 
-     * Il metodo si occupa di aggiungere il salvataggio dei progressi di gioco (gameDescription)
-     * in uno storage, per mezzo di una richiesta http ad un server REST.
      */
     public boolean addGameSavingRequest(String gameId, GameDescription gameDescription){
         
@@ -100,11 +108,12 @@ public class ClientManager {
     
     /**
      *
+     * Il metodo si occupa di fare richiesta del salvataggio di gioco corrispondente al gameId passato per parametro
+     * al metodo, tramite chiamata al servizio REST del server. 
+     * 
      * @param gameId Id del salvataggio del quale si vuole avere la descrizione di gioco salvata.
      * @return Descrizione del gioco recuperata dal database tramite servizio REST.
      * 
-     * Il metodo si occupa di fare richiesta del salvataggio di gioco corrispondente al gameId passato per parametro
-     * al metodo, tramite chiamata al servizio REST del server.
      */
     public RobberyAdventure getGameSavingRequest(String gameId){
         
@@ -114,10 +123,11 @@ public class ClientManager {
     
     /**
      *
-     * @return Set di stringhe rappresentante tutti gli id dei salvataggi dei progressi effettuati.
-     * 
      * Il metodo fa richiesta http al server REST, restituendo tutti i nomi dei salvataggi di gioco aggiunti
      * nello storage.
+     * 
+     * @return Set di stringhe rappresentante tutti gli id dei salvataggi dei progressi effettuati.
+     * 
      */
     public Set<String> getAllGamesNamesRequest(){
         

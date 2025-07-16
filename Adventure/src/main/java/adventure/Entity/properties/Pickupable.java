@@ -7,16 +7,18 @@ import adventure.identifiers.PropertyType;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe estende {@link PropertyWithValue} (poiché una proprietà con un valore booleano associato).
  * 
- * La classe rappresenta la proprietà (associata all'oggetto) di poter essere raccolto, può avere due valori rappresentanti il suo stato:
+ * La classe rappresenta la proprietà (associata all'oggetto) di poter essere raccolto, conserva un valore rappresentante il suo stato:
  * 
  * {@link value} è True -> raccolto.
  * {@link value} è False -> non raccolto.
  * 
  * La classe conserva inoltre la propertyType (identificativo) corrispondente ad essa {@link PropertyType#PICKUPABLE}.
+ * 
+ * @author Paolo
  */
 public class Pickupable extends PropertyWithValue {
     

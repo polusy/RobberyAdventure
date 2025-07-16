@@ -9,9 +9,11 @@ import adventure.Entity.types.RobberyAdventure;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe swing rappresenta l'interazione con l'utente per il salvataggio dei progressi di gioco.
+ * 
+ * @author Paolo
  */
 public class SaveCommandGUI extends javax.swing.JDialog {
     

@@ -15,10 +15,12 @@ import adventure.identifiers.ObjectId;
  * 
  * L'effetto viene conservato come composizione di un possibile oggetto {@link ObjectId} da aggiungere alla lootBag
  *
- * {@code addingObject} sarà usato per ricercare l'oggetto nella stanza e inserirlo nella lootBag.
+ * 
  */
 public class LootBagEffect {
-
+    /**
+     * {@code addingObject} sarà usato per ricercare l'oggetto nella stanza e inserirlo nella lootBag.
+     */
     private ObjectId addingObject;
 
     /**

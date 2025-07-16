@@ -10,15 +10,28 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe swing rappresenta l'interfaccia grafica del menu del gioco.
+ * 
+ * @author Paolo
  */
 public class MenuCommandGUI extends javax.swing.JDialog {
     
-    
+    /**
+     * manager necessario per permettere di effettuare chiamate REST al server.
+     */
     private ClientManager clientManager;
+    
+    /**
+     * Descrizione di gioco di cui si vorranno (probabilmente) salvare i progressi.
+     */
     private RobberyAdventure toBeSavedRobberyAdventure;
+    
+    /**
+     * salvataggio dei progressi recuperato attraverso il metodo REST.
+     * 
+     */
     private RobberyAdventure rescuedRobberyAdventure = null;
     
     private boolean gameEnded = false;
@@ -45,8 +58,8 @@ public class MenuCommandGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form MenuCommandGUI
-     * @param clientManager manager necessario per permettere di effettuare chiamate REST al server.
-     * @param robberyAdventure Descrizione di gioco di cui si vorranno (probabilmente) salvare i progressi.
+     * @param clientManager 
+     * @param robberyAdventure 
      * @param parent
      * @param modal
      */

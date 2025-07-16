@@ -10,14 +10,16 @@ import adventure.exceptions.EndGameException;
 
 /**
  *
- * @author Paolo
+ * 
+ * 
  * 
  * Questa interfaccia funzionale è stata pensata per permettere ad ogni gameEffect di conservarne
  * un attributo, avvalorato con una espressione lambda al momento dell'init. del GameEffect negli oggetti.
  * 
- * 
  * In generale questa interfaccia rappresenta un metodo speciale che deve essere eseguito come effetto (dopo aver
  * superato la completeCondition associata alla specifica proprietà di uno specifico oggetto).
+ * 
+ * @author Paolo
  */
 public interface SpecialAction {
     

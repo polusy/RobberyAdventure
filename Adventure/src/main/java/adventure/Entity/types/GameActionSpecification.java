@@ -17,10 +17,12 @@ import java.util.Map;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe Rappresenta la specifica di un azione sul gioco, quindi ne conserva le condizioni di applicabilità,
  * i risultati associati al superamento delle condizioni e i messaggi da mostrare in caso di fallimento.
+ * 
+ * @author Paolo
  */
 public class GameActionSpecification {
     /**
@@ -41,13 +43,14 @@ public class GameActionSpecification {
 
     /**
      *
+     * Il costruttore si assicura che l'inizializzazione della {@link CompleteCondition} 
+     * sia coerente con l'inizializzazione dei messaggi di fallimento sulle stesse.
+     * 
      * @param completeCondition
      * @param failingConditionMessages
      * @param passingConditionResult
      * @throws InconsistentInitializationException
      * 
-     * Il costruttore si assicura che l'inizializzazione della completeCondition 
-     * sia coerente con l'inizializzazione dei messaggi di fallimento sulle stesse.
      */
     public GameActionSpecification(CompleteCondition completeCondition, FailingConditionMessages failingConditionMessages, PassingConditionResult passingConditionResult) throws InconsistentInitializationException{
         

@@ -13,21 +13,26 @@ import java.io.PrintStream;
 
 /**
  *
- * @author Paolo
+ * 
  * 
  * La classe si occupa di gestire la richiesta dell'utente di visualizzazione dell'inventario.
+ * 
+ * @author Paolo
  */
 public class InventoryCommandObserver implements GameObserver{
     
     /**
      *
+     * 
+     * Il metodo costruisce una stringa contenente tutti i nomi degli oggetti dell'inventario
+     * 
      * @param game Descrizione di gioco corrente
      * @param parserOutput Rappresenta l'output del parser al momento del parsing della stringa inserita nell'input stream
      * dell'utente attraverso CLI.
      * @param out
      * @throws NotValidSentenceException Se l'utente inserisce una frase non corretta (contestualmente al comando di visual. dell'inventario).
      * 
-     * Il metodo costruisce una stringa contenente tutti i nomi degli oggetti dell'inventario.
+     *.
      */
     @Override
     public void update(GameDescription gameDescription, ParserOutput parserOutput, PrintStream out) throws NotValidSentenceException
