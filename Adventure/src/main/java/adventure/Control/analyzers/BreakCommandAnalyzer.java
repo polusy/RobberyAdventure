@@ -12,24 +12,24 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PrepositionType;
 import adventure.identifiers.PropertyType;
 
-/**
+/**La classe è specializzata nell'analisi semantica di un comando relativo al comando BREAK
  *
  * @author Paolo
  */
 public class BreakCommandAnalyzer extends CommandAnalyzer{
     
-    /**
+    /**Costruisce l'oggetto BreakCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public BreakCommandAnalyzer(){
         super("Non pensi che dovresti trovare un modo migliore per sfogare le tue frustrazioni?");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando BREAK
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */
