@@ -10,6 +10,16 @@ import java.util.Objects;
 /**
  *
  * @author utente
+ * 
+ * La classe eredita da Property, in quanto proprietà di oggetto.
+ * 
+ * La classe rappresenta, in più, una proprietà con un valore booleano  associato ad esso,
+ * Conservandone inoltre il PropertyType associato (identificativo).
+ * 
+ * Il boolean rappresenta il valore caratteristico della proprietà dell'oggetto in uno specifico momento della sessione di gioco.
+ * 
+ * e.g. (Breakable ha boolean True se l'oggetto è rotto, False altrimenti).
+ * 
  */
 public abstract class PropertyWithValue extends Property {
     private boolean value;
