@@ -41,7 +41,7 @@ public class CompleteCondition {
      * @return L'unica condizione di inventario, se singola.
      * @throws NoSuchElementException Se non viene trovata alcuna condizione di inventario.NoSuchElementException
      * 
-     * Il metodo restituisce l'unica condizione di inventario (lista di oggetti che necessariamente devono essere presenti
+     * Il metodo restituisce l'unica condizione di inventario {@link InventoryCondition} (lista di oggetti che necessariamente devono essere presenti
      * nell'inventario per modificare quella proprietà dell'oggetto), presente nella lista delle possibili condizioni dell'inventario.
      */
     public InventoryCondition getUniqueInventoryCondition() throws NoSuchElementException{
