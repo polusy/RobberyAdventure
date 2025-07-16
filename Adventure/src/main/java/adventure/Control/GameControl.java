@@ -309,6 +309,13 @@ public class GameControl {
         return SecurityCameraThread.policeArrivalLock ;
     }
     
+    /**
+     * 
+     * @param game Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @param out Stream di output sul quale il metodo può stampare un messaggio
+     * @throws EndGameException 
+     */
     public void policeArrivalHandler(GameDescription game, ParserOutput parserOutput, PrintStream out) throws EndGameException{
         if (!securityCameraThread.isAlreadyActivated() && parserOutput.getCommand().getType() == CommandType.NORTH){
             if (!securityCameraThread.isAlive()){
