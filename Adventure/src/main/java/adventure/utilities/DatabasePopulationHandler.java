@@ -16,13 +16,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
+/** Gestore del popolamento della base di dati con le tuple che rappresentano tutti gli oggetti del gioco, interattivi
+ * e non interattivi
  *
  * @author Paolo
  */
 public class DatabasePopulationHandler {
     
-    /**
+    /** Metodo main che inizializza i propri attributi {@link ServerManager} e {@link ClientManager}, ne avvia il 
+     * funzionamento, e popola la base di dati con le tuple contenenti le informazioni di base di tutti gli oggetti
+     * del gioco
      *
      * @param args
      */

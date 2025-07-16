@@ -8,7 +8,7 @@ package adventure.utilities;
 import adventure.Entity.types.RobberyAdventure;
 
 
-/**
+/** Tupla di una tabella che associa un oggetto {@link RobberyAdventure} ad un identificativo
  *
  * @author Paolo
  */
@@ -19,8 +19,8 @@ public class DatabaseGameTable {
 
     /**
      *
-     * @param robbery
-     * @param id
+     * @param robbery Partita del gioco RobberyAdventure
+     * @param id Identificativo da associare alla partita
      */
     public DatabaseGameTable(RobberyAdventure robbery, String id) {
         this.robberyAdventure = robbery;

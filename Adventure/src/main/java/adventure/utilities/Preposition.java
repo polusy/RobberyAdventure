@@ -4,7 +4,7 @@
  */
 package adventure.utilities;
 
-/**
+/** Preposizione riconoscibile da un oggetto {@link Parser}
  *
  * @author Paolo
  */
@@ -14,7 +14,7 @@ public class Preposition {
     
     /**
      *
-     * @param preposition
+     * @param preposition Parola che rappresenta l'effettiva preposizione inserita dall'utente nella stringa di input
      */
     public Preposition(String preposition){
         this.preposition = preposition;

@@ -14,9 +14,12 @@ import adventure.identifiers.CommandType;
 import adventure.exceptions.DuplicateException;
 import java.util.NoSuchElementException;
 
-/**
+/** Mappa che associa ad un {@link PropertyType} l'insieme di {@link CommandType} corrispondente.
+ * 
+ * La classe conserva in questo modo delle corrispondenze tra una tipologia di proprietà, rappresentata dall'identificativo
+ * {@link PropertyType} e un insieme di tipologie di comando, rappresentata dall'identificativo {@link CommandType}
  *
- * @author utente
+ * @author Alessandro
  */
 public abstract class PropertyCommandsCorrespondence {
     private static Map<PropertyType, Set<CommandType>> propertyCommandsCorrespondences;
@@ -68,8 +71,9 @@ public abstract class PropertyCommandsCorrespondence {
     
     /**
      *
-     * @param propertyType
-     * @return
+     * @param propertyType Identificativo della proprietà di cui si desidera il relativo insieme di comandi associato
+     * @return Insieme di identificativi di oggetti comando associato all'identificativo di oggetti proprietà 
+     * {@link PropertyType} passato per parametro, se presente, altrimenti lancia un'eccezione {@link NoSuchElementException}
      * @throws NoSuchElementException
      */
     public static Set<CommandType> getCommands(PropertyType propertyType) throws NoSuchElementException
