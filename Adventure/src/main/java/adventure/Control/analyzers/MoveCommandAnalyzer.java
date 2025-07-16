@@ -10,25 +10,28 @@ import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PropertyType;
-
-/**
+ 
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando MOVE
  *
  * @author Paolo
  */
 public class MoveCommandAnalyzer extends CommandAnalyzer{
 
-    /**
+    /** Costruisce l'oggetto MoveCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public MoveCommandAnalyzer(){
         super("Non puoi spostare questo oggetto, e' inutile....");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando MOVE
+     * 
+     * Nel caso in cui il comando sia riferito ad un oggetto dell'inventario, il messaggio di errore viene modificato con un altro
+     * più opportuno
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      */
     @Override
