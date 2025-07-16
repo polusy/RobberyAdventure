@@ -14,10 +14,27 @@ import java.util.Arrays;
 /**
  *
  * @author utente
+ * 
+ * La classe rappresenta un qualsiasi comando valido del gioco, conserva:
+ * 
+ * 
+ * 
  */
 public class Command {
+    
+    /**
+     * il tipo di comando {@link CommandType}
+     */
     private final CommandType type;
+    
+    /**
+     * Il nome associato ad esso {@code name}.
+     */
     private final String name;
+    
+    /**
+     * - gli alias del nome originale {@code alias}.
+     */
     private final Set<String> alias;
 
     /**
@@ -58,7 +75,7 @@ public class Command {
 
     /**
      *
-     * @return
+     * @return Hash calcolato sul tipo di comando.
      */
     @Override
     public int hashCode() {
@@ -70,7 +87,7 @@ public class Command {
     /**
      *
      * @param obj
-     * @return
+     * @return {@code true} se i due comandi sono uguali secondo il {@link CommandType}, {@code false} altrimenti.
      */
     @Override
     public boolean equals(Object obj) {

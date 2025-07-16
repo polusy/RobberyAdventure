@@ -11,12 +11,36 @@ import adventure.identifiers.PropertyType;
 /**
  *
  * @author Paolo
+ * 
+ * La classe conserva i messaggi di fallimento per un qualsiasi possibile fallimento della valutazione della completeCondition.
+ * 
+ * 
+ * 
  */
 public class FailingConditionMessages {
     
+    /**
+     * Rappresenta una mappa in cui per ogni {@link ObjectId} viene associata un message. Il message rappresenta
+     * il messaggio di fallimento riguardante l'assenza di {@code ObjectId} necessario nell'inventario per l'esecuzione di
+     * quella specifica azione.
+     */
     Map<ObjectId, String> missingNecessaryObjectsMessages;
+    
+    /**
+     * Rappresenta il messaggio per il fallimento su tutte le possibili condizioni valide dell'inventario.
+     */
     String failingInventoryConditionMessage;
+    
+    /**
+     * E' una mappa che associa al {@link ObjectId} di cui è fallita la valutazione di condizione, una Map per cui
+     * per ognuna delle {@link PropertyType} fallite è associato uno specifico messaggio di fallimento.
+     */
     Map<ObjectId, Map<PropertyType,String>> failingObjectsConditionsMessages;
+    
+    /**
+     * E' una mappa che associa ad ogni {@link ObjectId} che non ha passato la valutazione sulla condizione di visibilità,
+     * una stringa con il messaggio specifico da mostrare all'utente. 
+     */
     Map<ObjectId, String> failingVisibilityConditionMessages;
 
     /**
