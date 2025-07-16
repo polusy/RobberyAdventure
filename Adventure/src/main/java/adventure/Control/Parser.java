@@ -26,9 +26,12 @@ import adventure.identifiers.PrepositionType;
 import java.util.Collections;
 
 
-/**
+/** La classe è specializzata esclusivamente nell'analisi lessicale e sintattica di stringhe rispetto
+ * ad una grammatica fissata per i comandi, per un generico gioco,
+ * 
+ * 
  *
- * @author utente
+ * @author Alessandro
  */
 public class Parser {
     final private Set<String> stopwords;
@@ -42,16 +45,17 @@ public class Parser {
     final private String regex;
     final private String notValidRegex;
      
-    /**
+    /** Costruisce un oggetto Parser con i parametri passati e inizializza la propria espressione regolare che conserva la grammatica
+     * rispetto a cui il Parser analizza le stringhe
      *
-     * @param stopwords
-     * @param prepositionTypes
-     * @param commandTester
-     * @param objectTester
-     * @param roomTester
-     * @param prepositionTester
-     * @param sentencesSeparators
-     * @param wordsSeparators
+     * @param stopwords Parole da ignorare nell'analisi sintattica delle stringhe
+     * @param prepositionTypes Lista di elenchi di preposizioni, ognuna associata ad una specifica tipologia
+     * @param commandTester Predicato per il riconosimento di un token come un comando
+     * @param objectTester Predicato per il riconoscimento di un token come un oggetto
+     * @param roomTester Predicato per il riconoscimento di un token come una stanza 
+     * @param prepositionTester Predicato per il riconoscimento di un token come una preposizione
+     * @param sentencesSeparators Sequenze di caratteri separatrici di frasi
+     * @param wordsSeparators Sequenze di caratteri separatrici di singoli token
      */
     public Parser(Set<String> stopwords, List<PrepositionType> prepositionTypes, BiPredicate<String, Command> commandTester,
     BiPredicate<String, AdvObject> objectTester, BiPredicate<String, Room> roomTester, 
@@ -74,14 +78,20 @@ public class Parser {
         notValidRegex = "^( preposition (inventoryObject|roomObject)){2,2}$";
     }
 
-    /**
+    /** Il metodo è specializzato nell'analisi sintattica della stringa originalSentence passata per parametro.
+     * 
+     * Il metodo divide eventualmente la stringa intera originale in sotto-frasi, sulla base dei sentencesSeparators.
+     * Successivamente divide eventualmente ognuna delle sotto-frasi ottenute in token e tenta di riconoscerli.
+     * Confronta poi la struttura sintattica della sotto-frase con la propria grammatica di riferimento e in caso positivo
+     * costruisce un oggetto ParserOutput a partire da essa.
      *
-     * @param originalSentence
-     * @param commands
-     * @param rooms
-     * @param roomObjects
-     * @param inventoryObjects
-     * @return
+     * @param originalSentence Stringa intera da analizzare sintatticamente
+     * @param commands Comandi tra cui un token può essere riconosciuto
+     * @param rooms Stanze tra cui un token può essere riconosciuto
+     * @param roomObjects Oggetti della stanza corrente tra cui un token può essere riconosciuto
+     * @param inventoryObjects Oggetti correntemente presenti nell'inventario tra cui un token può essere riconosciuto
+     * @return Lista di oggetti ParserOutput, dove ognuno corrisponde al risultato dell'analisi sintattica della corrispondente
+     * sottofrase derivante dalla stringa originale
      * @throws NotValidTokenException
      * @throws NotValidSentenceException
      */
