@@ -188,7 +188,7 @@ public class Engine {
             catch (EndGameException exception){
                 if (gameControl.getSecurityCameraThread().isAlreadyActivated()){
                     out.println(System.lineSeparator() + "Troppo tardi! La telecamera ha allertato la polizia"
-                            + " e nsei stato arrestato!"+ System.lineSeparator());
+                            + " e sei stato arrestato!"+ System.lineSeparator());
                     exit = true;
                 }
                 
