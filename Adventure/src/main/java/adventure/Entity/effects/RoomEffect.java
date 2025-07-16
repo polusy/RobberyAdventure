@@ -13,11 +13,11 @@ import adventure.identifiers.ObjectId;
   * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
  * sulla situazione corrente di una stanza del gioco.
  * 
- * L'effetto viene conservato come composizione di un possibile oggetto (id) da aggiungere alla stanza
+ * L'effetto viene conservato come composizione di un possibile oggetto {@link ObjectId} da aggiungere alla stanza
  * e un possibile oggetto (id) da rimuovere dalla stanza.
  *
- * L'id addingObject sarà usato per ricercare l'oggetto nell'inventario e inserirlo nella stanza.
- * L'id removingObject sarà usato per ricercare l'oggetto nella stanza, rimuoverlo dalla stanza.
+ * {@code addingObject} sarà usato per ricercare l'oggetto nell'inventario e inserirlo nella stanza.
+ * {@code removingObject} sarà usato per ricercare l'oggetto nella stanza, rimuoverlo dalla stanza.
  */
 public class RoomEffect {
     final private ObjectId addingObject;

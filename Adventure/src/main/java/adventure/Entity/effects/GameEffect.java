@@ -19,12 +19,12 @@ import adventure.exceptions.InconsistentInitializationException;
  * sulla situazione corrente della sessione di gioco.
  * 
  * L'effetto viene conservato come composizione di effetti:
- * - su posizione corrente del giocatore nella mappa del gioco.
- * - sull'inventario del gioco (rimozione o inserimento di oggetti).
- * - sulla stanza corrente del gioco (riomozione o inserimento di oggetti).
- * - sulla lootBag del gioco (inserimento di oggetti).
- * - sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
- * - azione speciale generica sulla sessione di gioco.
+ * - su posizione corrente del giocatore nella mappa del gioco {@link CurrentPositionEffect}.
+ * - sull'inventario del gioco (rimozione o inserimento di oggetti) {@link InventoryEffect}.
+ * - sulla stanza corrente del gioco (riomozione o inserimento di oggetti){@link LootBagEffect}.
+ * - sulla lootBag del gioco (inserimento di oggetti){@link RoomEffect}.
+ * - sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità){@link objectsEffects}.
+ * - azione speciale generica sulla sessione di gioco{@link specialAction}.
  *
  */
 public class GameEffect {

@@ -12,7 +12,7 @@ import adventure.identifiers.ObjectId;
  * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
  * su un qualsiasi container del gioco.
  * 
- * L'effetto consiste nel rimuovere l'id dell'oggetto dalla lista degli oggetti contenuti nel container.
+ * L'effetto consiste nel rimuovere il {@link ObjectId} dell'oggetto dalla lista degli oggetti contenuti nel container.
  */
 public class ContainerEffect {
     
