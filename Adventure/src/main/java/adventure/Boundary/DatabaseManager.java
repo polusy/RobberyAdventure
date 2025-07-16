@@ -33,6 +33,9 @@ import adventure.identifiers.ObjectId;
  * inserimento di dati di oggetti e progressi di gioco, e infine di eseguire queries su di esso.
  */
 public class DatabaseManager {
+    /**
+     * connessione al db specifico.
+     */
     private Connection connection;
     
     /**
