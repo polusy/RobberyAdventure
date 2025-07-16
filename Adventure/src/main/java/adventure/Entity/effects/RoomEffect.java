@@ -14,7 +14,7 @@ import adventure.identifiers.ObjectId;
  * sulla situazione corrente di una stanza del gioco.
  * 
  * L'effetto viene conservato come composizione di un possibile oggetto {@link ObjectId} da aggiungere alla stanza
- * e un possibile oggetto (id) da rimuovere dalla stanza.
+ * e un possibile oggetto {@link ObjectId} da rimuovere dalla stanza.
  *
  * {@code addingObject} sarà usato per ricercare l'oggetto nell'inventario e inserirlo nella stanza.
  * {@code removingObject} sarà usato per ricercare l'oggetto nella stanza, rimuoverlo dalla stanza.

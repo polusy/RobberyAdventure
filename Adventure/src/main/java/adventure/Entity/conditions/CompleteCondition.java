@@ -20,7 +20,7 @@ import adventure.identifiers.ObjectId;
  * al superamento delle condizioni necessarie.
  * 
  * La prima condizione è una lista di possibili condizioni sull'inventario.
- * La seconda condizione è una mappa che associa ad un id di oggetto del gioco il vincolo che deve rispettare.
+ * La seconda condizione è una mappa che associa ad un {@link ObjectId} di oggetto del gioco il vincolo che deve rispettare.
  */
 public class CompleteCondition {
     final private List<InventoryCondition> inventoryConditionOptions; 

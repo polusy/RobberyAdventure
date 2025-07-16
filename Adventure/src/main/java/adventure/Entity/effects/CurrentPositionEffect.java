@@ -12,7 +12,7 @@ import adventure.identifiers.RoomId;
  * La classe rappresenta un effetto (eseguito solo dopo aver superato la completeCondition)
  * sulla posizione corrente del giocatore nella partita.
  * 
- * L'effetto viene conservato come l'id della nuova stanza corrente {@code newCurrentRoom}.
+ * L'effetto viene conservato come {@link RoomId} della nuova stanza corrente {@code newCurrentRoom}.
  * 
  * Esso sarà usato per impostare la stanza associata a questo id
  * come nuova currentRoom all'interno della gameDescription.
