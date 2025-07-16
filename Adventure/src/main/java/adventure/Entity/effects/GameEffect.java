@@ -22,7 +22,7 @@ import adventure.exceptions.InconsistentInitializationException;
  * - su posizione corrente del giocatore nella mappa del gioco.
  * - sull'inventario del gioco (rimozione o inserimento di oggetti).
  * - sulla stanza corrente del gioco (riomozione o inserimento di oggetti).
- * - sulla lootBag del gioco (rimozione o inserimento di oggetti).
+ * - sulla lootBag del gioco (inserimento di oggetti).
  * - sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
  * - azione speciale generica sulla sessione di gioco.
  *
@@ -37,12 +37,13 @@ public class GameEffect {
 
     /**
      *
-     * @param currentPositionEffect
-     * @param inventoryEffect
-     * @param lootBagEffect
-     * @param roomEffect
-     * @param objectsEffects
-     * @param specialAction
+     * @param currentPositionEffect Nuova Posizione corrente del giocatore nella mappa del gioco.
+     * @param inventoryEffect Effetto sull'inventario del gioco (rimozione o inserimento di oggetti).
+     * @param lootBagEffect Effetto sulla lootBag del gioco (inserimento di oggetti).
+     * @param roomEffect Effetto sulla stanza del gioco (rimozione o inserimento di oggetti).
+     * @param objectsEffects Effetto sugli oggetti del gioco (modifica di valori di alcune proprietà di oggetti o della loro visibilità).
+     * @param specialAction Azione speciale generica sulla sessione di gioco.
+     * 
      * @throws InconsistentInitializationException Se si cerca di inizializzare gli effetti portandoli in uno 
      * stato inconsistente.
      * 
