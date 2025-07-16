@@ -12,24 +12,24 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PropertyType;
 import adventure.identifiers.PrepositionType;
 
-/**
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando ACTIVATE
  *
  * @author Paolo
  */
 public class ActivateCommandAnalyzer extends CommandAnalyzer{
     
-    /**
+    /** Costruisce l'oggetto ActivateCommandAnalyzer, inizializzando il proprio messaggio di errore
      *
      */
     public ActivateCommandAnalyzer(){
         super("Mi sembra impossibile attivare questo oggetto!");
     }
     
-    /**
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando ACTIVATE
      *
-     * @param gameDescription
-     * @param parserOutput
-     * @return
+     * @param gameDescription Partita in esecuzione
+     * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente
+     * @return Risultato dell'analisi semantica dell'oggetto parserOutput
      * @throws NotValidSentenceException
      * @throws AmbiguousCommandException
      */
