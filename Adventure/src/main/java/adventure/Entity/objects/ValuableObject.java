@@ -18,9 +18,9 @@ import java.util.Map;
  * 
  * La classe rappresenta un qualsiasi oggetto di valore dell'avventura.
  * Poiché questi oggetti sono sempre raccoglibili e necessari per il proseguimento dell'avventura 
- * sono stati progettati come ereditanti la classe InteractiveObject (poiché, appunto, necessariamente interattivi).
+ * sono stati progettati come ereditanti {@link InteractiveObject} (poiché, appunto, necessariamente interattivi).
  * 
- * Conserva in più un attributo d'istanza intero, che rappresenta il valore dell'oggetto raccolto o da raccogliere.
+ * Conserva in più un attributo d'istanza intero {@code value}, che rappresenta il valore dell'oggetto raccolto o da raccogliere.
  */
 public class ValuableObject extends InteractiveObject{
     

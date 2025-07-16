@@ -23,11 +23,11 @@ import adventure.Entity.types.GameActionSpecification;
  *
  * @author utente
  * 
- * La classe rappresenta un qualsiasi oggetto interattivo dell'avventura. Estende la classe AdvObject,
+ * La classe rappresenta un qualsiasi oggetto interattivo dell'avventura. Estende {@link AdvObject},
  * infatti conserva tutti gli attributi di un normale oggetto e in più conserva una Map contenente:
- * - Per ogni property, una Map con un comando, a cui viene associata una specifica dell'azione di gioco.
+ * - Per ogni {@link Property}, una Map con un {@link CommandType}, a cui viene associata una specifica dell'azione di gioco {@link GameActionSpecifications}.
  * 
- * La gameActionSpecification rappresenta l'insieme delle condizioni necessarie e degli effetti da applicare alla sessione di gioco
+ * La {@link gameActionSpecification} rappresenta l'insieme delle condizioni necessarie e degli effetti da applicare alla sessione di gioco
  * al momento del superamento di tutte i vincoli specificati nella specifica dell'azione di gioco.
  */
 public class InteractiveObject extends AdvObject {
@@ -55,8 +55,8 @@ public class InteractiveObject extends AdvObject {
      * 
      * @throws InconsistentInitializationException Se l'oggetto viene inizializzato in modo inconsistente.
      * 
-     * Il metodo costruttore si assicura che se la proprietà inserita non è una proprietà con valore booleano (Container), allora ad essa
-     * non deve avere associata alcuna mappa con CommandType e GameActionSpecification (in quanto a questa proprietà non deve essere mai
+     * Il metodo costruttore si assicura che se la proprietà inserita non è una proprietà con valore booleano {@link Container}, allora ad essa
+     * non deve avere associata alcuna mappa con {@link CommandType} e {@link GameActionSpecification} (in quanto a questa proprietà non deve essere mai
      * associata ad alcuna specifica di azione di gioco).
      * 
      * Si assicura inoltre che se la proprietà è una proprietà con valore booleano, allora necessariamente
@@ -64,8 +64,8 @@ public class InteractiveObject extends AdvObject {
      * 
      * Il metodo si assicura inoltre che la proprietà inserita sia corente con il tipo di comando inserito nella Map più interna:
      * 
-     * e.g. Openable -> (Open, Close)
-     *      Pickupable -> (Pickup, Drop)
+     * e.g. {@code Openable} -> (Open, Close)
+     *      {@code Pickupable} -> (Pickup, Drop)
      */
     
     public InteractiveObject(ObjectId id, String name, String description, String brokenDescription, 
