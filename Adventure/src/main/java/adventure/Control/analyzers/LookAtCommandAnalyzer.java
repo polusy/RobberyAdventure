@@ -15,7 +15,7 @@ import adventure.Entity.objects.InteractiveObject;
 import adventure.Entity.objects.Door;
 import adventure.identifiers.PropertyType;
 
-/** La classe è specializzata nell'analisi semantica di un comando relativo al comando LOOK_AT
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code LOOK_AT}
  *
  * @author Alessandro
  */
@@ -28,7 +28,7 @@ public class LookAtCommandAnalyzer extends CommandAnalyzer {
         super("");
     }
     
-    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando LOOK_AT
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code LOOK_AT}
      * 
      * Nel caso in cui il comando sia riferito ad un oggetto rotto, il metodo seleziona la relativa descrizione
      *

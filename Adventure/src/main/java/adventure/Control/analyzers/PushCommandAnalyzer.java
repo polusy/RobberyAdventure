@@ -11,7 +11,7 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 
-/** La classe è specializzata nell'analisi semantica di un comando relativo al comando PUSH
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code PUSH}
  *
  * @author Alessandro
  */
@@ -24,7 +24,7 @@ public class PushCommandAnalyzer extends CommandAnalyzer{
         super("Ma ti rendi conto che stai cercando di premere questo oggetto?!");
     }
     
-    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando PUSH
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code PUSH}
      *
      * @param gameDescription Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente

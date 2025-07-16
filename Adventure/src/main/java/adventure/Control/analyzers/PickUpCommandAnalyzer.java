@@ -10,7 +10,7 @@ import adventure.Entity.types.ParserOutput;
 import adventure.exceptions.NotValidSentenceException;
 import adventure.identifiers.PropertyType;
 
-/** La classe è specializzata nell'analisi semantica di un comando relativo al comando PICKUP
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code PICK_UP}
  *
  * @author Alessandro
  */
@@ -23,7 +23,7 @@ public class PickUpCommandAnalyzer extends CommandAnalyzer{
         super(" Pensi veramente di riuscire a mettere questa cosa nello zaino!? ");
     }
     
-    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando PICKUP
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code PICK_UP}
      *
      * @param gameDescription Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente

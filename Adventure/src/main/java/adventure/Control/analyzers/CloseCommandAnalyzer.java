@@ -11,7 +11,7 @@ import adventure.exceptions.NotValidSentenceException;
 import adventure.exceptions.AmbiguousCommandException;
 import adventure.identifiers.PropertyType;
 
-/** La classe è specializzata nell'analisi semantica di un comando relativo al comando CLOSE
+/** La classe è specializzata nell'analisi semantica di un comando relativo al comando {@code CLOSE}
  *
  * @author Alessandro
  */
@@ -24,7 +24,7 @@ public class CloseCommandAnalyzer extends CommandAnalyzer{
         super("Non puoi chiudere questo oggetto!");
     }
     
-    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando CLOSE
+    /** Il metodo si occupa dell'analisi semantica del parserOutput, dove esso è relativo al comando {@code CLOSE}
      *
      * @param gameDescription Partita in esecuzione
      * @param parserOutput Risultato dell'elaborazione del parser della stringa inserita dall'utente

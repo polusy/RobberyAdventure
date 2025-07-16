@@ -21,7 +21,7 @@ import adventure.exceptions.*;
  */
 public abstract class CommandAnalyzer {
 
-    /** Messaggio di errore da stampare in caso di fallimento dell'analisi semantica del comando rappresentato dal ParserOutput
+    /** Messaggio di errore da stampare in caso di fallimento dell'analisi semantica del comando rappresentato dall'oggetto {@link ParserOutput}
      *
      */
     protected String errorMessage;
